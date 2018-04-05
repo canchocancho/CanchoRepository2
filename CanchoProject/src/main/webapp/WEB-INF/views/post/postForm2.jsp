@@ -33,9 +33,10 @@
 			float:left;
 			background-color:#99b3ff;
 		}
+		
 	</style>
 	
-	<script>
+	<script type="text/javascript">
 
 	</script>
 
