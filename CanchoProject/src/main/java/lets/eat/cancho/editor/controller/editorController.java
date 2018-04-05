@@ -10,6 +10,6 @@ public class editorController {
 	
 	@RequestMapping(value="editor", method=RequestMethod.GET)
 	public String editor(){
-		return "videoEditor/v_editor";
+		return "v_editor";
 	}
 }
