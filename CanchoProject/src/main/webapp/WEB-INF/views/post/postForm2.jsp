@@ -33,20 +33,11 @@
 			float:left;
 			background-color:#99b3ff;
 		}
+		
 	</style>
 	
-	<script>
-	    function add_item(){
-	        // pre_set 에 있는 내용을 읽어와서 처리..
-	        var div = document.createElement('div');
-	        div.innerHTML = document.getElementById('pre_set').innerHTML;
-	        document.getElementById('field').appendChild(div);
-	    }
-	 
-	    function remove_item(obj){
-	        // obj.parentNode 를 이용하여 삭제
-	        document.getElementById('field').removeChild(obj.parentNode);
-	    }
+	<script type="text/javascript">
+
 	</script>
 
 	</head>
@@ -61,14 +52,7 @@
 		<div id="div_menu">유저리스트</div>
 		
 		<div id="div_con">
-			<div id="pre_set" style="display:none">
-			    <textarea name="" value="" style="width:200px"></textarea> <input type="button" value="삭제" onclick="remove_item(this)">
-			</div>
-			
-			<div id="field"></div>
-			 
-			<input type="button" value=" 추가 " onclick="add_item()"><br>
-			추가 버튼을 눌러보세요.
+
 		</div>
 	</body>
 </html>
