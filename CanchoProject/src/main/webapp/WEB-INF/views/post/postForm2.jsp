@@ -6,8 +6,33 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>POST2</title>
 	
-	<style>
-
+	<style type="text/css">
+		#div_root{
+			margin: auto;
+			width: 100%;
+			height:100px;
+			background-color:#ff9999;
+		}
+		
+		#div_top{
+			width:100%;
+			height:100px;
+			background-color:#ffe699;
+		}
+		
+		#div_menu{
+			width:20%;
+			height:500px;
+			float:left;
+			background-color:#99ffb3;
+		}
+		
+		#div_con{
+			width:80%;
+			height:500px;
+			float:left;
+			background-color:#99b3ff;
+		}
 	</style>
 	
 	<script>
