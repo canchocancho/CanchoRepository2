@@ -63,6 +63,7 @@
 		
 		<div id="div_top">
 			<h3>메뉴 영역</h3>
+			<input type="button" value=" 추가 " onclick="add_item()">
 		</div>
 		
 		<div id="div_menu">
@@ -91,6 +92,15 @@
 		</div>
 
 	<script src="../resources/js/index.js"></script>
+	
+	<script>
+    function add_item(){
+        // pre_set 에 있는 내용을 읽어와서 처리..
+        var div = document.createElement('div');
+        div.innerHTML = document.getElementById('div_con').innerHTML;
+        document.getElementById('div_con').appendChild(div);
+    }
+	</script>
 	
 	</body>
 </html>
