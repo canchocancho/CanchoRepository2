@@ -1,0 +1,12 @@
+div.post {
+	float:left;
+	width:150px;
+	height:150px;
+	padding:10px 0px 0px 20px;
+	background-color:#f9d716;
+	border:1px solid black;
+	box-shadow:2px 2px 2px;
+}
+div.color {
+	background-color:salmon;
+}
