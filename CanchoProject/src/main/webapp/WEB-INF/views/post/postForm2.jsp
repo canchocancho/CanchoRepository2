@@ -7,7 +7,25 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>POST2</title>
 	
+	<script type="text/javascript" src="../resources/js/jquery-3.2.1.js"></script>
 	<link rel="stylesheet" href="../resources/css/postform2.css" />
+	
+	<style type="text/css">
+	    div post{
+	    	width: 400px;
+	    	height: 400px;
+	    	background-color: lime;
+	    }
+	</style>
+	
+	<script type="text/javascript">
+	    $(function(){
+	    	$( '.css_test img' )
+		    .draggable({
+		        containment : '.css_test'
+		    });
+	    });
+	</script>
 
 	</head>
 	
@@ -22,11 +40,27 @@
 		</div>
 		
 		<div id="div_menu">
-			<h3>유저리스트</h3>
+			<h3>도구 영역</h3>
 		</div>
 		
 		<div id="div_con" class="div_con">
 			<h3>내용 부분</h3>
+			
+			<input type="button" value="생성" id="a" onclick="add()"/>
+			<div id="new_input"></div>
+			<script>
+			var i = 1;
+			function add() {
+			    var element = document.createElement("div post");
+			    element.type = 'button';
+			    element.value = "a"+i;
+			    element.name = "a"+i;
+			    element.id = "a"+i++;
+			    var foo = document.getElementById("new_input");
+			    foo.appendChild(element);
+			}
+			</script>
+			
 		</div>
 
 	</body>
