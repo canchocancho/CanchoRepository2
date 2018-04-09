@@ -103,6 +103,24 @@
 		        document.getElementById('div_con').removeChild(obj.parentNode);
 		    } */
 		</script>
+		
+		<script>
+		$(document).ready(function(){
+		    $(".post").draggable({
+				cursor:"move",
+				stack:".post",
+				opacity:0.8,
+				containment:'parent'
+			});
+
+			$(".post").bind("dragstart",function(event, ui){
+				$(this).addClass("color");
+			});
+			$(".post").bind("dragstop", function(event, ui){
+				$(this).removeClass("color");
+			});
+		});
+		</script>
 	</head>
 	
 	<body>
@@ -140,19 +158,7 @@
 		</div>
 
 		<script>
-	    $(".post").draggable({
-			cursor:"move",
-			stack:".post",
-			opacity:0.8,
-			containment:'parent'
-		});
 
-		$(".post").bind("dragstart",function(event, ui){
-			$(this).addClass("color");
-		});
-		$(".post").bind("dragstop", function(event, ui){
-			$(this).removeClass("color");
-		});
 		</script>
 
 	</body>
