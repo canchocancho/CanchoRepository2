@@ -6,65 +6,106 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>POST3</title>
-		<link rel="stylesheet" href="../resources/css/postform2.css" />
+		
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
 		
 		<style>
-			.dropbtn {
-			    background-color: #4CAF50;
-			    color: white;
-			    padding: 16px;
-			    font-size: 16px;
-			    border: none;
-			    cursor: pointer;
+			#div_root{
+				width: 100%;
+				height:100px;
+				float:left;
+				background-color:#ff9999;
+			}
+					
+			#div_top{
+				width:100%;
+				height:100px;
+				float:left;
+				background-color:#ffe699;
+			}
+					
+			#div_menu{
+				width:20%;
+				height:500px;
+				float:left;
+				background-color:#99ffb3;
+			}
+					
+			#div_con{
+				width:80%;
+				height:500px;
+				float:left;
+				/* background-color:#99b3ff; */
 			}
 			
-			/* The container <div> - needed to position the dropdown content */
-			.dropdown {
-			    position: relative;
-			    display: inline-block;
+			.myButton {
+				-moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
+				-webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
+				box-shadow:inset 0px 39px 0px -24px #e67a73;
+				background-color:#e4685d;
+				-moz-border-radius:4px;
+				-webkit-border-radius:4px;
+				border-radius:4px;
+				border:1px solid #ffffff;
+				display:inline-block;
+				cursor:pointer;
+				color:#ffffff;
+				font-family:Arial;
+				font-size:15px;
+				padding:6px 15px;
+				text-decoration:none;
+				text-shadow:0px 1px 0px #b23e35;
+			}
+			.myButton:hover {
+				background-color:#eb675e;
+			}
+			.myButton:active {
+				position:relative;
+				top:1px;
 			}
 			
-			/* Dropdown Content (Hidden by Default) */
-			.dropdown-content {
-			    display: none;
-			    position: absolute;
-			    background-color: #f9f9f9;
-			    min-width: 160px;
-			    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-			    z-index: 1;
+			.text_box {
+			  width:auto;
+			  height:auto;
+			  border:0;
+			  background:transparent;
 			}
 			
-			/* Links inside the dropdown */
-			.dropdown-content a {
-			    color: black;
-			    padding: 12px 16px;
-			    text-decoration: none;
-			    display: block;
+			div.post {
+			float:left;
+			width:150px;
+			height:150px;
+			padding:10px 0px 0px 20px;
+			background-color:#f9d716;
+			border:1px solid black;
+			box-shadow:2px 2px 2px;
 			}
 			
-			/* Change color of dropdown links on hover */
-			.dropdown-content a:hover {background-color: #f1f1f1}
-			
-			/* Show the dropdown menu on hover */
-			.dropdown:hover .dropdown-content {
-			    display: block;
-			}
-			
-			/* Change the background color of the dropdown button when the dropdown content is shown */
-			.dropdown:hover .dropbtn {
-			    background-color: #3e8e41;
+			div.color {
+				background-color:salmon;
 			}
 		</style>
 		
 		<script type="text/javascript">
-			function bgtobabypink(){
-				document.getElementById("div_con").style.backgroundColor = "#ffccff";
+			function changebg(){
+				var div_con = document.getElementById("div_con");
+				div_con.style.backgroundColor= "#ffccff";
 			}
+			
+		    function add_item(){
+		        var div = document.createElement('div');
+		        div.innerHTML = document.getElementById('pre_set').innerHTML;
+		        document.getElementById('div_con').appendChild(div);
+		    }
+		 
+/* 		    function remove_item(obj){
+		        document.getElementById('div_con').removeChild(obj.parentNode);
+		    } */
 		</script>
 	</head>
 	
 	<body>
-
 		<!-- 맨 위 메뉴 바 부분 -->
 		<div id="div_root">
 
@@ -72,14 +113,11 @@
 		
 		<!-- 편집 메뉴 영역 -->
 		<div id="div_top">
-			<div class="dropdown">
-			  <button class="dropbtn">Background</button>
-			  <div class="dropdown-content">
-			    <a href="" onclick="bgtobabypink()">Babypink</a>
-			    <a href="" onclick="bgtomint()">Mint</a>
-			    <a href="" onclick="bgtopurple()">Purple</a>
-			  </div>
-			</div>
+				백그라운드 색상 변경
+			    <button class="myButton" onclick="changebg();">Babypink</button><br>
+			    
+				텍스트 박스 추가
+			    <button class="myButton" onclick="add_item();">Textbox</button>
 		</div>
 		
 		<!-- 왼쪽 도구 영역 -->
@@ -89,8 +127,33 @@
 		
 		<!-- 내용(표지 부분) 영역 -->
 		<div id="div_con" class="div_con">
-
+				<div class="post">
+					<p>글을 써보세요.</p>
+				</div>
 		</div>
+		
+		<!-- 텍스트 박스 -->
+		<div id="pre_set" style="display:none">
+			<div class="post">
+				<p>글을 써보세요.</p>
+			</div>
+		</div>
+
+		<script>
+	    $(".post").draggable({
+			cursor:"move",
+			stack:".post",
+			opacity:0.8,
+			containment:'parent'
+		});
+
+		$(".post").bind("dragstart",function(event, ui){
+			$(this).addClass("color");
+		});
+		$(".post").bind("dragstop", function(event, ui){
+			$(this).removeClass("color");
+		});
+		</script>
 
 	</body>
 </html>
