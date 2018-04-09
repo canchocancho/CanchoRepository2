@@ -74,7 +74,7 @@
 	    place.appendChild(this.userList_);
 	  }
 
-	  // This is the primary "constructor" for symmetry with Firepad.
+	  //This is the primary "constructor" for symmetry with Firepad.
 	  FirepadUserList.fromDiv = FirepadUserList;
 
 	  FirepadUserList.prototype.dispose = function() {
@@ -124,7 +124,7 @@
 	    var nameHint = elt('div', 'ENTER YOUR NAME', { 'class': 'firepad-userlist-name-hint'} );
 	    if (this.hasName_) nameHint.style.display = 'none';
 
-	    // Update Firebase when name changes.
+	    //Update Firebase when name changes.
 	    var self = this;
 	    on(nameInput, 'change', function(e) {
 	      var name = nameInput.value || "${loginId}";
@@ -175,8 +175,8 @@
 	      userId2Element[userId] = userDiv;
 
 	      if (userId === self.userId_) {
-	        // HACK: We go ahead and insert ourself in the DOM, so we can easily order other users against it.
-	        // But don't show it.
+	        //HACK: We go ahead and insert ourself in the DOM, so we can easily order other users against it.
+	        //But don't show it.
 	        userDiv.style.display = 'none';
 	      }
 
@@ -292,7 +292,7 @@
   </script>
   
 	<script>
-		//공유
+		//초대
 		function invite() {
 			alert(window.location.href); //공유해야 할 url 주소(이걸 쪽지로 보내야 함)
 		}
@@ -375,13 +375,13 @@
 		    webSocket.send($("#chat_id").val() + "|" + $("#inputMessage").val());
 		    $("#inputMessage").val("");
 		}
-		//     엔터키를 통해 send함
+		//엔터키를 통해 send함
 		function enterkey() {
 		    if (window.event.keyCode == 13) {
 		        send();
 		    }
 		}
-		//     채팅이 많아져 스크롤바가 넘어가더라도 자동적으로 스크롤바가 내려가게함
+		//채팅이 많아져 스크롤바가 넘어가더라도 자동적으로 스크롤바가 내려가게함
 		window.setInterval(function() {
 		    var elem = document.getElementById('messageWindow');
 		    elem.scrollTop = elem.scrollHeight;

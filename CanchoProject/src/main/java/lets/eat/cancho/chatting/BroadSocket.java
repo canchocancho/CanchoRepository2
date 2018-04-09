@@ -13,6 +13,7 @@ import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/broadcasting")
 public class BroadSocket {
+	
 	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
 	
 	@OnMessage
@@ -26,11 +27,13 @@ public class BroadSocket {
 			}
 		}
 	}
+	
 	@OnOpen
 	public void onOpen(Session session) {
 		System.out.println(session);
 		clients.add(session);
 	}
+	
 	@OnClose
 	public void onClose(Session session) {
 		clients.remove(session);
