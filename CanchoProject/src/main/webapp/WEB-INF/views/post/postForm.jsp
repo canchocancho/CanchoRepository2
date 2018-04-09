@@ -12,15 +12,7 @@
 	<title>POST</title>
 	
 	<script type="text/javascript" src="../resources/js/jquery-3.2.1.js"></script>
-<<<<<<< HEAD
-	<script src="./resources/js/sockjs-0.3.4.js"></script>
-	
-	<!-- 텍스트 창 -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-	<script src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
-=======
->>>>>>> branch 'master' of https://github.com/canchocancho/CanchoRepository2.git
+	<script src="../resources/js/sockjs-0.3.4.js"></script>
 
   	<meta charset="utf-8" />
  	<!-- Firebase -->
@@ -328,7 +320,7 @@
 			$('.highlight').fadeIn(1700);
 		});
 		var textarea = document.getElementById("messageWindow");
-		var webSocket = new WebSocket('ws://10.10.8.99:8888/cancho/broadcasting');
+		var webSocket = new WebSocket('ws://10.10.8.124:8888/cancho/broadcasting');
 		var inputMessage = document.getElementById('inputMessage');
 		webSocket.onerror = function(event) {
 		    onError(event)
@@ -372,13 +364,13 @@
 		    $("#messageWindow").html("<p class='chat_content'>채팅에 참여하였습니다.</p>");
 		}
 		function onError(event) {
-		    alert(event.data);
+		    alert("오류가 발생했습니다.");
 		}
 		function send() {
 		    if ($("#inputMessage").val() == "") {
 		    } else {
 		        $("#messageWindow").html($("#messageWindow").html()
-		            + "<p class='chat_content'>나 : " + $("#inputMessage").val() + "</p>");
+		            + "<p class='chat_content'>${loginId} : " + $("#inputMessage").val() + "</p>");
 		    }
 		    webSocket.send($("#chat_id").val() + "|" + $("#inputMessage").val());
 		    $("#inputMessage").val("");
@@ -417,18 +409,8 @@
 			<input type="hidden" id="hidden_data" name="hidden_data">
 			<input type="hidden" id="user_id" name="user_id" value="${loginId }">
 		</form>
-<<<<<<< HEAD
-		
-		<!-- 텍스트창 -->
-		<select id="color">
-			<option value="#ffc">黄色</option>
-			<option value="#fcc">赤色</option>
-			<option value="#cfc">緑色</option>
-		</select>
-		<input id="new" type="button" value="new">
-		<input id="del" type="button" value="del">
-		
-		<!--     채팅창 -->
+
+		<!--채팅창 -->
 		<input type="hidden" value="${loginId}" id="chat_id">
 	    <div id="_chatbox">
 	        <fieldset>
@@ -437,18 +419,9 @@
 	            <input type="submit" value="send" onclick="send()" />
 	        </fieldset>
 	    </div>
-		
-  
+
   </div>
-  
-	<!-- 로고 등 이미지가 들어가는 div -->
-  <div class="footer">
-		<img src="../resources/img/a.png">
-		<img src="../resources/img/b.png">
-=======
->>>>>>> branch 'master' of https://github.com/canchocancho/CanchoRepository2.git
-  </div>
-  
+
   <script>
     function init() {
       //// Initialize Firebase.
