@@ -126,11 +126,20 @@ public class PostController {
 		return "post/readPost";
 	}
 	
+	/*postForm2.jsp*/
 	@RequestMapping(value="writePost2", method=RequestMethod.GET)
 	public String writePost2(HttpSession session){
 		logger.info("POST");
 		
 		return "post/postForm2";
+	}
+	
+	/*postForm3.jsp*/
+	@RequestMapping(value="writePost3", method=RequestMethod.GET)
+	public String writePost3(HttpSession session){
+		logger.info("POST");
+		
+		return "post/postForm3";
 	}
 
 }
