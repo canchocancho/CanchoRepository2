@@ -7,8 +7,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>POST3</title>
 		
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script> -->
+
+ <script src="https://code.jquery.com/jquery-1.8.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 		
 		<style>
 			#div_root{
@@ -113,6 +116,17 @@
 		        var div = document.createElement('div');
 		        div.innerHTML = document.getElementById('pre_set').innerHTML;
 		        document.getElementById('div_con').appendChild(div);
+		        
+			    $(".post").draggable({
+					cursor:"move",
+					stack:".post",
+					opacity:0.8,
+					containment:"#div_con"
+				});
+			    
+			    $("#resizable").resizable({
+			    	containment:"#div_con"
+			    });
 		    }
 		 
 /* 		    function remove_item(obj){
@@ -120,29 +134,29 @@
 		    } */
 		</script>
 		
-		<script>
+<!-- 		<script>
 		$(document).ready(function(){
 		    $(".post").draggable({
 				cursor:"move",
 				stack:".post",
 				opacity:0.8,
-				containment:'parent'
+				containment:"#div_con"
 			});
 
-			$(".post").bind("dragstart",function(event, ui){
+ 			$(".post").bind("dragstart",function(event, ui){
 				$(this).addClass("color");
 			});
 			$(".post").bind("dragstop", function(event, ui){
 				$(this).removeClass("color");
 			});
 		});
-		</script>
+		</script> -->
 	</head>
 	
 	<body>
 		<!-- 맨 위 메뉴 바 부분 -->
-		<div id="div_root">
-
+		<div id="div_root" style="text-align: center;">
+			<h3>나만의 표지를 꾸며봅시다.</h3>
 		</div>
 		
 		<!-- 편집 메뉴 영역 -->
@@ -167,15 +181,17 @@
 		
 		<!-- 내용(표지 부분) 영역 -->
 		<div id="div_con" class="div_con">
-				<div class="post">
+				<!-- <div class="post">
 					<p>글을 써보세요.</p>
-				</div>
+				</div> -->
 		</div>
 		
 		<!-- 텍스트 박스 -->
 		<div id="pre_set" style="display:none">
 			<div class="post">
-				<p>글을 써보세요.</p>
+				<input type="text" id="resizable" class="ui-state-active" value="This is input box"
+					style="border: none; background: transparent;">
+				<!-- <p>글을 써보세요.</p> -->
 			</div>
 		</div>
 
