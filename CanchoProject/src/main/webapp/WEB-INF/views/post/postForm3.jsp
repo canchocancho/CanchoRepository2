@@ -11,7 +11,12 @@
 <script type="text/javascript" src="https://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script> -->
 
  <script src="https://code.jquery.com/jquery-1.8.2.js"></script>
-  <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+ <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+ 
+ <!-- 일본어 글상자 소스 -->
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+ <script src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
 		
 		<style>
 			#div_root{
@@ -29,14 +34,14 @@
 			}
 					
 			#div_menu{
-				width:15%;
+				width:20%;
 				height:666px;
 				float:left;
 				background-color:#99ffb3;
 			}
 					
 			#div_con{
-				width:85%;
+				width:1000px;
 				height:666px;
 				float:left;
 			}
@@ -87,28 +92,47 @@
 			div.color {
 				background-color:salmon;
 			}
+			
+			
+			
+			
+			.sticky {
+			  width: 250px;
+			  height: 50px;
+			  position: absolute;
+			  cursor: pointer;
+			  border: 1px solid #aaa;
+			}
+			textarea {
+			  width: 100%;
+			  height: 100%;
+			}
+			.selected {border-color: #f44;}
 		</style>
 		
 		<script type="text/javascript">
 			function changebg(img){
 				var div_con = document.getElementById("div_con");
+				if(img == 'cd'){
+					div_con.style.backgroundImage = "url(../resources/img/cd.jpg)";
+				}
+				if(img == 'christmas'){
+					div_con.style.backgroundImage = "url(../resources/img/christmas.jpg)";
+				}
+				if(img == 'diary'){
+					div_con.style.backgroundImage = "url(../resources/img/diary.jpg)";
+				}
+				if(img == 'label'){
+					div_con.style.backgroundImage = "url(../resources/img/label.jpg)";
+				}
+				if(img == 'menu'){
+					div_con.style.backgroundImage = "url(../resources/img/menu.jpg)";
+				}
+				if(img == 'paper'){
+					div_con.style.backgroundImage = "url(../resources/img/paper.jpg)";
+				}
 				if(img == 'poster'){
 					div_con.style.backgroundImage = "url(../resources/img/poster.jpg)";
-				}
-				if(img == 'flower'){
-					div_con.style.backgroundImage = "url(../resources/img/flower.png)";
-				}
-				if(img == 'wall'){
-					div_con.style.backgroundImage = "url(../resources/img/wall.jpg)";
-				}
-				if(img == 'sketchbook'){
-					div_con.style.backgroundImage = "url(../resources/img/sketchbook.jpg)";
-				}
-				if(img == 'princess'){
-					div_con.style.backgroundImage = "url(../resources/img/princess.jpg)";
-				}
-				if(img == 'notebook'){
-					div_con.style.backgroundImage = "url(../resources/img/notebook.jpg)";
 				}
 			}
 			
@@ -151,6 +175,66 @@
 			});
 		});
 		</script> -->
+		
+<script>
+$(function() {
+  $('#new').click(function() {
+    make();
+    save();
+  });
+
+  $('#del').click(function() {
+    $('.selected').remove();
+    save();
+  });
+
+  function make() {
+    var sticky = $('<div class="sticky">Drag & Double Click!</div>');
+    sticky.appendTo('#div_con')
+      .css('background-color', $('#color').val())
+      .draggable({stop: save})
+      .dblclick(function() {
+        $(this).html('<textarea>' + $(this).html() + '</textarea>')
+          .children()
+          .focus()
+          .blur(function() {
+            $(this).parent().html($(this).val());
+            save();
+          });
+      }).mousedown(function() {
+        $('.sticky').removeClass('selected');
+        $(this).addClass('selected');
+      });
+    return sticky;
+  }
+
+  function save() {
+    var items = [];
+    $('.sticky').each(function() {
+      items.push(
+        $(this).css('left'),
+        $(this).css('top'),
+        $(this).css('background-color'),
+        $(this).html()
+      );
+    });
+    $.cookie('sticky', items.join('\t'), {expires: 100});
+  }
+
+  function load() {
+    if (!$.cookie('sticky')) return;
+    var items = $.cookie('sticky').split('\t');
+    for (var i = 0; i < items.length; i += 4) {
+      make().css({
+        left: items[i],
+        top: items[i + 1],
+        backgroundColor: items[i + 2]
+      }).html(items[i + 3]);
+    }
+  }
+  load();
+});
+</script>
 	</head>
 	
 	<body>
@@ -161,17 +245,23 @@
 		
 		<!-- 편집 메뉴 영역 -->
 		<div id="div_top">
-				Template Images
+				Background
+			    <button class="myButton" onclick="changebg('cd')">CD</button>
+			    <button class="myButton" onclick="changebg('christmas')">Christmas</button>
+			    <button class="myButton" onclick="changebg('diary')">Diary</button>
+			    <button class="myButton" onclick="changebg('label')">Label</button>
+			    <button class="myButton" onclick="changebg('menu')">Menu</button>
+			    <button class="myButton" onclick="changebg('paper')">Paper</button>
 			    <button class="myButton" onclick="changebg('poster')">Poster</button>
-			    <button class="myButton" onclick="changebg('flower')">Flower</button>
-			    <button class="myButton" onclick="changebg('wall')">Wall</button>
-			    <button class="myButton" onclick="changebg('sketchbook')">Sketchbook</button>
-			    <button class="myButton" onclick="changebg('princess')">Princess</button>
-			    <button class="myButton" onclick="changebg('notebook')">Notebook</button>
 			    <br>
 			    
 				텍스트 박스 추가
 			    <button class="myButton" onclick="add_item();">Textbox</button>
+			    <br>
+			    
+				    텍스트 박스
+				    <input id="new" type="button" value="new">
+					<input id="del" type="button" value="del">
 		</div>
 		
 		<!-- 왼쪽 도구 영역 -->
