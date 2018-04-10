@@ -13,7 +13,7 @@
 		<style>
 			#div_root{
 				width: 100%;
-				height:100px;
+				height:50px;
 				float:left;
 				background-color:#ff9999;
 			}
@@ -26,17 +26,16 @@
 			}
 					
 			#div_menu{
-				width:20%;
-				height:500px;
+				width:15%;
+				height:666px;
 				float:left;
 				background-color:#99ffb3;
 			}
 					
 			#div_con{
-				width:80%;
-				height:500px;
+				width:85%;
+				height:666px;
 				float:left;
-				/* background-color:#99b3ff; */
 			}
 			
 			.myButton {
@@ -88,9 +87,26 @@
 		</style>
 		
 		<script type="text/javascript">
-			function changebg(){
+			function changebg(img){
 				var div_con = document.getElementById("div_con");
-				div_con.style.backgroundColor= "#ffccff";
+				if(img == 'poster'){
+					div_con.style.backgroundImage = "url(../resources/img/poster.jpg)";
+				}
+				if(img == 'flower'){
+					div_con.style.backgroundImage = "url(../resources/img/flower.png)";
+				}
+				if(img == 'wall'){
+					div_con.style.backgroundImage = "url(../resources/img/wall.jpg)";
+				}
+				if(img == 'sketchbook'){
+					div_con.style.backgroundImage = "url(../resources/img/sketchbook.jpg)";
+				}
+				if(img == 'princess'){
+					div_con.style.backgroundImage = "url(../resources/img/princess.jpg)";
+				}
+				if(img == 'notebook'){
+					div_con.style.backgroundImage = "url(../resources/img/notebook.jpg)";
+				}
 			}
 			
 		    function add_item(){
@@ -131,8 +147,14 @@
 		
 		<!-- 편집 메뉴 영역 -->
 		<div id="div_top">
-				백그라운드 색상 변경
-			    <button class="myButton" onclick="changebg();">Babypink</button><br>
+				Template Images
+			    <button class="myButton" onclick="changebg('poster')">Poster</button>
+			    <button class="myButton" onclick="changebg('flower')">Flower</button>
+			    <button class="myButton" onclick="changebg('wall')">Wall</button>
+			    <button class="myButton" onclick="changebg('sketchbook')">Sketchbook</button>
+			    <button class="myButton" onclick="changebg('princess')">Princess</button>
+			    <button class="myButton" onclick="changebg('notebook')">Notebook</button>
+			    <br>
 			    
 				텍스트 박스 추가
 			    <button class="myButton" onclick="add_item();">Textbox</button>
