@@ -7,16 +7,16 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>POST3</title>
 		
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script> -->
+		<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script> -->
 
- <script src="https://code.jquery.com/jquery-1.8.2.js"></script>
- <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+ 		<script src="https://code.jquery.com/jquery-1.8.2.js"></script>
+ 		<script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
  
- <!-- 일본어 글상자 소스 -->
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
- <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
- <script src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
+ 		<!-- 일본 글상자 소스 스크립트 -->
+ 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+ 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+ 		<script src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
 		
 		<style>
 			#div_root{
@@ -35,14 +35,14 @@
 					
 			#div_menu{
 				width:20%;
-				height:666px;
+				height:600px;
 				float:left;
 				background-color:#99ffb3;
 			}
 					
 			#div_con{
 				width:1000px;
-				height:666px;
+				height:600px;
 				float:left;
 			}
 			
@@ -64,9 +64,11 @@
 				text-decoration:none;
 				text-shadow:0px 1px 0px #b23e35;
 			}
+			
 			.myButton:hover {
 				background-color:#eb675e;
 			}
+			
 			.myButton:active {
 				position:relative;
 				top:1px;
@@ -93,9 +95,7 @@
 				background-color:salmon;
 			}
 			
-			
-			
-			
+			/* 일본 글상자 소스 스타일 */
 			.sticky {
 			  width: 250px;
 			  height: 50px;
@@ -103,10 +103,12 @@
 			  cursor: pointer;
 			  border: 1px solid #aaa;
 			}
+			
 			textarea {
 			  width: 100%;
 			  height: 100%;
 			}
+			
 			.selected {border-color: #f44;}
 		</style>
 		
@@ -158,7 +160,8 @@
 		    } */
 		</script>
 		
-<!-- 		<script>
+<!-- 시작할 때 포스트잇 만들려고 쓴 ready function
+ 		<script>
 		$(document).ready(function(){
 		    $(".post").draggable({
 				cursor:"move",
@@ -176,65 +179,66 @@
 		});
 		</script> -->
 		
-<script>
-$(function() {
-  $('#new').click(function() {
-    make();
-    save();
-  });
-
-  $('#del').click(function() {
-    $('.selected').remove();
-    save();
-  });
-
-  function make() {
-    var sticky = $('<div class="sticky">Drag & Double Click!</div>');
-    sticky.appendTo('#div_con')
-      .css('background-color', $('#color').val())
-      .draggable({stop: save})
-      .dblclick(function() {
-        $(this).html('<textarea>' + $(this).html() + '</textarea>')
-          .children()
-          .focus()
-          .blur(function() {
-            $(this).parent().html($(this).val());
-            save();
-          });
-      }).mousedown(function() {
-        $('.sticky').removeClass('selected');
-        $(this).addClass('selected');
-      });
-    return sticky;
-  }
-
-  function save() {
-    var items = [];
-    $('.sticky').each(function() {
-      items.push(
-        $(this).css('left'),
-        $(this).css('top'),
-        $(this).css('background-color'),
-        $(this).html()
-      );
-    });
-    $.cookie('sticky', items.join('\t'), {expires: 100});
-  }
-
-  function load() {
-    if (!$.cookie('sticky')) return;
-    var items = $.cookie('sticky').split('\t');
-    for (var i = 0; i < items.length; i += 4) {
-      make().css({
-        left: items[i],
-        top: items[i + 1],
-        backgroundColor: items[i + 2]
-      }).html(items[i + 3]);
-    }
-  }
-  load();
-});
-</script>
+		<!-- 일본어 글상자 소스 스크립트 -->
+		<script>
+		$(function() {
+		  $('#new').click(function() {
+		    make();
+		    save();
+		  });
+		
+		  $('#del').click(function() {
+		    $('.selected').remove();
+		    save();
+		  });
+		
+		  function make() {
+		    var sticky = $('<div class="sticky">Drag & Double Click!</div>');
+		    sticky.appendTo('#div_con')
+		      .css('background-color', $('#color').val())
+		      .draggable({stop: save})
+		      .dblclick(function() {
+		        $(this).html('<input type="text">' + $(this).html() + '</>')
+		          .children()
+		          .focus()
+		          .blur(function() {
+		            $(this).parent().html($(this).val());
+		            save();
+		          });
+		      }).mousedown(function() {
+		        $('.sticky').removeClass('selected');
+		        $(this).addClass('selected');
+		      });
+		    return sticky;
+		  }
+		
+		  function save() {
+		    var items = [];
+		    $('.sticky').each(function() {
+		      items.push(
+		        $(this).css('left'),
+		        $(this).css('top'),
+		        $(this).css('background-color'),
+		        $(this).html()
+		      );
+		    });
+		    $.cookie('sticky', items.join('\t'), {expires: 100});
+		  }
+		
+		  function load() {
+		    if (!$.cookie('sticky')) return;
+		    var items = $.cookie('sticky').split('\t');
+		    for (var i = 0; i < items.length; i += 4) {
+		      make().css({
+		        left: items[i],
+		        top: items[i + 1],
+		        backgroundColor: items[i + 2]
+		      }).html(items[i + 3]);
+		    }
+		  }
+		  load();
+		});
+		</script>
 	</head>
 	
 	<body>
