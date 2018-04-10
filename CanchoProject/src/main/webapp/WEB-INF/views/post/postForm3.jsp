@@ -10,8 +10,8 @@
 		<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript" src="https://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script> -->
 
- 		<script src="https://code.jquery.com/jquery-1.8.2.js"></script>
- 		<script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+ 		<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+ 		<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
  
  		<!-- 일본 글상자 소스 스크립트 -->
  		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
@@ -41,7 +41,7 @@
 			}
 					
 			#div_con{
-				width:1000px;
+				width:80%;
 				height:600px;
 				float:left;
 			}
@@ -96,16 +96,16 @@
 			}
 			
 			/* 일본 글상자 소스 스타일 */
-			.sticky {
-			  width: 250px;
-			  height: 50px;
+ 			.sticky {
+			  width: 200px;
+			  height: 100px;
 			  position: absolute;
 			  cursor: pointer;
 			  border: 1px solid #aaa;
 			}
 			
 			textarea {
-			  width: 100%;
+ 			  width: 100%;
 			  height: 100%;
 			}
 			
@@ -182,6 +182,7 @@
 		<!-- 일본어 글상자 소스 스크립트 -->
 		<script>
 		$(function() {
+			
 		  $('#new').click(function() {
 		    make();
 		    save();
@@ -193,12 +194,11 @@
 		  });
 		
 		  function make() {
-		    var sticky = $('<div class="sticky">Drag & Double Click!</div>');
+		    var sticky = $('<div class="sticky">내용을 쓰세요.</div>');
 		    sticky.appendTo('#div_con')
-		      .css('background-color', $('#color').val())
-		      .draggable({stop: save})
+		      .draggable({cursor:"move", containment:"#div_con"})
 		      .dblclick(function() {
-		        $(this).html('<input type="text">' + $(this).html() + '</>')
+		        $(this).html('<textarea>' + $(this).html() + '</textarea>')
 		          .children()
 		          .focus()
 		          .blur(function() {
@@ -259,13 +259,13 @@
 			    <button class="myButton" onclick="changebg('poster')">Poster</button>
 			    <br>
 			    
-				텍스트 박스 추가
+				Post It
 			    <button class="myButton" onclick="add_item();">Textbox</button>
 			    <br>
 			    
-				    텍스트 박스
-				    <input id="new" type="button" value="new">
-					<input id="del" type="button" value="del">
+				Sticky Note
+				<input class="myButton" id="new" type="button" value="new">
+				<input class="myButton" id="del" type="button" value="del">
 		</div>
 		
 		<!-- 왼쪽 도구 영역 -->
