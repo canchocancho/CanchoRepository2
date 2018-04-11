@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,6 +9,9 @@
 
  		<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
  		<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+ 		
+ 		<script type="text/javascript" src="../resources/js/fabric.js"></script>
+ 		<script type="text/javascript" src="../resources/js/fabric.min.js"></script>
 
 		<style>
 			#div_root{
@@ -86,7 +89,7 @@
 	
 			});
 	 		
-			function add(){
+			function addTextDiv(){
 			    var myDiv = $('<div id="draggableDiv" class="draggableDiv"><div id="textDiv" class="textDiv" contenteditable="true"></div></div>');
 			    myDiv.appendTo('#div_con');
 			}
@@ -137,7 +140,7 @@
 			    <br>
 				
 				Div Text
-				<input class="myButton" id="add" type="button" value="textDiv">
+				<input class="myButton" id="addTextDiv" type="button" value="textDiv">
 				<br>
 				
 				<div class="buttons">
