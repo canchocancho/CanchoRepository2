@@ -110,6 +110,16 @@
 			}
 			
 			.selected {border-color: #f44;}
+			
+		
+			/* 텍스트 div */
+			.textDiv {
+				padding: 20px;
+			    border: 2px solid;
+			    width: 200px;
+			    resize: both;
+			    overflow: auto;
+			}
 		</style>
 		
 		<script type="text/javascript">
@@ -138,7 +148,7 @@
 				}
 			}
 			
-		    function add_item(){
+/* 		    function add_item(){
 		        var div = document.createElement('div');
 		        div.innerHTML = document.getElementById('pre_set').innerHTML;
 		        document.getElementById('div_con').appendChild(div);
@@ -153,7 +163,7 @@
 			    $("#resizable").resizable({
 			    	containment:"#div_con"
 			    });
-		    }
+		    } */
 		 
 /* 		    function remove_item(obj){
 		        document.getElementById('div_con').removeChild(obj.parentNode);
@@ -180,10 +190,20 @@
 		</script> -->
 		
 		<!-- 일본어 글상자 소스 스크립트 -->
-		<script>
-		$(function() {
+ 		<script>
+ 		$(function() {
+	
+			$('#add').click(function() {
+		    add();
+		  });
 			
-		  $('#new').click(function() {
+			
+		function add(){
+		    var myDiv = $('<div id="draggableDiv" class="draggableDiv"><div id="textDiv" class="textDiv" contenteditable="true"></div></div>');
+		    myDiv.appendTo('#div_con');
+		}
+			
+		/*   $('#new').click(function() {
 		    make();
 		    save();
 		  });
@@ -236,8 +256,15 @@
 		      }).html(items[i + 3]);
 		    }
 		  }
-		  load();
+		  load();*/
 		});
+		
+		/* 텍스트 쓸 수 있는 div 만들기 */
+/* 		function add(){
+		    var myDiv = $('<div id="draggableDiv" class="draggableDiv"><div id="textDiv" class="textDiv" contenteditable="true"></div></div>');
+		    myDiv.appendTo('#div_con');
+		} */
+		
 		</script>
 	</head>
 	
@@ -259,13 +286,27 @@
 			    <button class="myButton" onclick="changebg('poster')">Poster</button>
 			    <br>
 			    
-				Post It
+<!-- 				Post It
 			    <button class="myButton" onclick="add_item();">Textbox</button>
-			    <br>
-			    
+
 				Sticky Note
 				<input class="myButton" id="new" type="button" value="new">
-				<input class="myButton" id="del" type="button" value="del">
+				<input class="myButton" id="del" type="button" value="del"> -->
+				
+				Div Text
+				<!-- <button class="myButton" id="add">Div</button> -->
+				<input class="myButton" id="add" type="button" value="textDiv">
+				<br>
+				
+				<div class="buttons">
+				    <input type="button" class="BOLD" value="B" onclick="document.execCommand('bold')" />
+				    <input type="button" class="ITALIC" value="Italic" onclick="document.execCommand('Italic')" />
+				    <input type="button" class="UNDERBAR" value="밑줄" onclick="document.execCommand('Underline')" />
+				    <input type="button" class="BAR" value="취소선" onclick="document.execCommand('StrikeThrough')" />
+				    <input type="button" class="aignLeft" value="왼쪽 정렬" onclick="document.execCommand('justifyleft')" />
+				    <input type="button" class="aignCenter" value="가운데 정렬" onclick="document.execCommand('justifycenter')" />
+				    <input type="button" class="aignRight" value="오른쪽 정렬" onclick="document.execCommand('justifyright')" />
+				</div>
 		</div>
 		
 		<!-- 왼쪽 도구 영역 -->
@@ -275,23 +316,17 @@
 		
 		<!-- 내용(표지 부분) 영역 -->
 		<div id="div_con" class="div_con">
-				<!-- <div class="post">
-					<p>글을 써보세요.</p>
-				</div> -->
+		
 		</div>
 		
 		<!-- 텍스트 박스 -->
-		<div id="pre_set" style="display:none">
+<!-- 		<div id="pre_set" style="display:none">
 			<div class="post">
 				<input type="text" id="resizable" class="ui-state-active" value="This is input box"
 					style="border: none; background: transparent;">
-				<!-- <p>글을 써보세요.</p> -->
+				<p>글을 써보세요.</p>
 			</div>
-		</div>
-
-		<script>
-
-		</script>
-
+		</div> -->
+		
 	</body>
 </html>
