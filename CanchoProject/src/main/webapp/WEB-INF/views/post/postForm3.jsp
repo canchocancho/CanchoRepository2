@@ -14,9 +14,9 @@
  		<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
  
  		<!-- 일본 글상자 소스 스크립트 -->
- 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<!--  		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
  		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
- 		<script src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
+ 		<script src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script> -->
 		
 		<style>
 			#div_root{
