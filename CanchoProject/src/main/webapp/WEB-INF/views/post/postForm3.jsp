@@ -1,23 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>POST3</title>
-		
-		<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script type="text/javascript" src="https://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script> -->
 
  		<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
  		<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
- 
- 		<!-- 일본 글상자 소스 스크립트 -->
- 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
- 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
- 		<script src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
-		
+ 		
+ 		<script type="text/javascript" src="../resources/js/fabric.js"></script>
+ 		<script type="text/javascript" src="../resources/js/fabric.min.js"></script>
+
 		<style>
 			#div_root{
 				width: 100%;
@@ -73,46 +68,32 @@
 				position:relative;
 				top:1px;
 			}
-			
-			.text_box {
-			  width:auto;
-			  height:auto;
-			  border:0;
-			  background:transparent;
+
+			/* 텍스트 div */
+			.textDiv {
+				padding: 20px;
+			    border: 2px solid;
+			    width: 200px;
+			    resize: both;
+			    overflow: auto;
 			}
-			
-			div.post {
-			float:left;
-			width:150px;
-			height:150px;
-			padding:10px 0px 0px 20px;
-			background-color:#f9d716;
-			border:1px solid black;
-			box-shadow:2px 2px 2px;
-			}
-			
-			div.color {
-				background-color:salmon;
-			}
-			
-			/* 일본 글상자 소스 스타일 */
- 			.sticky {
-			  width: 200px;
-			  height: 100px;
-			  position: absolute;
-			  cursor: pointer;
-			  border: 1px solid #aaa;
-			}
-			
-			textarea {
- 			  width: 100%;
-			  height: 100%;
-			}
-			
-			.selected {border-color: #f44;}
 		</style>
 		
 		<script type="text/javascript">
+		
+	 		$(function() {
+	 			
+				$('#add').click(function() {
+					addTextDiv();
+			  });
+	
+			});
+	 		
+			function addTextDiv(){
+			    var myDiv = $('<div id="draggableDiv" class="draggableDiv"><div id="textDiv" class="textDiv" contenteditable="true"></div></div>');
+			    myDiv.appendTo('#div_con');
+			}
+		
 			function changebg(img){
 				var div_con = document.getElementById("div_con");
 				if(img == 'cd'){
@@ -137,107 +118,6 @@
 					div_con.style.backgroundImage = "url(../resources/img/poster.jpg)";
 				}
 			}
-			
-		    function add_item(){
-		        var div = document.createElement('div');
-		        div.innerHTML = document.getElementById('pre_set').innerHTML;
-		        document.getElementById('div_con').appendChild(div);
-		        
-			    $(".post").draggable({
-					cursor:"move",
-					stack:".post",
-					opacity:0.8,
-					containment:"#div_con"
-				});
-			    
-			    $("#resizable").resizable({
-			    	containment:"#div_con"
-			    });
-		    }
-		 
-/* 		    function remove_item(obj){
-		        document.getElementById('div_con').removeChild(obj.parentNode);
-		    } */
-		</script>
-		
-<!-- 시작할 때 포스트잇 만들려고 쓴 ready function
- 		<script>
-		$(document).ready(function(){
-		    $(".post").draggable({
-				cursor:"move",
-				stack:".post",
-				opacity:0.8,
-				containment:"#div_con"
-			});
-
- 			$(".post").bind("dragstart",function(event, ui){
-				$(this).addClass("color");
-			});
-			$(".post").bind("dragstop", function(event, ui){
-				$(this).removeClass("color");
-			});
-		});
-		</script> -->
-		
-		<!-- 일본어 글상자 소스 스크립트 -->
-		<script>
-		$(function() {
-			
-		  $('#new').click(function() {
-		    make();
-		    save();
-		  });
-		
-		  $('#del').click(function() {
-		    $('.selected').remove();
-		    save();
-		  });
-		
-		  function make() {
-		    var sticky = $('<div class="sticky">내용을 쓰세요.</div>');
-		    sticky.appendTo('#div_con')
-		      .draggable({cursor:"move", containment:"#div_con"})
-		      .dblclick(function() {
-		        $(this).html('<textarea>' + $(this).html() + '</textarea>')
-		          .children()
-		          .focus()
-		          .blur(function() {
-		            $(this).parent().html($(this).val());
-		            save();
-		          });
-		      }).mousedown(function() {
-		        $('.sticky').removeClass('selected');
-		        $(this).addClass('selected');
-		      });
-		    return sticky;
-		  }
-		
-		  function save() {
-		    var items = [];
-		    $('.sticky').each(function() {
-		      items.push(
-		        $(this).css('left'),
-		        $(this).css('top'),
-		        $(this).css('background-color'),
-		        $(this).html()
-		      );
-		    });
-		    $.cookie('sticky', items.join('\t'), {expires: 100});
-		  }
-		
-		  function load() {
-		    if (!$.cookie('sticky')) return;
-		    var items = $.cookie('sticky').split('\t');
-		    for (var i = 0; i < items.length; i += 4) {
-		      make().css({
-		        left: items[i],
-		        top: items[i + 1],
-		        backgroundColor: items[i + 2]
-		      }).html(items[i + 3]);
-		    }
-		  }
-		  load();
-		});
 		</script>
 	</head>
 	
@@ -258,14 +138,20 @@
 			    <button class="myButton" onclick="changebg('paper')">Paper</button>
 			    <button class="myButton" onclick="changebg('poster')">Poster</button>
 			    <br>
-			    
-				Post It
-			    <button class="myButton" onclick="add_item();">Textbox</button>
-			    <br>
-			    
-				Sticky Note
-				<input class="myButton" id="new" type="button" value="new">
-				<input class="myButton" id="del" type="button" value="del">
+				
+				Div Text
+				<input class="myButton" id="add" type="button" value="textDiv">
+				<br>
+				
+				<div class="buttons">
+				    <input type="button" class="BOLD" value="B" onclick="document.execCommand('bold')" />
+				    <input type="button" class="ITALIC" value="Italic" onclick="document.execCommand('Italic')" />
+				    <input type="button" class="UNDERBAR" value="밑줄" onclick="document.execCommand('Underline')" />
+				    <input type="button" class="BAR" value="취소선" onclick="document.execCommand('StrikeThrough')" />
+				    <input type="button" class="aignLeft" value="왼쪽 정렬" onclick="document.execCommand('justifyleft')" />
+				    <input type="button" class="aignCenter" value="가운데 정렬" onclick="document.execCommand('justifycenter')" />
+				    <input type="button" class="aignRight" value="오른쪽 정렬" onclick="document.execCommand('justifyright')" />
+				</div>
 		</div>
 		
 		<!-- 왼쪽 도구 영역 -->
@@ -275,23 +161,8 @@
 		
 		<!-- 내용(표지 부분) 영역 -->
 		<div id="div_con" class="div_con">
-				<!-- <div class="post">
-					<p>글을 써보세요.</p>
-				</div> -->
+		
 		</div>
 		
-		<!-- 텍스트 박스 -->
-		<div id="pre_set" style="display:none">
-			<div class="post">
-				<input type="text" id="resizable" class="ui-state-active" value="This is input box"
-					style="border: none; background: transparent;">
-				<!-- <p>글을 써보세요.</p> -->
-			</div>
-		</div>
-
-		<script>
-
-		</script>
-
 	</body>
 </html>
