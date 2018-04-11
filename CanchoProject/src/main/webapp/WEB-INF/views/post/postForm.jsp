@@ -320,7 +320,7 @@
 			$('.highlight').fadeIn(1700);
 		});
 		var textarea = document.getElementById("messageWindow");
-		var webSocket = new WebSocket('ws://10.10.8.124:8888/cancho/broadcasting');
+		var webSocket = new WebSocket('ws://10.10.15.88:8888/cancho/broadcasting');
 		var inputMessage = document.getElementById('inputMessage');
 		webSocket.onerror = function(event) {
 		    onError(event)
