@@ -7,11 +7,12 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>POST3</title>
 
- 		<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
- 		<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+ 		<!-- <script src="https://code.jquery.com/jquery-1.9.1.js"></script> -->
+ 		<!-- <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->
  		
- 		<script type="text/javascript" src="../resources/js/fabric.js"></script>
- 		<script type="text/javascript" src="../resources/js/fabric.min.js"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/fabric.min.js" />"></script>
+	 	<script type="text/javascript" src="<c:url value="/resources/js/fabric.js" />"></script>
+	 	<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
 
 		<style>
 			#div_root{
