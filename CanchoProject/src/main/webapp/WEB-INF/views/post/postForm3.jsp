@@ -84,7 +84,7 @@
 	 		$(function() {
 	 			
 				$('#add').click(function() {
-			    add();
+					addTextDiv();
 			  });
 	
 			});
@@ -140,7 +140,7 @@
 			    <br>
 				
 				Div Text
-				<input class="myButton" id="addTextDiv" type="button" value="textDiv">
+				<input class="myButton" id="add" type="button" value="textDiv">
 				<br>
 				
 				<div class="buttons">
