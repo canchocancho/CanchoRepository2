@@ -393,7 +393,7 @@
 			</div>
 			
 			<hr>
-			<button class="myButton" id="btnSave" onclick="btnSave()">저장하기</button>
+			<button id="btnSave" onclick="btnSave()">저장하기</button>
 
 		</div>
 		
