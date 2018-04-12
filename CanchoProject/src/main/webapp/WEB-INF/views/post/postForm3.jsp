@@ -12,6 +12,9 @@
 		<script type="text/javascript" src="<c:url value="/resources/js/fabric.js" />"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
 
+		<script type="text/javascript" src="<c:url value="/resources/js/html2canvas.min.js" />"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/html2canvas.js" />"></script>
+
 		<style>
 			#div_root{
 				width: 100%;
@@ -39,62 +42,9 @@
 				height:600px;
 				float:left;
 			}
-			
-			.myButton {
-				-moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
-				-webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
-				box-shadow:inset 0px 39px 0px -24px #e67a73;
-				background-color:#e4685d;
-				-moz-border-radius:4px;
-				-webkit-border-radius:4px;
-				border-radius:4px;
-				border:1px solid #ffffff;
-				display:inline-block;
-				cursor:pointer;
-				color:#ffffff;
-				font-family:Arial;
-				font-size:15px;
-				padding:6px 15px;
-				text-decoration:none;
-				text-shadow:0px 1px 0px #b23e35;
-			}
-			
-			.myButton:hover {
-				background-color:#eb675e;
-			}
-			
-			.myButton:active {
-				position:relative;
-				top:1px;
-			}
-
-			/* 텍스트 div */
-			.textDiv {
-				padding: 20px;
-			    border: 2px solid;
-			    width: 200px;
-			    resize: both;
-			    overflow: auto;
-			}
 		</style>
 		
 		<script type="text/javascript">
-		
-/* 	 		$(function() {
-	 			
-				$('#add').click(function() {
-					addTextDiv();
-			  });
-
-			});
-	 		
-			function addTextDiv(){
-			    var myDiv = $('<div id="draggableDiv" class="draggableDiv"><div id="textDiv" class="textDiv" contenteditable="true"></div></div>');
-			    myDiv.appendTo('#div_con');
-			}
-		
-			*/
-			
 			function changeBackground(img){
 				
 				if(img == 'cd'){
@@ -122,12 +72,13 @@
 			
 			
 	    	function btnSave(){
-	    		 var canvas = document.getElementById("c");
-	    		 var  d =canvas.toDataURL("image/png");
-	    		 var w = window.open('about:blank','image from canvas');
-	    		 w.document.write("<img src='"+d+"' alt='from canvas'/>");
+
+	    		 html2canvas(document.querySelector("#div_con")).then(canvas => {
+		    		    document.body.appendChild(canvas)
+		    		});
+	    		 
 	    	 }
-			
+
 		  	$(function(){
 		    	  var $ = function(id){return document.getElementById(id)};
 
@@ -383,10 +334,7 @@
 			    <button type="button" onClick="changeBackground('poster')">Poster</button>
 			    <br>
 				
-				Div Text
-				<input class="myButton" id="add" type="button" value="textDiv">
-				
-				<div class="buttons">
+<!-- 			<div class="buttons">
 				    <input type="button" class="BOLD" value="B" onclick="document.execCommand('bold')" />
 				    <input type="button" class="ITALIC" value="Italic" onclick="document.execCommand('Italic')" />
 				    <input type="button" class="UNDERBAR" value="밑줄" onclick="document.execCommand('Underline')" />
@@ -394,7 +342,8 @@
 				    <input type="button" class="aignLeft" value="왼쪽 정렬" onclick="document.execCommand('justifyleft')" />
 				    <input type="button" class="aignCenter" value="가운데 정렬" onclick="document.execCommand('justifycenter')" />
 				    <input type="button" class="aignRight" value="오른쪽 정렬" onclick="document.execCommand('justifyright')" />
-				</div>
+				</div> -->
+				
 		</div>
 		
 		<!-- 왼쪽 도구 영역 -->

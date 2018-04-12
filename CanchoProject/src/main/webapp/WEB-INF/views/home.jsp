@@ -24,7 +24,6 @@
 				<li><a href="post/writePost">포스트 쓰기</a></li>
 				<li><a href="post/writePost2">포스트 쓰기2(미리)</a></li>
 				<li><a href="post/writePost3">포스트 쓰기3(다빈)</a></li>
-				<li><a href="post/writePost4">포스트 쓰기4(다빈)</a></li>
 				<li><a href="video/editor">브이로그 만들기</a></li>
 				<li><a href="post/postList">포스트 목록</a></li>		
 				<li><a href="user/logout">로그아웃</a></li>
