@@ -141,5 +141,13 @@ public class PostController {
 		
 		return "post/postForm3";
 	}
+	
+	/*postForm4.jsp*/
+	@RequestMapping(value="writePost4", method=RequestMethod.GET)
+	public String writePost4(HttpSession session){
+		logger.info("POST");
+		
+		return "post/postForm4";
+	}
 
 }
