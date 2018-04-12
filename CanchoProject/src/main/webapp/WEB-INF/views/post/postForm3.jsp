@@ -447,8 +447,7 @@
 			
 			<hr>
 			<button class="myButton" id="btnSave" onclick="btnSave()">저장하기</button>
-			
-			<div id="img-out"></div>
+
 		</div>
 		
 		<!-- 내용(표지 부분) 영역 -->
