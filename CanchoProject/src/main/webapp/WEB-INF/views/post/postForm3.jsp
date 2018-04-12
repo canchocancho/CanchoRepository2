@@ -95,40 +95,38 @@
 		
 			*/
 			
-			function changebg(img){
-				var div_con = document.getElementById("div_con");
+			function changeBackground(img){
 				
 				if(img == 'cd'){
-					div_con.style.backgroundImage = "url(../resources/img/cd.jpg)";
+					document.getElementById("c").style.background = "url(../resources/img/cd.jpg)";
 				}
 				if(img == 'christmas'){
-					div_con.style.backgroundImage = "url(../resources/img/christmas.jpg)";
+					document.getElementById("c").style.background = "url(../resources/img/christmas.jpg)";
 				}
 				if(img == 'diary'){
-					div_con.style.backgroundImage = "url(../resources/img/diary.jpg)";
+					document.getElementById("c").style.background = "url(../resources/img/diary.jpg)";
 				}
 				if(img == 'label'){
-					div_con.style.backgroundImage = "url(../resources/img/label.jpg)";
+					document.getElementById("c").style.background = "url(../resources/img/label.jpg)";
 				}
 				if(img == 'menu'){
-					div_con.style.backgroundImage = "url(../resources/img/menu.jpg)";
+					document.getElementById("c").style.background = "url(../resources/img/menu.jpg)";
 				}
 				if(img == 'paper'){
-					div_con.style.backgroundImage = "url(../resources/img/paper.jpg)";
+					document.getElementById("c").style.background = "url(../resources/img/paper.jpg)";
 				}
 				if(img == 'poster'){
-					div_con.style.backgroundImage = "url(../resources/img/poster.jpg)";
+					document.getElementById("c").style.background = "url(../resources/img/poster.jpg)";
 				}
 			}
 			
 			
-	    	  function btnSave(){
-	    		  var canvas=document.getElementById("c");
-	    		  var d=canvas.toDataURL("image/png");
-	    		  var w=window.open('about:blank','image from canvas');
-	    		  w.document.write("<img src='"+d+"' alt='from canvas'/>");
-	    	  }
-			
+	    	function btnSave(){
+	    		 var canvas = document.getElementById("c");
+	    		 var  d =canvas.toDataURL("image/png");
+	    		 var w = window.open('about:blank','image from canvas');
+	    		 w.document.write("<img src='"+d+"' alt='from canvas'/>");
+	    	 }
 			
 		  	$(function(){
 		    	  var $ = function(id){return document.getElementById(id)};
@@ -376,13 +374,13 @@
 		<!-- 편집 메뉴 영역 -->
 		<div id="div_top">
 				Background
-			    <button class="myButton" onclick="changebg('cd')">CD</button>
-			    <button class="myButton" onclick="changebg('christmas')">Christmas</button>
-			    <button class="myButton" onclick="changebg('diary')">Diary</button>
-			    <button class="myButton" onclick="changebg('label')">Label</button>
-			    <button class="myButton" onclick="changebg('menu')">Menu</button>
-			    <button class="myButton" onclick="changebg('paper')">Paper</button>
-			    <button class="myButton" onclick="changebg('poster')">Poster</button>
+			    <button type="button" onClick="changeBackground('cd')">CD</button>
+			    <button type="button" onClick="changeBackground('christmas')">Christmas</button>
+			    <button type="button" onClick="changeBackground('diary')">Diary</button>
+			    <button type="button" onClick="changeBackground('label')">Label</button>
+			    <button type="button" onClick="changeBackground('menu')">Menu</button>
+			    <button type="button" onClick="changeBackground('paper')">Paper</button>
+			    <button type="button" onClick="changeBackground('poster')">Poster</button>
 			    <br>
 				
 				Div Text
