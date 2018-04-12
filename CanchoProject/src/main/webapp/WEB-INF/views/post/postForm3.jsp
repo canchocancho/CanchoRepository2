@@ -87,7 +87,7 @@
 				$('#add').click(function() {
 					addTextDiv();
 			  });
-	
+
 			});
 	 		
 			function addTextDiv(){
@@ -119,6 +119,11 @@
 					div_con.style.backgroundImage = "url(../resources/img/poster.jpg)";
 				}
 			}
+			
+			
+			
+			
+			
 		</script>
 	</head>
 	
@@ -142,7 +147,6 @@
 				
 				Div Text
 				<input class="myButton" id="add" type="button" value="textDiv">
-				<br>
 				
 				<div class="buttons">
 				    <input type="button" class="BOLD" value="B" onclick="document.execCommand('bold')" />
