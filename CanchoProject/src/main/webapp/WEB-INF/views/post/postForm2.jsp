@@ -30,6 +30,9 @@
   	      drawingShadowWidth = $('drawing-shadow-width'),
   	      drawingShadowOffset = $('drawing-shadow-offset'),
   	      clearEl = $('clear-canvas');
+  	  
+  	  var text = $('insertText');
+  	  var tMenu = $('textmenu');
 
   	  clearEl.onclick = function() { canvas.clear() };
 
@@ -38,10 +41,14 @@
   	    if (canvas.isDrawingMode) {
   	      drawingModeEl.innerHTML = 'Cancel drawing mode';
   	      drawingOptionsEl.style.display = '';
+  	      text.style.display = 'none';
+  	      tMenu.style.display = 'none';
   	    }
   	    else {
   	      drawingModeEl.innerHTML = 'Enter drawing mode';
   	      drawingOptionsEl.style.display = 'none';
+  	      text.style.display = '';
+	      tMenu.style.display = '';
   	    }
   	  };
 
@@ -192,8 +199,56 @@
   	      color: drawingShadowColorEl.value,
   	    });
   	  }
+  	  
+  	  //insertText
+  	  $('insertText').onclick = function() {
+  		  alert("Text");
+  		var fonts = ["Pacifico", "VT323", "Quicksand", "Inconsolata"];
+
+  		var textbox = new fabric.Textbox('Lorum ipsum dolor sit amet', {
+  		  left: 50,
+  		  top: 50,
+  		  width: 150,
+  		  fontSize: 20
+  		});
+  		canvas.add(textbox).setActiveObject(textbox);
+  		fonts.unshift('Times New Roman');
+  		// Populate the fontFamily select
+  		var select = document.getElementById("font-family");
+  		fonts.forEach(function(font) {
+  		  var option = document.createElement('option');
+  		  option.innerHTML = font;
+  		  option.value = font;
+  		  select.appendChild(option);
+  		});
+
+  		// Apply selected font on change
+  		document.getElementById('font-family').onchange = function() {
+  		  if (this.value !== 'Times New Roman') {
+  		    loadAndUse(this.value);
+  		  } else {
+  		    canvas.getActiveObject().set("fontFamily", this.value);
+  		    canvas.requestRenderAll();
+  		  }
+  		};
+
+  		function loadAndUse(font) {
+  		  var myfont = new FontFaceObserver(font)
+  		  myfont.load()
+  		    .then(function() {
+  		      // when font is loaded, use it.
+  		      canvas.getActiveObject().set("fontFamily", font);
+  		      canvas.requestRenderAll();
+  		    }).catch(function(e) {
+  		      console.log(e)
+  		      alert('font loading failed ' + font);
+  		    });
+  		}
+  	  };
+  	  
+  	  
   		
-  		
+ 
   		
   		
   		
@@ -328,6 +383,13 @@
 	<canvas id="c" width="700" height="500"></canvas>
 	<div style="display: inline-block; margin-left: 10px">
 	  	<button id="drawing-mode" class="btn btn-info">Cancel drawing mode</button><br>
+	  	<button id="insertText" class="btn btn-info" style="display: none;">Text</button>
+	  	<div id="textmenu" class="controls" style="display: none;">
+			<p>
+				Font-family: <select id="font-family"><option value="Times New Roman">Times New Roman</option><option value="Pacifico">Pacifico</option><option value="VT323">VT323</option><option value="Quicksand">Quicksand</option><option value="Inconsolata">Inconsolata</option></select>
+			</p>
+		</div>
+	  	<br>
 	  	<button id="clear-canvas" class="btn btn-info">Clear</button><br>
 
  		<div id="drawing-mode-options" style="">
