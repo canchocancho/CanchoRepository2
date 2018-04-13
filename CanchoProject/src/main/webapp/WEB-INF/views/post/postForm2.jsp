@@ -256,17 +256,16 @@
      function handleImage(e){
          var reader = new FileReader();
          reader.onload = function(event){
-        	 
-             var img = new Image();
-             img.onload = function(){
-                 var imgInstance = new fabric.Image(img)
-                 canvas.add(imgInstance);
-             }
-             img.src = event.target.result;
+        	 var img = new Image();
+        	 img.onload = function(){
+        		 var imgInstance = new fabric.Image(img)
+        		 canvas.add(imgInstance);
+        	 }
+        	 img.src = event.target.result;
          }
-         reader.readAsDataURL(e.target.files[0]);     
+         reader.readAsDataURL(e.target.files[0]);
      }
-     
+         
      //주석
      
      
