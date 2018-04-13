@@ -15,6 +15,9 @@
 		<script type="text/javascript" src="<c:url value="/resources/js/html2canvas.min.js" />"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/html2canvas.js" />"></script>
 
+
+<script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
+
 		<style>
 			#div_root{
 				width: 100%;
@@ -69,15 +72,13 @@
 					document.getElementById("c").style.background = "url(../resources/img/poster.jpg)";
 				}
 			}
-			
-			
-	    	function btnSave(){
 
-	    		 html2canvas(document.querySelector("#div_con")).then(canvas => {
-		    		    document.body.appendChild(canvas)
-		    		});
-	    		 
-	    	 }
+	    	  function download(){
+    			var download = document.getElementById("download");
+    			var image = document.getElementById("finalCover").toDataURL("image/png")
+    	                    .replace("image/png", "image/octet-stream");
+    				  download.setAttribute("href", image);
+    		}
 
 		  	$(function(){
 		    	  var $ = function(id){return document.getElementById(id)};
@@ -311,6 +312,16 @@
 		    		    });
 		    		}
 		    	  }
+		    	  
+		    	  
+		    	  $('btnComplete').onclick = function(){
+
+			    	html2canvas(document.querySelector("#div_con")).then(canvas => {
+				    		    document.body.appendChild(canvas).setAttribute("id", "finalCover");
+				    	});
+		    	  }
+		    	  
+
     	  
 		  	});
 		</script>
@@ -393,8 +404,8 @@
 			</div>
 			
 			<hr>
-			<button id="btnSave" onclick="btnSave()">저장하기</button>
-
+			<button id="btnComplete" onclick="btnComplete()">완성</button>
+			<a id="download" download="post_cover.png"><button type="button" onClick="download()">저장</button></a>
 		</div>
 		
 		<!-- 내용(표지 부분) 영역 -->
@@ -404,6 +415,6 @@
 			<canvas id="c" width="1200" height="600"></canvas>
 
 		</div>
-		
+
 	</body>
 </html>

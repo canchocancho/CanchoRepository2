@@ -7,7 +7,24 @@ public class Post {
 	private String post_title_clean;
 	private String post_file;
 	private String user_id;
+	private String post_cover;
 	private String post_date;
+	
+	public Post() {
+		super();
+	}
+	
+	public Post(int post_num, String post_title, String post_title_clean, String post_file, String user_id,
+			String post_cover, String post_date) {
+		super();
+		this.post_num = post_num;
+		this.post_title = post_title;
+		this.post_title_clean = post_title_clean;
+		this.post_file = post_file;
+		this.user_id = user_id;
+		this.post_cover = post_cover;
+		this.post_date = post_date;
+	}
 	
 	public int getPost_num() {
 		return post_num;
@@ -39,6 +56,12 @@ public class Post {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
+	public String getPost_cover() {
+		return post_cover;
+	}
+	public void setPost_cover(String post_cover) {
+		this.post_cover = post_cover;
+	}
 	public String getPost_date() {
 		return post_date;
 	}
@@ -46,25 +69,11 @@ public class Post {
 		this.post_date = post_date;
 	}
 	
-	public Post() {
-		super();
-	}
-	
-	public Post(int post_num, String post_title, String post_title_clean, String post_file, String user_id,
-			String post_date) {
-		super();
-		this.post_num = post_num;
-		this.post_title = post_title;
-		this.post_title_clean = post_title_clean;
-		this.post_file = post_file;
-		this.user_id = user_id;
-		this.post_date = post_date;
-	}
-	
 	@Override
 	public String toString() {
 		return "Post [post_num=" + post_num + ", post_title=" + post_title + ", post_title_clean=" + post_title_clean
-				+ ", post_file=" + post_file + ", user_id=" + user_id + ", post_date=" + post_date + "]";
+				+ ", post_file=" + post_file + ", user_id=" + user_id + ", post_cover=" + post_cover + ", post_date="
+				+ post_date + "]";
 	}
 
 }

@@ -297,6 +297,11 @@
 			alert(window.location.href); //공유해야 할 url 주소(이걸 쪽지로 보내야 함)
 		}
 		
+		//표지 만들기
+		function makeCover(){
+			window.open('makeCoverForm', 'newWindow', 'top=0, left=0, height=1920px, width=1080px');
+		}
+		
 		//저장
 		function save(){
 			var title = document.getElementById("post_title");
@@ -395,6 +400,9 @@
   
 	<!-- 초대하기 -->
 	<input type="button" id="invite" name="invite" onclick="invite();" value="초대" style="float: left;"/>
+	
+	<!-- 표지 만들기 -->
+	<input type="button" id="makeCover" name="makeCover" onclick="makeCover();" value="표지 만들기" style="float: left;"/>
 		
 	<!-- 저장하기 -->
 	<input type="button" id="save" name="save" onclick="save();" value="저장" style="float: left;"/>

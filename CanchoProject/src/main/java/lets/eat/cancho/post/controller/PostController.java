@@ -1,13 +1,19 @@
 package lets.eat.cancho.post.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -51,13 +57,14 @@ public class PostController {
 
 		//String loginId = (String)session.getAttribute("loginId");	
         String loginId = user_id;
-        String fileName = "C:\\canchocancho\\"+loginId+finalDate+Math.random()+".txt";
+        String randomName = loginId+finalDate+Math.random();
+        String fileName = "C:\\canchocancho\\"+randomName+".txt";
         
         Post post = new Post();
         post.setPost_title(post_title);
         post.setPost_file(fileName);
         post.setUser_id(loginId);
-        
+
         try{
             //BufferedWriter 와 FileWriter를 조합하여 사용 (속도 향상)
             BufferedWriter fw = new BufferedWriter(new FileWriter(fileName, true));
@@ -139,6 +146,15 @@ public class PostController {
 	public String writePost3(HttpSession session){
 		logger.info("POST");
 		
+		return "post/postForm3";
+	}
+	
+	/*표지 만들기*/
+	@RequestMapping(value="makeCoverForm", method=RequestMethod.GET)
+	public String idCheck(Model model){
+		
+		logger.info("표지 만들기");
+
 		return "post/postForm3";
 	}
 
