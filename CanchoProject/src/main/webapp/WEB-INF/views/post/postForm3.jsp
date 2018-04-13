@@ -99,6 +99,7 @@
 		    	      clearEl = $('clear-canvas');
 		    	  
 		    	  var text = $('insertText');
+		    	  var uploadImage = $('imageLoader');
 		    	  var tMenu = $('textmenu');
 
 		    	  clearEl.onclick = function() { canvas.clear() };
@@ -110,12 +111,14 @@
 		    	      drawingOptionsEl.style.display = '';
 		    	      text.style.display = 'none';
 		    	      tMenu.style.display = 'none';
+		    	      uploadImage.style.display = 'none';
 		    	    }
 		    	    else {
 		    	      drawingModeEl.innerHTML = '드로잉 모드 ON';
 		    	      drawingOptionsEl.style.display = 'none';
 		    	      text.style.display = '';
-		  	      tMenu.style.display = '';
+		  	  	    tMenu.style.display = '';
+		  	 	   uploadImage.style.display = '';
 		    	    }
 		    	  };
 
@@ -316,13 +319,34 @@
 		    	  
 		    	  $('btnComplete').onclick = function(){
 
+		    		    var finalCover = document.getElementById("finalCover");
+		    		    
+		    		    if(finalCover != null){
+		    		    	finalCover.outerHTML='';
+		    		    }
+		    		  
 			    	html2canvas(document.querySelector("#div_con")).then(canvas => {
 				    		    document.body.appendChild(canvas).setAttribute("id", "finalCover");
 				    	});
 		    	  }
 		    	  
 
-    	  
+		    	  	 //upload Image
+		    		 var imageLoader = document.getElementById('imageLoader');
+		    	     imageLoader.addEventListener('change', handleImage, false);
+		    	 
+		    	     function handleImage(e){
+		    	         var reader = new FileReader();
+		    	         reader.onload = function(event){
+		    	        	 var img = new Image();
+		    	        	 img.onload = function(){
+		    	        		 var imgInstance = new fabric.Image(img)
+		    	        		 canvas.add(imgInstance);
+		    	        	 }
+		    	        	 img.src = event.target.result;
+		    	         }
+		    	         reader.readAsDataURL(e.target.files[0]);
+		    	     }
 		  	});
 		</script>
 	</head>
@@ -363,6 +387,7 @@
 			<!-- 캔버스 버튼들 -->
 			<div style="display: inline-block; margin-left: 10px">
 			  	<button id="drawing-mode" class="btn btn-info">드로잉 모드 OFF</button><br>
+			  	<input type="file" id="imageLoader" name="imageLoader" style="display: none;"><br>
 			  	<button id="insertText" class="btn btn-info" style="display: none;">글씨 쓰기</button>
 			  	<div id="textmenu" class="controls" style="display: none;">
 					<p>
