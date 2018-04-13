@@ -141,14 +141,6 @@ public class PostController {
 		return "post/postForm2";
 	}
 	
-	/*postForm3.jsp*/
-	@RequestMapping(value="writePost3", method=RequestMethod.GET)
-	public String writePost3(HttpSession session){
-		logger.info("POST");
-		
-		return "post/postForm3";
-	}
-	
 	/*표지 만들기*/
 	@RequestMapping(value="makeCoverForm", method=RequestMethod.GET)
 	public String idCheck(Model model){
