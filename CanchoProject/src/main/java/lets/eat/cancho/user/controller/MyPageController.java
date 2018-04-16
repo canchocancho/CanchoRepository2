@@ -20,4 +20,6 @@ public class MyPageController {
 		logger.info("마이페이지 이동 종료");
 		return "user/myPage";
 	}
+	
+	//주석
 }
