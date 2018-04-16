@@ -16,7 +16,8 @@ CREATE TABLE blog_post
     post_title_clean    VARCHAR2(10)     NULL, 
     post_file           VARCHAR2(300)    NOT NULL, 
     user_id             VARCHAR2(45)     NOT NULL, 
-    post_cover			VARCHAR2(500)	 NULL,
+    originalfile		VARCHAR2(200),
+	savedfile			VARCHAR2(100),
     post_date           DATE             default SYSDATE, 
     CONSTRAINT BLOG_POST_PK PRIMARY KEY (post_num)
 );
@@ -26,17 +27,7 @@ CREATE SEQUENCE blog_post_seq
 START WITH 1
 INCREMENT BY 1;
 
--- blog_friend table
-CREATE TABLE blog_friend
-(
-    user_id      VARCHAR2(45)    NOT NULL, 
-    friend_id    VARCHAR2(45)    NOT NULL,
-    CONSTRAINT FK_blog_friend_user_id FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
-);
-
---주석
-
--- ---------------------------------------------------아래는 아직 안 만든 테이블
+-- ---------------------------------------------------아래는 아직 안 만든 테이블들
 
 -- comment table
 CREATE TABLE blog_comment
@@ -73,5 +64,14 @@ CREATE TABLE blog_block
     blocked_id    VARCHAR2(45)    NOT NULL, 
     CONSTRAINT BLOG_BLOCK_PK PRIMARY KEY (user_id)
     ,CONSTRAINT FK_blog_block_user_id_blog_use FOREIGN KEY (user_id)
+    REFERENCES blog_user (user_id)
+)
+
+-- blog_friend table
+CREATE TABLE blog_friend
+(
+    user_id      VARCHAR2(45)    NOT NULL, 
+    friend_id    VARCHAR2(45)    NOT NULL,
+    CONSTRAINT FK_blog_friend_user_id_blog_us FOREIGN KEY (user_id)
     REFERENCES blog_user (user_id)
 )
