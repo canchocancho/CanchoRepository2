@@ -35,7 +35,7 @@ public class FileService {
 		
 		//저장할 파일명을 오늘 날짜의 년월일로 생성
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String savedFilename = sdf.format(new Date());
+		String savedFilename = sdf.format(new Date())+Math.random();
 		
 		//원본 파일의 확장자
 		String ext;
