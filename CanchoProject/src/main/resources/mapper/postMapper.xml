@@ -41,7 +41,7 @@
 		from
 			blog_post
 		order by
-			post_num
+			post_num desc
 	</select>
 	
 	<!-- 포스트 파일명 불러오기 -->
