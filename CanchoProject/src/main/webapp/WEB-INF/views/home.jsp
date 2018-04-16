@@ -27,6 +27,7 @@
 				<li><a href="video/editor">브이로그 만들기</a></li>
 				<li><a href="post/postList">포스트 목록</a></li>		
 				<li><a href="user/logout">로그아웃</a></li>
+				<li><a href="user/myPage">마이페이지</a></li>
 			</c:otherwise>
 		</c:choose>
 		</ul>

@@ -265,8 +265,12 @@
          }
          reader.readAsDataURL(e.target.files[0]);
      }
+     
+     //download
+     document.getElementById('download').addEventListener('click', function() {
+     downloadCanvas(this, 'canvas', 'test.png');
+	}, false);
          
-     //주석
      
      
      
@@ -450,6 +454,8 @@
 		    <span class="info">0</span><input type="range" value="0" min="0" max="50" id="drawing-shadow-offset"><br>
  	 </div>
 	</div>
+	
+	<a id="download">Download as image</a>
 	
 	
 	
