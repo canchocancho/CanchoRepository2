@@ -8,7 +8,7 @@
 	<body>
 		
 	<h1>
-		TOMOlog  ggggg
+		TOMOlog
 	</h1>
 	
 		<ul>
