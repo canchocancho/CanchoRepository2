@@ -50,7 +50,7 @@ CREATE TABLE blog_comment
     REFERENCES blog_post (post_num)
     ,CONSTRAINT FK_blog_comment_user_id_blog_u FOREIGN KEY (user_id)
     REFERENCES blog_user (user_id)
-)
+);
 
 CREATE SEQUENCE blog_comment_SEQ
 START WITH 1
@@ -63,7 +63,7 @@ CREATE TABLE blog_tag
     tag_name    VARCHAR(100)    NULL  
     ,CONSTRAINT FK_blog_tag_post_num_blog_post FOREIGN KEY (post_num)
     REFERENCES blog_post (post_num)
-)
+);
 
 -- blog_block table
 CREATE TABLE blog_block
@@ -73,5 +73,5 @@ CREATE TABLE blog_block
     CONSTRAINT BLOG_BLOCK_PK PRIMARY KEY (user_id)
     ,CONSTRAINT FK_blog_block_user_id_blog_use FOREIGN KEY (user_id)
     REFERENCES blog_user (user_id)
-)
+);
 
