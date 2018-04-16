@@ -70,5 +70,23 @@ public class UserDAO {
 		
 		return result;
 	}
+	
+	//회원정보 수정
+	public int updateUser(Blog_User user){
+		logger.info("회원정보 수정 시작 - 다오");
+		
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int result = 0;
+		
+		try {
+			result = mapper.updateUser(user);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("회원정보 수정 종료 - 다오");
+		
+		return result;
+	}
 
 }

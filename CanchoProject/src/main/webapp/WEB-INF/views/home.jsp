@@ -20,7 +20,6 @@
 			</c:when>
 			<c:otherwise>
 				<h3>${sessionScope.loginName }님 환영합니다. </h3>
-				<li><a href="user/update?loginId=${sessionScope.loginId }" class="a1">내 정보 수정</a></li>
 				<li><a href="post/writePost">포스트 쓰기</a></li>
 				<li><a href="post/writePost2">포스트 쓰기2(미리)</a></li>
 				<li><a href="video/editor">브이로그 만들기</a></li>

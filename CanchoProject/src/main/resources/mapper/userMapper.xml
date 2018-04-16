@@ -45,61 +45,20 @@
 		where
 			user_id = #{user_id}
 	</update>
-	 
-	 
-	 
-	 
-	 
-	 
-	 <!-- 회원 정보 수정 -->
-	<!--  <update id="updateMember" parameterType="member">
+	  
+	<!-- 회원 정보 수정 -->
+	<update id="updateUser" parameterType="user">
 	 	update 
-	 		blogMember
+	 		blog_user
 	 	set
-	 		password = #{password}
-	 		, name = #{name}
-	 		, gender = #{gender}
-	 		, email = #{email}
-	 		, phone = #{phone}
+	 		user_id = #{user_id}
+	 		, user_name = #{user_name}
+	 		, user_email = #{user_email}
+	 		, user_password = #{user_password}
 	 	where 
-	 		id = #{id} 	
-	 </update> -->
+	 		user_id = #{user_id} 	
+	</update>
 	 
-	<!-- 회원 로그인 + 회원 정보 조회 : 정보승 -->
-	<!-- <select id="selectUser" parameterType="hashmap" resultType="userinfo">
 	
-		SELECT
-			userid
-			, username
-			, emailverify		
-		FROM
-			tbl_userinfo
-		WHERE
-				userid like #{userid}	
-			
-			<if test="userpw != null and userpw != '' ">
-				AND
-				
-					userpw like #{userpw}	
-			</if>
-	
-	
-	</select> -->
-
-	<!-- 회원 정보 수정 : 정보승 -->
-	<!-- <update id="updateUserInfo" parameterType="userinfo">
-	
-		UPDATE
-			tbl_userinfo
-		SET
-			username = #{username}
-			
-			<if test="userpw != null and userpw != '' ">
-				, userpw = #{userpw}
-			</if>
-		WHERE
-			userid like #{userid}
-	
-	</update> -->
 	 
 </mapper>
