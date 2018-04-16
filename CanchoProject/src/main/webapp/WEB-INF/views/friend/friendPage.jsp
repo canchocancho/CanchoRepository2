@@ -5,20 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>[ 마이페이지 ]</title>
+<title>[ 친구페이지 ]</title>
 </head>
 <body>
 	<ul>
 		<c:choose>
 			<c:when test="${sessionScope.loginId != null }">
-				<h3>${sessionScope.loginName }님의 마이페이지 </h3>
-				<li><a href="updateInfo">회원정보 수정</a></li>
-				<li><a href="friendList">친구리스트</a></li>
-				<li><a href="">나의 쪽지함</a></li>
-				<li><a href="">설정</a></li>
+				<h3>${sessionScope.loginName }님의 친구 페이지</h3>
+				<li><a href="">친구 검색</a></li>
+				<li><a href="">친구 설정</a></li>
 			</c:when>
 		</c:choose>
 	</ul>
+	
+	<!-- 친구목록 -->
+	
 
 </body>
 </html>

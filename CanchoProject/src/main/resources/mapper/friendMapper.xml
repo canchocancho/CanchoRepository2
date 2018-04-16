@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lets.eat.cancho.friend.dao.FriendMapper">
+	
+	 <!-- 친구 ID 검색 -->
+	 <select id="searchFriendId" parameterType="string" resultType="friend">
+	 	select
+	 		user_id
+	 		, user_name
+	 		, user_email
+	 		, user_password
+	 		, user_verify
+	 	from 
+	 		blog_user
+	 	where
+	 		user_id like "#{user_id}%" 
+	 </select>
+	 
+	 <!-- 회원 정보 등록 -->
+	 <!-- <insert id="joinUser" parameterType="user">
+	 	insert into
+	 		blog_user
+	 		(
+		 		user_id
+	 			, user_name
+	 			, user_email
+	 			, user_password
+	 		) values (
+	 			#{user_id}
+	 			, #{user_name}
+	 			, #{user_email}
+	 			, #{user_password}
+	 		)
+	 </insert> -->
+	 
+	<!-- 회원 정보 수정 -->
+	<!-- <update id="updateUser" parameterType="user">
+	 	update 
+	 		blog_user
+	 	set
+	 		user_id = #{user_id}
+	 		, user_name = #{user_name}
+	 		, user_email = #{user_email}
+	 		, user_password = #{user_password}
+	 	where 
+	 		user_id = #{user_id} 	
+	</update> -->
+	 
+	
+	 
+</mapper>

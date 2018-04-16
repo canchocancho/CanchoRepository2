@@ -46,8 +46,6 @@
 
 </head>
 <body>
-	<p>${user.user_id }</p>
-	
 	<form action="update" method="post" onsubmit="return formCheck();" id="u1">
 			<table>
 				<tr>

@@ -76,6 +76,15 @@ public class MyPageController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="friendList", method = RequestMethod.GET)
+	public String friendList(){
+		logger.info("친구리스트 페이지 이동 시작");
+		logger.info("친구리스트 페이지 이동 종료");
+		return "friend/friendPage";
+	}
+	
+	
+	
 	
 	
 	

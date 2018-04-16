@@ -7,10 +7,12 @@
 	<typeAliases>
 		<typeAlias type="lets.eat.cancho.post.vo.Post" alias="Post" />
 		<typeAlias type="lets.eat.cancho.user.vo.Blog_User" alias="User" />
+		<typeAlias type="lets.eat.cancho.friend.vo.Friend" alias="friend"/>
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="mapper/postMapper.xml" />
 		<mapper resource="mapper/userMapper.xml" />
+		<mapper resource="mapper/friendMapper.xml" />
 	</mappers>
 </configuration>
