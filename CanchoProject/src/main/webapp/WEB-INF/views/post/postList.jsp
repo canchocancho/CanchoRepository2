@@ -34,7 +34,7 @@
 					<td><a href="readOnePost?post_num=${post.post_num }">
 					
 						<c:if test="${post.savedfile == null }">${post.post_title }</c:if>
-						<c:if test="${post.savedfile != null }"><img src="post/download?postnum=${post.postnum }"></c:if>
+						<c:if test="${post.savedfile != null }">이미지이미지</c:if>
 					
 					</a></td>
 					<td>${post.user_id }</td>
