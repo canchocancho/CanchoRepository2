@@ -34,6 +34,8 @@ CREATE TABLE blog_friend
     CONSTRAINT FK_blog_friend_user_id FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
 );
 
+--주석
+
 -- ---------------------------------------------------아래는 아직 안 만든 테이블
 
 -- comment table
