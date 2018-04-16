@@ -26,12 +26,7 @@ CREATE SEQUENCE blog_post_seq
 START WITH 1
 INCREMENT BY 1;
 
-
---test test test
-
-
 -- ---------------------------------------------------아래는 아직 안 만든 테이블
-
 
 -- comment table
 CREATE TABLE blog_comment
