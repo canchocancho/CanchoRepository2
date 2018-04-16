@@ -141,7 +141,7 @@ public class PostController {
 			      } catch(Exception e) {
 			    	  e.printStackTrace();
 			      }
-		System.out.println(result);
+		
 		model.addAttribute("postText", result);
 		
 		return "post/readPost";
@@ -169,9 +169,7 @@ public class PostController {
 	   public void fileDownload(int post_num, HttpServletResponse response){
 		
 	      Post post = dao.bringPost(post_num);
-	      
-	      System.out.println(post);
-	      
+	 
 	      String originalfile = post.getOriginalfile();
 	      
 	      try{
