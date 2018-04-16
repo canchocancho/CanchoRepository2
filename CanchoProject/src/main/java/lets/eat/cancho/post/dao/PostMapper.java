@@ -9,4 +9,5 @@ public interface PostMapper {
 	public int writePost(Post post);
 	public ArrayList<Post> postList();
 	public String readPost(int post_num);
+	public Post bringPost(int post_num);
 }

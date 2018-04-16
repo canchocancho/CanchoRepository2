@@ -412,9 +412,9 @@
   <div id="firepad">
   
   		<!-- 히든폼 -->
-		<form action="write" method="post" name="hidden_form" style="position: relative;">
+		<form action="write" method="post" name="hidden_form" enctype="multipart/form-data" style="position: relative;">
 			제목 <input type="text" id="post_title" name="post_title" autocomplete="off">
-			표지 첨부 <input type="file" id="post_cover" name="post_cover">
+			표지 첨부 <input type="file" name="upload">
 			<input type="hidden" id="hidden_data" name="hidden_data">
 			<input type="hidden" id="user_id" name="user_id" value="${loginId }">
 		</form>

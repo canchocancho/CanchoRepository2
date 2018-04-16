@@ -14,7 +14,11 @@
 			,post_title
 			,post_file
 			,user_id
-			,post_cover
+
+			<if test="originalfile != null and savedfile != null">
+			,originalfile
+			,savedfile
+			</if>
 			)
 		values
 			(
@@ -22,7 +26,11 @@
 			,#{post_title}
 			,#{post_file}
 			,#{user_id}
-			,#{post_cover}
+			
+			<if test="originalfile != null and savedfile != null">
+			,#{originalfile}
+			,#{savedfile}
+			</if>
 			) 
 	</insert>
 	
@@ -40,6 +48,16 @@
 	<select id="readPost" parameterType="int" resultType="String">
 		select
 			post_file
+		from
+			blog_post
+		where
+			post_num = #{post_num}
+	</select>
+	
+	<!-- 포스트 전체 불러오기 -->
+	<select id="bringPost" parameterType="int" resultType="Post">
+		select
+			*
 		from
 			blog_post
 		where

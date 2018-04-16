@@ -1,19 +1,19 @@
 package lets.eat.cancho.post.controller;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Date;
 
-import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,11 +21,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import lets.eat.cancho.HomeController;
+import lets.eat.cancho.common.util.FileService;
 import lets.eat.cancho.post.dao.PostDAO;
 import lets.eat.cancho.post.vo.Post;
 
@@ -39,6 +42,8 @@ public class PostController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	final String uploadPath = "/postfile";
+	
 	@RequestMapping(value="writePost", method=RequestMethod.GET)
 	public String writePost(HttpSession session){
 		logger.info("POST");
@@ -47,7 +52,8 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="write", method=RequestMethod.POST)
-	public String saveData(String post_title, String hidden_data, String user_id, HttpSession session, Model model){
+	public String saveData(String post_title, String hidden_data, String user_id,
+			HttpSession session, Model model, MultipartFile upload){
 		
 		logger.info("WRITE");
 		
@@ -65,6 +71,14 @@ public class PostController {
         post.setPost_file(fileName);
         post.setUser_id(loginId);
 
+        if(!upload.isEmpty()){
+			//첨부파일이 있는 경우
+			//Post 객체에 originalFileName과 savedfileName을 저장
+			String savedfile = FileService.saveFile(upload, uploadPath); //저장된 파일명
+			post.setSavedfile(savedfile);
+			post.setOriginalfile(upload.getOriginalFilename());
+		}
+        
         try{
             //BufferedWriter 와 FileWriter를 조합하여 사용 (속도 향상)
             BufferedWriter fw = new BufferedWriter(new FileWriter(fileName, true));
@@ -133,6 +147,14 @@ public class PostController {
 		return "post/readPost";
 	}
 	
+	/*postForm2.jsp*/
+	@RequestMapping(value="writePost2", method=RequestMethod.GET)
+	public String writePost2(HttpSession session){
+		logger.info("POST");
+		
+		return "post/postForm2";
+	}
+	
 	/*표지 만들기*/
 	@RequestMapping(value="makeCoverForm", method=RequestMethod.GET)
 	public String idCheck(Model model){
@@ -141,5 +163,40 @@ public class PostController {
 
 		return "post/coverForm";
 	}
+	
+	/*이미지 다운로드*/
+	@RequestMapping(value="download", method=RequestMethod.GET)
+	   public void fileDownload(int post_num, HttpServletResponse response){
+		
+	      Post post = dao.bringPost(post_num);
+	      
+	      System.out.println(post);
+	      
+	      String originalfile = post.getOriginalfile();
+	      
+	      try{
+	         response.setHeader("Content-Disposition", "attachment;filename="
+	               + URLEncoder.encode(originalfile, "UTF-8"));
+	      } catch (UnsupportedEncodingException e) {
+	         e.printStackTrace();
+	      }
+	      
+	      String fullPath = uploadPath + "/" + post.getSavedfile();
+	      
+	      FileInputStream fis = null; 
+	      ServletOutputStream sos = null;
+	      
+	      try{
+	         fis = new FileInputStream(fullPath);
+	         sos = response.getOutputStream(); 
+	         
+	         FileCopyUtils.copy(fis, sos); 
+	         
+	         fis.close();
+	         sos.close();
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	   }
 
 }

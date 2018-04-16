@@ -74,4 +74,8 @@ CREATE TABLE blog_friend
     friend_id    VARCHAR2(45)    NOT NULL,
     CONSTRAINT FK_blog_friend_user_id_blog_us FOREIGN KEY (user_id)
     REFERENCES blog_user (user_id)
+<<<<<<< HEAD
 )
+=======
+)
+>>>>>>> branch 'master' of https://github.com/canchocancho/CanchoRepository2.git
