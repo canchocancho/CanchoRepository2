@@ -73,5 +73,24 @@ public class PostDAO {
 		
 		return post_file;
 	}
+	
+	//포스트 전체를 가져오기
+	public Post bringPost(int post_num){
+		
+		logger.info("포스트 전체 가져오기");
+		
+		PostMapper mapper = session.getMapper(PostMapper.class);
+		
+		Post post = null;
+		
+		try{
+			post = mapper.bringPost(post_num);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return post;
+	}
 
 }

@@ -53,5 +53,15 @@
 		where
 			post_num = #{post_num}
 	</select>
+	
+	<!-- 포스트 전체 불러오기 -->
+	<select id="bringPost" parameterType="int" resultType="Post">
+		select
+			*
+		from
+			blog_post
+		where
+			post_num = #{post_num}
+	</select>
 
 </mapper>

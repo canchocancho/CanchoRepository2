@@ -2,12 +2,18 @@ package lets.eat.cancho.post.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -158,11 +165,14 @@ public class PostController {
 	}
 	
 	/*이미지 다운로드*/
-/*	@RequestMapping(value="download", method=RequestMethod.GET)
+	@RequestMapping(value="download", method=RequestMethod.GET)
 	   public void fileDownload(int post_num, HttpServletResponse response){
-	      Post post = dao.readPost(post_num);
+		
+	      Post post = dao.bringPost(post_num);
 	      
-	      String originalfile = board.getOriginalfile();
+	      System.out.println(post);
+	      
+	      String originalfile = post.getOriginalfile();
 	      
 	      try{
 	         response.setHeader("Content-Disposition", "attachment;filename="
@@ -171,7 +181,7 @@ public class PostController {
 	         e.printStackTrace();
 	      }
 	      
-	      String fullPath = uploadPath + "/" + board.getSavedfile();
+	      String fullPath = uploadPath + "/" + post.getSavedfile();
 	      
 	      FileInputStream fis = null; 
 	      ServletOutputStream sos = null;
@@ -187,6 +197,6 @@ public class PostController {
 	      } catch (IOException e) {
 	         e.printStackTrace();
 	      }
-	   }*/
+	   }
 
 }
