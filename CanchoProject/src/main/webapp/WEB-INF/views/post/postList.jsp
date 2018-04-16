@@ -31,7 +31,12 @@
 			<c:forEach items="${postList }" var="post">
 				<tr>
 					<td>${post.post_num }</td>
-					<td><a href="readOnePost?post_num=${post.post_num }">${post.post_title }</a></td>
+					<td><a href="readOnePost?post_num=${post.post_num }">
+					
+						<c:if test="${post.savedfile == null }">${post.post_title }</c:if>
+						<c:if test="${post.savedfile != null }"><img src="post/download?postnum=${post.postnum }"></c:if>
+					
+					</a></td>
 					<td>${post.user_id }</td>
 					<td>${post.post_date }</td>
 				</tr>
