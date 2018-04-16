@@ -27,6 +27,14 @@ CREATE SEQUENCE blog_post_seq
 START WITH 1
 INCREMENT BY 1;
 
+-- blog_friend table
+CREATE TABLE blog_friend
+(
+    user_id      VARCHAR2(45)    NOT NULL, 
+    friend_id    VARCHAR2(45)    NOT NULL,
+    CONSTRAINT FK_blog_friend_user_id FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
+);
+
 -- ---------------------------------------------------아래는 아직 안 만든 테이블들
 
 -- comment table
@@ -67,15 +75,3 @@ CREATE TABLE blog_block
     REFERENCES blog_user (user_id)
 )
 
--- blog_friend table
-CREATE TABLE blog_friend
-(
-    user_id      VARCHAR2(45)    NOT NULL, 
-    friend_id    VARCHAR2(45)    NOT NULL,
-    CONSTRAINT FK_blog_friend_user_id_blog_us FOREIGN KEY (user_id)
-    REFERENCES blog_user (user_id)
-<<<<<<< HEAD
-)
-=======
-)
->>>>>>> branch 'master' of https://github.com/canchocancho/CanchoRepository2.git
