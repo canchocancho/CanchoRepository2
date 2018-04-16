@@ -147,7 +147,7 @@ public class PostController {
 		
 		logger.info("표지 만들기");
 
-		return "post/postForm3";
+		return "post/coverForm";
 	}
 
 }

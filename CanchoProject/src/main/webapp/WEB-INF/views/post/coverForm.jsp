@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>POST3</title>
+		<title>MAKE COVER</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript" src="<c:url value="/resources/js/fabric.min.js" />"></script>
