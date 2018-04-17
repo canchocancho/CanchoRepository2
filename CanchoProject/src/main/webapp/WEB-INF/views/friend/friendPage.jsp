@@ -41,7 +41,7 @@
 	</form>
 			
 	<br>
-	<a href="">친구 설정</a>
+	<a href="">친구 설정 ㅁㅁ</a>
 	
 	<!-- 친구목록 -->
 	<c:if test="${list != null }">
