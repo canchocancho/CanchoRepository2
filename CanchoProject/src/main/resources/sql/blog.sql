@@ -35,26 +35,29 @@ CREATE TABLE blog_friend
     CONSTRAINT FK_blog_friend_user_id FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
 );
 
--- ---------------------------------------------------아래는 아직 안 만든 테이블들
-
 -- comment table
 CREATE TABLE blog_comment
 (
-    commet_num      INT              NOT NULL, 
+    comment_num      INT              NOT NULL, 
     post_num        INT              NOT NULL, 
     comment_text    VARCHAR2(300)    NOT NULL, 
     user_id         VARCHAR2(45)     NOT NULL, 
     comment_date    DATE             NOT NULL, 
-    CONSTRAINT BLOG_COMMENT_PK PRIMARY KEY (commet_num)
+    CONSTRAINT BLOG_COMMENT_PK PRIMARY KEY (comment_num)
     ,CONSTRAINT FK_blog_comment_post_num_blog_ FOREIGN KEY (post_num)
     REFERENCES blog_post (post_num)
     ,CONSTRAINT FK_blog_comment_user_id_blog_u FOREIGN KEY (user_id)
     REFERENCES blog_user (user_id)
-)
+);
 
 CREATE SEQUENCE blog_comment_SEQ
 START WITH 1
 INCREMENT BY 1;
+
+
+-- ---------------------------------------------------아래는 아직 안 만든 테이블들
+
+
 
 -- tag table
 CREATE TABLE blog_tag
@@ -63,7 +66,7 @@ CREATE TABLE blog_tag
     tag_name    VARCHAR(100)    NULL  
     ,CONSTRAINT FK_blog_tag_post_num_blog_post FOREIGN KEY (post_num)
     REFERENCES blog_post (post_num)
-)
+);
 
 -- blog_block table
 CREATE TABLE blog_block
@@ -73,5 +76,5 @@ CREATE TABLE blog_block
     CONSTRAINT BLOG_BLOCK_PK PRIMARY KEY (user_id)
     ,CONSTRAINT FK_blog_block_user_id_blog_use FOREIGN KEY (user_id)
     REFERENCES blog_user (user_id)
-)
+);
 

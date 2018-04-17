@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import lets.eat.cancho.HomeController;
+import lets.eat.cancho.comment.dao.CommentDAO;
+import lets.eat.cancho.comment.vo.Comment;
 import lets.eat.cancho.common.util.FileService;
 import lets.eat.cancho.post.dao.PostDAO;
 import lets.eat.cancho.post.vo.Post;
@@ -39,6 +41,9 @@ public class PostController {
 	
 	@Autowired
 	PostDAO dao;
+	
+	@Autowired
+	CommentDAO commentDAO;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -127,6 +132,9 @@ public class PostController {
 		String post_file = dao.readPost(post_num);
 		String result = null;
 		
+		Post post = dao.bringPost(post_num);
+		ArrayList<Comment> commentList = commentDAO.readComment(post_num);
+		
 		try {
 			//파일에서 스트림을 통해 주르륵 읽어들인다
 			BufferedReader fr = new BufferedReader(new FileReader(post_file));
@@ -141,18 +149,12 @@ public class PostController {
 			      } catch(Exception e) {
 			    	  e.printStackTrace();
 			      }
-		System.out.println(result);
+		
 		model.addAttribute("postText", result);
+		model.addAttribute("post", post);
+		model.addAttribute("commentList", commentList);
 		
 		return "post/readPost";
-	}
-	
-	/*postForm2.jsp*/
-	@RequestMapping(value="writePost2", method=RequestMethod.GET)
-	public String writePost2(HttpSession session){
-		logger.info("POST");
-		
-		return "post/postForm2";
 	}
 	
 	/*표지 만들기*/
@@ -169,9 +171,7 @@ public class PostController {
 	   public void fileDownload(int post_num, HttpServletResponse response){
 		
 	      Post post = dao.bringPost(post_num);
-	      
-	      System.out.println(post);
-	      
+	 
 	      String originalfile = post.getOriginalfile();
 	      
 	      try{
