@@ -51,7 +51,7 @@
 		         var div = document.getElementById("div"+comment_num);
 		         
 		         var str = '<form id="editForm'+comment_num+'" action="updateComment" method="post">';
-				 str += '<input type="text" name="comment_text" value="'+comment_text+'">';
+				 str += '<input type="text" name="comment_text" value="'+comment_text+'" autocomplete="off">';
 				 
 		         str += '<input type="hidden" name="comment_num" value="'+comment_num+'">';
 		         str += '<input type="hidden" name="post_num" value="'+post_num+'">';

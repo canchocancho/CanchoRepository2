@@ -24,21 +24,19 @@
 			
 			if (password.length == 0) {
 				alert("비밀번호를 입력하세요");
-				return;
+				return false;
 			} else if (password2.length == 0) {
-				alert("비밀번호를 입력하세요");
-				return;
+				alert("비밀번호 확인값을 입력하세요");
+				return false;
 			} else if (password != password2) {
 				alert("동일한 비밀번호를 입력하세요");
-				password = "";
-				password2 = "";
-				return;
+				return false;
 			} else if (name.length == 0) {
 				alert("이름을 입력하세요");
-				return;
+				return false;
 			} else if (email.length == 0) {
 				alert("이메일을 입력하세요");
-				return;
+				return false;
 			}
 		});
 	});
