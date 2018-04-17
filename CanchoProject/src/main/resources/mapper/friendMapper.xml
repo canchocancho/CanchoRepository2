@@ -6,7 +6,7 @@
 <mapper namespace="lets.eat.cancho.friend.dao.FriendMapper">
 	
 	 <!-- 친구 ID 검색 -->
-	 <select id="searchFriendId" parameterType="string" resultType="friend">
+	 <select id="searchFriendId" parameterType="string" resultType="user">
 	 	select
 	 		user_id
 	 		, user_name
@@ -16,25 +16,32 @@
 	 	from 
 	 		blog_user
 	 	where
-	 		user_id like "#{user_id}%" 
+	 		user_id like '%' || #{user_id} || '%'
 	 </select>
 	 
-	 <!-- 회원 정보 등록 -->
-	 <!-- <insert id="joinUser" parameterType="user">
+	 <!-- 친구 추가 -->
+	 <insert id="insertFriendId" parameterType="friend">
 	 	insert into
-	 		blog_user
+	 		blog_friend
 	 		(
 		 		user_id
-	 			, user_name
-	 			, user_email
-	 			, user_password
+	 			, friend_id
 	 		) values (
 	 			#{user_id}
-	 			, #{user_name}
-	 			, #{user_email}
-	 			, #{user_password}
+	 			, #{friend_id}
 	 		)
-	 </insert> -->
+	 </insert>
+	 
+	 <!-- 전체 친구 목록 불러오기 -->
+	 <select id="selectFriendList" parameterType="string" resultType="friend">
+	 	select
+	 		user_id
+	 		, friend_id
+	 	from 
+	 		blog_friend
+	 	where
+	 		user_id = #{user_id}
+	 </select>
 	 
 	<!-- 회원 정보 수정 -->
 	<!-- <update id="updateUser" parameterType="user">
