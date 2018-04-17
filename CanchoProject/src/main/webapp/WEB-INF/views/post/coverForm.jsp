@@ -102,8 +102,10 @@
 		    	  var text = $('insertText');
 		    	  var uploadImage = $('imageLoader');
 		    	  var tMenu = $('textmenu');
-
+		    	  
 		    	  clearEl.onclick = function() { canvas.clear() };
+		    	  
+		    	  var n;
 
 		    	  drawingModeEl.onclick = function() {
 		    	    canvas.isDrawingMode = !canvas.isDrawingMode;
@@ -271,6 +273,15 @@
 		    	    });
 		    	  }
 		    	  
+		    	  //뒤로가기
+		    	 $('roll-back').onclick = function() {
+		    		 n = canvas.getObjects().length;
+		    		 alert(n);
+		    		 
+		    		 canvas.remove(canvas.item(n-1));
+		    		 n--;
+				  }
+		    	  
 		    	  //복사
 		    	  $('copy').onclick = function() {
 				  		canvas.getActiveObject().clone(function(cloned) {
@@ -433,6 +444,7 @@
 						<button id="copy">복사</button>
 						<button id="paste">붙여넣기</button>
 						<button id="clear-canvas" class="btn btn-info">전체 삭제</button>
+						<button id="roll-back" class="btn btn-info">뒤로가기</button>
 				</div>
 		 		<div id="drawing-mode-options" style="">
 		   			<label for="drawing-mode-selector">Mode:</label>
