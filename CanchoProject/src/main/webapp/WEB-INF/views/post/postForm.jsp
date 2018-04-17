@@ -423,7 +423,7 @@
 		<input type="hidden" value="${loginId}" id="chat_id">
 	    <div id="_chatbox">
 	        <fieldset>
-	            <div id="messageWindow"></div>
+	            <div id="messageWindow" style="overflow-y: scroll; height:200px;" ></div>
 	            <br /> <input id="inputMessage" type="text" onkeyup="enterkey()" />
 	            <input type="submit" value="send" onclick="send()" />
 	        </fieldset>

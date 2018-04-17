@@ -48,7 +48,9 @@
 		
 		<script type="text/javascript">
 			function changeBackground(img){
-				
+				if(img == 'delete'){
+					document.getElementById("c").style.background = "";
+				}
 				if(img == 'cd'){
 					document.getElementById("c").style.background = "url(../resources/img/cd.jpg)";
 				}
@@ -391,6 +393,7 @@
 		<!-- 편집 메뉴 영역 -->
 		<div id="div_top">
 				Background
+				<button type="button" onClick="changeBackground('delete')">배경 삭제</button>
 			    <button type="button" onClick="changeBackground('cd')">CD</button>
 			    <button type="button" onClick="changeBackground('christmas')">Christmas</button>
 			    <button type="button" onClick="changeBackground('diary')">Diary</button>
