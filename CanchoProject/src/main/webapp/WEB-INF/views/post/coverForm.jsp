@@ -15,9 +15,8 @@
 		<script type="text/javascript" src="<c:url value="/resources/js/html2canvas.min.js" />"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/html2canvas.js" />"></script>
 
-
 		<script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
-
+		
 		<style>
 			#div_root{
 				width: 100%;
@@ -198,7 +197,7 @@
 		    	    };
 
 		    	    var img = new Image();
-		    	    img.src = '../assets/honey_im_subtle.png';
+		    	    img.src = '../resources/img/honey_im_subtle.jpg';
 
 		    	    var texturePatternBrush = new fabric.PatternBrush(canvas);
 		    	    texturePatternBrush.source = img;
