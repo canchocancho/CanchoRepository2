@@ -9,5 +9,9 @@ public interface CommentMapper {
 	public int insertComment(Comment comment);
 	
 	public ArrayList<Comment> readComment(int post_num);
+	
+	public int deleteComment(int comment_num);
+	
+	public int updateComment(Comment comment);
 
 }

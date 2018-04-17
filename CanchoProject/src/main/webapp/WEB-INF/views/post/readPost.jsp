@@ -50,13 +50,13 @@
 
 		         var div = document.getElementById("div"+comment_num);
 		         
-		         var str = '<form id="editForm'+comment_num+'" action="commentUpdate" method="post">';
+		         var str = '<form id="editForm'+comment_num+'" action="updateComment" method="post">';
 				 str += '<input type="text" name="comment_text" value="'+comment_text+'">';
 				 
 		         str += '<input type="hidden" name="comment_num" value="'+comment_num+'">';
 		         str += '<input type="hidden" name="post_num" value="'+post_num+'">';
 		         
-		         str += '<a href="javascript:commentUpdate('+comment_num+')">[확인]</a>';
+		         str += '<a href="javascript:updateComment('+comment_num+')">[확인]</a>';
 		         str += '<a href="javascript:commentCancel(div'+comment_num+')">[취소]</a>';
 		         str += '</form>';
 		         
@@ -68,7 +68,7 @@
 				div.innerHTML = "";
 			}
 			
-			function commentUpdate(comment_num){
+			function updateComment(comment_num){
 
 				var form = document.getElementById("editForm"+comment_num);
 				form.submit();
@@ -105,21 +105,23 @@
 	<table style="margin: 0 auto;">
 		<tr>
 			<th>작성자</th>
-			<th>내용</th>
+			<th style="width: 300px;">내용</th>
 			<th>날짜</th>
+			<th></th>
 		</tr>
 	
 		<c:forEach items="${commentList }" var="comment">
 			<tr>
 				<td>${comment.user_id }</td>
-				<td>${comment.comment_text }<c:if test="${sessionScope.loginId == comment.user_id }">
-						<a
-							href="javascript:updateCommentForm('${comment.comment_num }', '${comment.post_num }', '${comment.comment_text }')">[수정]</a>
-						<a
-							href="javascript:deleteComment('${comment.comment_num }', '${comment.post_num }')">[삭제]</a>
-					</c:if>
-				</td>
+				<td style="text-align: left;">${comment.comment_text }</td>
 				<td>${comment.comment_date }</td>
+				<td>
+					<c:if test="${sessionScope.loginId == comment.user_id }">
+						<a href="javascript:updateCommentForm('${comment.comment_num }', '${comment.post_num }', '${comment.comment_text }')">[수정]</a>
+						<a href="javascript:deleteComment('${comment.comment_num }', '${comment.post_num }')">[삭제]</a>
+					</c:if>
+				
+				</td>
 			</tr>
 			<tr>
 				<!-- 리플 수정 폼이 나타날 위치 -->
@@ -141,5 +143,7 @@
 		<a href="postList"><button>목록으로</button></a>
 	</div>
 
+
+	<h3>본문 수정/삭제는 아직</h3>
 	</body>
 </html>

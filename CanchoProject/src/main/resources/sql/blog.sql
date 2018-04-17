@@ -38,12 +38,12 @@ CREATE TABLE blog_friend
 -- comment table
 CREATE TABLE blog_comment
 (
-    commet_num      INT              NOT NULL, 
+    comment_num      INT              NOT NULL, 
     post_num        INT              NOT NULL, 
     comment_text    VARCHAR2(300)    NOT NULL, 
     user_id         VARCHAR2(45)     NOT NULL, 
     comment_date    DATE             NOT NULL, 
-    CONSTRAINT BLOG_COMMENT_PK PRIMARY KEY (commet_num)
+    CONSTRAINT BLOG_COMMENT_PK PRIMARY KEY (comment_num)
     ,CONSTRAINT FK_blog_comment_post_num_blog_ FOREIGN KEY (post_num)
     REFERENCES blog_post (post_num)
     ,CONSTRAINT FK_blog_comment_user_id_blog_u FOREIGN KEY (user_id)

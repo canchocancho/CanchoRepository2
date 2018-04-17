@@ -29,5 +29,25 @@ public class CommentController {
 		
 		return "redirect:readOnePost?post_num="+comment.getPost_num();
 	}
+	
+	@RequestMapping(value="deleteComment", method=RequestMethod.GET)
+	public String deleteComment(int comment_num, int post_num, HttpSession session){
+		
+		dao.deleteComment(comment_num);		
+		
+		return "redirect:readOnePost?post_num="+post_num;
+	}
+	
+	@RequestMapping(value="updateComment", method=RequestMethod.POST)
+	public String updateComment(int comment_num, String comment_text, int post_num, HttpSession session){
+		
+		Comment comment = null;
+		comment.setComment_num(comment_num);
+		comment.setComment_text(comment_text);
+		
+		dao.updateComment(comment);
+		
+		return "redirect:readOnePost?post_num="+post_num;
+	}
 
 }

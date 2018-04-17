@@ -10,7 +10,7 @@
 		insert into
 			blog_comment
 			(
-			commet_num
+			comment_num
 			,post_num
 			,comment_text
 			,user_id
@@ -34,5 +34,21 @@
 		where
 			post_num = #{post_num}
 	</select>
+	
+	<delete id="deleteComment" parameterType="int">
+		delete from
+			blog_comment
+		where
+			comment_num = #{comment_num}
+	</delete>
+	
+	<update id="updateComment" parameterType="Comment">
+		update
+			blog_comment
+		set
+			comment_text = #{comment_text}
+		where
+			comment_num = #{comment_num}
+	</update>
 	
 </mapper>

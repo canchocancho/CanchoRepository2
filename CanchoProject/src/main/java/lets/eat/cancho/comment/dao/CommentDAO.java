@@ -53,5 +53,37 @@ public class CommentDAO {
 		return commentList;
 	}
 	
+	public void deleteComment(int comment_num){
+		
+		logger.info("댓글 삭제 시작");
+		
+		CommentMapper mapper = session.getMapper(CommentMapper.class);
+		
+		try{
+			mapper.deleteComment(comment_num);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("댓글 삭제 완료");
+	}
+	
+	public void updateComment(Comment comment){
+		
+		logger.info("댓글 수정 시작");
+		
+		CommentMapper mapper = session.getMapper(CommentMapper.class);
+		
+		try{
+			mapper.updateComment(comment);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("댓글 수정 완료");
+	}
+	
 	
 }
