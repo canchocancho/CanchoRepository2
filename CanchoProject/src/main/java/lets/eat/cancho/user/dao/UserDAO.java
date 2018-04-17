@@ -88,5 +88,24 @@ public class UserDAO {
 		
 		return result;
 	}
+	
+	//회원탈퇴
+	public int deleteUser(String user_id){
+		logger.info("회원 탈퇴 시작");
+		
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int result = 0;
+		
+		try{
+			result = mapper.deleteUser(user_id);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("회원 탈퇴 종료");
+		
+		return result;
+	}
 
 }

@@ -17,6 +17,11 @@
 				$('#btn1').on('click', function(){
 					var id = $('#user_id').val();
 					
+					if(id.length == 0){
+						alert("체크할 아이디를 입력하세요.");
+						return false;
+					}
+					
 					$.ajax({
 						url : "idCheck",
 						type : "get",
@@ -28,7 +33,7 @@
 								var str = '<p>'+id+": 사용할 수 있는 ID 입니다."+'</p>';
 								$('#idCheckResult').html(str);
 							}else{
-								var str = '<p>'+id+": 사용할 수 없는 ID 입니다."+'</p>';
+								var str = '<p>'+id+": 사용할 수 없는 ID 입니다.</p><p>다른 사용자가 사용 중이거나 가입했던 이력이 있는 아이디일 수 있습니다."+'</p>';
 								$('#idCheckResult').html(str);
 							}
 						},

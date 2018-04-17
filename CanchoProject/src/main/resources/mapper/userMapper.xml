@@ -8,11 +8,7 @@
 	 <!-- 회원 정보 검색 -->
 	 <select id="searchUserOne" parameterType="string" resultType="user">
 	 	select
-	 		user_id
-	 		, user_name
-	 		, user_email
-	 		, user_password
-	 		, user_verify
+	 		*
 	 	from 
 	 		blog_user
 	 	where
@@ -59,6 +55,14 @@
 	 		user_id = #{user_id} 	
 	</update>
 	 
-	
+	<!-- 회원 탈퇴 -->
+	<update id="deleteUser" parameterType="String">
+		update 
+			blog_user
+		set
+			user_deleted = 'Y'
+		where
+			user_id = #{user_id}
+	</update>
 	 
 </mapper>

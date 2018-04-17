@@ -77,6 +77,10 @@
 				</tr>
 			</table>
 		</form>
+		
+		<br>
+		
+		<a href="deletePage"><button>탈퇴하기ㅠ.ㅠ</button></a>
 	
 </body>
 </html>

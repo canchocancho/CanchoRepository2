@@ -5,7 +5,8 @@ CREATE TABLE blog_user
     user_name        VARCHAR2(45)     NOT NULL, 
     user_email       VARCHAR2(100)    NOT NULL unique, 
     user_password    VARCHAR2(100)    NOT NULL,
-    user_verify		 VARCHAR2(50)	  default 'N'
+    user_verify		 VARCHAR2(50)	  default 'N',
+    user_deleted	 VARCHAR2(50)	  default 'N'
 );
 
 -- blog_post table
