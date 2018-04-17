@@ -129,7 +129,7 @@ public class PostController {
 		String result = null;
 		
 		Post post = dao.bringPost(post_num);
-		ArrayList<Comment> commentList = dao.readReply(post_num);
+		ArrayList<Comment> commentList = dao.readComment(post_num);
 		
 		try {
 			//파일에서 스트림을 통해 주르륵 읽어들인다
