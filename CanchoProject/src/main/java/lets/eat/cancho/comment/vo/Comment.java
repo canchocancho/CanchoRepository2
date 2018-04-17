@@ -2,7 +2,7 @@ package lets.eat.cancho.comment.vo;
 
 public class Comment {
 	
-    private int commet_num;
+    private int comment_num;
     private int post_num;
     private String comment_text;
     private String user_id;
@@ -12,20 +12,20 @@ public class Comment {
 		super();
 	}
 	
-	public Comment(int commet_num, int post_num, String comment_text, String user_id, String comment_date) {
+	public Comment(int comment_num, int post_num, String comment_text, String user_id, String comment_date) {
 		super();
-		this.commet_num = commet_num;
+		this.comment_num = comment_num;
 		this.post_num = post_num;
 		this.comment_text = comment_text;
 		this.user_id = user_id;
 		this.comment_date = comment_date;
 	}
 	
-	public int getCommet_num() {
-		return commet_num;
+	public int getComment_num() {
+		return comment_num;
 	}
-	public void setCommet_num(int commet_num) {
-		this.commet_num = commet_num;
+	public void setComment_num(int comment_num) {
+		this.comment_num = comment_num;
 	}
 	public int getPost_num() {
 		return post_num;
@@ -54,7 +54,7 @@ public class Comment {
 	
 	@Override
 	public String toString() {
-		return "Comment [commet_num=" + commet_num + ", post_num=" + post_num + ", comment_text=" + comment_text
+		return "Comment [comment_num=" + comment_num + ", post_num=" + post_num + ", comment_text=" + comment_text
 				+ ", user_id=" + user_id + ", comment_date=" + comment_date + "]";
 	}
 

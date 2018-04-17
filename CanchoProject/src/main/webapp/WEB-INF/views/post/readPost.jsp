@@ -74,6 +74,16 @@
 				form.submit();
 			}			
 		</script>
+		
+		<style>
+			table{
+				border-collapse: collapse;
+			}
+			
+			table, th, td{
+				text-align: center; border: 1px solid black;
+			}
+		</style>
 	</head>
 	
 	<body>
@@ -93,16 +103,23 @@
 	<br>
 
 	<table style="margin: 0 auto;">
+		<tr>
+			<th>작성자</th>
+			<th>내용</th>
+			<th>날짜</th>
+		</tr>
+	
 		<c:forEach items="${commentList }" var="comment">
 			<tr>
 				<td>${comment.user_id }</td>
 				<td>${comment.comment_text }<c:if test="${sessionScope.loginId == comment.user_id }">
 						<a
-							href="javascript:updateReplyForm('${comment.comment_num }', '${comment.post_num }', '${comment.comment_text }')">[수정]</a>
+							href="javascript:updateCommentForm('${comment.comment_num }', '${comment.post_num }', '${comment.comment_text }')">[수정]</a>
 						<a
-							href="javascript:deleteReply('${comment.comment_num }', '${comment.post_num }')">[삭제]</a>
+							href="javascript:deleteComment('${comment.comment_num }', '${comment.post_num }')">[삭제]</a>
 					</c:if>
 				</td>
+				<td>${comment.comment_date }</td>
 			</tr>
 			<tr>
 				<!-- 리플 수정 폼이 나타날 위치 -->

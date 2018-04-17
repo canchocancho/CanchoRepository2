@@ -6,7 +6,7 @@
 <mapper namespace="lets.eat.cancho.comment.dao.CommentMapper">
 
 	<!-- 댓글 저장 -->
-	<insert id="insertComment" parameterType="Post">
+	<insert id="insertComment" parameterType="Comment">
 		insert into
 			blog_comment
 			(
