@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="<c:url value="/resources/js/html2canvas.js" />"></script>
 
 
-<script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
+		<script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
 
 		<style>
 			#div_root{
@@ -270,6 +270,38 @@
 		    	    });
 		    	  }
 		    	  
+		    	  //복사
+		    	  $('copy').onclick = function() {
+				  		canvas.getActiveObject().clone(function(cloned) {
+				  			_clipboard = cloned;
+				  		});
+				  	}
+
+		    	 //붙여넣기
+				 $('paste').onclick = function(){
+				  		_clipboard.clone(function(clonedObj) {
+				  			canvas.discardActiveObject();
+				  			clonedObj.set({
+				  				left: clonedObj.left + 10,
+				  				top: clonedObj.top + 10,
+				  				evented: true,
+				  			});
+				  			if (clonedObj.type === 'activeSelection') {
+				  				clonedObj.canvas = canvas;
+				  				clonedObj.forEachObject(function(obj) {
+				  					canvas.add(obj);
+				  				});
+				  				clonedObj.setCoords();
+				  			} else {
+				  				canvas.add(clonedObj);
+				  			}
+				  			_clipboard.top += 10;
+				  			_clipboard.left += 10;
+				  			canvas.setActiveObject(clonedObj);
+				  			canvas.requestRenderAll();
+				  		});
+				  	}
+		    	  
 		    	  //insertText
 		    	  $('insertText').onclick = function() {
 
@@ -346,7 +378,7 @@
 		    	        	 img.src = event.target.result;
 		    	         }
 		    	         reader.readAsDataURL(e.target.files[0]);
-		    	     }
+		    	     }		  
 		  	});
 		</script>
 	</head>
@@ -395,8 +427,11 @@
 					</p>
 				</div>
 			  	<br>
-			  	<button id="clear-canvas" class="btn btn-info">지우기</button><br>
-		
+			  	<div class="controls">
+						<button id="copy">복사</button>
+						<button id="paste">붙여넣기</button>
+						<button id="clear-canvas" class="btn btn-info">전체 삭제</button>
+				</div>
 		 		<div id="drawing-mode-options" style="">
 		   			<label for="drawing-mode-selector">Mode:</label>
 		   			<select id="drawing-mode-selector">
