@@ -127,6 +127,8 @@ public class PostController {
 		String post_file = dao.readPost(post_num);
 		String result = null;
 		
+		Post post = dao.bringPost(post_num);
+		
 		try {
 			//파일에서 스트림을 통해 주르륵 읽어들인다
 			BufferedReader fr = new BufferedReader(new FileReader(post_file));
@@ -143,6 +145,7 @@ public class PostController {
 			      }
 		
 		model.addAttribute("postText", result);
+		model.addAttribute("post", post);
 		
 		return "post/readPost";
 	}

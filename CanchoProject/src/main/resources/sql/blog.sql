@@ -35,8 +35,6 @@ CREATE TABLE blog_friend
     CONSTRAINT FK_blog_friend_user_id FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
 );
 
--- ---------------------------------------------------아래는 아직 안 만든 테이블들
-
 -- comment table
 CREATE TABLE blog_comment
 (
@@ -55,6 +53,11 @@ CREATE TABLE blog_comment
 CREATE SEQUENCE blog_comment_SEQ
 START WITH 1
 INCREMENT BY 1;
+
+
+-- ---------------------------------------------------아래는 아직 안 만든 테이블들
+
+
 
 -- tag table
 CREATE TABLE blog_tag
