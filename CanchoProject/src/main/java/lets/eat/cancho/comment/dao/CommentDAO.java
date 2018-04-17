@@ -1,5 +1,7 @@
 package lets.eat.cancho.comment.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +32,25 @@ public class CommentDAO {
 		}
 		
 		logger.info("댓글 달기 종료");
+	}
+	
+	public ArrayList<Comment> readComment(int post_num){
+		
+		logger.info("댓글 목록 불러오기");
+		
+		ArrayList<Comment> commentList = null;
+		CommentMapper mapper = session.getMapper(CommentMapper.class);
+		
+		try{
+			commentList = mapper.readComment(post_num);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("댓글 목록 불러오기 완료");
+		
+		return commentList;
 	}
 	
 	

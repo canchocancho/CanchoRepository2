@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import lets.eat.cancho.HomeController;
+import lets.eat.cancho.comment.dao.CommentDAO;
 import lets.eat.cancho.comment.vo.Comment;
 import lets.eat.cancho.common.util.FileService;
 import lets.eat.cancho.post.dao.PostDAO;
@@ -40,6 +41,9 @@ public class PostController {
 	
 	@Autowired
 	PostDAO dao;
+	
+	@Autowired
+	CommentDAO commentDAO;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -129,7 +133,7 @@ public class PostController {
 		String result = null;
 		
 		Post post = dao.bringPost(post_num);
-		ArrayList<Comment> commentList = dao.readComment(post_num);
+		ArrayList<Comment> commentList = commentDAO.readComment(post_num);
 		
 		try {
 			//파일에서 스트림을 통해 주르륵 읽어들인다

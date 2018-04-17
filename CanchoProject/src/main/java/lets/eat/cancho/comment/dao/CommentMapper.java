@@ -1,9 +1,13 @@
 package lets.eat.cancho.comment.dao;
 
+import java.util.ArrayList;
+
 import lets.eat.cancho.comment.vo.Comment;
 
 public interface CommentMapper {
 	
 	public int insertComment(Comment comment);
+	
+	public ArrayList<Comment> readComment(int post_num);
 
 }

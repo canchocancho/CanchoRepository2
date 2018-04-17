@@ -26,4 +26,13 @@
 			) 
 	</insert>
 	
+	<select id="readComment" parameterType="int" resultType="Comment">
+		select
+			*
+		from
+			blog_comment
+		where
+			post_num = #{post_num}
+	</select>
+	
 </mapper>
