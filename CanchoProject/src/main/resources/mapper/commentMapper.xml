@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lets.eat.cancho.comment.dao.CommentMapper">
+
+	<!-- 댓글 저장 -->
+	<insert id="insertComment" parameterType="Post">
+		insert into
+			blog_comment
+			(
+			commet_num
+			,post_num
+			,comment_text
+			,user_id
+			,comment_date
+			)
+		values
+			(
+			 blog_comment_SEQ.nextval
+			,#{post_num}
+			,#{comment_text}
+			,#{user_id}
+			,SYSDATE
+			) 
+	</insert>
+	
+</mapper>
