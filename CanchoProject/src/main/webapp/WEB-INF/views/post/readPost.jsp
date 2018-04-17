@@ -93,7 +93,7 @@
 	<br>
 
 	<table style="margin: 0 auto;">
-		<c:forEach items="${commentList }" var="reply">
+		<c:forEach items="${commentList }" var="comment">
 			<tr>
 				<td>${comment.user_id }</td>
 				<td>${comment.comment_text }<c:if test="${sessionScope.loginId == comment.user_id }">

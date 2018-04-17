@@ -7,7 +7,7 @@
 	<typeAliases>
 		<typeAlias type="lets.eat.cancho.post.vo.Post" alias="Post" />
 		<typeAlias type="lets.eat.cancho.user.vo.Blog_User" alias="User" />
-		<typeAlias type="lets.eat.cancho.friend.vo.Friend" alias="friend"/>'
+		<typeAlias type="lets.eat.cancho.friend.vo.Friend" alias="friend"/>
 		<typeAlias type="lets.eat.cancho.comment.vo.Comment" alias="Comment"/>
 	</typeAliases>
 
