@@ -39,15 +39,11 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value="updateComment", method=RequestMethod.POST)
-	public String updateComment(int comment_num, String comment_text, int post_num, HttpSession session){
-		
-		Comment comment = null;
-		comment.setComment_num(comment_num);
-		comment.setComment_text(comment_text);
-		
+	public String updateComment(Comment comment, HttpSession session){
+
 		dao.updateComment(comment);
 		
-		return "redirect:readOnePost?post_num="+post_num;
+		return "redirect:readOnePost?post_num="+comment.getPost_num();
 	}
 
 }
