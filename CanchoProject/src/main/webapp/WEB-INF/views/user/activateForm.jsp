@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
 		<title>계정 복구</title>
 		<script type="text/javascript">
 
