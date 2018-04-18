@@ -214,7 +214,7 @@
                   <div class="post-detail">
                     <div class="user-info">
                       <h5><a href="timeline.html" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>
-                      <p class="text-muted">Published a photo about 15 mins ago</p>
+                      <p class="text-muted">${post.post_date }</p>
                     </div>
                     <div class="reaction">
                       <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
