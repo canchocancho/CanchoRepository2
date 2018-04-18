@@ -139,7 +139,7 @@
                   <li><a href="timeline-friends.html">Friends</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
-                  <li>1,299 people following her</li>
+                  <li>1,299 people following me</li>
                   <li><button class="btn-primary">Add Friend</button></li>
                 </ul>
               </div>
@@ -150,7 +150,7 @@
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
               <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
-              <h4>Sarah Cruiz</h4>
+              <h4>${sessionScope.loginName }</h4>
               <p class="text-muted">Creative Director</p>
             </div>
             <div class="mobile-menu">
