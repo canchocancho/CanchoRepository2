@@ -127,7 +127,7 @@
               <div class="col-md-3">
                 <div class="profile-info">
                   <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo">
-                  <h3>Sarah Cruiz</h3>
+                  <h3>${sessionScope.loginId}</h3>
                   <p class="text-muted">Creative Director</p>
                 </div>
               </div>
@@ -150,7 +150,7 @@
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
               <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo">
-              <h4>Sarah Cruiz</h4>
+              <h4>${post.user_id }</h4>
               <p class="text-muted">Creative Director</p>
             </div>
             <div class="mobile-menu">
@@ -214,7 +214,7 @@
                   <div class="post-detail">
                     <div class="user-info">
                       <h5><a href="timeline.html" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>
-                      <p class="text-muted">Published a photo about 15 mins ago</p>
+                      <p class="text-muted">${post.post_date }</p>
                     </div>
                     <div class="reaction">
                       <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
