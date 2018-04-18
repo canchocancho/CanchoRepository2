@@ -28,8 +28,7 @@
     
     <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="resources/images/fav.png"/>
-
-</head>
+	</head>
 	<body>
   
     <!--preloader-->
@@ -403,8 +402,8 @@
 		<script src="resources/js/jquery.incremental-counter.js"></script>
     <script src="resources/js/script.js"></script>
 	</body>
-
 </html>
+
 
 
 <%-- 원래 home.jsp
