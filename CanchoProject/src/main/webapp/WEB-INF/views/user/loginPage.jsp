@@ -145,7 +145,7 @@
           <h1 class="error-title">Login</h1>
           <br>
                   <!--Login Form-->
-                  <form name="Login_form" id='Login_form'>
+                  <form name="Login_form" id='Login_form' action="login" method="post">
                      <div class="row">
                       <div class="form-group col-xs-12">
                         <label for="my-id" class="sr-only">Email</label>
