@@ -128,7 +128,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String join(@ModelAttribute("user")Blog_User user, Model model) throws
+	public String join(Blog_User user, Model model) throws
 		MessagingException, UnsupportedEncodingException {
 		logger.info("회원 가입 시작");
 		
@@ -169,9 +169,10 @@ public class UserController {
 		else {
 			logger.info("User Join Fail");
 			model.addAttribute("errorMsg", "회원가입 실패");
-			return "user/joinForm";
+			return "redirect:/";
 		}
 		
+		model.addAttribute("id", user.getUser_id());
 		return "redirect:joinComplete";
 	}
 	

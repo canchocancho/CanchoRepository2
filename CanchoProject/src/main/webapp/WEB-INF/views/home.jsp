@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
 
     <!-- Stylesheets
     ================================================= -->
@@ -28,6 +29,73 @@
     
     <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="resources/images/fav.png"/>
+    
+    <script type="text/javascript">
+	    <c:if test ="${errorMsg != null}">
+			alert("${errorMsg}")
+		</c:if>
+			
+			$(function(){
+				/* //ID중복체크
+				$('#btn1').on('click', function(){
+					var id = $('#user_id').val();
+					
+					if(id.length == 0){
+						alert("체크할 아이디를 입력하세요.");
+						return false;
+					}
+					
+					$.ajax({
+						url : "idCheck",
+						type : "get",
+						data : {
+							id : id
+						},
+						success : function(obj){
+							if(obj){
+								var str = '<p>'+id+": 사용할 수 있는 ID 입니다."+'</p>';
+								$('#idCheckResult').html(str);
+							}else{
+								var str = '<p>'+id+": 사용할 수 없는 ID 입니다.</p><p>다른 사용자가 사용 중이거나 가입했던 이력이 있는 아이디일 수 있습니다."+'</p>';
+								$('#idCheckResult').html(str);
+							}
+						},
+						error : function(err){
+							console.log(err);
+						}
+					});
+				}); */
+				
+				//유효성 검사
+				$('#joinForm').on('submit',function(){
+					var id = $('#user_id').val();
+					var password = $('#user_password').val();
+					var password2 = $('#user_password2').val();
+					var name =  $('#user_name').val();
+					var email = $('#user_email').val();
+					
+					if (id.length == 0) {
+						alert("ID를 입력하세요.");
+						return false;
+					} else if (password.length == 0) {
+						alert("비밀번호를 입력하세요.");
+						return false;
+					} else if (password2.length == 0) {
+						alert("비밀번호를 입력하세요.");
+						return false;
+					} else if (password != password2) {
+						alert("동일한 비밀번호를 입력하세요.");
+						return false;
+					} else if (name.length == 0) {
+						alert("이름을 입력하세요.");
+						return false;
+					} else if (email.length == 0) {
+						alert("이메일을 입력하세요.");
+						return false;
+					}
+				});
+			});
+    </script>
 	</head>
 	<body>
   
@@ -136,19 +204,25 @@
 					<div class="line-divider"></div>
 					<div class="form-wrapper">
 						<p class="signup-text">Signup now and meet awesome people around the world</p>
-						<form action="#">
+						<form action="user/join" method="post" id="joinForm">
 							<fieldset class="form-group">
-								<input type="text" class="form-control" id="example-name" placeholder="Enter name">
+								<input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter id" autocomplete="off">
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="email" class="form-control" id="example-email" placeholder="Enter email">
+								<input type="password" class="form-control" id="user_password" name="user_password" placeholder="Enter a password">
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="password" class="form-control" id="example-password" placeholder="Enter a password">
+								<input type="password" class="form-control" id="user_password2" placeholder="Enter a password again">
 							</fieldset>
-						</form>
+							<fieldset class="form-group">
+								<input type="text" class="form-control" id="user_name" name="user_name" placeholder="Enter name" autocomplete="off">
+							</fieldset>
+							<fieldset class="form-group">
+								<input type="email" class="form-control" id="user_email" name="user_email" placeholder="Enter email" autocomplete="off">
+							</fieldset>
 						<p>By signning up you agree to the terms</p>
 						<button class="btn-secondary">Signup</button>
+						</form>
 					</div>
 					<a href="#">Already have an account?</a>
 					<img class="form-shadow" src="resources/images/bottom-shadow.png" alt="" />
@@ -203,7 +277,7 @@
 					<li><button class="btn-secondary"><img src="resources/images/google-play.png" alt="Google Play" /></button></li>
 				</ul>
 				<h2 class="sub-title">stay connected anytime, anywhere</h2>
-				<img src="http://placehold.it/800x190" alt="iPhone" class="img-responsive" />
+				<img src="resources/images/800190.jpg" alt="iPhone" class="img-responsive" />
 			</div>
 		</section>
 
@@ -393,6 +467,30 @@
         <p>copyright @thunder-team 2016. All rights reserved</p>
       </div>
 		</footer>
+		
+		
+		
+		<c:choose>
+			<c:when test="${sessionScope.loginId == null }">
+				<li><a href="user/joinForm">회원가입</a></li>
+				<li><a href="user/loginPage">로그인</a></li>
+				<li><a href="post/postList">포스트 목록</a></li>
+				<li><a href="user/activateForm">휴면계정 복구</a></li>
+			</c:when>
+			<c:otherwise>
+				<h3>${sessionScope.loginName }님 환영합니다. </h3>
+				<li><a href="post/writePost">포스트 쓰기</a></li>
+				<li><a href="video/editor">브이로그 만들기</a></li>
+				<li><a href="post/postList">포스트 목록</a></li>		
+				<li><a href="user/logout">로그아웃</a></li>
+				<li><a href="user/myPage">마이페이지</a></li>
+			</c:otherwise>
+		</c:choose>
+		
+		
+		
+		
+		
 
     <!-- Scripts
     ================================================= -->
@@ -418,22 +516,7 @@
 	</h1>
 	
 		<ul>
-		<c:choose>
-			<c:when test="${sessionScope.loginId == null }">
-				<li><a href="user/joinForm">회원가입</a></li>
-				<li><a href="user/loginPage">로그인</a></li>
-				<li><a href="post/postList">포스트 목록</a></li>
-				<li><a href="user/activateForm">휴면계정 복구</a></li>
-			</c:when>
-			<c:otherwise>
-				<h3>${sessionScope.loginName }님 환영합니다. </h3>
-				<li><a href="post/writePost">포스트 쓰기</a></li>
-				<li><a href="video/editor">브이로그 만들기</a></li>
-				<li><a href="post/postList">포스트 목록</a></li>		
-				<li><a href="user/logout">로그아웃</a></li>
-				<li><a href="user/myPage">마이페이지</a></li>
-			</c:otherwise>
-		</c:choose>
+
 		</ul>
 	
 	</body>
