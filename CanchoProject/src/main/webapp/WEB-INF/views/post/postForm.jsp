@@ -428,7 +428,6 @@
 	            <input type="submit" value="send" onclick="send()" />
 	        </fieldset>
 	    </div>
-
   </div>
 
   <script>
