@@ -159,7 +159,7 @@ public class PostController {
 	
 	/*표지 만들기*/
 	@RequestMapping(value="makeCoverForm", method=RequestMethod.GET)
-	public String idCheck(Model model){
+	public String makeCoverForm(Model model){
 		
 		logger.info("표지 만들기");
 

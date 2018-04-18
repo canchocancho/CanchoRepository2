@@ -54,23 +54,23 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="update", method = RequestMethod.POST)
-	public String update(@ModelAttribute("user")Blog_User user, Model model){
+	public String update(@ModelAttribute("user")Blog_User user, Model model, HttpSession session){
 		logger.info("회원정보 수정 시작");
 		
 		int result = dao.updateUser(user);
 		
 		if (result != 1) {
-			model.addAttribute("errorMsg", "회원정보 수정 실패");
+			model.addAttribute("errorMsg", "이미 가입된 이메일입니다.");
 			logger.info("회원정보 수정 실패");
 			return "user/updateInfo";
 		}
 		
 		logger.info("회원정보 수정 종료");
-		
-		return "redirect:updateComplete";
+		model.addAttribute("errorMsg", "회원정보 수정을 완료하였습니다.");
+		return "user/updateInfo";
 	}
 	
-	@RequestMapping(value="updateComplete", method = RequestMethod.GET)
+/*	@RequestMapping(value="updateComplete", method = RequestMethod.GET)
 	public String update(SessionStatus status, @ModelAttribute("user")Blog_User user, Model model, HttpSession session){
 		logger.info("회원정보 수정 성공 후 홈으로 돌아가기 시작");
 		
@@ -81,7 +81,7 @@ public class MyPageController {
 		logger.info("회원정보 수정 성공 후 홈으로 돌아가기 종료");
 		
 		return "redirect:/";
-	}
+	}*/
 	
 	@RequestMapping(value="friendList", method = RequestMethod.GET)
 	public String friendList(HttpSession session, Model model){

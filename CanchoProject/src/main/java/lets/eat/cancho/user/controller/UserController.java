@@ -72,7 +72,8 @@ public class UserController {
 				    	//E-mail 인증까지 모두 마친 로그인
 						logger.info("User Login Success");
 						session.setAttribute("loginId", vo.getUser_id());	// 로그인 성공시 User ID를 Session에 저장
-						session.setAttribute("loginName", vo.getUser_name()); 
+						session.setAttribute("loginName", vo.getUser_name());
+						session.setAttribute("loginEmail", vo.getUser_email());
 				    	return "redirect:/post/postList";
 				    	 
 				      } else {
@@ -281,5 +282,11 @@ public class UserController {
 			
 			return "user/activated";
 		}
+	}
+	
+	@RequestMapping(value="editProfile", method=RequestMethod.GET)
+	public String editProfile(HttpSession session){
+
+		return "user/editProfile";
 	}
 }

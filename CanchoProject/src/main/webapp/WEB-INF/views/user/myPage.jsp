@@ -41,7 +41,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index-register.html"><img src="../resources/images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="../post/postList"><img src="../resources/images/logo.png" alt="logo" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -133,8 +133,8 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html" class="active">About</a></li>
+                  <li><a href="../post/postList">Timeline</a></li>
+                  <li><a href="" class="active">About</a></li>
                   <li><a href="timeline-album.html">Album</a></li>
                   <li><a href="timeline-friends.html">Friends</a></li>
                 </ul>
@@ -167,7 +167,18 @@
         </div>
         <div id="page-contents">
           <div class="row">
-            <div class="col-md-3"></div>
+            <div class="col-md-3">
+            
+              <!--Edit Profile Menu-->
+              <ul class="edit-menu">
+              	<li class="active"><i class="icon ion-ios-information-outline"></i><a href="">Basic Information</a></li>
+              	<li><i class="icon ion-ios-briefcase-outline"></i><a href="">Education and Work(안함)</a></li>
+              	<li><i class="icon ion-ios-heart-outline"></i><a href="">My Interests(안함)</a></li>
+                <li><i class="icon ion-ios-settings"></i><a href="editProfile">Profile Update</a></li>
+              	<li><i class="icon ion-ios-locked-outline"></i><a href="updateInfo">Change Information</a></li>
+              </ul>
+
+            </div>
             <div class="col-md-7">
 
               <!-- About
