@@ -407,7 +407,8 @@
 </html>
 
 
-<%-- <html>
+<%-- 원래 home.jsp
+	<html>
 	<head>
 		<title>TOMOlog</title>
 	</head>
