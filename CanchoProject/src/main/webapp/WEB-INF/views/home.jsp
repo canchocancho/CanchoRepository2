@@ -10,7 +10,7 @@
 <meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
 <meta name="robots" content="index, follow" />
 
-<title>Insert title here</title>
+<title>TOMOlog</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -81,7 +81,7 @@
 						alert("비밀번호를 입력하세요.");
 						return false;
 					} else if (password2.length == 0) {
-						alert("비밀번호를 입력하세요.");
+						alert("비밀번호 확인값을 입력하세요.");
 						return false;
 					} else if (password != password2) {
 						alert("동일한 비밀번호를 입력하세요.");
@@ -118,7 +118,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index-register.html"><img src="resources/images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href=""><img src="resources/images/logo.png" alt="logo" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -199,7 +199,7 @@
         <!-- Sign Up Form
         ================================================= -->
         <div class="sign-up-form">
-					<a href="index.html" class="logo"><img src="resources/images/logo.png" alt="Friend Finder"/></a>
+					<a href="" class="logo"><img src="resources/images/logo.png" alt="Friend Finder"/></a>
 					<h2 class="text-white">Find My Friends</h2>
 					<div class="line-divider"></div>
 					<div class="form-wrapper">
@@ -224,7 +224,7 @@
 						<button class="btn-secondary">Signup</button>
 						</form>
 					</div>
-					<a href="#">Already have an account?</a>
+					<a href="user/loginPage">Already have an account?</a>
 					<img class="form-shadow" src="resources/images/bottom-shadow.png" alt="" />
 				</div><!-- Sign Up Form End -->
 
@@ -470,6 +470,8 @@
 		
 		
 		
+		
+		<!-- 원래 home.jsp -->
 		<c:choose>
 			<c:when test="${sessionScope.loginId == null }">
 				<li><a href="user/joinForm">회원가입</a></li>
@@ -501,23 +503,3 @@
     <script src="resources/js/script.js"></script>
 	</body>
 </html>
-
-
-
-<%-- 원래 home.jsp
-	<html>
-	<head>
-		<title>TOMOlog</title>
-	</head>
-	<body>
-		
-	<h1>
-		TOMOlog
-	</h1>
-	
-		<ul>
-
-		</ul>
-	
-	</body>
-</html> --%>

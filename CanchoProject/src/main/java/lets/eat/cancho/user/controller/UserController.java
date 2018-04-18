@@ -15,20 +15,16 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import lets.eat.cancho.user.dao.UserDAO;
 import lets.eat.cancho.user.vo.Blog_User;
 
 @Controller
 @RequestMapping(value="user")
-@SessionAttributes("user")
 public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -168,11 +164,10 @@ public class UserController {
 		} 
 		else {
 			logger.info("User Join Fail");
-			model.addAttribute("errorMsg", "회원가입 실패");
+			model.addAttribute("errorMsg", "알 수 없는 에러가 발생하였습니다.");
 			return "redirect:/";
 		}
 		
-		model.addAttribute("id", user.getUser_id());
 		return "redirect:joinComplete";
 	}
 	
@@ -199,16 +194,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="joinComplete", method=RequestMethod.GET)
-	public String joinComplete(SessionStatus session, 
-			@ModelAttribute("user") Blog_User user, 
-			Model model ){
-		
-		logger.info("회원 가입 성공 폼 이동 시작");
-		
-		model.addAttribute("id", user.getUser_id());
-		session.setComplete();
-		
-		logger.info("회원 가입 성공 폼 이동 종료");
+	public String joinComplete(){
+
 		return "user/joinComplete";
 	}
 	
