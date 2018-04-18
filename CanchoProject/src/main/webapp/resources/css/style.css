@@ -1534,7 +1534,7 @@ ul.online-users li span.online-dot{
   ==================================================*/
 
 .timeline-cover{
-  background: url("http://placehold.it/1030x360") no-repeat;
+  background: url("../images/1030360.jpg") no-repeat;
   background-position: center;
   background-size: cover;
   min-height: 360px;
