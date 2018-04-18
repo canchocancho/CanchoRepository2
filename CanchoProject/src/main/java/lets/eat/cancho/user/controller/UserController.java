@@ -65,7 +65,7 @@ public class UserController {
 		}
 	    else if (vo.getUser_deleted().equals("Y")){
 	    	//탈퇴한 회원일 경우
-	    	model.addAttribute("errorMsg", "존재하지 않는 아이디입니다.");
+	    	model.addAttribute("errorMsg", "휴면 계정입니다. 메인 페이지에서 계정을 복구해주세요.");
 	    	logger.info("탈퇴한 회원");
 	    	return "user/loginPage";  
 	    }
@@ -248,5 +248,50 @@ public class UserController {
 	public String deleteComplete(){
 		
 		return "user/deleteComplete";
+	}
+	
+	@RequestMapping(value="activateForm", method=RequestMethod.GET)
+	public String activateForm(){
+		
+		return "user/activateForm";
+	}
+	
+	@RequestMapping(value="activate", method=RequestMethod.POST)
+	public String activate(Blog_User user, Model model){
+		
+		Blog_User deleted_user = dao.searchUserOne(user.getUser_id());
+		
+		//아예 가입된 회원이 아닐 경우
+		if(deleted_user == null){
+			model.addAttribute("errorMsg", "해당 아이디로 가입된 이력이 없습니다.");
+			return "user/activateForm";
+		}
+		
+		//가입은 되어 있는데 휴면계정이 아닐 경우
+		else if(!deleted_user.getUser_deleted().equals("Y")){
+			model.addAttribute("errorMsg", "휴면 계정이 아닙니다.");
+			return "user/activateForm";
+		}
+		
+		//휴면계정인데 비밀번호가 틀렸을 경우
+		else if(!user.getUser_password().equals(deleted_user.getUser_password())){
+			model.addAttribute("errorMsg", "비밀번호가 틀렸습니다.");
+			return "user/activateForm";
+		}
+		
+		//activate 성공
+		else {
+			int result = dao.activateUser(user.getUser_id());
+			
+			if(result == 1) {
+				logger.info("계정 활성화 성공");
+			}
+			else {
+				model.addAttribute("errorMsg", "알 수 없는 오류가 발생하였습니다.");
+				return "user/activateForm";
+			}
+			
+			return "user/activated";
+		}
 	}
 }

@@ -80,7 +80,7 @@
 		
 		<br>
 		
-		<a href="deletePage"><button>탈퇴하기ㅠ.ㅠ</button></a>
+		<a href="deletePage"><button>휴면 계정으로 전환하기</button></a>
 	
 </body>
 </html>
