@@ -89,9 +89,9 @@ public class UserDAO {
 		return result;
 	}
 	
-	//회원탈퇴
+	//휴면 계정 전환
 	public int deleteUser(String user_id){
-		logger.info("회원 탈퇴 시작");
+		logger.info("휴면 계정 전환 시작");
 		
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		int result = 0;
@@ -103,7 +103,26 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		
-		logger.info("회원 탈퇴 종료");
+		logger.info("휴면 계정 전환 종료");
+		
+		return result;
+	}
+	
+	//계정 활성화
+	public int activateUser(String user_id){
+		logger.info("계정 활성화 시작");
+		
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int result = 0;
+		
+		try{
+			result = mapper.activateUser(user_id);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("계정 활성화 종료");
 		
 		return result;
 	}

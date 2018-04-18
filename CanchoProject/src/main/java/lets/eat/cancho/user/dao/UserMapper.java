@@ -16,7 +16,9 @@ public interface UserMapper {
 	//회원정보 수정
 	public int updateUser(Blog_User user);
 
-	
-	//회원탈퇴
+	//휴면 계정 전환
 	public int deleteUser(String user_id);
+	
+	//계정 활성화
+	public int activateUser(String user_id);
 }

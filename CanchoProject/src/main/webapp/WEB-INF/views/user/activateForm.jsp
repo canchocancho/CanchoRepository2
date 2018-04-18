@@ -5,13 +5,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>LOGIN</title>
+		<title>계정 복구</title>
 		<script type="text/javascript">
 
 			<c:if test="${errorMsg !=null }">
 	   		alert('${errorMsg }');
 	 	  	</c:if>
-		
+	
 			function formCheck(){
 				var id = document.getElementById('user_id');
 				var password = document.getElementById('user_password');
@@ -28,19 +28,20 @@
 	</head>
 	
 	<body>
-		<h1>LOGIN</h1>
-		<form action="login" method="post" onsubmit="return formCheck();">
+		<h1>휴면 계정 복구</h1>
+		
+		<form action="activate" method="post" onsubmit="return formCheck();">
 			<table>
 				<tr>
 					<th>ID</th>
-					<td><input type="text" name="user_id" id="user_id" value="${user_id }" autocomplete="off"></td>
+					<td><input type="text" name="user_id" id="user_id" autocomplete="off"></td>
 				</tr>
 				<tr>
 					<th>Password</th>
 					<td><input type="password" name="user_password" id="user_password"></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><input type="submit" value="login"></td>
+					<td colspan="2" align="center"><input type="submit" value="계정 복구하기"></td>
 				</tr>
 			</table>
 		</form>
