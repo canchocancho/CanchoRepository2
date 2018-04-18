@@ -14,7 +14,7 @@
 				<h3>${sessionScope.loginName }님의 마이페이지 </h3>
 				<li><a href="updateInfo">회원정보 수정</a></li>
 				<li><a href="friendList">친구리스트</a></li>
-				<li><a href="">나의 쪽지함</a></li>
+				<li><a href="message">나의 쪽지함</a></li>
 				<li><a href="">설정</a></li>
 			</c:when>
 		</c:choose>
