@@ -66,8 +66,9 @@ public class MyPageController {
 		}
 		
 		logger.info("회원정보 수정 종료");
-		model.addAttribute("errorMsg", "회원정보 수정을 완료하였습니다.");
-		return "user/updateInfo";
+		session.setAttribute("loginName", user.getUser_name());
+		session.setAttribute("loginEmail", user.getUser_email());
+		return "redirect:updateInfo";
 	}
 	
 /*	@RequestMapping(value="updateComplete", method = RequestMethod.GET)

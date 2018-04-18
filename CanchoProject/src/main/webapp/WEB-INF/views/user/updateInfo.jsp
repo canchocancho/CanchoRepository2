@@ -161,7 +161,7 @@
               <div class="col-md-3">
                 <div class="profile-info">
                   <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
-                  <h3>Sarah Cruiz</h3>
+                  <h3>${sessionScope.loginName }</h3>
                   <p class="text-muted">Creative Director</p>
                 </div>
               </div>

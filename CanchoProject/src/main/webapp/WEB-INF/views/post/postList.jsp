@@ -5,11 +5,12 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="This is social network html5 template available in themeforest......">
 		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page">
 		<meta name="robots" content="index, follow">
-		<title>포스트목록</title>
+		<title>TIMELINE</title>
 
     <!-- Stylesheets
     ================================================= -->
@@ -23,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
     
     <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="resources/images/fav.png">
+    <link rel="shortcut icon" type="image/png" href="../resources/images/fav.png">
 	</head>
 	<body>
 
@@ -41,7 +42,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index-register.html"><img src="../resources/images/logo.png" alt="logo"></a>
+            <a class="navbar-brand" href=""><img src="../resources/images/logo.png" alt="logo"></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -133,7 +134,7 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="timeline.html" class="active">Timeline</a></li>
+                  <li><a href="" class="active">Timeline</a></li>
                   <li><a href="../user/myPage">About</a></li>
                   <li><a href="timeline-album.html">Album</a></li>
                   <li><a href="timeline-friends.html">Friends</a></li>
@@ -195,9 +196,9 @@
               </div><!-- Post Create Box End-->
 
 
-                <!-- Post Content
-              ================================================= -->
-              <!-- 게시글이 하나라도 존재하는 경우 -->
+            <!-- Post Content
+            ================================================= -->
+            <!-- 게시글이 하나라도 존재하는 경우 -->
 			<c:if test="${postList != null && postList.size() != 0}">	
 			<c:forEach items="${postList }" var="post">
 				  <div class="post-content">
@@ -296,7 +297,7 @@
               
               
               
-
+<%-- 
               <!-- Post Content
               ================================================= -->
               <div class="post-content">
@@ -312,7 +313,7 @@
                   <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left">
                   <div class="post-detail">
                     <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
+                      <h5><a href="timeline.html" class="profile-link">${sessionScope.loginName }</a> <span class="following">following</span></h5>
                       <p class="text-muted">Yesterday</p>
                     </div>
                     <div class="reaction">
@@ -352,7 +353,7 @@
                   <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left">
                   <div class="post-detail">
                     <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
+                      <h5><a href="timeline.html" class="profile-link">${sessionScope.loginName }</a> <span class="following">following</span></h5>
                       <p class="text-muted">2 days ago</p>
                     </div>
                     <div class="reaction">
@@ -378,7 +379,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> 
+              
+              --%>
 
             </div>
             <div class="col-md-2 static">
