@@ -127,7 +127,7 @@
               <div class="col-md-3">
                 <div class="profile-info">
                   <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo">
-                  <h3>${sessionScope.loginId}</h3>
+                  <h3>${sessionScope.loginName}</h3>
                   <p class="text-muted">Creative Director</p>
                 </div>
               </div>
@@ -150,7 +150,7 @@
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
               <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo">
-              <h4>${post.user_id }</h4>
+              <h4>${sessionScope.loginName}</h4>
               <p class="text-muted">Creative Director</p>
             </div>
             <div class="mobile-menu">
@@ -241,27 +241,6 @@
                 </div>
               </div>
 			
-			
-			
-			
-			
-			
-			
-				<%-- <tr>
-					<td>${post.post_num }</td>
-					<td><a href="readOnePost?post_num=${post.post_num }">
-					
-						<c:if test="${post.savedfile == null }">${post.post_title }</c:if>
-						<c:if test="${post.savedfile != null }"><img src="download?post_num=${post.post_num }" style="width: 500px;"></c:if>
-					
-					</a></td>
-					<td>${post.user_id }</td>
-					<td>${post.post_date }</td>
-				</tr>
-				<tr>
-					<td><div id="read">
-					</div></td>
-				</tr> --%>
 			</c:forEach>
 			</c:if>
               
@@ -519,7 +498,7 @@
 	
 	
 	
-		<h1>POST LIST</h1>
+		<h1>POST LIST</h1> 
 		
 	<table>
 		<tr>
