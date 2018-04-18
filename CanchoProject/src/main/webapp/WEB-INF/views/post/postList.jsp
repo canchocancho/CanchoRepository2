@@ -198,12 +198,12 @@
                 <!-- Post Content
               ================================================= -->
               <!-- 게시글이 하나라도 존재하는 경우 -->
-			  <c:if test="${postList != null && postList.size() != 0}">	
-			  <c:forEach items="${postList }" var="post">
-				    <div class="post-content">
+			<c:if test="${postList != null && postList.size() != 0}">	
+			<c:forEach items="${postList }" var="post">
+				  <div class="post-content">
 
-                  <!--Post Date-->
-                  <div class="post-date hidden-xs hidden-sm">
+                <!--Post Date-->
+                <div class="post-date hidden-xs hidden-sm">
                   <h5>${post.user_id }</h5>
                   <p class="text-grey">Sometimes ago</p>
                 </div><!--Post Date End-->
@@ -214,7 +214,7 @@
                   <div class="post-detail">
                     <div class="user-info">
                       <h5><a href="timeline.html" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>
-                      <p class="text-muted">${post.post_date }</p>
+                      <p class="text-muted">Published a photo about 15 mins ago</p>
                     </div>
                     <div class="reaction">
                       <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
@@ -240,6 +240,28 @@
                   </div>
                 </div>
               </div>
+			
+			
+			
+			
+			
+			
+			
+				<%-- <tr>
+					<td>${post.post_num }</td>
+					<td><a href="readOnePost?post_num=${post.post_num }">
+					
+						<c:if test="${post.savedfile == null }">${post.post_title }</c:if>
+						<c:if test="${post.savedfile != null }"><img src="download?post_num=${post.post_num }" style="width: 500px;"></c:if>
+					
+					</a></td>
+					<td>${post.user_id }</td>
+					<td>${post.post_date }</td>
+				</tr>
+				<tr>
+					<td><div id="read">
+					</div></td>
+				</tr> --%>
 			</c:forEach>
 			</c:if>
               
