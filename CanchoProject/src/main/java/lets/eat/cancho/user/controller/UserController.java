@@ -73,7 +73,7 @@ public class UserController {
 						logger.info("User Login Success");
 						session.setAttribute("loginId", vo.getUser_id());	// 로그인 성공시 User ID를 Session에 저장
 						session.setAttribute("loginName", vo.getUser_name()); 
-				    	return "redirect:/";
+				    	return "redirect:/post/postList";
 				    	 
 				      } else {
 				    	//E-mail 인증이 되지 않은 로그인
