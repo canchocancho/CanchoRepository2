@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="<c:url value="resources/js/jquery-3.2.1.js" />"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="This is social network html5 template available in themeforest......" />
 <meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
@@ -15,7 +16,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
 
     <!-- Stylesheets
     ================================================= -->
