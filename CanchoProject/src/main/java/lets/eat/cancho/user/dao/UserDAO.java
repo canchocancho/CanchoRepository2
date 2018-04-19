@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import lets.eat.cancho.user.vo.Blog_Profile;
 import lets.eat.cancho.user.vo.Blog_User;
 
 @Repository
@@ -123,6 +124,25 @@ public class UserDAO {
 		}
 		
 		logger.info("계정 활성화 종료");
+		
+		return result;
+	}
+	
+	//프로필 정보 등록
+	public int writeProfile(Blog_Profile profile){
+		logger.info("프로필 정보 등록 시작 - 다오");
+		
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int result = 0;
+		
+		try {
+			result = mapper.writeProfile(profile);
+			logger.info("등록여부 : "  + result);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("프로필 정보 등록 종료 - 다오");
 		
 		return result;
 	}

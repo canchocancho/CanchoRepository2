@@ -1,6 +1,10 @@
 package lets.eat.cancho.user.controller;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
@@ -19,8 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import lets.eat.cancho.common.util.FileService;
+import lets.eat.cancho.post.vo.Post;
 import lets.eat.cancho.user.dao.UserDAO;
+import lets.eat.cancho.user.vo.Blog_Profile;
 import lets.eat.cancho.user.vo.Blog_User;
 
 @Controller
@@ -33,6 +41,8 @@ public class UserController {
 	
 	@Autowired
 	UserDAO dao;
+	
+	final String uploadPath = "/profilePicture";
 	
 	@RequestMapping(value="loginPage", method = RequestMethod.GET)
 	public String loginPage(){
@@ -285,8 +295,63 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="editProfile", method=RequestMethod.GET)
-	public String editProfile(HttpSession session){
-
+	public String editProfile(HttpSession session, Model model){
+		String id = (String)session.getAttribute("loginId");
+		Blog_User user = dao.searchUserOne(id);
+		
+		model.addAttribute("user", user);
 		return "user/editProfile";
 	}
+	
+	//save profile
+	@RequestMapping(value="saveProfile", method=RequestMethod.POST)
+	public String saveData(Blog_Profile profile,HttpSession session, Model model, MultipartFile upload){
+		
+		logger.info("saveProfile");
+		
+        Date date = new Date(); 
+        SimpleDateFormat simpleDate = new SimpleDateFormat("_yyMMdd_hhmmss_");
+        String finalDate = simpleDate.format(date);
+
+		//String loginId = (String)session.getAttribute("loginId");	
+        String loginId = (String)session.getAttribute("loginId");
+        System.out.println(loginId);
+        String randomName = loginId+finalDate+Math.random();
+        String fileName = "C:\\canchocancho\\"+randomName+".txt";
+        
+  /*      Post post = new Post();
+        post.setPost_title(post_title);
+        post.setPost_file(fileName);
+        post.setUser_id(loginId);*/
+        
+        Blog_Profile profile1 = new Blog_Profile();
+       profile1 = profile;
+
+        if(!upload.isEmpty()){
+			//첨부파일이 있는 경우
+			//Post 객체에 originalFileName과 savedfileName을 저장
+			String savedfile = FileService.saveFile(upload, uploadPath); //저장된 파일명
+			profile1.setP_savedfile(savedfile);
+			profile1.setP_originalfile(upload.getOriginalFilename());
+		}
+        
+		int result = dao.writeProfile(profile1);
+		
+		if(result != 1){
+			//등록실패
+			model.addAttribute("errorMsg", "오류가 발생했습니다.");
+			logger.info("포스팅 실패");
+			
+			return "user/editProfile";
+		}
+		
+		logger.info("포스팅 종료");
+
+		return "user/myPage";
+	}
+	
+	
+	
+	
+	
 }

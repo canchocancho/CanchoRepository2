@@ -1,5 +1,6 @@
 package lets.eat.cancho.user.dao;
 
+import lets.eat.cancho.user.vo.Blog_Profile;
 import lets.eat.cancho.user.vo.Blog_User;
 
 public interface UserMapper {
@@ -21,4 +22,7 @@ public interface UserMapper {
 	
 	//계정 활성화
 	public int activateUser(String user_id);
+	
+	//프로필 정보 등록
+	public int writeProfile(Blog_Profile profile);
 }

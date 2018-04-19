@@ -74,5 +74,44 @@
 		where
 			user_id = #{user_id}
 	</update>
+	
+	<!-- 프로필 저장 -->
+	<insert id="writeProfile" parameterType="profile">
+		insert into
+			blog_profile
+			(
+			user_id
+			, user_email
+			, p_birthDate
+			, p_sex
+			, p_city
+			, p_country
+			, p_company
+			, p_school
+			, p_introduce
+
+			<if test="p_originalfile != null and p_savedfile != null">
+			,p_originalfile
+			,p_savedfile
+			</if>
+			)
+		values
+			(
+			#{user_id}
+			, #{user_email}
+			, #{p_birthDate}
+			, #{p_sex}
+			, #{p_city}
+			, #{p_country}
+			, #{p_company}
+			, #{p_school}
+			, #{p_introduce}
+			
+			<if test="p_originalfile != null and p_savedfile != null">
+			, #{p_originalfile}
+			, #{p_savedfile}
+			</if>
+			) 
+	</insert>
 	 
 </mapper>
