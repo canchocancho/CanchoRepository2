@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/timeline.css"/>
+
+    <script type="text/javascript" src="../../js/vendor/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../js/vendor/jquery-ui-1.10.3.custom.min.js"></script>
+
+    <script type="text/javascript" src="../../js/timeline.js"></script>
+
+    <script type="text/javascript">
+        jQuery(function(){
+            var options = {
+                width: 600,
+                duration: 60 * 2 + 25,
+                framesNumber: 12,
+                tags: [
+                    {title: 'One', length: 15},
+                    {title: 'Two', start: 30, length: 15},
+                    {title: 'Three', start: 5, length: 20},
+                    {title: 'Four', start: 40, length: 20}
+                ]
+            };
+
+         /*    var timeline = new Timeline('#test1', options);
+            timeline.goToNextSecond();
+            timeline.goToPrevSecond();
+            timeline.goTo(72);
+            timeline.addTag({title: 'Five', start: 80, length: 20});
+            timeline.addTag({title: 'Six', length: 20}); */
+            console.log(JSON.stringify(timeline.toJSON()));
+
+            // Second example
+
+            options.align = false;
+            options.framesOrder = ['.main', '.quoter', '.half', '.quoter'];
+            options.tags[3].line = 6;
+            options.tags[3].events = {
+                'setStart': function(event, start){
+                    console.log(start + ' or ' + this.start);
+                }
+            };
+            window.tl = new Timeline('#test2', options);
+        });
+    </script>
+
+</head>
+<body>
+
+<div id="test1" class="timeline">
+    <ul class="frames">
+        <li class="pointer">
+            <div class="line"></div>
+        </li>
+        <li class="frame">
+            <div class="line"></div>
+            <div class="time"></div>
+        </li>
+    </ul>
+    <ul class="tags-lines">
+        <li>
+            <div class="tag">
+                <span class="title"></span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<br/>
+
+<div id="test2" class="timeline">
+    <ul class="frames">
+        <li class="pointer">
+            <div class="line"></div>
+        </li>
+        <li class="frame main">
+            <div class="line"></div>
+            <div class="time"></div>
+        </li>
+        <li class="frame half">
+            <div class="line"></div>
+        </li>
+        <li class="frame quoter">
+            <div class="line"></div>
+        </li>
+    </ul>
+    <ul class="tags-lines">
+        <li>
+            <div class="tag">
+                <span class="title"></span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

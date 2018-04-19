@@ -1,5 +1,7 @@
 var Mash = {
-  clip_from_media: function(media){
+		
+	//	
+	clip_from_media: function(media){
     var key, type, property_type, property, clip = {id:media.id};
     if (media.properties){
       for (key in media.properties) {
@@ -19,6 +21,9 @@ var Mash = {
     }
     return clip;
   },
+  //
+  
+  //
   clip_has_audio: function(clip, media) {
     var has = false;
     switch(media.type){
@@ -39,6 +44,9 @@ var Mash = {
     }
     return has;
   },
+  //
+  
+  //
   clip_time: function(clip, media, time, quantize, add_one_frame) {
     var clip_time = time.copyTime();
     clip_time.subtract(new TimeRange(clip.frame, quantize));
@@ -62,6 +70,9 @@ var Mash = {
     }
     return clip_time;
   },
+  //
+  
+  //
   effect_clips: function(vis_clips){
     var i, z, clip, clips = [];
     z = vis_clips.length;
@@ -71,6 +82,8 @@ var Mash = {
     }
     return clips;
   },
+  //
+  //
   init_clip: function(mash, clip, media, track_index){
     if (! track_index) track_index = 0;
     if (clip && media && mash && (! Mash.init_media(media))) {
@@ -111,6 +124,8 @@ var Mash = {
       }
     }
   },
+  //
+  //
   init_mash: function(mash){
     Util.copy_ob_scalars(Option.mash.default, mash, true);
     mash.quantize = (mash.quantize ? parseInt(mash.quantize) : 1);
@@ -144,11 +159,15 @@ var Mash = {
     }
     return media_references;
   },
+  //
+  
+  //
   init_media: function(media){
-
+	/*alert( JSON.stringify(media));*/
     var error = ! Util.isob(media);
     if (! error) {
       if (Util.isnt(media.id)) media.id = Util.uuid();
+      
       switch(media.type) {
         case Constant.video: {
           if (Util.isnt(media.fps)) media.fps = 10;
@@ -166,7 +185,7 @@ var Mash = {
           if (Util.isnt(media.to.merger)) media.to.merger = Defaults.module_from_type(Constant.merger);
           if (Util.isnt(media.from.scaler)) media.from.scaler = Defaults.module_from_type(Constant.scaler);
           if (Util.isnt(media.from.merger)) media.from.merger = Defaults.module_from_type(Constant.merger);
-      //console.log('init_media', media, media.id);
+          //console.log('init_media', media, media.id);
           break;
         }
       }
@@ -174,6 +193,9 @@ var Mash = {
     if (error) console.error('init_media got invalid media', media);
     return error;
   },
+  //
+  
+  //
   init_module: function(type, module, media){
     if (media) {
       if (media.properties) {
@@ -184,15 +206,24 @@ var Mash = {
       }
     } else return console.error("could not find media for module", module);
   },
+  //
+  
+  //
   init_track: function(track, index){
     if (! Util.isob(track)) track = {type:track};
     track.index = index;
     if (! Util.isarray(track.clips)) track.clips = [];
     return track;
   },
+  //
+  
+  //
   is_modular_clip: function(mash, clip){
     return Mash.is_modular_media(Mash.media(mash, clip));
   },
+  //
+  
+  //
   is_modular_media: function(media){
     var is = false;
     if (Util.isob(media) && (! Util.isnt(media.type))) {
@@ -206,6 +237,9 @@ var Mash = {
     }
     return is;
   },
+  //
+  
+  //
   is_visual_media: function(media){
     var is = false;
     if (Util.isob(media)) {
@@ -218,6 +252,9 @@ var Mash = {
     }
     return is;
   },
+  //
+  
+  //
   length_of_clips: function(clips){
     var clip, frames = 0;
     if (Util.isarray(clips) && clips.length) {
@@ -226,10 +263,16 @@ var Mash = {
     }
     return frames;
   },
+  //
+  
+  //
   loaded_range: function(mash, range, audio_on){
     var urls = Mash.urls_for_clips(mash, Mash.range_clips(mash, range, audio_on), range);
     return Loader.loaded_urls_of_type(urls);
   },
+  //
+  
+  //
   max_frames_for_clip: function(clip, media, quantize){
     var max = 0;
     switch(media.type){
@@ -241,6 +284,9 @@ var Mash = {
     }
     return max;
   },
+  //
+  
+  //
   max_trim_for_clip: function(clip, media, quantize){
     var max = 0;
     switch(media.type){
@@ -252,9 +298,15 @@ var Mash = {
     }
     return max;
   },
+  //
+  
+  //
   media: function(mash, ob_or_id){
     return Util.array_find(mash.media, ob_or_id);
   },
+  //
+  
+  //
   media_count_for_clips: function(mash, clips, referenced){
     var clip, media, j, y, i, z, key, keys, reference;
     if (Util.isob(referenced) && Util.isarray(clips)) {
@@ -299,6 +351,9 @@ var Mash = {
       }
     }
   },
+  //
+  
+  //
   media_for_clips: function(mash, clips, media){
     var reference, k, referenced = {}, medias = [];
     if (! Util.isnt(clips)) {
@@ -318,6 +373,9 @@ var Mash = {
     }
     return medias;
   },
+  //
+  
+  //
   media_merger_scaler: function(mash, object, referenced){
     if (Util.isob(object)) {
       //console.log(object[Constant.merger].id, object[Constant.scaler].id);
@@ -325,10 +383,16 @@ var Mash = {
       if (Util.isob(object[Constant.scaler])) Mash.media_reference(mash, object[Constant.scaler].id, referenced, Constant.scaler);
     }
   },
+  //
+  
+  //
   media_range: function(clip, media, range, quantize, add_one_frame) {
     var result = TimeRange.fromTimes(Mash.clip_time(clip, media, range, quantize), Mash.clip_time(clip, media, range.endTime, quantize, add_one_frame));
     return result;
   },
+  //
+  
+  //
   media_reference: function(mash, media_id, referenced, type){
     if (referenced[media_id]) referenced[media_id].count++;
     else {
@@ -337,6 +401,9 @@ var Mash = {
       referenced[media_id].media = Mash.media_search(type, media_id, mash);
     }
   },
+  //
+  
+  //
   media_search: function(type, ob_or_id, mash){
     var ob = null;
     if ( ! Util.isnt(ob_or_id)) {
@@ -346,6 +413,9 @@ var Mash = {
     }
     return ob;
   },
+  //
+  
+  //
   module_clips: function(mash){
     var clip, i, z, clips, vis_clips;
     vis_clips = Mash.visual_clips(mash);
@@ -357,6 +427,9 @@ var Mash = {
     }
     return clips;
   },
+  //
+  
+  //
   modules_reference_media: function(mash, ob_or_id){
     var does, i, z, key, keys, j, y, media, clip, clips = Mash.module_clips(mash);
     if (Util.isob(ob_or_id)) ob_or_id = ob_or_id.id;
@@ -383,6 +456,9 @@ var Mash = {
     }
     return does;
   },
+  //
+  
+  //
   properties_for_media: function(media, type){
     var key, prop_keys = [];
     if ((! Util.isnt(type)) && Util.isob(media) && Util.isob(media.properties)){
@@ -394,6 +470,9 @@ var Mash = {
     }
     return prop_keys;
   },
+  //
+  
+  //
   range_clips: function(mash, time, include_audio){
     time = time.copyTimeRange();
     var clip_time, key, tracks, track, clips = [], clip, i, z, j, y, k, x;
@@ -417,6 +496,9 @@ var Mash = {
     }
     return clips;
   },
+  //
+  
+  //
   recalc_clips: function(clips){
     if (clips.length > 1) clips.sort(Util.sort_by_frame);
   },
@@ -424,6 +506,9 @@ var Mash = {
     if ((Constant.audio === track.type) || track.index) Mash.recalc_clips(track.clips);
     else Mash.recalc_video_clips(mash, track.clips);
   },
+  //
+  
+  //
   recalc_video_clips: function(mash, clips) {
     var media, i, z, clip, start_time = 0;
     z = clips.length;
@@ -436,6 +521,9 @@ var Mash = {
     }
     Mash.recalc_clips(clips); // sorts by frame
   },
+  //
+  
+  //
   track_for_clip: function(mash, clip, media){
     if (! media) media = Mash.media(mash, clip);
     var track, tracks, i = 0, z;
@@ -449,6 +537,9 @@ var Mash = {
       if (-1 < track.clips.indexOf(clip)) return track;
     }
   },
+  //
+  
+  //
   urls_for_clip: function(mash, clip, range, resources){
     var quantize, media, i, z, key, keys, font;
     quantize = mash.quantize;
@@ -518,9 +609,15 @@ var Mash = {
     }
     return resources;
   },
+  //
+  
+  //
   urls_for_clips: function(mash, clips, range, avb){
     return Mash.urls_of_type(Mash.urls_for_clips_by_type(mash, clips, range), avb);
   },
+  //
+  
+  //
   urls_for_clips_by_type: function(mash, clips, range){
     // range is in this.__fps
     range = range.copyTimeRange();
@@ -533,6 +630,9 @@ var Mash = {
     }
     return resources;
   },
+  //
+  
+  //
   urls_for_media_filters: function(media, referenced){
     var i, z, filter, filter_config;
       if (Util.isob(media) && Util.isob(referenced) && media.filters) {
@@ -548,6 +648,9 @@ var Mash = {
         }
       }
   },
+  //
+  
+  //
   urls_for_video_clip: function(clip, media, range, quantize, resources){
     if (! resources) resources = {};
     var add_one_frame = (range.frames > 1);
@@ -576,6 +679,9 @@ var Mash = {
     }
     return resources;
   },
+  //
+  
+  //
   urls_of_type: function(urls_by_type, avb){
     var urls = {};
     var type, url, add_type;
@@ -597,6 +703,9 @@ var Mash = {
     }
     return urls;
   },
+  //
+  
+  //
   visual_clips: function(mash){
     var track, i, z, clips = [];
     z = mash.video.length;

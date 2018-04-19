@@ -10,6 +10,8 @@ var Action = function(player, redo_func, undo_func, destroy_func){
   this.undo_add_objects = [];
   this.redo_delete_objects = [];
 };
+
+
 (function(pt){
   pt.redo = function(){
     this.player.add_media(this.redo_add_objects);

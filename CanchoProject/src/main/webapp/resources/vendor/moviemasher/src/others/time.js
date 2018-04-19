@@ -3,10 +3,12 @@ var TimeRange = function(start, rate, duration){
   if (rate) this.fps = Number(rate) || 0;
   if (duration) this.frames = Math.max(1, Number(duration));
 };
+
 TimeRange.fromTimes = function(start, end) {
   start.synchronize(end);
   return new TimeRange(start.frame, start.fps, Math.max(1, end.frame - start.frame));
 };
+
 TimeRange.fromSeconds = function(seconds, rate, rounding) {
   if (! rounding) rounding = 'round';
   if (! rate) rate = 1;
@@ -34,6 +36,7 @@ TimeRange.fromSomething = function(something){
   }
   return something;
 };
+
 (function(pt){
   pt.frames = 0;
   pt.frame = 0;
