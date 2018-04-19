@@ -33,6 +33,8 @@ import lets.eat.cancho.comment.vo.Comment;
 import lets.eat.cancho.common.util.FileService;
 import lets.eat.cancho.post.dao.PostDAO;
 import lets.eat.cancho.post.vo.Post;
+import lets.eat.cancho.user.dao.UserDAO;
+import lets.eat.cancho.user.vo.Blog_Profile;
 
 @Controller
 @RequestMapping(value="post")
@@ -45,9 +47,13 @@ public class PostController {
 	@Autowired
 	CommentDAO commentDAO;
 	
+	@Autowired
+	UserDAO userDAO;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	final String uploadPath = "/postfile";
+	final String uploadPath2 = "/profilePicture";
 	
 	@RequestMapping(value="writePost", method=RequestMethod.GET)
 	public String writePost(HttpSession session){
@@ -185,6 +191,39 @@ public class PostController {
 	      }
 	      
 	      String fullPath = uploadPath + "/" + post.getSavedfile();
+	      
+	      FileInputStream fis = null; 
+	      ServletOutputStream sos = null;
+	      
+	      try{
+	         fis = new FileInputStream(fullPath);
+	         sos = response.getOutputStream(); 
+	         
+	         FileCopyUtils.copy(fis, sos); 
+	         
+	         fis.close();
+	         sos.close();
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	   }
+	
+	/*프사 다운로드*/
+	@RequestMapping(value="downloadPic", method=RequestMethod.GET)
+	   public void downloadPic(String user_id, HttpServletResponse response){
+		
+		  Blog_Profile profile = userDAO.readProfile(user_id);
+	 
+	      String originalfile = profile.getP_originalfile();
+	      
+	      try{
+	         response.setHeader("Content-Disposition", "attachment;filename="
+	               + URLEncoder.encode(originalfile, "UTF-8"));
+	      } catch (UnsupportedEncodingException e) {
+	         e.printStackTrace();
+	      }
+	      
+	      String fullPath = uploadPath2 + "/" + profile.getP_savedfile();
 	      
 	      FileInputStream fis = null; 
 	      ServletOutputStream sos = null;
