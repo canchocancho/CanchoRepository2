@@ -25,4 +25,10 @@ public interface UserMapper {
 	
 	//프로필 정보 등록
 	public int writeProfile(Blog_Profile profile);
+	
+	//프로필 정보 조회
+	public Blog_Profile readProfile(String user_id);
+	
+	//프로필 정보 수정
+	public int updateProfile(Blog_Profile profile);
 }

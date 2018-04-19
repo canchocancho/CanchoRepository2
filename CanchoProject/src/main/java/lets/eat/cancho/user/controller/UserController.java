@@ -1,10 +1,6 @@
 package lets.eat.cancho.user.controller;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
@@ -26,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lets.eat.cancho.common.util.FileService;
-import lets.eat.cancho.post.vo.Post;
 import lets.eat.cancho.user.dao.UserDAO;
 import lets.eat.cancho.user.vo.Blog_Profile;
 import lets.eat.cancho.user.vo.Blog_User;
@@ -84,6 +79,17 @@ public class UserController {
 						session.setAttribute("loginId", vo.getUser_id());	// 로그인 성공시 User ID를 Session에 저장
 						session.setAttribute("loginName", vo.getUser_name());
 						session.setAttribute("loginEmail", vo.getUser_email());
+						
+						//로그인에 성공하면 그 즉시 자동으로 프로필을(있는 경우에) 불러온다
+						logger.info("프로필 불러오기 시작");
+						Blog_Profile user_profile = null;
+						user_profile = dao.readProfile(vo.getUser_id());
+						
+						//프로필을 등록한 유저일 경우 세션으로 들고 다니기
+						if(user_profile != null){
+							session.setAttribute("profile", user_profile);
+						}
+						
 				    	return "redirect:/post/postList";
 				    	 
 				      } else {
@@ -307,47 +313,63 @@ public class UserController {
 	@RequestMapping(value="saveProfile", method=RequestMethod.POST)
 	public String saveData(Blog_Profile profile,HttpSession session, Model model, MultipartFile upload){
 		
-		logger.info("saveProfile");
+		//최초저장인지 수정인지 판별해야 함
+		Blog_Profile searchProfile = dao.readProfile(profile.getUser_id());
 		
-        Date date = new Date(); 
-        SimpleDateFormat simpleDate = new SimpleDateFormat("_yyMMdd_hhmmss_");
-        String finalDate = simpleDate.format(date);
+		//최초저장일 경우
+		if(searchProfile == null){
+			logger.info("saveProfile");
 
-		//String loginId = (String)session.getAttribute("loginId");	
-        String loginId = (String)session.getAttribute("loginId");
-        System.out.println(loginId);
-        String randomName = loginId+finalDate+Math.random();
-        String fileName = "C:\\canchocancho\\"+randomName+".txt";
-        
-  /*      Post post = new Post();
-        post.setPost_title(post_title);
-        post.setPost_file(fileName);
-        post.setUser_id(loginId);*/
-        
-        Blog_Profile profile1 = new Blog_Profile();
-       profile1 = profile;
-
-        if(!upload.isEmpty()){
-			//첨부파일이 있는 경우
-			//Post 객체에 originalFileName과 savedfileName을 저장
-			String savedfile = FileService.saveFile(upload, uploadPath); //저장된 파일명
-			profile1.setP_savedfile(savedfile);
-			profile1.setP_originalfile(upload.getOriginalFilename());
-		}
-        
-		int result = dao.writeProfile(profile1);
-		
-		if(result != 1){
-			//등록실패
-			model.addAttribute("errorMsg", "오류가 발생했습니다.");
-			logger.info("포스팅 실패");
+	        if(!upload.isEmpty()){
+				//첨부파일이 있는 경우
+				//Post 객체에 originalFileName과 savedfileName을 저장
+				String savedfile = FileService.saveFile(upload, uploadPath); //저장된 파일명
+				profile.setP_savedfile(savedfile);
+				profile.setP_originalfile(upload.getOriginalFilename());
+			}
+	        
+			int result = dao.writeProfile(profile);
 			
-			return "user/editProfile";
+			if(result != 1){
+				//등록실패
+				model.addAttribute("errorMsg", "오류가 발생했습니다.");
+				logger.info("프로필 저장 실패");
+				
+				return "user/editProfile";
+			}
+			
+			logger.info("프로필 저장 종료");
+			session.setAttribute("profile", profile);
+
+			return "user/myPage";
 		}
 		
-		logger.info("포스팅 종료");
-
-		return "user/myPage";
+		//수정일 경우
+		else {
+			logger.info("updateProfile");
+			
+	        if(!upload.isEmpty()){
+				//첨부파일이 있는 경우
+				//Post 객체에 originalFileName과 savedfileName을 저장
+				String savedfile = FileService.saveFile(upload, uploadPath); //저장된 파일명
+				profile.setP_savedfile(savedfile);
+				profile.setP_originalfile(upload.getOriginalFilename());
+			}
+	        
+	        int result = dao.updateProfile(profile);
+	        
+	        if(result != 1){
+	        	model.addAttribute("errorMsg", "오류가 발생했습니다.");
+	        	logger.info("프로필 업데이트 실패");
+	        	
+	        	return "user/editProfile";
+	        }
+	        
+	        logger.info("프로필 수정 종료");
+	        session.setAttribute("profile", profile);
+	        
+	        return "user/myPage";
+		}
 	}
 	
 	

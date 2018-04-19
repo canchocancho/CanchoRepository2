@@ -113,5 +113,35 @@
 			</if>
 			) 
 	</insert>
+	
+	<!-- 프로필 정보 불러오기 -->
+	<select id="readProfile" parameterType="String" resultType="profile">
+		select
+			*
+		from
+			blog_profile
+		where
+			user_id = #{user_id}
+	</select>
+	
+	<!-- 프로필 수정 -->
+	<update id="updateProfile" parameterType="profile">
+		update
+			blog_profile
+		set
+			p_birthDate = #{p_birthDate}
+			,p_sex = #{p_sex}
+			,p_city = #{p_city}
+			,p_country = #{p_country}
+			,p_company = #{p_company}
+			,p_school = #{p_school}
+			,p_introduce = #{p_introduce}
+			<if test="p_originalfile != null and p_savedfile != null">
+			,p_originalfile = #{p_originalfile}
+			,p_savedfile = #{p_savedfile}
+			</if>
+		where
+			user_id = #{user_id}
+	</update>
 	 
 </mapper>

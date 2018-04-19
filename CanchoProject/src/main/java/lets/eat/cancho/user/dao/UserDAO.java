@@ -146,5 +146,42 @@ public class UserDAO {
 		
 		return result;
 	}
+	
+	//프로필 정보 불러오기
+	public Blog_Profile readProfile(String user_id){
+		logger.info("프로필 불러오기 시작");
+		
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		Blog_Profile result = null;
+		
+		try{
+			result = mapper.readProfile(user_id);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("프로필 불러오기 종료");
+		
+		return result;
+	}
+	
+	//프로필 수정
+	public int updateProfile(Blog_Profile profile){
+		logger.info("프로필 수정 시작");
+		
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int result = 0;
+		
+		try{
+			result = mapper.updateProfile(profile);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("프로필 수정 종료");
+		
+		return result;
+	}
 
 }

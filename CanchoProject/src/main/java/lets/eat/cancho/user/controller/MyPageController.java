@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import lets.eat.cancho.friend.dao.FriendDAO;
 import lets.eat.cancho.friend.vo.Friend;
@@ -34,7 +33,7 @@ public class MyPageController {
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 	
 	@RequestMapping(value="myPage", method = RequestMethod.GET)
-	public String loginPage(){
+	public String myPage(HttpSession session){
 		logger.info("마이페이지 이동 시작");
 		logger.info("마이페이지 이동 종료");
 		return "user/myPage";

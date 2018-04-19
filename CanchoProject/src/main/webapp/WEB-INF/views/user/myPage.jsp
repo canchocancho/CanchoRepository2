@@ -181,46 +181,61 @@
 
             </div>
             <div class="col-md-7">
-
+				
+				
+			<c:if test="${sessionScope.profile != null }">
               <!-- About
               ================================================= -->
               <div class="about-profile">
                 <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Personal Information</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur</p>
+                  <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Who am I?</h4>
+                  <p>${sessionScope.profile.p_introduce }</p>
                 </div>
                 <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Work Experiences</h4>
+                  <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>My Profile</h4>
                   <div class="organization">
                     <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
                     <div class="work-info">
-                      <h5>Envato</h5>
-                      <p>Seller - <span class="text-grey">1 February 2013 to present</span></p>
+                      <h5>Sex</h5>
+                      <p>${sessionScope.profile.p_sex }</p>
                     </div>
                   </div>
                   <div class="organization">
                     <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
                     <div class="work-info">
-                      <h5>Envato</h5>
-                      <p>Seller - <span class="text-grey">1 February 2013 to present</span></p>
+                      <h5>Birthday</h5>
+                      <p>${sessionScope.profile.p_birthDate }</p>
                     </div>
                   </div>
                   <div class="organization">
                     <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
                     <div class="work-info">
-                      <h5>Envato</h5>
-                      <p>Seller - <span class="text-grey">1 February 2013 to present</span></p>
+                      <h5>Email</h5>
+                      <p>${sessionScope.profile.user_email }</p>
+                    </div>
+                  </div>
+                  <div class="organization">
+                    <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
+                    <div class="work-info">
+                      <h5>My Work</h5>
+                      <p>${sessionScope.profile.p_company }</p>
+                    </div>
+                  </div>
+                  <div class="organization">
+                    <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
+                    <div class="work-info">
+                      <h5>My School</h5>
+                      <p>${sessionScope.profile.p_school }</p>
                     </div>
                   </div>
                 </div>
                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Location</h4>
-                  <p>228 Park Eve, New York</p>
-                  <div class="google-maps">
-                    <div id="map" class="map"></div>
-                  </div>
+                  <p>${sessionScope.profile.p_city }, ${sessionScope.profile.p_country }</p>
                 </div>
-                <div class="about-content-block">
+                
+                
+<!--                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-ios-heart-outline icon-in-title"></i>Interests</h4>
                   <ul class="interests list-inline">
                     <li><span class="int-icons" title="Bycycle riding"><i class="icon ion-android-bicycle"></i></span></li>
@@ -236,8 +251,21 @@
                       <li><a href="">Russian</a></li>
                       <li><a href="">English</a></li>
                     </ul>
+                </div> -->
+                
+                
+              </div>
+              </c:if>
+              
+              <c:if test="${sessionScope.profile == null }">
+              <div class="about-profile">
+                <div class="about-content-block">
+                  <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Who am I?</h4>
+                  <p>Please update your profile:)</p>
                 </div>
               </div>
+              </c:if>
+              
             </div>
             <div class="col-md-2 static">
               <div id="sticky-sidebar">

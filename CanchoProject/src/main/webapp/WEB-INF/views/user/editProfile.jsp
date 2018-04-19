@@ -24,6 +24,38 @@
     
     <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="../resources/images/fav.png"/>
+    
+    <script type="text/javascript">
+		<c:if test ="${errorMsg != null}">
+			alert("${errorMsg}")
+		</c:if>
+			
+		function formCheck(){
+			var p_birthDate = document.getElementById("p_birthDate");
+			var p_city = document.getElementById("p_city");
+			var p_country = document.getElmentById("p_country");
+			
+			if(p_birthDate.value == ''){
+				alert('생년월일을 입력하세요.');
+				p_birthDate.focus();
+				return false;
+			}
+			
+			if(p_city.value == ''){
+				alert('도시를 입력하세요.');
+				p_city.focus();
+				return false;
+			}
+			
+			if(p_country.value == ''){
+				alert("나라를 입력하세요.");
+				p_country.focus();
+				return false;
+			}
+
+			return true;
+		}
+    </script>
 	</head>
   <body>
 
@@ -134,7 +166,7 @@
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li><a href="../post/postList">Timeline</a></li>
-                  <li><a href="timeline-about.html" class="active">About</a></li>
+                  <li><a href="myPage" class="active">About</a></li>
                   <li><a href="timeline-album.html">Album</a></li>
                   <li><a href="timeline-friends.html">Friends</a></li>
                 </ul>
@@ -186,16 +218,16 @@
                 <div class="block-title">
                   <h4 class="grey"><i class="icon ion-android-checkmark-circle"></i>Edit basic information</h4>
                   <div class="line"></div>
-                  <p>save your personal information.</p>
+                  <p>Save your personal information.</p>
                   <div class="line"></div>
                 </div>
                 <div class="edit-block">
-                  <form action="saveProfile" method="post" name="basic-info" id="basic-info" class="form-inline" enctype="multipart/form-data">
+                  <form action="saveProfile" method="post" name="basic-info" id="basic-info" class="form-inline" enctype="multipart/form-data" onsubmit="return formCheck();">
+                    <input type="hidden" id="user_id" name="user_id" value="${user.user_id }">
                     <div class="row">
                       <div class="form-group col-xs-12">
                         <label for="firstname">My name</label>
                         <input class="form-control input-group-lg" type="text" title="Enter first name" placeholder="First name" readonly="readonly" value="${user.user_name }"/>
-                        <input type="hidden" id="user_id" name="user_id" value="${user.user_id }">
                       </div>
                     </div>
                     <div class="row">
@@ -204,13 +236,20 @@
                         <input id="user_email" class="form-control input-group-lg" type="text" name="user_email" title="Enter Email" placeholder="My Email" readonly="readonly" value="${user.user_email}" />
                       </div>
                     </div>
+                    
+                    
+                    
+                    
+                    <!-- 등록한 프로필이 있음 -->
+                    <c:if test="${profile != null }">
+                    
                     <div class="row">
-                      <p class="custom-label"><strong>Date of Birth</strong></p>
-                      <div class="form-group col-xs-12">
+                    	<div class="form-group col-xs-12">
+                      <label for="my-company">Date of Birth<span style="color: red">*</span></label>
                         <label for="month" class="sr-only"></label>
-                        <input id="p_birthDate" class="form-control input-group-lg" type="text" name="p_birthDate" title="Enter birthdate" placeholder="YYYY-MM-DD"/>
+                        <input id="p_birthDate" class="form-control input-group-lg" type="text" name="p_birthDate" title="Enter birthdate" placeholder="YYYY-MM-DD" autocomplete="off" value="${profile.p_birthDate }"/>
                       </div>
-                     
+                     </div>
                     <div class="form-group gender">
                       <span class="custom-label"><strong>I am a: </strong></span>
                       <label class="radio-inline">
@@ -222,24 +261,73 @@
                     </div>
                     <div class="row">
                       <div class="form-group col-xs-6">
-                        <label for="city"> My city</label>
-                        <input id="p_city" class="form-control input-group-lg" type="text" name="p_city" title="Enter city" placeholder="Your city"/>
+                        <label for="city">My city<span style="color: red">*</span></label>
+                        <input id="p_city" class="form-control input-group-lg" type="text" name="p_city" title="Enter city" placeholder="Your city" autocomplete="off" value="${profile.p_city }"/>
                       </div>
                       <div class="form-group col-xs-6">
-                        <label for="country">My country</label>
-                        <input id="p_country" class="form-control input-group-lg" type="text" name="p_country" title="Enter city" placeholder="Your country"/>
+                        <label for="country">My country<span style="color: red">*</span></label>
+                        <input id="p_country" class="form-control input-group-lg" type="text" name="p_country" title="Enter city" placeholder="Your country" autocomplete="off" value="${profile.p_country }"/>
                       </div>
                     </div>
                        <div class="row">
                       <div class="form-group col-xs-12">
                         <label for="my-company">My company</label>
-                        <input id="p_company" class="form-control input-group-lg" type="text" name="p_company" title="Enter company" placeholder="Your company"/>
+                        <input id="p_company" class="form-control input-group-lg" type="text" name="p_company" title="Enter company" placeholder="Your company" autocomplete="off" value="${profile.p_company }"/>
                       </div>
                     </div>
                     <div class="row">
                       <div class="form-group col-xs-12">
                         <label for="my-school">My school</label>
-                        <input id="p_school" class="form-control input-group-lg" type="text" name="p_school" title="Enter school" placeholder="Your school"/>
+                        <input id="p_school" class="form-control input-group-lg" type="text" name="p_school" title="Enter school" placeholder="Your school" autocomplete="off" value="${profile.p_school }"/>
+                      </div> 
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12">
+                        <label for="my-info">About me</label>
+                        <textarea id="p_introduce" name="p_introduce" class="form-control" placeholder="Some texts about me" rows="4" cols="400">${profile.p_introduce }</textarea>
+                      </div>
+                    </div>
+                    </c:if>
+
+
+				<!-- 등록한 프로필이 없음 -->
+				<c:if test="${profile == null }">
+                    <div class="row">
+                    	<div class="form-group col-xs-12">
+                      <label for="my-company">Date of Birth<span style="color: red">*</span></label>
+                        <label for="month" class="sr-only"></label>
+                        <input id="p_birthDate" class="form-control input-group-lg" type="text" name="p_birthDate" title="Enter birthdate" placeholder="YYYY-MM-DD" autocomplete="off" value=""/>
+                      </div>
+                     </div>
+                    <div class="form-group gender">
+                      <span class="custom-label"><strong>I am a: </strong></span>
+                      <label class="radio-inline">
+                        <input type="radio" id="p_sex" name="p_sex" value="Male" checked>Male
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" id="p_sex" name="p_sex" value="Female">Female
+                      </label>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-6">
+                        <label for="city">My city<span style="color: red">*</span></label>
+                        <input id="p_city" class="form-control input-group-lg" type="text" name="p_city" title="Enter city" placeholder="Your city" autocomplete="off"/>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label for="country">My country<span style="color: red">*</span></label>
+                        <input id="p_country" class="form-control input-group-lg" type="text" name="p_country" title="Enter city" placeholder="Your country" autocomplete="off"/>
+                      </div>
+                    </div>
+                       <div class="row">
+                      <div class="form-group col-xs-12">
+                        <label for="my-company">My company</label>
+                        <input id="p_company" class="form-control input-group-lg" type="text" name="p_company" title="Enter company" placeholder="Your company" autocomplete="off"/>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12">
+                        <label for="my-school">My school</label>
+                        <input id="p_school" class="form-control input-group-lg" type="text" name="p_school" title="Enter school" placeholder="Your school" autocomplete="off"/>
                       </div> 
                     </div>
                     <div class="row">
@@ -248,14 +336,15 @@
                         <textarea id="p_introduce" name="p_introduce" class="form-control" placeholder="Some texts about me" rows="4" cols="400"></textarea>
                       </div>
                     </div>
+                  </c:if>  
+                    
+                    
                     <div class="row">
                       <div class="form-group col-xs-12">
                         <label for="uploadPicture">My picture</label>
                         <input type="file" name="upload">
                       </div>
                     </div>
-                   
-                    
                     <input type="submit" class="btn btn-primary" value="Save Changes">
                   </form>
                 </div>
