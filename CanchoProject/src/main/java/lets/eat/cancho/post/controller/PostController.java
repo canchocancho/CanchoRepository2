@@ -120,6 +120,9 @@ public class PostController {
 		
 		ArrayList<Post> postList = dao.postList();
 		model.addAttribute("postList", postList);
+		
+		ArrayList<Comment> commentList = commentDAO.commentList();
+		model.addAttribute("commentList", commentList);
 	
 		return "post/postList";
 	}

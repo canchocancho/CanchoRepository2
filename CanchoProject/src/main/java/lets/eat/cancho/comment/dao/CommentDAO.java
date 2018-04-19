@@ -18,20 +18,23 @@ public class CommentDAO {
 	@Autowired
 	SqlSession session;
 	
-	public void insertComment(Comment comment){
+	public int insertComment(Comment comment){
 		
 		logger.info("댓글 달기 시작");
+		int result = 0;
 		
 		CommentMapper mapper = session.getMapper(CommentMapper.class);
 		
 		try{
-			mapper.insertComment(comment);
+			result = mapper.insertComment(comment);
 			
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		logger.info("댓글 달기 종료");
+		
+		return result;
 	}
 	
 	public ArrayList<Comment> readComment(int post_num){
@@ -83,6 +86,24 @@ public class CommentDAO {
 		}
 		
 		logger.info("댓글 수정 완료");
+	}
+	
+	public ArrayList<Comment> commentList(){
+		logger.info("댓글 전체 불러오기 시작");
+		
+		CommentMapper mapper = session.getMapper(CommentMapper.class);
+		ArrayList<Comment> list = null;
+		
+		try{
+			list = mapper.commentList();
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("댓글 전체 불러오기 완료");
+		
+		return list;
 	}
 	
 	

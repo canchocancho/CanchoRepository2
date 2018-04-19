@@ -39,7 +39,7 @@ CREATE TABLE blog_friend
 -- comment table
 CREATE TABLE blog_comment
 (
-    comment_num      INT              NOT NULL, 
+    comment_num     INT              NOT NULL, 
     post_num        INT              NOT NULL, 
     comment_text    VARCHAR2(300)    NOT NULL, 
     user_id         VARCHAR2(45)     NOT NULL, 

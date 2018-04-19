@@ -51,4 +51,13 @@
 			comment_num = #{comment_num}
 	</update>
 	
+	<select id="commentList" resultType="Comment">
+		select
+			*
+		from
+			blog_comment
+		order by
+			comment_num
+	</select>
+	
 </mapper>

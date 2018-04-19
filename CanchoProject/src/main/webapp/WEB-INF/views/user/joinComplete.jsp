@@ -123,7 +123,7 @@
           <img src="../resources/images/welcome.png" alt="" class="img-responsive" style="width: 500px;"/>
           <div class="error-message">
           	<h1 class="error-title">Thanks:)</h1>
-          	<p>Please enjoy all of our services.</p>
+          	<p>Please check your email to use all of our services.</p>
           </div>
           <br>
           <a href="loginPage"><button class="btn btn-primary">Login</button></a>

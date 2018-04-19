@@ -14,4 +14,6 @@ public interface CommentMapper {
 	
 	public int updateComment(Comment comment);
 
+	public ArrayList<Comment> commentList();
+	
 }
