@@ -130,13 +130,13 @@ public class ImageFileManager {
 		Thread thread = new Thread(() -> {
 			
 			System.out.println("Dddddddddddddd" + fileName + "  " + ffid);
-			String originP = "c:\\canchov\\temp\\";
+			String originP = "c:\\tomolog\\temp\\";
 			String originPath = originP + fileName + ".mp4";
 			Runtime run = Runtime.getRuntime();
 			System.out.println("야!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + originPath);
 			//int a = VideoInfo.getVideoFrameRate(originPath);
 			//System.out.println("이미지 자릿수 : " + a);
-			File dir = new File("c:\\canchov\\extract\\" + ffid +"\\");
+			File dir = new File("c:\\tomolog\\extract\\" + ffid +"\\");
 			
 			//File dir = new File("c:\\freemiere\\videoExtract\\");
 			//String pathpath = "C:\\Users\\Mintcho_o\\Desktop\\DOING\\pika2.mp4";
