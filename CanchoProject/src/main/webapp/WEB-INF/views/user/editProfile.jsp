@@ -127,7 +127,7 @@
               <div class="col-md-3">
                 <div class="profile-info">
                   <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
-                  <h3>Sarah Cruiz</h3>
+                  <h3>${sessionScope.loginName }</h3>
                   <p class="text-muted">Creative Director</p>
                 </div>
               </div>
@@ -174,7 +174,7 @@
               	<li><i class="icon ion-ios-information-outline"></i><a href="myPage">Basic Information</a></li>
               	<li><i class="icon ion-ios-briefcase-outline"></i><a href="edit-profile-work-edu.html">Education and Work</a></li>
               	<li><i class="icon ion-ios-heart-outline"></i><a href="edit-profile-interests.html">My Interests</a></li>
-                <li class="active"><i class="icon ion-ios-settings"></i><a href="edit-profile-settings.html">Profile Update</a></li>
+                <li class="active"><i class="icon ion-ios-settings"></i><a href="">Profile Update</a></li>
               	<li><i class="icon ion-ios-locked-outline"></i><a href="updateInfo">Change Information</a></li>
               </ul>
             </div>

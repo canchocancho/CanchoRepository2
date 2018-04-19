@@ -184,7 +184,7 @@
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
               <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
-              <h4>Sarah Cruiz</h4>
+              <h4>${sessionScope.loginName }</h4>
               <p class="text-muted">Creative Director</p>
             </div>
             <div class="mobile-menu">
