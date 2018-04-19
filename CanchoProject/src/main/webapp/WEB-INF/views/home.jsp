@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery-3.2.1.js"></script>
 
     <!-- Stylesheets
     ================================================= -->
@@ -36,20 +37,14 @@
 		</c:if>
 			
 			$(function(){
-				/* //ID중복체크
+				//ID중복체크
 				$('#btn1').on('click', function(){
-					var id = $('#user_id').val();
-					
-					if(id.length == 0){
-						alert("체크할 아이디를 입력하세요.");
-						return false;
-					}
-					
+					alert("누름");
 					$.ajax({
 						url : "idCheck",
 						type : "get",
 						data : {
-							id : id
+							id : user_id
 						},
 						success : function(obj){
 							if(obj){
@@ -64,7 +59,7 @@
 							console.log(err);
 						}
 					});
-				}); */
+				});
 				
 				//유효성 검사
 				$('#joinForm').on('submit',function(){
@@ -207,6 +202,7 @@
 						<form action="user/join" method="post" id="joinForm">
 							<fieldset class="form-group">
 								<input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter id" autocomplete="off">
+								<input type="button" id="btn1" name="btn1" value="check">
 							</fieldset>
 							<fieldset class="form-group">
 								<input type="password" class="form-control" id="user_password" name="user_password" placeholder="Enter a password">
@@ -488,6 +484,8 @@
 				<li><a href="user/myPage">마이페이지</a></li>
 			</c:otherwise>
 		</c:choose>
+		
+		<div id="idCheckResult"></div>
 		
 		
 		
