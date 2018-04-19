@@ -2,6 +2,8 @@ package lets.eat.cancho.comment.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +12,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lets.eat.cancho.comment.dao.CommentDAO;
 import lets.eat.cancho.comment.vo.Comment;
+import lets.eat.cancho.user.controller.UserController;
 
 @Controller
 @RequestMapping(value="post")
 @SessionAttributes("post")
 public class CommentController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
 	CommentDAO dao;
@@ -22,12 +27,16 @@ public class CommentController {
 	@RequestMapping(value="insertComment", method=RequestMethod.POST)
 	public String insertComment(HttpSession session, Comment comment){
 		
+		logger.info("댓글 작성 시작");
+
 		String user_id = (String) session.getAttribute("loginId");
 		comment.setUser_id(user_id);
 		
 		dao.insertComment(comment);
+
+		logger.info("댓글 작성 종료");
 		
-		return "redirect:readOnePost?post_num="+comment.getPost_num();
+		return "redirect:/post/postList";
 	}
 	
 	@RequestMapping(value="deleteComment", method=RequestMethod.GET)
@@ -45,5 +54,5 @@ public class CommentController {
 		
 		return "redirect:readOnePost?post_num="+comment.getPost_num();
 	}
-
+	
 }

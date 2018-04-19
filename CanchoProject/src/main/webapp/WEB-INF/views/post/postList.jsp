@@ -25,6 +25,24 @@
     
     <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="../resources/images/fav.png">
+    
+		<script type="text/javascript">
+		
+			<c:if test="${errorMsg != null }">
+				alert('${errorMsg }');
+			</c:if>
+			
+			//유효성 검사
+			function formCheck(){
+				var comment_text = document.getElementById('comment_text');
+				
+				if (comment_text.value == "") {
+					alert("댓글 내용을 입력하세요.");
+					return false;
+				}
+			}
+		</script>
+
 	</head>
 	<body>
 
@@ -206,7 +224,6 @@
                 <!--Post Date-->
                 <div class="post-date hidden-xs hidden-sm">
                   <h5>${post.user_id }</h5>
-                  <p class="text-grey">Sometimes ago</p>
                 </div><!--Post Date End-->
 
                 <img src="download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
@@ -226,18 +243,35 @@
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
                     </div>
                     <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm">
-                      <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
+                    
+                    <c:forEach items="${commentList }" var="comment">
+						<c:if test="${post.post_num == comment.post_num }">
+							<div class="post-comment">
+	                     	 <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm">
+	                     	 <p><a href="timeline.html" class="profile-link">${comment.user_id }</a> ${comment.comment_text }</p>
+							</div>
+						</c:if>
+                    </c:forEach>
+                    
+                    <!-- 
+                      <div class="post-comment">
                       <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm">
                       <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
                     </div>
                     <div class="post-comment">
                       <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm">
                       <input type="text" class="form-control" placeholder="Post a comment">
+                    </div> -->
+                    
+                    <!-- 댓글 달기 -->
+                    <form id="replyForm" action="insertComment" method="post" onsubmit="return formCheck();">
+                    <div class="post-comment">
+                      <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm">   		
+							<input type="hidden" name="post_num" id="post_num" value="${post.post_num }">
+							<input type="text" class="form-control" name="comment_text" id="comment_text" placeholder="Post a comment" autocomplete="off">
+							<input type="submit" value="Write" class="btn btn-primary">
                     </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -246,56 +280,7 @@
 			</c:if>
               
               
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-            
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
+     
               
 <%-- 
               <!-- Post Content

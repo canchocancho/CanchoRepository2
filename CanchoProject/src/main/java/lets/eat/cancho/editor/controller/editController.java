@@ -16,6 +16,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -27,6 +28,7 @@ import lets.eat.cancho.editor.util.test;
 /**
  * Handles requests for the application home page....
  */
+
 @Controller
 public class editController {
 	
@@ -45,7 +47,7 @@ public class editController {
 	
 	@RequestMapping(value = "/editor", method = RequestMethod.GET)
 	public String home() {
-		return "home";
+		return "videoEditor/editor";
 	}
 	
 	@ResponseBody
