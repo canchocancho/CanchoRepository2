@@ -519,8 +519,6 @@
 				<input type="button" id="save" name="save" onclick="save();" value="저장" style="float: left;"/>
   			</div>
   			
-  		<!-- 미리 -->
-  
   		<div id="firepad">
   
 	  		<!-- 히든폼 -->
