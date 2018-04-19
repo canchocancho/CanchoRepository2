@@ -1,7 +1,9 @@
 var Util = {
+		
   array_empty: function(array){
     while(array.length > 0) array.pop();
   },
+  
   array_add: function(array, value){
     var pos;
     if (array && Util.isarray(array)) {
@@ -9,9 +11,11 @@ var Util = {
       if (-1 === pos) array.push(value);
     }
   },
+  
   array_key: function(array, value, key, id_key){
     return Util.array_find(array, value, id_key)[key];
   },
+
   array_find: function(array, value, key){
     var item = null, i, z;
     if (array && Util.isarray(array)) {
@@ -28,6 +32,7 @@ var Util = {
     }
     return item;
   },
+  
   array_delete: function(array, value){
     var index;
     if (Util.isarray(array)){
@@ -35,6 +40,7 @@ var Util = {
       if (-1 < index) array.splice(index, 1);
     }
   },
+  
   array_delete_ref: function(array, value, key){
     var ob, index = -1;
     if (Util.isarray(array)){
@@ -46,6 +52,7 @@ var Util = {
     }
     return index;
   },
+  
   array_replace: function(array, value, key){
     var index = this.array_delete_ref(array, value, key);
     if (-1 < index) array.splice(index, 0, value);
@@ -190,11 +197,13 @@ var Util = {
     }
     return match;
   },
+  
   ob_keys: function(ob){
     var key, array = [];
     if (Util.isob(ob)) for (key in ob) array.push(key);
     return array;
   },
+  
   ob_property: function(ob, prop) {
     var i, z, val = null;
     if (Util.isob(ob) && (! Util.isnt(prop)) && prop.length) {
@@ -211,20 +220,24 @@ var Util = {
     }
     return val;
   },
+  
   ob_values: function(ob){
     var key, array = [];
     if (Util.isob(ob)) for (key in ob) array.push(ob[key]);
     return array;
   },
+  
   pad: function(n, width, z) {
     z = z || '0';
     n = String(n);
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
   },
+  
   pluralize: function(n, s){
     if (n !== 1) s += 's';
     return s;
   },
+  
   set_ob_property: function(ob, prop, val) {
     var i, z;
     if (Util.isob(ob) && (! Util.isnt(prop)) && prop.length) {
@@ -240,6 +253,7 @@ var Util = {
       if (ob) ob[prop[i]] = val;
     }
   },
+  
   sort_by_frame: function(clip1, clip2) {
     return (clip1.frame - clip2.frame) || (clip1.frames - clip2.frames);
   },

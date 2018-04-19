@@ -2,106 +2,20 @@
 /*global MovieMasher:true*/
 'use strict';
 var mm_player;
-function mm_update_textarea() {
-  var textarea = document.getElementById('mm-textarea');
-  textarea.value = JSON.stringify(mm_player.mash, null, '\t');
-}
-function add_media(id){
-  var media = {
-    'title': {
-      "label": "Title",
-      "type": "theme",
-      "id": "com.moviemasher.theme.text",
-      "properties": {
-        "string": { "type": "string", "value": "Title" },
-        "size": { "type": "fontsize", "value": 0.2 },
-        "x": { "type": "number", "value": 0 },
-        "y": { "type": "number", "value": 0 },
-        "color": { "type": "rgba", "value": "rgba(255,255,255,1)" },
-        "shadowcolor": { "type": "rgba", "value": "rgba(0,0,0,0)" },
-        "shadowx": { "type": "number", "value": 0 },
-        "shadowy": { "type": "number", "value": 0 },
-        "background": { "type": "rgb", "value": "rgb(0,0,0)" },
-        "fontface": { "type": "font", "value": "com.moviemasher.font.default" }
-      },
-      "filters": [{
-        "id": "color",
-        "parameters":[{
-          "name": "color",
-          "value":"background"
-        },{
-          "name": "size",
-          "value":"mm_dimensions"
-        },{
-          "name": "duration",
-          "value":"mm_duration"
-        },{
-          "name": "rate",
-          "value":"mm_fps"
-        }]
-      },{
-        "id": "drawtext",
-        "parameters":[{
-          "name": "fontcolor",
-          "value":"color"
-        },{
-          "name": "shadowcolor",
-          "value":"shadowcolor"
-        },{
-          "name": "fontsize",
-          "value":"mm_vert(size)"
-        },{
-          "name": "x",
-          "value":"mm_horz(x)"
-        },{
-          "name": "y",
-          "value":"mm_vert(y)"
-        },{
-          "name": "shadowx",
-          "value":"mm_horz(shadowx)"
-        },{
-          "name": "shadowy",
-          "value":"mm_vert(shadowy)"
-        },{
-          "name": "fontfile",
-          "value":"mm_fontfile(fontface)"
-        },{
-          "name": "textfile",
-          "value":"mm_textfile(string)"
-        }]
-      }]
-    },
-    'cable': {
-      'label': 'Cable',
-      'type': 'image',
-      'id': 'cable',
-      'url': 'resources/vendor/moviemasher/app/media/img/cable.jpg'
-    },
-    'frog': {
-      'label': 'Frog',
-      'type': 'image',
-      'id': 'frog',
-      'url': 'resources/vendor/moviemasher/app/media/img/frog.jpg'
-    },
-    'globe': {
-      'label': 'Globe',
-      'type': 'image',
-      'id': 'globe',
-      'url': 'resources/vendor/moviemasher/app/media/img/globe.jpg'
-    }
-  };
-  if (mm_player) {
-    mm_player.add(media[id], 'video');
-    mm_update_textarea();
-  }
-}
+var mm_init_media;
+var videoTotalDuration = 0;
 
+/**
+ * MovieMasher Loader
+ * Body가 실행될 때 가장 먼저 같이 실행된다.
+ */
 function mm_load() {
-	  var canvas = document.getElementById('mm-canvas');
+	  var canvas = document.getElementById('mm-canvas')
 	  
 	  if (canvas && MovieMasher && MovieMasher.supported) {
 	    mm_player = MovieMasher.player();
-	    // register the filters we use
+	    
+	    // 필터 등록
 	    MovieMasher.register(MovieMasher.Constant.filter, [
 	      { "id":"color", "source": "resources/vendor/moviemasher/dist/filters/color.js" },
 	      { "id":"drawtext", "source": "resources/vendor/moviemasher/dist/filters/drawtext.js" },
@@ -109,7 +23,7 @@ function mm_load() {
 	      { "id":"scale", "source": "resources/vendor/moviemasher/dist/filters/scale.js" },
 	      { "id":"setsar", "source": "resources/vendor/moviemasher/dist/filters/setsar.js" }
 	    ]);
-	    // register at least a default font, since we're allowing a module that uses fonts
+	    // 폰트 등록
 	    MovieMasher.register(MovieMasher.Constant.font, {
 	      "label": "Blackout Two AM",
 	      "id":"com.moviemasher.font.default",
@@ -118,7 +32,140 @@ function mm_load() {
 	    });
 	    mm_player.canvas_context = canvas.getContext('2d');
 	    mm_player.mash = {};
-	    mm_update_textarea();
 	  }
+	  /*getMash();*/
+}
 
+function extract(){	
+	var zeroPlus = '';
+    $.ajax({
+   		url : 'extract',
+   		type : 'GET',
+   		success : function(url) {
+   			var duration = url.count/30
+   			var zeroCount = String(url.count.toString()).length;
+   			for(var i = 0; i <= zeroCount; i++){
+   				zeroPlus += '0';
+    		}
+    		var media = {
+    	    		'label': 'pika',
+   		    		'id': 'pika',
+   		    		'type': 'video', 
+   		    		'url': url.originPath,
+   		    		'fps': 30,
+   		    		'pattern':  (zeroPlus+'%.jpg'),
+    	    		'duration' : duration
+    	   };
+    		mm_player.add(media, 'video', videoTotalDuration , 0);
+    		/*isAudio ==*/
+    		if(true){
+    			   media = {
+    					      'label': 'pika',
+    					      'type': 'audio',
+    					      'id': 'pikaaudio',
+    					      'url': url.originPath + 'audio.mp3',
+    					      'duration': duration,
+    			  };
+    			   
+    			  mm_player.add(media, 'audio', videoTotalDuration , 0);
+    		   }
+    		  videoTotalDuration += duration;
+    		  //setMash();
+    		  outputVideoEditor();
+    		  videoSlider();
+    	},
+   		error : function(e) {
+   			alert("추출 실패");
+   		}
+   	});	
+ }
+
+function myHandler(){
+	if(document.getElementById('t-slider') != null &&
+	document.getElementById('player-slider') != null) {
+		document.getElementById('t-slider').value = mm_player.position;
+		document.getElementById('player-slider').value = mm_player.position;
+		
+		var videoTrackObjsCnt = $.makeArray($(".video-obj").map(function(){
+			//if($(this).attr('itemId').indexOf('transition') != -1) return -1 * ($(this).attr("frames"));
+		    return $(this).attr("frames");
+		}));
+		var maxValue = 0;
+		for(var j = 0; j < videoTrackObjsCnt.length; j++){
+			maxValue += Number(videoTrackObjsCnt[j]);
+		}
+		var trackArr= Object.keys(tracksDuration);
+		for(var i = 0; i < trackArr.length; i++){
+			if( tracksDuration[trackArr[i]] > maxValue )
+				maxValue = tracksDuration[trackArr[i]];
+		}
+		var time = maxValue * mm_player.position;
+		time = time.toFixed(2);
+		var tempTime = time + '';
+		var tempTimeSplited = tempTime.split('.');
+		var timeEnd = tempTimeSplited[1];
+		var timeSec = tempTimeSplited[0] * 1;
+		var timeStr = ' ';
+		function plusZero(time){
+			var t = time + '';
+			if(t.length == 2) return t;
+			else{
+				return '0' + t;
+			}
+		}
+		if (timeSec < 60) {
+			timeStr += '00:00:' + plusZero(timeSec) + ':';
+		} else if (timeSec < 3600){
+			timeStr += '00:' + plusZero(Math.floor(timeSec%3600/60)) + ':' + plusZero(timeSec%60) + ':';
+		} else {
+			timeStr += plusZero(Math.floor(timeSec/3600)) + ':' + plusZero(Math.floor(timeSec%3600/60)) + ':' + plusZero(timeSec%60) + ':';
+		}
+		timeStr += plusZero(timeEnd);
+		$('#time').text(timeStr);
+	}
+}
+
+function getMash(){
+	alert("getMash");
+	$.ajax({
+		url : 'getMash',
+		type : 'POST',
+		dataType : 'json',
+		success : function(item) {
+			mm_player.mash = eval("("+item.mash+")");
+			tracksDuration = eval("("+item.durations+")");
+			videoTotalDuration = item.videoDur * 1;
+			//otherObjNum = eval("("+item.otherObjNum+")");
+			//video0TrackobjNum = item.videoObjNum * 1;
+			
+			video0TrackRedraw();
+			var trackArr= Object.keys(tracksDuration);
+			for(var i = 0; i < trackArr.length; i++){
+				trackRedraw(trackArr[i]);
+			}	
+		},
+		error : function(e) {
+			console.log(e);
+		}
+	});	
+}
+
+function setMash(){
+	alert("setMash");
+	$.ajax({
+		url : 'setMash',
+		type : 'POST',
+		data : {
+			mash : JSON.stringify(mm_player.mash),
+			durations : JSON.stringify(tracksDuration),
+			videoDur : videoTotalDuration,
+			otherObjNum : otherObjNum,
+			videoObjNum : video0TrackobjNum
+		},
+		success : function() {
+		},
+		error : function(e) {
+			console.log(e);
+		}
+	});	
 }

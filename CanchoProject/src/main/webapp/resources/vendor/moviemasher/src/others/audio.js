@@ -1,13 +1,21 @@
 var Audio = {
+  
+  //1st
   buffer_source: function(buffer){
     var context = Audio.get_ctx();
     var source = context.createBufferSource(); // creates a sound source
     source.buffer = buffer;                    // tell the source which sound to play
     return source;
   },
+  //
+  
+  //2nd
   load: function(url){
     Loader.load_audio(url);
-  },
+  	},
+  //
+  
+  //3rd
   clip_timing: function(clip, zero_seconds, quantize) {
     if (isNaN(zero_seconds)) console.error('Audio.clip_timing got NaN for zero_seconds', clip);
     var now, dif, range, result = {offset: 0};
@@ -28,16 +36,22 @@ var Audio = {
       result.duration -= dif;
     }
     return result;
-  },
-  connect_source: function(source, start, offset, duration){
+  	},
+  //
+  	
+  //4th
+  	connect_source: function(source, start, offset, duration){
     var context = Audio.get_ctx();
     source.gainNode = context.createGain();
     source.buffer_source.connect(source.gainNode);
     source.gainNode.connect(context.destination);
     //console.log('Audio.connect_source', start, offset, duration);
     source.buffer_source.start(start, offset, duration);
-  },
-  config_gain: function(gainNode, gain, start, duration, volume){
+  	},
+  //
+  	
+  //5th
+  	config_gain: function(gainNode, gain, start, duration, volume){
     gainNode.cancelScheduledValues(0);
     var gain_val, time_per, i, z, gains;
     gains = gain.split(',');
@@ -48,6 +62,9 @@ var Audio = {
       gainNode[Constant.gain].linearRampToValueAtTime(gain_val, start + time_per * duration);
     }
   },
+  //
+  	
+  //6th
   destroy_sources: function(except_clips){
     var new_sources = [];
     var source, i, z = Audio.sources.length;
@@ -62,6 +79,9 @@ var Audio = {
     }
     Audio.sources = new_sources;
   },
+  //
+  
+  //7th
   disconnect_source: function(source){
     //console.log('Audio.disconnect_source', source);
     var context = Audio.get_ctx();
@@ -69,6 +89,9 @@ var Audio = {
     source.gainNode.disconnect(context.destination);
     delete source.gainNode;
   },
+  //
+  	
+  //8th
   get_ctx: function(){
     if (! Audio.ctx) {
       if (window.AudioContext) Audio.ctx = new window.AudioContext();
@@ -76,6 +99,9 @@ var Audio = {
     }
     return Audio.ctx;
   },
+  //
+  	
+  //9th
   gain_source: function(source){
     if (source){
       if (source.player.muted || !source.player.volume) {
@@ -89,6 +115,9 @@ var Audio = {
       }
     }
   },
+  //
+  	
+  //10th
   media_url: function(media){
     var url;
     switch(media.type){
@@ -112,6 +141,9 @@ var Audio = {
     }
     return url;
   },
+  //
+  
+  //11th
   start: function(){
     //console.log('Audio.start');
     var context = Audio.get_ctx();
@@ -121,6 +153,9 @@ var Audio = {
     Audio.__buffer_source.connect(context.destination);
     Audio.__buffer_source.start(0);
   },
+  //
+  
+  //12th
   stop: function(){
     //console.log('Audio.stop');
     Audio.destroy_sources();
@@ -129,9 +164,15 @@ var Audio = {
       Audio.__buffer_source = null;
     }
   },
+  //
+  
+  //13th
   source_for_clip: function(clip){
     return Util.array_find(Audio.sources, {clip: clip}, 'clip');
   },
+  //
+  
+  //14th
   source_from_clip: function(clip, media, player) {
     var quantize, times, source, url = Audio.media_url(media);
     if (url && Loader.cached_urls[url]) {
@@ -153,17 +194,26 @@ var Audio = {
     }
     return source;
   },
+  
+  //15th
   sync: function(now_seconds){//_drawn
     Audio.__last_seconds = now_seconds;
     Audio.__sync_seconds = Audio.get_ctx().currentTime;
     //console.log(Audio.time());
   },
+  //
+  
+  //16
   time: function(){
     return Audio.__last_seconds + (Audio.get_ctx().currentTime - Audio.__sync_seconds);
   },
+  //
+  
+  //17
   zero_seconds: function() {
     return Audio.__sync_seconds - Audio.__last_seconds;
   },
+  //
   sources: [],
   ctx: null,
   __last_seconds: 0,

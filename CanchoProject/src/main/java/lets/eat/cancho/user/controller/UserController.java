@@ -107,12 +107,12 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="idCheck", method=RequestMethod.GET)
-	public boolean idCheck(String id){
+	public boolean idCheck(String user_id){
 		
 		logger.info("아이디 중복 검사 시작");
 		boolean flag = false;
 		
-		Blog_User user = dao.searchUserOne(id);
+		Blog_User user = dao.searchUserOne(user_id);
 		
 		logger.info("아이디 중복 검사 종료");
 

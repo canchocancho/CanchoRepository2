@@ -28,6 +28,7 @@ var Player = function(evaluated) {
   this.fps = evaluated.fps; // sets this.__fps and scales other times
   this.mash = new_mash;
 };
+
 (function(pt){
   var dp = Object.defineProperty;
   dp(pt, "action_index", {
@@ -77,7 +78,7 @@ var Player = function(evaluated) {
       if (rate) {
         rate = Math.round(Number(rate));
         if (rate && (this.__fps !== rate)) {
-          this.__fps = rate;
+          this.__fps = rate;	
           this.__time.scale(this.__fps);
           this.__minbuffertime.scale(this.__fps);
           this.__unbuffertime.scale(this.__fps);

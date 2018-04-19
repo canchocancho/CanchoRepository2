@@ -55,6 +55,25 @@ CREATE SEQUENCE blog_comment_SEQ
 START WITH 1
 INCREMENT BY 1;
 
+-- profile table
+CREATE TABLE blog_profile
+(
+    user_id		varchar2(45),
+    user_email       VARCHAR2(100),
+    p_birthdate   	varchar2(20) not null,
+    p_birthMonth	varchar2(20) not null,
+    p_birthYear		varchar2(20) not null,
+    p_sex		varchar2(20) not null,
+    p_city      varchar2(100) not null,
+    p_country   varchar2(100) not null,
+    p_company   varchar2(100) null,
+    p_school	varchar2(100) null,
+    p_originalfile		VARCHAR2(200),
+	p_savedfile			VARCHAR2(100),
+	constraint user_id_fk foreign key(user_id) references blog_user(user_id),
+	constraint user_email_fk foreign key(user_email) references blog_user(user_email)
+);
+
 
 -- ---------------------------------------------------아래는 아직 안 만든 테이블들
 

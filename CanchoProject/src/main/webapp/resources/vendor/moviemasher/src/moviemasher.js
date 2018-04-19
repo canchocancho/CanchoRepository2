@@ -5,10 +5,13 @@ var MovieMasher = function() { // it's not necessary to instantiate, but you can
   this.initialize();
 };
 MovieMasher.prototype.initialize = function(){}; // override me to parse instance_arguments
+
+
 MovieMasher.configure = function(options){
   if (Util.isob(options)) Option.set(options);
   return Option;
 };
+
 MovieMasher.find = function(type, ob_or_id, key){
   var ob;
   if (Util.isob(ob_or_id)) ob_or_id = ob_or_id[key || 'id'];
@@ -28,15 +31,29 @@ MovieMasher.find = function(type, ob_or_id, key){
   }
   return ob;
 };
+
+
+//무비매셔 플레이
 MovieMasher.player = function(index_or_options){
   var result = null;
-  if (Util.isnt(index_or_options)) index_or_options = {};
-  if (Util.isob(index_or_options)) { // new player
+  
+  if (Util.isnt(index_or_options)){
+	  index_or_options = {};
+  }
+  
+  // new player
+  if (Util.isob(index_or_options)) {
     result = new Player(index_or_options);
     Players.instances.push(result);
-  } else result = Players.instances[index_or_options];
+  } else {
+	  result = Players.instances[index_or_options];
+  }
+  
   return result;
 };
+
+
+
 MovieMasher.register = function(type, media){
   if (! Util.isarray(media)) media = [media];
   if (Util.isob.apply(Util, media)) {
