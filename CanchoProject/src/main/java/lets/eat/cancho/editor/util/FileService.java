@@ -47,7 +47,6 @@ public class FileService {
 		
 		//저장할 파일명을 오늘 날짜의 년월일로 생성
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		System.out.println(sdf);
 		/*String savedFilename = sdf.format(new Date());*/
 		
 		
@@ -69,18 +68,14 @@ public class FileService {
 		
 		//저장할 파일명은 원본 이름으로 생성. 확장자 전 까지로 저장.
 		String savedFilename = originalFilename.substring(0, lastIndex);
-		System.out.println(savedFilename);
-		
-		
-		
 		
 		while (true) {
 			
 			serverFile = new File(uploadPath + "/" + savedFilename + ext);
 			
-			if ( !serverFile.isFile()) break;
+			if (!serverFile.isFile()) break;
 			
-			savedFilename = savedFilename + new Date().getTime();			
+			savedFilename = savedFilename + new Date().getTime();	
 			//savedFilename = savedFilename + "(" + nameNumber.get(savedFilename) + ")"
 			
 		}
@@ -90,7 +85,6 @@ public class FileService {
 		//파일 저장
 		try {
 			mfile.transferTo(serverFile);
-			System.out.println("dddd" + serverFile);
 			
 		} catch (Exception e) {
 			savedFilename = null;
@@ -125,15 +119,11 @@ public class FileService {
 		
 		//해당 파일이 존재하면 삭제
 		if (delFile.isFile()) {
-			System.out.println("삭제하러 들어왔음다");
 			try {
 				
 			delFile.delete();
 			
 			if(!(fullpathEx.equals("notVideo")))	{
-				
-				System.out.println("비디오입니다");
-				
 				File delDirec = new File(fullpathEx);
 				
 			    String[] fnameList = delDirec.list();

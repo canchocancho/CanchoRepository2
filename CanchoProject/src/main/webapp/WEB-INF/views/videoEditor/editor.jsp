@@ -83,9 +83,7 @@
 	      		<button onclick="mm_player.paused = true">Pause</button>
 	      		<button onclick="extract()">pika</button>
 	    	</div>
-    	
-    		<div id = "volume">
-    		</div>
+
     	</div>
     	<p>
     	<div id = uploadContainer align="right">
@@ -109,6 +107,7 @@
 		</div>    
     </div>
     <div id="all-tracks-container">
+    <div id = "volume"></div>
 	<span style="padding-left:33px"></span>
 	<span class='fslider'>
 		<input type='range' id='t-slider' step='0.001' value='0' min='0' max='1' oninput='sliderSyncro("tslider")' />

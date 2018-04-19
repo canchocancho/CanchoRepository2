@@ -43,7 +43,6 @@ function delAll() {
 }
 
 $(function(){
-	
 	$("#imgBtn").on("click",function(){
 		
 		var selectedType = $('#selectedFile').val();
@@ -59,10 +58,33 @@ $(function(){
 			data: formData,
 			processData: false,
 		    contentType: false,
-			dataType:"json",				
+		    dataType : "text",				
 			success:function(data){	
-				console.log(data);
-				readFileList();
+				extract(data);
+				$.ajax({
+					type:"POST"
+					,url: "getFileList"
+					,datatype: "json"
+					,success: function(data) {
+							var str = "";
+							for(var li in data) {
+								str += "<div>" + data[li] + "   <button class=\"IndiFile\" filen=\"" + data[li] + "\">Delete</button></div>"
+							}
+							str += "<div id=\"deleteAllBox\"><button id=\"deleteAll\">DeleteAll</button></div>";
+							$('#fileListBox').html(str);
+							$('.IndiFile').on('click', function() {
+								var delFileName = $(this).attr("filen");
+								delIndiFile(delFileName);
+							});
+							$('#deleteAll').on('click', function() {
+								delAll();
+							});
+					}	/*	success end	*/
+					,error: function(e) {
+						console.log(e);
+					}
+				});
+				
 			},
 			error: function(e){			
 				console.log(e);
@@ -70,7 +92,7 @@ $(function(){
 		});
 	});
 	
-	$('#selectedFile').on('change', function() {
+$('#selectedFile').on('change', function() {
 		var selectedType = $('#selectedFile').val();
 		alert(selectedType);
 		readFileList();
@@ -79,37 +101,30 @@ $(function(){
 });
 
 
-function readFileList() {
-	var selectedType = $('#selectedFile').val();
-	$.ajax({
-		type:"POST"
-		,url: "getFileList"
-		,data: {
-			selectedType : selectedType
+$.ajax({
+	type:"POST"
+	,url: "getFileList"
+	,datatype: "json"
+	,success: function(data) {
+			var str = "";
+			for(var li in data) {
+				str += "<div>" + data[li] + "   <button class=\"IndiFile\" filen=\"" + data[li] + "\">Delete</button></div>"
 			}
-		,datatype: "json"
-		,success: function(data) {
-				var str = "";
-				for(var li in data) {
-					str += "<div>" + data[li] + "   <button class=\"IndiFile\" filen=\"" + data[li] + "\">Delete</button></div>"
-				}
-				str += "<div id=\"deleteAllBox\"><button id=\"deleteAll\">DeleteAll</button></div>";
-				$('#fileListBox').html(str);
-				$('.IndiFile').on('click', function() {
-					var delFileName = $(this).attr("filen");
-					console.log("the fileName is " + delFileName);
-					delIndiFile(delFileName);
-				});
-				$('#deleteAll').on('click', function() {
-					delAll();
-				});
-
-		}	/*	success end	*/
-		,error: function(e) {
-			console.log(e);
-		}
-	});
-}
+			str += "<div id=\"deleteAllBox\"><button id=\"deleteAll\">DeleteAll</button></div>";
+			$('#fileListBox').html(str);
+			$('.IndiFile').on('click', function() {
+				var delFileName = $(this).attr("filen");
+				console.log("the fileName is " + delFileName);
+				delIndiFile(delFileName);
+			});
+			$('#deleteAll').on('click', function() {
+				delAll();
+			});
+	}	/*	success end	*/
+	,error: function(e) {
+		console.log(e);
+	}
+});
 
 function addTrackEventHandlerRegister(){
 	$('#addImgTrack').on('dblclick', function(){

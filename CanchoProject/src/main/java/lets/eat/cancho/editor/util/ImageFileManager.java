@@ -73,7 +73,6 @@ public class ImageFileManager {
 	public static BufferedImage resizeImageHighQuality(String orgImgPath)  {
 		BufferedImage originalImage;
 		try {
-			System.out.println("어디야 : " + orgImgPath );
 			originalImage = ImageIO.read(new File(orgImgPath));
 			Dimension origin = new Dimension();
 			origin.setSize(originalImage.getWidth(), originalImage.getHeight());
@@ -129,33 +128,26 @@ public class ImageFileManager {
 	public static void extractVideo(String fileName, String ffid){
 		Thread thread = new Thread(() -> {
 			
-			System.out.println("Dddddddddddddd" + fileName + "  " + ffid);
 			String originP = "c:\\tomolog\\temp\\";
 			String originPath = originP + fileName + ".mp4";
 			Runtime run = Runtime.getRuntime();
-			System.out.println("야!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + originPath);
-			//int a = VideoInfo.getVideoFrameRate(originPath);
-			//System.out.println("이미지 자릿수 : " + a);
+		
 			File dir = new File("c:\\tomolog\\extract\\" + ffid +"\\");
-			
-			//File dir = new File("c:\\freemiere\\videoExtract\\");
-			//String pathpath = "C:\\Users\\Mintcho_o\\Desktop\\DOING\\pika2.mp4";
 			dir.mkdirs();
 			
 			String command = "ffmpeg -i "
 					//+ originPath
 					+ originPath
 					+ " -r 30 -qscale:v 1 "
-					+ "c:\\canchov\\extract\\" + ffid +"\\%09d.jpg";
+					+ "c:\\tomolog\\extract\\" + ffid +"\\%09d.jpg";
 			
 			String command2 = "ffmpeg -y -i "
 					+ originPath
 					+ " -vn -acodec libmp3lame -ar 44.1k -ac 2 -ab 128k "
-					+ "c:\\canchov\\extract\\" + ffid + "\\audio.mp3";
+					+ "c:\\tomolog\\extract\\" + ffid + "\\audio.mp3";
 			
 			//System.out.println("command : " + command);
 			try{
-				System.out.println("try?");
 				run.exec("cmd.exe chcp 65001");
 				Process process = run.exec(command);
 				process.getErrorStream().close(); 

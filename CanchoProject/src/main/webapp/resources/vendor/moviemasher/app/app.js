@@ -36,24 +36,30 @@ function mm_load() {
 	  /*getMash();*/
 }
 
-function extract(){	
+function extract(data){
 	var zeroPlus = '';
     $.ajax({
    		url : 'extract',
    		type : 'GET',
-   		success : function(url) {
-   			var duration = url.count/30
-   			var zeroCount = String(url.count.toString()).length;
+   		data : {
+   			fileName : data
+   		},
+   		success : function(path) {
+   			var url = path.originPath + data +'\\';
+   			var duration = path.count/30
+   			var zeroCount = String(path.count.toString()).length;
    			for(var i = 0; i <= zeroCount; i++){
    				zeroPlus += '0';
     		}
+   			alert(zeroCount);
+   			alert(url);
     		var media = {
-    	    		'label': 'pika',
-   		    		'id': 'pika',
+    	    		'label': data,
+   		    		'id': data,
    		    		'type': 'video', 
-   		    		'url': url.originPath,
+   		    		'url': url,
    		    		'fps': 30,
-   		    		'pattern':  (zeroPlus+'%.jpg'),
+   		    		'pattern': (zeroPlus+'%.jpg'),
     	    		'duration' : duration
     	   };
     		mm_player.add(media, 'video', videoTotalDuration , 0);
