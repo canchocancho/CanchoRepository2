@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -261,15 +261,8 @@
                 </div>
               </div>
             </div>
-            
-            
-            
-            
-            
-            
-            
-            
             <div class="col-md-2 static">
+            
               <!--Sticky Timeline Activity Sidebar-->
               <div id="sticky-sidebar">
                 <h4 class="grey">Sarah's activity</h4>
