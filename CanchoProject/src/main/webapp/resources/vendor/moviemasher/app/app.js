@@ -33,7 +33,6 @@ function mm_load() {
 	    mm_player.canvas_context = canvas.getContext('2d');
 	    mm_player.mash = {};
 	  }
-	  /*getMash();*/
 }
 
 function extract(data){
@@ -86,92 +85,3 @@ function extract(data){
    	});	
  }
 
-function myHandler(){
-	if(document.getElementById('t-slider') != null &&
-	document.getElementById('player-slider') != null) {
-		document.getElementById('t-slider').value = mm_player.position;
-		document.getElementById('player-slider').value = mm_player.position;
-		
-		var videoTrackObjsCnt = $.makeArray($(".video-obj").map(function(){
-			//if($(this).attr('itemId').indexOf('transition') != -1) return -1 * ($(this).attr("frames"));
-		    return $(this).attr("frames");
-		}));
-		var maxValue = 0;
-		for(var j = 0; j < videoTrackObjsCnt.length; j++){
-			maxValue += Number(videoTrackObjsCnt[j]);
-		}
-		var trackArr= Object.keys(tracksDuration);
-		for(var i = 0; i < trackArr.length; i++){
-			if( tracksDuration[trackArr[i]] > maxValue )
-				maxValue = tracksDuration[trackArr[i]];
-		}
-		var time = maxValue * mm_player.position;
-		time = time.toFixed(2);
-		var tempTime = time + '';
-		var tempTimeSplited = tempTime.split('.');
-		var timeEnd = tempTimeSplited[1];
-		var timeSec = tempTimeSplited[0] * 1;
-		var timeStr = ' ';
-		function plusZero(time){
-			var t = time + '';
-			if(t.length == 2) return t;
-			else{
-				return '0' + t;
-			}
-		}
-		if (timeSec < 60) {
-			timeStr += '00:00:' + plusZero(timeSec) + ':';
-		} else if (timeSec < 3600){
-			timeStr += '00:' + plusZero(Math.floor(timeSec%3600/60)) + ':' + plusZero(timeSec%60) + ':';
-		} else {
-			timeStr += plusZero(Math.floor(timeSec/3600)) + ':' + plusZero(Math.floor(timeSec%3600/60)) + ':' + plusZero(timeSec%60) + ':';
-		}
-		timeStr += plusZero(timeEnd);
-		$('#time').text(timeStr);
-	}
-}
-
-function getMash(){
-	alert("getMash");
-	$.ajax({
-		url : 'getMash',
-		type : 'POST',
-		dataType : 'json',
-		success : function(item) {
-			mm_player.mash = eval("("+item.mash+")");
-			tracksDuration = eval("("+item.durations+")");
-			videoTotalDuration = item.videoDur * 1;
-			//otherObjNum = eval("("+item.otherObjNum+")");
-			//video0TrackobjNum = item.videoObjNum * 1;
-			
-			video0TrackRedraw();
-			var trackArr= Object.keys(tracksDuration);
-			for(var i = 0; i < trackArr.length; i++){
-				trackRedraw(trackArr[i]);
-			}	
-		},
-		error : function(e) {
-			console.log(e);
-		}
-	});	
-}
-
-function setMash(){
-	alert("setMash");
-	$.ajax({
-		url : 'setMash',
-		type : 'POST',
-		data : {
-			mash : JSON.stringify(mm_player.mash),
-			durations : JSON.stringify(tracksDuration),
-			videoDur : videoTotalDuration,
-			otherObjNum : otherObjNum,
-			videoObjNum : video0TrackobjNum
-		},
-		success : function() {
-		},
-		error : function(e) {
-			console.log(e);
-		}
-	});	
-}

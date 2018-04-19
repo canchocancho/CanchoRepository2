@@ -11,6 +11,7 @@ import java.util.Iterator;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import lets.eat.cancho.editor.util.FileService;
 import lets.eat.cancho.editor.util.ImageFileManager;
 import lets.eat.cancho.editor.util.test;
@@ -99,10 +99,8 @@ public class editController {
 	@RequestMapping(value = "getFileList", method = RequestMethod.POST)
 	public File[] getFileList(String selectedType) {
 		String type = selectedType;
-		
 		File path = new File("C:/tomolog/temp/");
 		File[] fileList = path.listFiles(); 
-		
 			return fileList;
 		}
 	
@@ -180,23 +178,32 @@ public class editController {
 	@ResponseBody
 	@RequestMapping(value = "deleteAllFiles", method = RequestMethod.GET)
 	public void deleteAllFiles(String deleteMess) {
-		
-		String mess = deleteMess;
-		String path = "C:\\tomolog\\";
-		
-		// 전체 파일 이름 담기(확장자명 포함임ㅎ)
-		boolean result = FileService.deleteAllFiles(videoList, path);
-		
-		if (result) {
-			for(String v : videoList) {
-				videoList.remove(v);
-			}
-			for(String i : imageList) {
-				imageList.remove(i);
-			}
-			for(String a : audioList) {
-				audioList.remove(a);
-			}
-		}
-	}	*/
+		 File file = new File("C:/dir");
+         
+	        if( file.exists() ){ //파일존재여부확인
+	             
+	            if(file.isDirectory()){ //파일이 디렉토리인지 확인
+	                 
+	                File[] files = file.listFiles();
+	                 
+	                for( int i=0; i<files.length; i++){
+	                    if( files[i].delete() ){
+	                        System.out.println(files[i].getName()+" 삭제성공");
+	                    }else{
+	                        System.out.println(files[i].getName()+" 삭제실패");
+	                    }
+	                }
+	                 
+	            }
+	            if(file.delete()){
+	                System.out.println("파일삭제 성공");
+	            }else{
+	                System.out.println("파일삭제 실패");
+	            }
+	             
+	        }else{
+	            System.out.println("파일이 존재하지 않습니다.");
+	        }
+	}*/
+
 }

@@ -169,7 +169,6 @@ function videoSlider(){
         	var idsInOrder = $("#video-track").sortable("toArray");
         	/*addUndoArr(mm_player.mash)
         	reorderingVideo0Clips(idsInOrder);*/
-        	setMash()
         }
     });
 }
