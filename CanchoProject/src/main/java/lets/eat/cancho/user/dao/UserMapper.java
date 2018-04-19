@@ -12,5 +12,13 @@ public interface UserMapper {
 	
 	//이메일 인증
 	public int verifyUser(String user_id);
+	
+	//회원정보 수정
+	public int updateUser(Blog_User user);
 
+	//휴면 계정 전환
+	public int deleteUser(String user_id);
+	
+	//계정 활성화
+	public int activateUser(String user_id);
 }

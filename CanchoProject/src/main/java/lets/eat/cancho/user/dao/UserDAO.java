@@ -70,5 +70,61 @@ public class UserDAO {
 		
 		return result;
 	}
+	
+	//회원정보 수정
+	public int updateUser(Blog_User user){
+		logger.info("회원정보 수정 시작 - 다오");
+		
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int result = 0;
+		
+		try {
+			result = mapper.updateUser(user);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("회원정보 수정 종료 - 다오");
+		
+		return result;
+	}
+	
+	//휴면 계정 전환
+	public int deleteUser(String user_id){
+		logger.info("휴면 계정 전환 시작");
+		
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int result = 0;
+		
+		try{
+			result = mapper.deleteUser(user_id);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("휴면 계정 전환 종료");
+		
+		return result;
+	}
+	
+	//계정 활성화
+	public int activateUser(String user_id){
+		logger.info("계정 활성화 시작");
+		
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int result = 0;
+		
+		try{
+			result = mapper.activateUser(user_id);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("계정 활성화 종료");
+		
+		return result;
+	}
 
 }

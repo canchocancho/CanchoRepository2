@@ -25,7 +25,7 @@ import lets.eat.cancho.editor.util.test;
 
 
 /**
- * Handles requests for the application home page.
+ * Handles requests for the application home page....
  */
 @Controller
 public class editController {

@@ -15,20 +15,16 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import lets.eat.cancho.user.dao.UserDAO;
 import lets.eat.cancho.user.vo.Blog_User;
 
 @Controller
 @RequestMapping(value="user")
-@SessionAttributes("user")
 public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -52,17 +48,23 @@ public class UserController {
 		Blog_User vo = dao.searchUserOne(user.getUser_id());
 		
 	    if(vo == null) {
-		         //아이디가 없는 경우
-		    	 model.addAttribute("errorMsg", "존재하지 않는 아이디입니다.");
-		    	 logger.info("로그인 실패");
-		         return "user/loginPage";
-		         
-		      } else if (!vo.getUser_password().equals(user.getUser_password())) {
-			         //비밀번호가 틀린 경우
-			    	  model.addAttribute("errorMsg", "비밀번호가 잘못되었습니다.");
-			    	  logger.info("로그인 실패");
-			         return "user/loginPage";
-			      }
+		    //아이디가 없는 경우
+	    	model.addAttribute("errorMsg", "존재하지 않는 아이디입니다.");
+	    	logger.info("로그인 실패");
+	    	return "user/loginPage";  
+		 }
+	    else if (!vo.getUser_password().equals(user.getUser_password())) {
+			 //비밀번호가 틀린 경우
+			 model.addAttribute("errorMsg", "비밀번호가 잘못되었습니다.");
+			 logger.info("로그인 실패");
+			 return "user/loginPage";
+		}
+	    else if (vo.getUser_deleted().equals("Y")){
+	    	//탈퇴한 회원일 경우
+	    	model.addAttribute("errorMsg", "휴면 계정입니다. 메인 페이지에서 계정을 복구해주세요.");
+	    	logger.info("탈퇴한 회원");
+	    	return "user/loginPage";  
+	    }
 
 	    String userVerified = (user != null) ? vo.getUser_verify() : "N";
 	    
@@ -70,8 +72,9 @@ public class UserController {
 				    	//E-mail 인증까지 모두 마친 로그인
 						logger.info("User Login Success");
 						session.setAttribute("loginId", vo.getUser_id());	// 로그인 성공시 User ID를 Session에 저장
-						session.setAttribute("loginName", vo.getUser_name()); 
-				    	return "redirect:/";
+						session.setAttribute("loginName", vo.getUser_name());
+						session.setAttribute("loginEmail", vo.getUser_email());
+				    	return "redirect:/post/postList";
 				    	 
 				      } else {
 				    	//E-mail 인증이 되지 않은 로그인
@@ -122,7 +125,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String join(@ModelAttribute("user")Blog_User user, Model model) throws
+	public String join(Blog_User user, Model model) throws
 		MessagingException, UnsupportedEncodingException {
 		logger.info("회원 가입 시작");
 		
@@ -130,7 +133,7 @@ public class UserController {
 		String admin = "canchoad@gmail.com";
 		
 		//Server Address
-		String serverAddress = "http://10.10.8.36:8888/cancho/";
+		String serverAddress = "http://203.233.199.106:8888/cancho/";
 		
 		logger.info(user.toString());
 		int result = dao.joinUser(user);
@@ -162,8 +165,8 @@ public class UserController {
 		} 
 		else {
 			logger.info("User Join Fail");
-			model.addAttribute("errorMsg", "회원가입 실패");
-			return "user/joinForm";
+			model.addAttribute("errorMsg", "알 수 없는 에러가 발생하였습니다.");
+			return "redirect:/";
 		}
 		
 		return "redirect:joinComplete";
@@ -192,17 +195,98 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="joinComplete", method=RequestMethod.GET)
-	public String joinComplete(SessionStatus session, 
-			@ModelAttribute("user") Blog_User user, 
-			Model model ){
-		
-		logger.info("회원 가입 성공 폼 이동 시작");
-		
-		model.addAttribute("id", user.getUser_id());
-		session.setComplete();
-		
-		logger.info("회원 가입 성공 폼 이동 종료");
+	public String joinComplete(){
+
 		return "user/joinComplete";
 	}
 	
+	@RequestMapping(value="deletePage", method=RequestMethod.GET)
+	public String deletePage(HttpSession session){
+		
+		return "user/deleteForm";
+	}
+	
+	@RequestMapping(value="deleteAccount", method=RequestMethod.POST)
+	public String deleteAccount(HttpSession session, String password, Model model){
+		
+		String user_id = (String) session.getAttribute("loginId");
+		
+		Blog_User user = dao.searchUserOne(user_id);
+
+		//입력한 비밀번호가 틀렸을 경우
+		if(!password.equals(user.getUser_password())){
+			model.addAttribute("errorMsg", "비밀번호를 잘못 입력하셨습니다.");
+			return "user/deleteForm";
+		}
+		
+		int result = dao.deleteUser(user_id);
+		
+		//비밀번호는 제대로 입력했는데 오류가 일어나 탈퇴 실패
+		if(result != 1){
+			model.addAttribute("errorMsg", "알 수 없는 오류가 발생하였습니다.");
+			return "user/deleteForm";
+		}
+		
+		//탈퇴했으니 세션 끊기
+		session.invalidate();
+		
+		return "redirect:deleteComplete";
+	}
+	
+	@RequestMapping(value="deleteComplete", method=RequestMethod.GET)
+	public String deleteComplete(){
+		
+		return "user/deleteComplete";
+	}
+	
+	@RequestMapping(value="activateForm", method=RequestMethod.GET)
+	public String activateForm(){
+		
+		return "user/activateForm";
+	}
+	
+	@RequestMapping(value="activate", method=RequestMethod.POST)
+	public String activate(Blog_User user, Model model){
+		
+		Blog_User deleted_user = dao.searchUserOne(user.getUser_id());
+		
+		//아예 가입된 회원이 아닐 경우
+		if(deleted_user == null){
+			model.addAttribute("errorMsg", "해당 아이디로 가입된 이력이 없습니다.");
+			return "user/activateForm";
+		}
+		
+		//가입은 되어 있는데 휴면계정이 아닐 경우
+		else if(!deleted_user.getUser_deleted().equals("Y")){
+			model.addAttribute("errorMsg", "휴면 계정이 아닙니다.");
+			return "user/activateForm";
+		}
+		
+		//휴면계정인데 비밀번호가 틀렸을 경우
+		else if(!user.getUser_password().equals(deleted_user.getUser_password())){
+			model.addAttribute("errorMsg", "비밀번호가 틀렸습니다.");
+			return "user/activateForm";
+		}
+		
+		//activate 성공
+		else {
+			int result = dao.activateUser(user.getUser_id());
+			
+			if(result == 1) {
+				logger.info("계정 활성화 성공");
+			}
+			else {
+				model.addAttribute("errorMsg", "알 수 없는 오류가 발생하였습니다.");
+				return "user/activateForm";
+			}
+			
+			return "user/activated";
+		}
+	}
+	
+	@RequestMapping(value="editProfile", method=RequestMethod.GET)
+	public String editProfile(HttpSession session){
+
+		return "user/editProfile";
+	}
 }

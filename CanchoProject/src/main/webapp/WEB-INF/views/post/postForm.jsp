@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html>
 
@@ -9,26 +12,22 @@
 	<title>POST</title>
 	
 	<script type="text/javascript" src="../resources/js/jquery-3.2.1.js"></script>
-	
-	<!-- 텍스트 창 -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-	<script src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
+	<script src="../resources/js/sockjs-0.3.4.js"></script>
 
-  <meta charset="utf-8" />
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+  	<meta charset="utf-8" />
+ 	<!-- Firebase -->
+  	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 
-  <!-- CodeMirror -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
+  	<!-- CodeMirror -->
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
 
-  <!-- Firepad -->
-  <link rel="stylesheet" href="../resources/css/firepad.css" />
-  <script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
+  	<!-- Firepad -->
+  	<link rel="stylesheet" href="../resources/css/firepad.css" />
+  	<script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
 
-  <!-- Firepad Userlist -->
-  <link rel="stylesheet" href="../resources/css/firepad-userlist.css" />
+  	<!-- Firepad Userlist -->
+  	<link rel="stylesheet" href="../resources/css/firepad-userlist.css" />
 
   <style>
     html { height: 100%; }
@@ -37,40 +36,14 @@
        For demo purposes, we make the user list 175px and firepad fill the rest of the page. */
     #userlist {
       position: absolute; left: 0; top: 0; bottom: 0; height: auto;
-      width: 175px; height: 400px;
+      width: 175px;
     }
     #firepad {
       position: absolute; left: 175px; top: 0; bottom: 0; right: 0; height: auto;
-      height: 500px;
     }
-    
-    /* 텍스트창 */
-    .sticky {
-	  width: 250px;
-	  height: 50px;
-	  position: absolute;
-	  cursor: pointer;
-	  border: 1px solid #aaa;
-	}
-	
-	textarea {
-	  width: 100%;
-	  height: 100%;
-	}
-	
-	.selected {border-color: #f44;}
-    
- 	.footer {
-	  text-align: center;
-	  width: 100%;
-	  height: 200px;
-	  background-color: #e6ccff;
-	  position: absolute;
-	  top: 420px;
-	  left: 0px;
-	  margin-top: 100px;
-	  padding: 0px;
-	}
+    .firepad-userlist{
+      height: 100%;
+    }
   </style>
   
   <script type="text/javascript">
@@ -101,7 +74,7 @@
 	    place.appendChild(this.userList_);
 	  }
 
-	  // This is the primary "constructor" for symmetry with Firepad.
+	  //This is the primary "constructor" for symmetry with Firepad.
 	  FirepadUserList.fromDiv = FirepadUserList;
 
 	  FirepadUserList.prototype.dispose = function() {
@@ -151,7 +124,7 @@
 	    var nameHint = elt('div', 'ENTER YOUR NAME', { 'class': 'firepad-userlist-name-hint'} );
 	    if (this.hasName_) nameHint.style.display = 'none';
 
-	    // Update Firebase when name changes.
+	    //Update Firebase when name changes.
 	    var self = this;
 	    on(nameInput, 'change', function(e) {
 	      var name = nameInput.value || "${loginId}";
@@ -202,8 +175,8 @@
 	      userId2Element[userId] = userDiv;
 
 	      if (userId === self.userId_) {
-	        // HACK: We go ahead and insert ourself in the DOM, so we can easily order other users against it.
-	        // But don't show it.
+	        //HACK: We go ahead and insert ourself in the DOM, so we can easily order other users against it.
+	        //But don't show it.
 	        userDiv.style.display = 'none';
 	      }
 
@@ -316,72 +289,17 @@
 
 	  return FirepadUserList;
 	})();
-  
-  //텍스트 창
-  $(function() {
-  $('#new').click(function() {
-    make();
-    save();
-  });
-
-  $('#del').click(function() {
-    $('.selected').remove();
-    save();
-  });
-
-  function make() {
-    var sticky = $('<div class="sticky">원하는 곳에 글을 써보세요!</div>');
-    sticky.appendTo('.footer')
-      .css('background-color', $('#color').val())
-      .draggable({stop: save})
-      .dblclick(function() {
-        $(this).html('<textarea>' + $(this).html() + '</textarea>')
-          .children()
-          .focus()
-          .blur(function() {
-            $(this).parent().html($(this).val());
-            save();
-          });
-      }).mousedown(function() {
-        $('.sticky').removeClass('selected');
-        $(this).addClass('selected');
-      });
-    return sticky;
-  }
-
-  function save() {
-    var items = [];
-    $('.sticky').each(function() {
-      items.push(
-        $(this).css('left'),
-        $(this).css('top'),
-        $(this).css('background-color'),
-        $(this).html()
-      );
-    });
-    $.cookie('sticky', items.join('\t'), {expires: 100});
-  }
-
-  function load() {
-    if (!$.cookie('sticky')) return;
-    var items = $.cookie('sticky').split('\t');
-    for (var i = 0; i < items.length; i += 4) {
-      make().css({
-        left: items[i],
-        top: items[i + 1],
-        backgroundColor: items[i + 2]
-      }).html(items[i + 3]);
-    }
-  }
-  load();
-});
-  
   </script>
   
 	<script>
-		//공유
+		//초대
 		function invite() {
 			alert(window.location.href); //공유해야 할 url 주소(이걸 쪽지로 보내야 함)
+		}
+		
+		//표지 만들기
+		function makeCover(){
+			window.open('makeCoverForm', 'newWindow', 'top=0, left=0, height=1920px, width=1080px');
 		}
 		
 		//저장
@@ -399,48 +317,119 @@
 			hidden_form.hidden_data.value = String(str);
 			hidden_form.submit();
 		}
-		
 	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('h1').fadeIn(600);
+			$('.highlight').fadeIn(1700);
+		});
+		var textarea = document.getElementById("messageWindow");
+		var webSocket = new WebSocket('ws://203.233.199.106:8888/cancho/broadcasting');
+		var inputMessage = document.getElementById('inputMessage');
+		webSocket.onerror = function(event) {
+		    onError(event)
+		};
+		webSocket.onopen = function(event) {
+		    onOpen(event)
+		};
+		webSocket.onmessage = function(event) {
+		    onMessage(event)
+		};
+		function onMessage(event) {
+		    var message = event.data.split("|");
+		    var sender = message[0];
+		    var content = message[1];
+		    
+		    if (content == "") {
+		        
+		    } else {
+		        if (content.match("/")) {
+		            if (content.match(("/" + $("#chat_id").val()))) {
+		                var temp = content.replace("/" + $("#chat_id").val(), "(귓속말) :").split(":");
+		                if (temp[1].trim() == "") {
+		                } else {
+		                    $("#messageWindow").html($("#messageWindow").html() + "<p class='whisper'>"
+		                        + sender + content.replace("/" + $("#chat_id").val(), "(귓속말) :") + "</p>");
+		                }
+		            } else {
+		            }
+		        } else {
+		            if (content.match("!")) {
+		                $("#messageWindow").html($("#messageWindow").html()
+		                    + "<p class='chat_content'><b class='impress'>" + sender + " : " + content + "</b></p>");
+		            } else {
+		                $("#messageWindow").html($("#messageWindow").html()
+		                    + "<p class='chat_content'>" + sender + " : " + content + "</p>");
+		            }
+		        }
+		    }
+		}
+		function onOpen(event) {
+		    $("#messageWindow").html("<p class='chat_content'>채팅에 참여하였습니다.</p>");
+		}
+		function onError(event) {
+		    alert("오류가 발생했습니다.");
+		}
+		function send() {
+		    if ($("#inputMessage").val() == "") {
+		    } else {
+		        $("#messageWindow").html($("#messageWindow").html()
+		            + "<p class='chat_content'>${loginId} : " + $("#inputMessage").val() + "</p>");
+		    }
+		    webSocket.send($("#chat_id").val() + "|" + $("#inputMessage").val());
+		    $("#inputMessage").val("");
+		}
+		//엔터키를 통해 send함
+		function enterkey() {
+		    if (window.event.keyCode == 13) {
+		        send();
+		    }
+		}
+		//채팅이 많아져 스크롤바가 넘어가더라도 자동적으로 스크롤바가 내려가게함
+		window.setInterval(function() {
+		    var elem = document.getElementById('messageWindow');
+		    elem.scrollTop = elem.scrollHeight;
+		}, 0);
+</script>
 </head>
 
 <body onload="init()">
 
   <div id="userlist">
   
-  		<!-- 초대하기 -->
-		<input type="button" id="invite" name="invite" onclick="invite();" value="초대" style="float: left;"/>
+	<!-- 초대하기 -->
+	<input type="button" id="invite" name="invite" onclick="invite();" value="초대" style="float: left;"/>
+	
+	<!-- 표지 만들기 -->
+	<input type="button" id="makeCover" name="makeCover" onclick="makeCover();" value="표지 만들기" style="float: left;"/>
 		
-		<!-- 저장하기 -->
-		<input type="button" id="save" name="save" onclick="save();" value="저장" style="float: left;"/>
+	<!-- 저장하기 -->
+	<input type="button" id="save" name="save" onclick="save();" value="저장" style="float: left;"/>
 
   </div>
   
   <div id="firepad">
   
   		<!-- 히든폼 -->
-		<form action="write" method="post" name="hidden_form" style="position: relative;">
+		<form action="write" method="post" name="hidden_form" enctype="multipart/form-data" style="position: relative;">
 			제목 <input type="text" id="post_title" name="post_title" autocomplete="off">
+			표지 첨부 <input type="file" name="upload">
 			<input type="hidden" id="hidden_data" name="hidden_data">
 			<input type="hidden" id="user_id" name="user_id" value="${loginId }">
 		</form>
-		
-		<!-- 텍스트창 -->
-		<select id="color">
-			<option value="#ffc">黄色</option>
-			<option value="#fcc">赤色</option>
-			<option value="#cfc">緑色</option>
-		</select>
-		<input id="new" type="button" value="new">
-		<input id="del" type="button" value="del">
-  
+
+		<!--채팅창 -->
+		<input type="hidden" value="${loginId}" id="chat_id">
+	    <div id="_chatbox">
+	        <fieldset>
+	            <div id="messageWindow" style="overflow-y: scroll; height:200px;" ></div>
+	            <br /> <input id="inputMessage" type="text" onkeyup="enterkey()" />
+	            <input type="submit" value="send" onclick="send()" />
+	        </fieldset>
+	    </div>
   </div>
-  
-	<!-- 로고 등 이미지가 들어가는 div -->
-  <div class="footer">
-		<img src="../resources/img/a.png">
-		<img src="../resources/img/b.png">
-  </div>
-  
+
   <script>
     function init() {
       //// Initialize Firebase.
