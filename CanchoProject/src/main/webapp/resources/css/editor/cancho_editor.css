@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+#upperContainer {
+	width: 100%;
+	height: 30%;
+	text-align: center;
+	margin-top: 20px;
+	background-color: gray;
+}
+
+#playerContainer {
+	float: left;
+	width: 45%;
+	text-align: center;
+}
+
+#uploadContainer {
+	float: right;
+	width: 45%;
+	text-align: center;
+}
+
+
+#timeLineContainer {
+	float: bottom;
+}
+
+#dragDropZone {
+	text-align: right;
+	display: inline-block;
+}
+
+.fileBox {
+	clear: both;
+	overflow: scroll;
+}
+
+#middle {
+	height: 300px;
+}
+
