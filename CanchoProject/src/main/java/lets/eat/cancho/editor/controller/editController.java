@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import lets.eat.cancho.editor.util.FileService;
 import lets.eat.cancho.editor.util.ImageFileManager;
 import lets.eat.cancho.editor.util.test;
@@ -100,15 +101,39 @@ public class editController {
 	public ArrayList<String> getFileList(String selectedType) {
 		System.out.println("안오니?");
 		String type = selectedType;
-		String pathS = "";
 		File path = new File("C:/tomolog/temp/");
 		File[] fileList = path.listFiles();
 		ArrayList<String> videoPath = new ArrayList<String>();
 		for (int i = 0; i < fileList.length; i++) {
-			 videoPath.add(pathS + fileList[i].toString());
+			 videoPath.add(fileList[i].toString());
 		}
 			return videoPath;
 		}
+	
+	@ResponseBody
+	@RequestMapping(value = "getVideoInfo", method = RequestMethod.GET ,
+					produces = "application/json;charset=utf-8")
+	public HashMap getVideoInfo(int ffid, String path){
+		
+		HashMap<String, Object> rtn  = new HashMap<>();
+	
+		//1. 영상의 사진 갯수
+		String videoPath = "C:\\freemiere\\videoExtract\\" + ffid;
+		int count = test.findFileNum(videoPath) - 1;
+		rtn.put("count", count);
+		//2. 영상의 주소
+		String vExtractPath = "storageResources\\videoExtract\\" + ffid + "\\";
+		rtn.put("extractPath", vExtractPath);
+		//3.audio 파일 여부
+		boolean isAudio = false;
+		File audio = new File(videoPath + "\\audio.mp3");
+		if(audio.exists()) isAudio=true;
+		
+		rtn.put("isAudio", isAudio);
+		return rtn;
+	}
+	
+	
 	
 	@RequestMapping(value = "download", method = RequestMethod.GET)
 	public void fileDownload(HttpServletResponse response, String origin , String saved){

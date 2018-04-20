@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="resources/vendor/w2ui/w2ui-1.5.rc1.min.css" type="text/css">
 	<link rel="stylesheet"  href="resources/vendor/font-awesome/css/font-awesome.min.css" type="text/css">
 	<link rel="stylesheet" href="resources/vendor/zTree/css/awesomeStyle/awesome.css" type="text/css">
-	<!--<link rel="stylesheet" href="resources/css/editor/editor.css" type="text/css"> -->
+	<link rel="stylesheet" href="resources/css/editor/editor.css" type="text/css">
 	<link href="resources/vendor/colorBox/colorbox.css" rel="stylesh1eet">
 	
 	<style>
@@ -67,7 +67,6 @@
     
     <script src="resources/js/editor/editor.js"></script>
     <script src="resources/js/editor/videoSlider.js"></script>
-    <script src="resources/js/editor/timeLine2.js"></script>
     <style>canvas, textarea { width: 320px; height: 240px; }</style>
   </head> 
   <body onload='mm_load()'>

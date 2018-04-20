@@ -1,4 +1,5 @@
 var selectedClipNum;
+var video0TrackobjNum = 0;
 var tracksDuration = {
 		"video-1" : 0,
 		"video-2" : 0,
@@ -6,6 +7,12 @@ var tracksDuration = {
 		"audio-2" : 0
 };
 
+
+
+function getFileName(path){
+	var pathArray = path.split('/');
+	return pathArray[pathArray.length-1];
+}
 
 /**
  * 현재 mash된 미디어의 라벨
@@ -98,6 +105,13 @@ function getFileType(path){
 	return rtn;
 }
 
+function checkFileType(data){
+	if(data.indexOf("video") != -1) return 'video';
+	if(data.indexOf("audio") != -1) return 'audio';
+	if(data.indexOf("image") != -1) return 'image';
+	if(data.indexOf("filter") != -1) return 'filter';
+	if(data.indexOf("transition") != -1) return 'transition';
+}
 
 /**
  * 비디오 상세 설정창(라벨, 점프, 볼륨, 필터 등)
@@ -232,16 +246,15 @@ function videoDragDropEventHandler(){
 			checkFileType(data) != 'image' &&
 			checkFileType(data) != 'transition') return;
 
-		addUndoArr(mm_player.mash);
 		//여기다가 할일을 
 		if(checkFileType(data) == 'video') {
 			addVideoTrackVideoObj(data);
-		} else if(checkFileType(data) == 'image'){
+		}/* else if(checkFileType(data) == 'image'){
 			addVideoTrackImageObj(data);
 		} 
 		else if(checkFileType(data) == 'transition'){
 			addVideoTrackTransitionsObj(data);
-		}
+		}*/
 		
 	});
 	
@@ -389,4 +402,61 @@ function add_media(trackId, id, url, fname, duration){
 	tracksDuration[trackId] += duration;	
 	return mm_player.selectedClip;
 	//alert(JSON.stringify(mm_player.mash, null, '\t'));
+}
+
+function addVideoTrackVideoObj(id){
+	
+	/*var ffid = $('#' + id).attr('ffid');
+	var path = $('#' + id).attr('path');
+	var fname = getFileName(path);*/
+	
+	var html = $('#video-track').html();
+	var newid = 'video'+'Obj' + video0TrackobjNum;
+	video0TrackobjNum++;
+	html += '<div class="ui-state-default video-obj track-obj" ';
+/*	html += ' frames=' + videoInfo.count/30 +' ';
+	html += ' id=' + newid +' ';
+	html += ' fname=' + fname +' ';
+	html += ' itemId=' + id +' ';*/
+	html += ' clicked=' + 'false' +' ';
+	html += '>';
+	html += '<img class="obj-thumb">'
+/*	html +=  fname;*/
+	html += '</div>';
+	
+	$('#video-track').html(html);
+	/*$.ajax({
+		url : 'getVideoInfo',
+		type : 'GET',
+		data : {
+			ffid : ffid
+		},
+		dataType : 'json',
+		success : function(videoInfo) {
+		
+			var html = $('#video-track').html();
+			var newid = 'video'+'Obj' + video0TrackobjNum;
+			video0TrackobjNum++;
+			html += '<div class="ui-state-default video-obj track-obj" ';
+			html += ' frames=' + videoInfo.count/30 +' ';
+			html += ' id=' + newid +' ';
+			html += ' fname=' + fname +' ';
+			html += ' itemId=' + id +' ';
+			//html += ' path=' + videoInfo.extractPath +' ';
+			html += ' clicked=' + 'false' +' ';
+			html += '>';
+			html += '<img class="obj-thumb" src="' + thumbPath + '">'
+			html +=  fname;
+			html += '</div>';
+			
+			$('#video-track').html(html);
+			add_video0(newid, videoInfo.extractPath.replace(/\\/gi, '/') ,videoInfo.count, fname, videoInfo.isAudio);
+			resizeTrackObj(0);
+			video0TrackEventRemover();
+			video0TrackEventRegister();
+		},
+		error : function(e) {
+			//alert(JSON.stringify(e));
+		}
+	});	*/
 }
