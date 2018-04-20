@@ -125,11 +125,11 @@ public class PostController {
 		logger.info("POST LIST");
 		
 		ArrayList<Post> postList = dao.postList();
-		model.addAttribute("postList", postList);
+		model.addAttribute("postList", postList); //포스트 리스트 담기
 		
 		ArrayList<Comment> commentList = commentDAO.commentList();
-		model.addAttribute("commentList", commentList);
-	
+		model.addAttribute("commentList", commentList); //코멘트 리스트 담기
+
 		return "post/postList";
 	}
 	
