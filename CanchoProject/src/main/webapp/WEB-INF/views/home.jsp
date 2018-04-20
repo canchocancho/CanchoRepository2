@@ -36,7 +36,7 @@
 			alert("${errorMsg}")
 		</c:if>
 		
-		//텍스트 포스트 작성 이동
+		//텍스트 포스트 작성 이동a
 		function createPost(){
 			location.href = "post/writePost";
 		}
