@@ -1,4 +1,5 @@
 var selectedClipNum;
+var video0TrackobjNum = 0;
 var tracksDuration = {
 		"video-1" : 0,
 		"video-2" : 0,
@@ -6,6 +7,12 @@ var tracksDuration = {
 		"audio-2" : 0
 };
 
+
+
+function getFileName(path){
+	var pathArray = path.split('/');
+	return pathArray[pathArray.length-1];
+}
 
 /**
  * 현재 mash된 미디어의 라벨
@@ -69,101 +76,41 @@ function getDur(id){
 	return duration;
 }
 
-/**
- * 파일이 드래그 되는 곳 생성
- */
-function outputFileList(list){
-	var contents = '<div id="dragDropZone">';
+function getFileType(path){
+	var imgExtarr = new Array('jpg', 'jpeg', 'png');
+	var vdoExtarr = new Array('mp4', 'wemb', 'ogg');
+	var adoExtarr = new Array('mp3');
 	
-	$.each(list,function(index, item) {
-		contents += '<table class="fileBox"><tr><td class="fimage">';
-		contents += '';
-		
-		if (item.isFolder == false) {
-			var path = item.path;
-			var pathArray = path.split('\\');
-			var imgPath = './tomolog/';
-			var fileType = getFileType(item.path);
-			if( fileType == 'image'){
-				contents += '<img id="image' + index + '" ondragstart="drag(event)" draggable="true" class="file fimage-editor" ffid="' + item.ffid + '" path="' + imgPath + '">';
-			}
-			else if(fileType == 'video'){
-				
-				var p = item.path;
-				var videoPathrray = p.split('\\');
-				var videoPath = './storageResources/';
-				for (var j = 2; j < videoPathrray.length; j++) {
-					videoPath += videoPathrray[j] ;
-					if(j < (videoPathrray.length-1) )
-						videoPath += '/';
-				}
-				
-				contents += '<video id="video' + index 
-						 + '" draggable="true" ondragstart="drag(event)" ' 
-						 + 'path="' + videoPath + '" '
-						 + 'ffid="' + item.ffid + '" '
-						 + 'width=156 height=auto controls'
-						 + ' poster="' + thumbPath +'">';
-				contents +=   '<source src="' + videoPath + '" type="video/mp4">';
-				contents +=   '<source src="' + videoPath + '" type="video/ogg">';
-				contents +=   '<source src="' + videoPath + '" type="video/webm">';
-				contents +=   'Your browser does not support the video tag.';
-				contents += '</video>';
-			}
-			else if(fileType == 'audio'){
-				
-				var p = item.path;
-				var audioPathrray = p.split('\\');
-				var audioPath = './storageResources/';
-				for (var j = 2; j < audioPathrray.length; j++) {
-					audioPath += audioPathrray[j] ;
-					if(j < (audioPathrray.length-1) )
-						audioPath += '/';
-				}
-				contents +='<img draggable="true" ondragstart="drag(event)" ffid="' + item.ffid + '" path="' + audioPath + '" id="audio' + index + '" src="./resources/img/storage/audio.png">';
-				contents +='<audio controls>';
-				contents +='  <source src=' + audioPath + ' type="audio/mpeg">';
-				contents +='  Your browser does not support the audio tag.';
-				contents +='</audio>';
-				  
-			}
-			else {
-				contents += '<img  src="./resources/img/storage/file.png">';
-			}
-		} 
-		contents += '</td></tr>';
-		contents += '<tr><td class="fname">'; 
-		contents += item.fileName;
-		contents += '</td></tr>';
-	});
+	var rtn = 'file';
 	
-	contents += '</div>';
+	var pathArray = path.split('\\');
+	var fileArray = pathArray[pathArray.length-1].split('.');
+	var ext = fileArray[fileArray.length-1];
 	
-	w2ui.view.content('main', contents);
+	for (var i in imgExtarr) {
+		if(imgExtarr[i] == ext.toLowerCase())
+			return 'image';
+	}
 	
-	var dragDrop = $("#dragDropZone");
-	$('#dragDropZone').on('dragenter dragover', function(e) {
-		e.preventDefault();
-		$(this).css('border', '2px solid #ff0080');
-	});
-	$('#dragDropZone').on('drop', function(e) {
-		e.preventDefault();
-		var files = e.originalEvent.dataTransfer.files;
-		if (files.length < 1)
-			return;
-		$(this).css('border', '0px');
-		FileMultiUpload(files, dragDrop);
-	});
-	$('#dragDropZone').on('dragleave dragend', function(e) {
-		e.preventDefault();
-		$(this).css('border', '0px');
-	});
+	for (var i in vdoExtarr) {
+		if(vdoExtarr[i] == ext.toLowerCase())
+			return 'video';
+	}
 	
-	$('.fimage-editor').on('dblclick', function(){
-		var path = $(this).attr('path');
-		//alert(path);
-		$.colorbox({maxWidth:"75%", maxHeight:"75%", href:path});
-	});
+	for (var i in adoExtarr) {
+		if(adoExtarr[i] == ext.toLowerCase())
+			return 'audio';
+	}
+	
+	return rtn;
+}
+
+function checkFileType(data){
+	if(data.indexOf("video") != -1) return 'video';
+	if(data.indexOf("audio") != -1) return 'audio';
+	if(data.indexOf("image") != -1) return 'image';
+	if(data.indexOf("filter") != -1) return 'filter';
+	if(data.indexOf("transition") != -1) return 'transition';
 }
 
 /**
@@ -269,8 +216,7 @@ function videoSlider(){
         },
         update: function(event, ui) {
         	var idsInOrder = $("#video-track").sortable("toArray");
-        	/*addUndoArr(mm_player.mash)
-        	reorderingVideo0Clips(idsInOrder);*/
+        	//reorderingVideo0Clips(idsInOrder);
         }
     });
 }
@@ -300,16 +246,15 @@ function videoDragDropEventHandler(){
 			checkFileType(data) != 'image' &&
 			checkFileType(data) != 'transition') return;
 
-		addUndoArr(mm_player.mash);
 		//여기다가 할일을 
 		if(checkFileType(data) == 'video') {
 			addVideoTrackVideoObj(data);
-		} else if(checkFileType(data) == 'image'){
+		}/* else if(checkFileType(data) == 'image'){
 			addVideoTrackImageObj(data);
 		} 
 		else if(checkFileType(data) == 'transition'){
 			addVideoTrackTransitionsObj(data);
-		}
+		}*/
 		
 	});
 	
@@ -360,91 +305,158 @@ function subTrackDragDropEventHandler(trackId, type){
 	});	
 }
 
-function editorBinder(){
-	$("#editor_jump").bind('change mouseup', function () {
-		/*addUndoArr(mm_player.mash);*/
-		var video0Clips = mm_player.mash.video[0].clips;
-		var selectedClip = video0Clips[selectedClipNum];
-		var jump = selectedClip.trim*1;
-		var time = selectedClip.frames*1;
-		var sum = jump + time;
-		var newJump = 1*document.getElementById("editor_jump").value;
-		var newTime = sum - newJump;
-
-		$('#editor_time').attr('value', newTime);
-		
-		mm_player.mash.video[0].clips[selectedClipNum].frames = newTime;
-		mm_player.mash.video[0].clips[selectedClipNum].trim = newJump;
-		
-		var preFrame = 0;
-		for(var i = 0; i < mm_player.mash.video[0].clips.length; i++){
-			if(getType(mm_player.mash.video[0].clips[i].id) == 'transition') {
-				var frames = mm_player.mash.video[0].clips[i].frames;
-				var newFrames = preFrame - frames;
-				if(newFrames < 0) newFrames = 0;
-				mm_player.mash.video[0].clips[i].frame = newFrames;
-				preFrame = newFrames;
-				continue;
-			}
-			mm_player.mash.video[0].clips[i].frame = preFrame;
-			preFrame = preFrame + mm_player.mash.video[0].clips[i].frames;
-		}
-		
-		var index = 0;
-		for(var i = 0; i < mm_player.mash.video[0].clips.length; i++){
-			if( getType(mm_player.mash.video[0].clips[i].id) == 'image' ||
-					 getType(mm_player.mash.video[0].clips[i].id) == 'transition'	) continue;
-
-			mm_player.mash.audio[0].clips[index].frame = mm_player.mash.video[0].clips[i].frame;
-			mm_player.mash.audio[0].clips[index].trim = mm_player.mash.video[0].clips[i].trim;
-			mm_player.mash.audio[0].clips[index].frames = mm_player.mash.video[0].clips[i].frames;
-			index++;
-		}
-		
-		mm_player.change('frame');
-		mm_player.change('trim');
-		video0TrackRedraw();
-	});
+function addObj(trackId, id){
+	if(video0TrackobjNum == 0){
+		alert("video 트랙에 적어도 하나의 영상이 필요합니다.");
+		return;
+	}
 	
-	$("#e-time").bind('change mouseup', function () {
-		addUndoArr(mm_player.mash);
-		var newTime = 1*document.getElementById("e-time").value;
-
-		mm_player.mash.video[0].clips[selectedClipNum].frames = newTime;
+	var path = $('#' + id).attr('path');
+	var fname = getFileName(path);
+	var type = getFileType(path);
+	//alert(path);
+	var thumbPath = getThumbFpath(path, type);
+	//alert(thumbPath);
 		
-		var preFrame = 0;
-		for(var i = 0; i < mm_player.mash.video[0].clips.length; i++){
-			if(getType(mm_player.mash.video[0].clips[i].id) == 'transition') {
-				var frames = mm_player.mash.video[0].clips[i].frames;
-				var newFrames = preFrame - frames;
-				if(newFrames < 0) newFrames = 0;
-				mm_player.mash.video[0].clips[i].frame = newFrames;
-				preFrame = newFrames;
-				continue;
+	var url = path.substring(2,path.length);
+	//alert(url);
+	var html = $('#' + trackId).html();
+	var num = otherObjNum[trackId]*1;
+	var newid = trackId + '-' + num;
+	num++;
+	otherObjNum[trackId] = num;
+	//alert(JSON.stringify(otherObjNum));
+	var trackClass = trackId + '-obj';
+	$.ajax({
+		url : 'getObjectInfo',
+		type : 'GET',
+		data : {
+			path : path,
+			type : type
+		},
+		dataType : 'json',
+		success : function(duration) {
+			if(type == 'audio') {
+				html += '<div class="draggable ui-widget-content ' + trackClass + ' audio-obj other-obj track-obj"';
 			}
-			mm_player.mash.video[0].clips[i].frame = preFrame;
-			preFrame = preFrame + mm_player.mash.video[0].clips[i].frames;
+			else if( type == 'image') {
+				html += '<div class="draggable ui-widget-content ' + trackClass + ' image-obj  other-obj track-obj"';
+			}
+			var thumbId = newid+'image';
+			//alert(thumbId);
+			html += ' frames=' + duration +' ';
+			html += ' id=' + newid +' ';
+			html += ' itemId=' + id +' ';
+			//html += ' path=' + url +' ';
+			html += ' fname=' + fname +' ';
+			html += ' trackId=' + trackId +' ';
+			html += ' thumbPath=' + thumbPath +' ';
+			html += ' clicked=' + 'false' +' ';
+			html += '>';
+			html += '<img class="obj-thumb" src="' + thumbPath + '">'
+			html += fname;
+			html += '</div>';
+			
+			$('#' + trackId).html(html);
+			$( ".other-obj" ).draggable({ axis: "x", containment: '#' + trackId, scroll: false });
+			var addedClip = add_media(trackId, newid, url, fname, duration);
+			//alert(JSON.stringify(mm_player.mash));
+			$('#' + newid).attr('frame', addedClip.frame);
+			
+			resizeOtherTrackObj(newid, trackId);
+			trackObjEventRegister();
+		    $( ".draggable" ).draggable({
+		        stop: function() {
+		        	addUndoArr(mm_player.mash);
+		        	updateLocationObj($(this).attr('id'), $(this).attr('trackId'));
+		        	setMash();
+		        }
+		     });
+		},
+		error : function(e) {
+			//alert(JSON.stringify(e));
 		}
-		//alert(JSON.stringify(mm_player.mash.video[0].clips));
-		var index = 0;
-		for(var i = 0; i < mm_player.mash.video[0].clips.length; i++){
-			//alert(JSON.stringify(selectedVideoClip));
-			if( getType(mm_player.mash.video[0].clips[i].id) == 'image' ||
-					getType(mm_player.mash.video[0].clips[i].id) == 'transition') continue;
-			//alert(JSON.stringify(mm_player.mash.video[0].clips[i]));
-			//alert(JSON.stringify(mm_player.mash.audio[0].clips[index]));
-			mm_player.mash.audio[0].clips[index].frame = mm_player.mash.video[0].clips[i].frame;
-			mm_player.mash.audio[0].clips[index].frames = mm_player.mash.video[0].clips[i].frames;
-			index++;
-		}
+	});	
+}
+
+function add_media(trackId, id, url, fname, duration){
+	
+	var trackInfos = trackId.split('-');
+	var type = trackInfos[0];
+	if(type == 'video') type='image';
+	
+	var add = {
+		      'label': fname,
+		      'type': type,
+		      'id': id,
+		      'url': url,
+	};
+	
+	if(type == 'audio'){
+		add['duration']  = duration;
+	}
+	mm_player.add(add, trackInfos[0], tracksDuration[trackId] , trackInfos[1]*1);
+	//alert(JSON.stringify(mm_player.selectedClip, null, '\t'));
+	setMash();
+	
+	tracksDuration[trackId] += duration;	
+	return mm_player.selectedClip;
+	//alert(JSON.stringify(mm_player.mash, null, '\t'));
+}
+
+function addVideoTrackVideoObj(id){
+	
+	/*var ffid = $('#' + id).attr('ffid');
+	var path = $('#' + id).attr('path');
+	var fname = getFileName(path);*/
+	
+	var html = $('#video-track').html();
+	var newid = 'video'+'Obj' + video0TrackobjNum;
+	video0TrackobjNum++;
+	html += '<div class="ui-state-default video-obj track-obj" ';
+/*	html += ' frames=' + videoInfo.count/30 +' ';
+	html += ' id=' + newid +' ';
+	html += ' fname=' + fname +' ';
+	html += ' itemId=' + id +' ';*/
+	html += ' clicked=' + 'false' +' ';
+	html += '>';
+	html += '<img class="obj-thumb">'
+/*	html +=  fname;*/
+	html += '</div>';
+	
+	$('#video-track').html(html);
+	/*$.ajax({
+		url : 'getVideoInfo',
+		type : 'GET',
+		data : {
+			ffid : ffid
+		},
+		dataType : 'json',
+		success : function(videoInfo) {
 		
-		var videoTrackObjsCnt = $.makeArray($(".video-obj").map(function(){
-		    return $(this).attr("id");
-		}));
-		//alert(videoTrackObjsCnt);
- 		mm_player.change('frames');
- 		//alert(JSON.stringify(mm_player.mash));
-		video0TrackRedraw();       
-		setMash();
-	});
+			var html = $('#video-track').html();
+			var newid = 'video'+'Obj' + video0TrackobjNum;
+			video0TrackobjNum++;
+			html += '<div class="ui-state-default video-obj track-obj" ';
+			html += ' frames=' + videoInfo.count/30 +' ';
+			html += ' id=' + newid +' ';
+			html += ' fname=' + fname +' ';
+			html += ' itemId=' + id +' ';
+			//html += ' path=' + videoInfo.extractPath +' ';
+			html += ' clicked=' + 'false' +' ';
+			html += '>';
+			html += '<img class="obj-thumb" src="' + thumbPath + '">'
+			html +=  fname;
+			html += '</div>';
+			
+			$('#video-track').html(html);
+			add_video0(newid, videoInfo.extractPath.replace(/\\/gi, '/') ,videoInfo.count, fname, videoInfo.isAudio);
+			resizeTrackObj(0);
+			video0TrackEventRemover();
+			video0TrackEventRegister();
+		},
+		error : function(e) {
+			//alert(JSON.stringify(e));
+		}
+	});	*/
 }
