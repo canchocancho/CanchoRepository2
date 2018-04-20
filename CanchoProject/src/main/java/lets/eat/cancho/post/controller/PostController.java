@@ -117,7 +117,7 @@ public class PostController {
 		
 		logger.info("포스팅 종료");
 
-		return "redirect:/";
+		return "redirect:postList";
 	}
 	
 	@RequestMapping(value="postList", method=RequestMethod.GET)
