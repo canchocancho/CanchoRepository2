@@ -163,7 +163,7 @@
                   <li><a href="" class="active">Timeline</a></li>
                   <li><a href="../user/myPage">About</a></li>
                   <li><a href="timeline-album.html">Album</a></li>
-                  <li><a href="timeline-friends.html">Friends</a></li>
+                  <li><a href="../user/friendList">Friends</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
                   <li>1,299 people following her</li>
