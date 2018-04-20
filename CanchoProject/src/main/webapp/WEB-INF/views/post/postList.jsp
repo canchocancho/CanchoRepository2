@@ -139,7 +139,15 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo">
+                   <!-- 프로필 사진이 있을 때 -->
+	            	<c:if test="${profile.p_originalfile != null }">
+	              		<img src="downloadPic?user_id=${profile.user_id }" alt="post-image" class="img-responsive profile-photo">
+	              	</c:if>
+	              	
+	            	<!-- 프로필 사진이 없을 때 -->
+	            	<c:if test="${profile.p_originalfile == null }">
+	              		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="img-responsive profile-photo">
+	              	</c:if>
                   <h3>${sessionScope.loginName}</h3>
                   <p class="text-muted">Creative Director</p>
                 </div>
