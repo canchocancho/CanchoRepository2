@@ -226,6 +226,8 @@
                       <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
                       <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
                     </div>
+ 
+ 
  <%--                    <div class="line-divider"></div>
                     
                     
