@@ -31,12 +31,13 @@ public class CommentController {
 
 		String user_id = (String) session.getAttribute("loginId");
 		comment.setUser_id(user_id);
+		int post_num = comment.getPost_num();
 		
 		dao.insertComment(comment);
 
 		logger.info("댓글 작성 종료");
 		
-		return "redirect:/post/postList";
+		return "redirect:readOnePost?post_num="+post_num;
 	}
 	
 	@RequestMapping(value="deleteComment", method=RequestMethod.GET)

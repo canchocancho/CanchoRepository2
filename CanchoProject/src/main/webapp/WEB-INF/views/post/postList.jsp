@@ -37,6 +37,12 @@
 			}
 		</script>
 
+		<style>
+			A:link   { text-decoration: none; } /* a 태그에 마우스 올렸을 때 밑줄 같은 거 없애기 */
+			A:visited   { text-decoration: none; }
+			A:active   { text-decoration: none; }
+			A:hover   { text-decoration: none; }
+		</style>
 	</head>
 	<body>
 
@@ -214,7 +220,22 @@
                   <h5>${post.user_id }</h5>
                 </div><!--Post Date End-->
 
-                <img src="download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
+				<!-- 표지가 있을 경우 -->
+				<c:if test="${post.originalfile != null }">
+				<a href="readOnePost?post_num=${post.post_num }">
+				<img src="download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
+				</a>
+				</c:if>
+                
+                <!-- 표지가 없을 경우 -->
+                <c:if test="${post.originalfile == null }">
+                <div class="user-info">
+                <h1 style="text-align: center;"><a href="readOnePost?post_num=${post.post_num }">
+                ${post.post_title }</a></h1>
+                </div>
+                </c:if>
+                
+                
                 <div class="post-container">
                   <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left">
                   <div class="post-detail">
@@ -226,36 +247,6 @@
                       <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
                       <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
                     </div>
- 
- 
- <%--                    <div class="line-divider"></div>
-                    
-                    
-                    
-                    <div class="post-text">
-                      <p>글내용</p>
-                    </div>
-                    <div class="line-divider"></div>
-                    
-                    <c:forEach items="${commentList }" var="comment">
-						<c:if test="${post.post_num == comment.post_num }">
-							<div class="post-comment">
-	                     	 <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm">
-	                     	 <p><a href="timeline.html" class="profile-link">${comment.user_id }</a> ${comment.comment_text }</p>
-							</div>
-						</c:if>
-                    </c:forEach>
-                    <!-- 댓글 달기 -->
-                    <form id="replyForm" action="insertComment" method="post">
-                    <div class="post-comment">
-                      <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm">   		
-							<input type="hidden" name="post_num" id="post_num" value="${post.post_num }">
-							<input type="text" class="form-control" name="comment_text" id="comment_text" placeholder="Post a comment" autocomplete="off">
-                    </div>
-                    </form> --%>
-                    
-                    
-                    
                   </div>
                 </div>
               </div>
@@ -375,48 +366,5 @@
     <script src="../resources/js/jquery.scrollbar.min.js"></script>
     <script src="../resources/js/script.js"></script>
 
-
-	
-	
-	
-	
-		<h1>POST LIST</h1> 
-		
-	<table>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>등록일</th>
-		</tr>
-		
-		<!-- 게시글이 존재하지 않는 경우 -->
-		<c:if test="${postList == null || postList.size() == 0}">
-			<tr>
-				<td colspan="4" style="text-align: center;">포스트가 존재하지 않습니다.</td>
-			</tr>
-		</c:if>
-
-		<!-- 게시글이 하나라도 존재하는 경우 -->
-		<c:if test="${postList != null && postList.size() != 0}">	
-			<c:forEach items="${postList }" var="post">
-				<tr>
-					<td>${post.post_num }</td>
-					<td><a href="readOnePost?post_num=${post.post_num }">
-					
-						<c:if test="${post.savedfile == null }">${post.post_title }</c:if>
-						<c:if test="${post.savedfile != null }"><img src="download?post_num=${post.post_num }" style="width: 500px;"></c:if>
-					
-					</a></td>
-					<td>${post.user_id }</td>
-					<td>${post.post_date }</td>
-				</tr>
-				<tr>
-					<td><div id="read">
-					</div></td>
-				</tr>
-			</c:forEach>
-		</c:if>
-			</table>
 	</body>
 </html>
