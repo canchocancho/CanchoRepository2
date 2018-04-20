@@ -44,6 +44,18 @@
 			post_num desc
 	</select>
 	
+	<!-- 포스트 목록 -->
+	<select id="postListId" parameterType="String" resultType="Post">
+		select
+			*
+		from
+			blog_post
+		where
+			user_id = #{user_id}
+		order by
+			post_num desc
+	</select>
+	
 	<!-- 포스트 파일명 불러오기 -->
 	<select id="readPost" parameterType="int" resultType="String">
 		select

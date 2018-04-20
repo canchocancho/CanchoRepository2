@@ -1,6 +1,7 @@
 package lets.eat.cancho.user.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lets.eat.cancho.common.util.FileService;
+import lets.eat.cancho.post.dao.PostDAO;
+import lets.eat.cancho.post.vo.Post;
 import lets.eat.cancho.user.dao.UserDAO;
 import lets.eat.cancho.user.vo.Blog_Profile;
 import lets.eat.cancho.user.vo.Blog_User;
@@ -36,6 +39,9 @@ public class UserController {
 	
 	@Autowired
 	UserDAO dao;
+	
+	@Autowired
+	PostDAO postDAO;
 	
 	final String uploadPath = "/profilePicture";
 	
@@ -90,7 +96,11 @@ public class UserController {
 							session.setAttribute("profile", user_profile);
 						}
 						
-				    	return "redirect:/post/postList";
+						ArrayList<Post> postList = postDAO.postList();
+						session.setAttribute("postList", postList);
+						model.addAttribute("postList", postList);
+						
+				    	return "redirect:/";
 				    	 
 				      } else {
 				    	//E-mail 인증이 되지 않은 로그인

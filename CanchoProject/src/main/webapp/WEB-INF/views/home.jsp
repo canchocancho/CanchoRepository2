@@ -35,6 +35,11 @@
     	<c:if test ="${errorMsg != null}">
 			alert("${errorMsg}")
 		</c:if>
+		
+		//텍스트 포스트 작성 이동
+		function createPost(){
+			location.href = "post/writePost";
+		}
 			
 			$(function(){
 /* 				//ID중복체크
@@ -91,9 +96,17 @@
 				});
 			});
     </script>
+		<style>
+			A:link   { text-decoration: none; } /* a 태그에 마우스 올렸을 때 밑줄 같은 거 없애기 */
+			A:visited   { text-decoration: none; }
+			A:active   { text-decoration: none; }
+			A:hover   { text-decoration: none; }
+		</style>
 	</head>
 	<body>
-  
+ 
+ 
+ 	<c:if test="${sessionScope.loginId == null }">
     <!--preloader-->
     <div id="spinner-wrapper">
       <div class="spinner"></div>
@@ -398,6 +411,267 @@
 				</div>
 			</div>
 		</section>
+		</c:if>
+		
+		
+		
+		
+		
+		
+		
+		
+	<!-- 로그인이 되어 있을 경우 -->	
+	<c:if test="${sessionScope.loginId != null }">
+    <!-- Header
+    ================================================= -->
+		<header id="header">
+      <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
+
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href=""><img src="resources/images/logo.png" alt="logo" /></a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right main-menu">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
+                <ul class="dropdown-menu newsfeed-home">
+                  <li><a href="index.html">Landing Page 1</a></li>
+                  <li><a href="index-register.html">Landing Page 2</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Newsfeed <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
+                <ul class="dropdown-menu newsfeed-home">
+                  <li><a href="newsfeed.html">Newsfeed</a></li>
+                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
+                  <li><a href="newsfeed-friends.html">My friends</a></li>
+                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
+                  <li><a href="newsfeed-images.html">Images</a></li>
+                  <li><a href="newsfeed-videos.html">Videos</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Timeline <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
+                <ul class="dropdown-menu login">
+                  <li><a href="timeline.html">Timeline</a></li>
+                  <li><a href="timeline-about.html">Timeline About</a></li>
+                  <li><a href="timeline-album.html">Timeline Album</a></li>
+                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
+                  <li><a href="edit-profile-basic.html">Edit: Basic Info</a></li>
+                  <li><a href="edit-profile-work-edu.html">Edit: Work</a></li>
+                  <li><a href="edit-profile-interests.html">Edit: Interests</a></li>
+                  <li><a href="edit-profile-settings.html">Account Settings</a></li>
+                  <li><a href="edit-profile-password.html">Change Password</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All Pages <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
+                <ul class="dropdown-menu page-list">
+                  <li><a href="index.html">Landing Page 1</a></li>
+                  <li><a href="index-register.html">Landing Page 2</a></li>
+                  <li><a href="newsfeed.html">Newsfeed</a></li>
+                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
+                  <li><a href="newsfeed-friends.html">My friends</a></li>
+                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
+                  <li><a href="newsfeed-images.html">Images</a></li>
+                  <li><a href="newsfeed-videos.html">Videos</a></li>
+                  <li><a href="timeline.html">Timeline</a></li>
+                  <li><a href="timeline-about.html">Timeline About</a></li>
+                  <li><a href="timeline-album.html">Timeline Album</a></li>
+                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
+                  <li><a href="edit-profile-basic.html">Edit Profile</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="faq.html">FAQ Page</a></li>
+                  <li><a href="404.html">404 Not Found</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="contact.html">Contact</a></li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-sm">
+              <div class="form-group">
+                <i class="icon ion-android-search"></i>
+                <input type="text" class="form-control" placeholder="Search friends, photos, videos">
+              </div>
+            </form>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+      </nav>
+    </header>
+    <!--Header End-->
+
+    <div id="page-contents">
+    	<div class="container">
+    		<div class="row">
+
+          <!-- Newsfeed Common Side Bar Left
+          ================================================= -->
+    			<div class="col-md-3 static">
+            <div class="profile-card">
+            
+                <!-- 프로필 사진이 있을 때 -->
+            	<c:if test="${profile.p_originalfile != null }">
+              		<img src="post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="profile-photo">
+              	</c:if>
+              	
+            	<!-- 프로필 사진이 없을 때 -->
+            	<c:if test="${profile.p_originalfile == null }">
+              		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo">
+              	</c:if>
+
+            	<!-- <img src="http://placehold.it/300x300" alt="user" class="profile-photo" /> -->
+            	
+            	<h5><a href="timeline.html" class="text-white">${loginName }</a></h5>
+            	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
+            </div><!--profile card ends-->
+            <ul class="nav-news-feed">
+              <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>
+              <li><i class="icon ion-ios-people"></i><div><a href="newsfeed-people-nearby.html">People Nearby</a></div></li>
+              <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends.html">Friends</a></div></li>
+              <li><i class="icon ion-chatboxes"></i><div><a href="newsfeed-messages.html">Messages</a></div></li>
+              <li><i class="icon ion-images"></i><div><a href="newsfeed-images.html">Images</a></div></li>
+              <li><i class="icon ion-ios-videocam"></i><div><a href="newsfeed-videos.html">Videos</a></div></li>
+            </ul><!--news-feed links ends-->
+          </div>
+          
+    	<div class="col-md-7">
+
+            <!-- Post Create Box
+            ================================================= -->
+            <div class="create-post">
+            <button class="btn btn-primary pull-right" onclick="createPost();">Publish</button>
+<!--             	<div class="row">
+            		<div class="col-md-7 col-sm-7">
+                  <div class="form-group">
+                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-md" />
+                    <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                  </div>
+                </div>
+            		<div class="col-md-5 col-sm-5">
+                  <div class="tools">
+                    <ul class="publishing-tools list-inline">
+                      <li><a href="#"><i class="ion-compose"></i></a></li>
+                      <li><a href="#"><i class="ion-images"></i></a></li>
+                      <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
+                      <li><a href="#"><i class="ion-map"></i></a></li>
+                    </ul>
+                    
+                  </div>
+                </div>
+            	</div> -->
+            </div><!-- Post Create Box End-->
+
+            <!-- Post Content
+            ================================================= -->
+            <c:if test="${postList != null && postList.size() != 0}">
+            <c:forEach items="${postList }" var="post">
+            
+            <div class="post-content">
+             <!--  <img src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" />
+               -->
+              
+              
+           		<!-- 표지가 있을 경우 -->
+				<c:if test="${post.originalfile != null }">
+				<a href="post/readOnePost?post_num=${post.post_num }">
+				<img src="post/download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
+				</a>
+				</c:if>
+                
+                <!-- 표지가 없을 경우 -->
+                <c:if test="${post.originalfile == null }">
+                <div class="user-info">
+                <h1 style="text-align: center;"><a href="post/readOnePost?post_num=${post.post_num }">
+                ${post.post_title }</a></h1>
+                </div>
+                </c:if>   
+              
+              
+              
+              <div class="post-container">
+                <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
+                <div class="post-detail">
+                  <div class="user-info">
+                    <h5><a href="timeline.html" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>
+                    <p class="text-muted">${post.post_date }</p>
+                  </div>
+                  <div class="reaction">
+                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
+                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                  </div>
+                 <!--  <div class="line-divider"></div>
+                  <div class="post-text">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                  </div> 
+                  <div class="line-divider"></div>
+                  <div class="post-comment">
+                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
+                    <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                  </div>-->
+                </div>
+              </div>
+            </div>
+			
+			</c:forEach>
+			</c:if>
+          </div>
+
+          <!-- Newsfeed Common Side Bar Right
+          ================================================= -->
+    			<div class="col-md-2 static">
+            <div class="suggestions" id="sticky-sidebar">
+              <h4 class="grey">Who to Follow</h4>
+              <div class="follow-user">
+                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
+                <div>
+                  <h5><a href="timeline.html">Diana Amber</a></h5>
+                  <a href="#" class="text-green">Add friend</a>
+                </div>
+              </div>
+              <div class="follow-user">
+                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
+                <div>
+                  <h5><a href="timeline.html">Cris Haris</a></h5>
+                  <a href="#" class="text-green">Add friend</a>
+                </div>
+              </div>
+              <div class="follow-user">
+                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
+                <div>
+                  <h5><a href="timeline.html">Brian Walton</a></h5>
+                  <a href="#" class="text-green">Add friend</a>
+                </div>
+              </div>
+              <div class="follow-user">
+                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
+                <div>
+                  <h5><a href="timeline.html">Olivia Steward</a></h5>
+                  <a href="#" class="text-green">Add friend</a>
+                </div>
+              </div>
+              <div class="follow-user">
+                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
+                <div>
+                  <h5><a href="timeline.html">Sophia Page</a></h5>
+                  <a href="#" class="text-green">Add friend</a>
+                </div>
+              </div>
+            </div>
+          </div>
+    		</div>
+    	</div>
+    </div>
+
+		</c:if>
 
     <!-- Footer
     ================================================= -->

@@ -116,16 +116,23 @@ public class PostController {
 		}
 		
 		logger.info("포스팅 종료");
+		
+		ArrayList<Post> postList = dao.postList();
+		session.setAttribute("postList", postList);
 
-		return "redirect:postList";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="postList", method=RequestMethod.GET)
 	public String postList(HttpSession session, Model model){
 		logger.info("POST LIST");
 		
-		ArrayList<Post> postList = dao.postList();
-		model.addAttribute("postList", postList); //포스트 리스트 담기
+		String user_id = (String) session.getAttribute("loginId");
+		
+		ArrayList<Post> postListId = dao.postListId(user_id);
+		
+		
+		model.addAttribute("postListId", postListId); //포스트 리스트 담기
 		
 		return "post/postList";
 	}

@@ -55,6 +55,23 @@ public class PostDAO {
 		return list;
 	}
 	
+	public ArrayList<Post> postListId(String user_id){
+		
+		logger.info("사용자 포스트 목록 불러오기");
+		
+		ArrayList<Post> list = new ArrayList<Post>();
+		PostMapper mapper = session.getMapper(PostMapper.class);
+
+		try{
+			list = mapper.postListId(user_id);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	//포스트 파일명 가져오기
 	public String readPost(int post_num){
 		

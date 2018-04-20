@@ -14,11 +14,15 @@
 
     <!-- Stylesheets
     ================================================= -->
-		<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../resources/css/bootstrap2.min.css">
 		<link rel="stylesheet" href="../resources/css/style.css">
 		<link rel="stylesheet" href="../resources/css/ionicons.min.css">
-    <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
-    <link href="../resources/css/emoji.css" rel="stylesheet">
+ 	    <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+   		<link href="../resources/css/emoji.css" rel="stylesheet">
+    
+	  	<!-- Firepad -->
+	  	<link rel="stylesheet" href="../resources/css/firepad.css" />
+	  	<link rel="stylesheet" href="../resources/css/firepad_fc_fs.css" />
     
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
@@ -38,7 +42,12 @@
 			A:active   { text-decoration: none; }
 			A:hover   { text-decoration: none; }
 			
-			textarea {}
+			textarea {
+				-webkit-box-sizing: none;
+				-moz-box-sizing: none;
+				box-sizing: none;
+				width: 100%;
+			}
 		</style>
 	</head>
 	<body>
@@ -57,7 +66,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href=""><img src="../resources/images/logo.png" alt="logo"></a>
+            <a class="navbar-brand" href="../"><img src="../resources/images/logo.png" alt="logo"></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -149,7 +158,7 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="" class="active">Timeline</a></li>
+                  <li><a href="../post/postList" class="active">Timeline</a></li>
                   <li><a href="../user/myPage">About</a></li>
                   <li><a href="timeline-album.html">Album</a></li>
                   <li><a href="../user/friendList">Friends</a></li>

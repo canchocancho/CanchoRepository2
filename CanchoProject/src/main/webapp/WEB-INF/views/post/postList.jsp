@@ -219,14 +219,15 @@
             <!-- Post Content
             ================================================= -->
             <!-- 게시글이 하나라도 존재하는 경우 -->
-			<c:if test="${postList != null && postList.size() != 0}">	
+			<c:if test="${postList != null && postList.size() != 0}">
+			
 			<c:forEach items="${postList }" var="post">
 				  <div class="post-content">
 
-                <!--Post Date-->
+<%--                 <!--Post Date-->
                 <div class="post-date hidden-xs hidden-sm">
                   <h5>${post.user_id }</h5>
-                </div><!--Post Date End-->
+                </div><!--Post Date End--> --%>
 
 				<!-- 표지가 있을 경우 -->
 				<c:if test="${post.originalfile != null }">
@@ -262,6 +263,9 @@
 			</c:if>
 
             </div>
+            
+          <!-- Newsfeed Common Side Bar Right
+          ================================================= -->
             <div class="col-md-2 static">
               <div id="sticky-sidebar" class="" style="">
                 <h4 class="grey">Sarah's activity</h4>
