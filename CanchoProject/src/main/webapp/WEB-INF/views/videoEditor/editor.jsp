@@ -106,6 +106,7 @@
 			</div>
 		</div>    
     </div>
+    <div id = "timeLine">
     <div id="all-tracks-container">
     <div id = "volume"></div>
 	<span style="padding-left:33px"></span>
@@ -156,6 +157,8 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div id = "bottom">
 </div>
   </body>
 </html>
