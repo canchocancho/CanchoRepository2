@@ -97,11 +97,17 @@ public class editController {
 	
 	@ResponseBody
 	@RequestMapping(value = "getFileList", method = RequestMethod.POST)
-	public File[] getFileList(String selectedType) {
+	public ArrayList<String> getFileList(String selectedType) {
+		System.out.println("안오니?");
 		String type = selectedType;
+		String pathS = "";
 		File path = new File("C:/tomolog/temp/");
-		File[] fileList = path.listFiles(); 
-			return fileList;
+		File[] fileList = path.listFiles();
+		ArrayList<String> videoPath = new ArrayList<String>();
+		for (int i = 0; i < fileList.length; i++) {
+			 videoPath.add(pathS + fileList[i].toString());
+		}
+			return videoPath;
 		}
 	
 	@RequestMapping(value = "download", method = RequestMethod.GET)

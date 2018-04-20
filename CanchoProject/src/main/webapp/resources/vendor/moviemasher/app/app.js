@@ -12,6 +12,10 @@ var videoTotalDuration = 0;
 function mm_load() {
 	  var canvas = document.getElementById('mm-canvas')
 	  
+	    var myContext = canvas.getContext('2d');
+	  canvas.addEventListener( 'blargle', myHandler, false );
+	  eventOnDraw( myContext, 'blargle' );
+	  
 	  if (canvas && MovieMasher && MovieMasher.supported) {
 	    mm_player = MovieMasher.player();
 	    
@@ -82,4 +86,77 @@ function extract(data){
    		}
    	});	
  }
+//드래그 앤 드롭 이벤트
+function eventOnDraw( ctx, eventName ){
+	  var fireEvent = function(){
+	    var evt = document.createEvent("Events");
+	    evt.initEvent(eventName, true, true);
+	    ctx.canvas.dispatchEvent( evt );
+	  }
+	  var stroke = ctx.stroke;
+	  ctx.stroke = function(){
+	    stroke.call(this);
+	    fireEvent();
+	  };
+	  var fillRect = ctx.fillRect;
+	  ctx.fillRect = function(x,y,w,h){
+	    fillRect.call(this,x,y,w,h);
+	    fireEvent();
+	  };
+	  var fill = ctx.fill;
+	  ctx.fill = function(){
+	    fill.call(this);
+	    fireEvent();
+	  };
+}
+
+function myHandler(){
+	if(document.getElementById('t-slider') != null &&
+	document.getElementById('player-slider') != null) {
+		document.getElementById('t-slider').value = mm_player.position;
+		document.getElementById('player-slider').value = mm_player.position;
+		
+		var videoTrackObjsCnt = $.makeArray($(".video-obj").map(function(){
+		    return $(this).attr("frames");
+		}));
+		
+		var maxValue = 0;
+		
+		for(var j = 0; j < videoTrackObjsCnt.length; j++){
+			maxValue += Number(videoTrackObjsCnt[j]);
+		}
+
+		var trackArr= Object.keys(tracksDuration);
+		for(var i = 0; i < trackArr.length; i++){
+			if( tracksDuration[trackArr[i]] > maxValue )
+				maxValue = tracksDuration[trackArr[i]];
+		}	
+		
+		var time = maxValue * mm_player.position;
+		time = time.toFixed(2);
+		var tempTime = time + '';
+		var tempTimeSplited = tempTime.split('.');
+		var timeEnd = tempTimeSplited[1];
+		var timeSec = tempTimeSplited[0] * 1;
+		var timeStr = ' ';
+
+		function plusZero(time){
+			var t = time + '';
+			if(t.length == 2) return t;
+			else{
+				return '0' + t;
+			}
+		}
+		
+		if (timeSec < 60) {
+			timeStr += '00:00:' + plusZero(timeSec) + ':';
+		} else if (timeSec < 3600){
+			timeStr += '00:' + plusZero(Math.floor(timeSec%3600/60)) + ':' + plusZero(timeSec%60) + ':';
+		} else {
+			timeStr += plusZero(Math.floor(timeSec/3600)) + ':' + plusZero(Math.floor(timeSec%3600/60)) + ':' + plusZero(timeSec%60) + ':';
+		}
+		timeStr += plusZero(timeEnd);
+		$('#time').text(timeStr);
+	}
+}
 

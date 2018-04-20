@@ -29,7 +29,7 @@ function delAll() {
 	});
 }
 
-$(function(){
+/*$(function(){
 	$("#imgBtn").on("click",function(){		
 		var selectedType = $('#selectedFile').val();
 		var formData = new FormData();
@@ -72,7 +72,7 @@ $(function(){
 			}
 		});
 	});
-});
+});*/
 
 
 $.ajax({
@@ -80,7 +80,8 @@ $.ajax({
 	,url: "getFileList"
 	,datatype: "json"
 	,success: function(data) {
-			var str = "";
+			alert("그래");
+			/*var str = "";
 			for(var li in data) {
 				str += "<div>" + data[li] + "<button class=\"IndiFile\" filen=\"" + data[li] + "\">Delete</button></div>"
 			}
@@ -93,7 +94,9 @@ $.ajax({
 			});
 			$('#deleteAll').on('click', function() {
 				delAll();
-			});
+			});*/
+			outputFileList(data);
+			
 	}
 	,error: function(e) {
 		console.log(e);
@@ -119,3 +122,90 @@ function volumeControll(){
 	}
 }
 
+function outputFileList(list){
+	var contents = '<div id="dragDropZone">';
+	
+	$.each(list,function(index, item) {
+		contents += '<table class="fileBox"><tr><td class="fimage">';
+		contents += '';
+		var path = item;
+			var pathArray = path.split('\\');
+			var imgPath = './tomolog/';
+			for (var j = 2; j < pathArray.length; j++) {
+				imgPath += pathArray[j];
+				if(j < (pathArray.length-1) ) {
+					imgPath += '/';
+				}
+			}
+			var fileType = getFileType(item);
+		/*	if( fileType == 'image'){
+				contents += '<img id="image' + index + '" ondragstart="drag(event)" draggable="true" class="file fimage-editor" path="' + imgPath + '" src="' + thumbPath +'">';
+			}
+			else */if(fileType == 'video'){
+				
+				var p = item;
+				var videoPathrray = p.split('\\');
+				var videoPath = './tomolog/';
+				for (var j = 2; j < videoPathrray.length; j++) {
+					videoPath += videoPathrray[j] ;
+					if(j < (videoPathrray.length-1) )
+						videoPath += '/';
+				}
+				
+				contents += '<video id="video' + index 
+						 + '" draggable="true" ondragstart="drag(event)" ' 
+						 + 'path="' + videoPath + '" '
+						 + 'width=156 height=auto controls'
+						 + '>';
+				contents +=   '<source src="' + videoPath + '" type="video/mp4">';
+				contents +=   '<source src="' + videoPath + '" type="video/ogg">';
+				contents +=   '<source src="' + videoPath + '" type="video/webm">';
+				contents +=   'Your browser does not support the video tag.';
+				contents += '</video>';
+			}
+			/*else if(fileType == 'audio'){
+				
+				var p = item.path;
+				var audioPathrray = p.split('\\');
+				var audioPath = './storageResources/';
+				for (var j = 2; j < audioPathrray.length; j++) {
+					audioPath += audioPathrray[j] ;
+					if(j < (audioPathrray.length-1) )
+						audioPath += '/';
+				}
+				contents +='<img draggable="true" ondragstart="drag(event)" ffid="' + item.ffid + '" path="' + audioPath + '" id="audio' + index + '">';
+				contents +='<audio controls>';
+				contents +='  <source src=' + audioPath + ' type="audio/mpeg">';
+				contents +='  Your browser does not support the audio tag.';
+				contents +='</audio>';
+				  
+			}*/
+		contents += '</td></tr>';
+	});
+	
+	contents += '</div>';
+	
+	$('#fileBox').html(contents);
+	
+	$('#dragDropZone').on('dragenter dragover', function(e) {
+		e.preventDefault();
+		$(this).css('border', '2px solid #ff0080');
+	});
+	$('#dragDropZone').on('drop', function(e) {
+		e.preventDefault();
+		var files = e.originalEvent.dataTransfer.files;
+		if (files.length < 1)
+			return;
+		$(this).css('border', '0px');
+	});
+	$('#dragDropZone').on('dragleave dragend', function(e) {
+		e.preventDefault();
+		$(this).css('border', '0px');
+	});
+	
+	$('.fimage-editor').on('dblclick', function(){
+		var path = $(this).attr('path');
+		//alert(path);
+		$.colorbox({maxWidth:"75%", maxHeight:"75%", href:path});
+	});
+}
