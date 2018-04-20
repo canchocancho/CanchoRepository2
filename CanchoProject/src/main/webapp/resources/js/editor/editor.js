@@ -29,7 +29,7 @@ function delAll() {
 	});
 }
 
-/*$(function(){
+$(function(){
 	$("#imgBtn").on("click",function(){		
 		var selectedType = $('#selectedFile').val();
 		var formData = new FormData();
@@ -72,7 +72,7 @@ function delAll() {
 			}
 		});
 	});
-});*/
+});
 
 
 $.ajax({
@@ -81,7 +81,7 @@ $.ajax({
 	,datatype: "json"
 	,success: function(data) {
 			alert("그래");
-			/*var str = "";
+			var str = "";
 			for(var li in data) {
 				str += "<div>" + data[li] + "<button class=\"IndiFile\" filen=\"" + data[li] + "\">Delete</button></div>"
 			}
@@ -94,7 +94,7 @@ $.ajax({
 			});
 			$('#deleteAll').on('click', function() {
 				delAll();
-			});*/
+			});
 			outputFileList(data);
 			
 	}

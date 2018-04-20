@@ -14,30 +14,8 @@
 	<link rel="stylesheet" href="resources/vendor/zTree/css/awesomeStyle/awesome.css" type="text/css">
 	<!--<link rel="stylesheet" href="resources/css/editor/editor.css" type="text/css"> -->
 	<link href="resources/vendor/colorBox/colorbox.css" rel="stylesh1eet">
+	<link href="resources/css/editor/cancho_editor.css" rel="stylesheet">
 	
-	<style>
-	
-		#selectFiles {
-		
-			width: 250px;
-			height: 200px;
-			background-color: gray;
-			padding: 10px;
-		}
-		
-		#playerContainer{
-			width: 400px;
-			height: 300px;
-			margin: 0px auto;
-		}
-		
-		#uploadContainer{
-			width: 400px;
-			height: 300px;
-			margin: 0px auto;
-		}
-	
-	</style>
 	
 	
 	<script type="text/javascript" src="resources/vendor/jquery/jquery.js"></script>
@@ -68,11 +46,11 @@
     <script src="resources/js/editor/editor.js"></script>
     <script src="resources/js/editor/videoSlider.js"></script>
     <script src="resources/js/editor/timeLine2.js"></script>
-    <style>canvas, textarea { width: 320px; height: 240px; }</style>
+    <!-- <style>canvas, textarea { width: 320px; height: 240px; }</style> -->
   </head> 
   <body onload='mm_load()'>
-	<div>  
-		<div id = playerContainer align="left">
+	<div id="upperContainer">  
+		<div id ="playerContainer">
 	    	<canvas id='mm-canvas'></canvas>
 	    	<div>    
 	    		<input type= "range" id="p-slider" step= "0.001" value="0" min="0" max="1" oninput="sliderSyncro('pslider')"/>
@@ -85,15 +63,14 @@
 	    	</div>
 
     	</div>
-    	<p>
-    	<div id = uploadContainer align="right">
-			<div id="imgDiv">		
-			</div>
+    	
+    	<div id ="uploadContainer">
+			
 		
 			<input type="file" id="upload" name="file-data">			
-			<input type="button" id="imgBtn" value="전송"><p><p>
+			<input type="button" id="imgBtn" value="전송">
 		
-			<div id="selectFiles">
+			
 				<select id="selectedFile">
 					<option>Video</option>
 					<option>Image</option>
@@ -103,9 +80,10 @@
 					<div id="fileListBox">
 					</div>
 				</div>
-			</div>
+			
 		</div>    
     </div>
+   	<div id="middle"></div>
     <div id = "timeLine">
     <div id="all-tracks-container">
     <div id = "volume"></div>

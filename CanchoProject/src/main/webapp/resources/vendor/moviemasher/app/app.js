@@ -178,8 +178,7 @@ $(document).ready(function () {
 	bottomContents +=	 " <input type='range' id='track-zoom' step='0.01' value='1' min='1' max='5' oninput='javascript:zoom();' />";   
 	$('#bottm').html(bottomContents);
 	
-	timeLineSlider();
+	videoSlider();
 	trackDragAndDropEventHander();
-	addTrackEventHandlerRegister();
-	timeLineMenuEventHandler();
+	
 });
