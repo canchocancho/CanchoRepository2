@@ -50,8 +50,6 @@ function extract(data){
    			for(var i = 0; i <= zeroCount; i++){
    				zeroPlus += '0';
     		}
-   			alert(zeroCount);
-   			alert(url);
     		var media = {
     	    		'label': data,
    		    		'id': data,
@@ -65,10 +63,10 @@ function extract(data){
     		/*isAudio ==*/
     		if(true){
     			   media = {
-    					      'label': 'pika',
+    					      'label': data,
     					      'type': 'audio',
-    					      'id': 'pikaaudio',
-    					      'url': url.originPath + 'audio.mp3',
+    					      'id': data,
+    					      'url': url + 'audio.mp3',
     					      'duration': duration,
     			  };
     			   

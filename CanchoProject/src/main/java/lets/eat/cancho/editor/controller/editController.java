@@ -132,78 +132,21 @@ public class editController {
 	}
 	
 	/*@ResponseBody
-	@RequestMapping(value = "deleteIndiFile", method = RequestMethod.POST)
-	public void deleteIndiFile(String indiFileName) {
-		String delFileName = indiFileName;
-		
-		String fullpath = uploadPath + delFileName;
-		
-		
-		String ext;
-		int lastIndex = delFileName.lastIndexOf('.');
-		int fileLength = delFileName.length();
-		String extName = delFileName.substring(lastIndex+1, fileLength);
-		String realName = delFileName.substring(0, lastIndex);
-		
-		String fullpathEx = extractPath + realName;
-		System.out.println(fullpathEx);
-		
-		deleteMap.put("fullpath", fullpath);
-		
-		if(extName.equals("mp4") || extName.equals("ogg") || extName.equals("webm")) {
-			deleteMap.put("fullpathEx", fullpathEx);
-		}
-		else {
-			deleteMap.put("fullpathEx", "notVideo");
-		}
-		
-		boolean del = FileService.deleteFile(deleteMap);
-		
-		if(del) {
-			switch(extName) {
-			
-				case "mp4": videoList.remove(delFileName); break;
-				case "ogg": videoList.remove(delFileName); break;
-				case "webm": videoList.remove(delFileName); break;
-				case "mp3": audioList.remove(delFileName); break;
-				case "jpg": imageList.remove(delFileName); break;
-				case "jpeg": imageList.remove(delFileName); break;
-				case "png": imageList.remove(delFileName); break;
-				
-			}
-		}
-		
-	}
-	
-	@ResponseBody
 	@RequestMapping(value = "deleteAllFiles", method = RequestMethod.GET)
-	public void deleteAllFiles(String deleteMess) {
-		 File file = new File("C:/dir");
-         
-	        if( file.exists() ){ //파일존재여부확인
-	             
-	            if(file.isDirectory()){ //파일이 디렉토리인지 확인
-	                 
-	                File[] files = file.listFiles();
-	                 
-	                for( int i=0; i<files.length; i++){
-	                    if( files[i].delete() ){
-	                        System.out.println(files[i].getName()+" 삭제성공");
-	                    }else{
-	                        System.out.println(files[i].getName()+" 삭제실패");
-	                    }
-	                }
-	                 
-	            }
-	            if(file.delete()){
-	                System.out.println("파일삭제 성공");
-	            }else{
-	                System.out.println("파일삭제 실패");
-	            }
-	             
-	        }else{
-	            System.out.println("파일이 존재하지 않습니다.");
-	        }
+	public void deleteAllFiles() {
+		File exFile = new File("C:/tomolog/extract/");
+		File temFile = new File("C:/tomolog/temp/");
+        if(exFile.exists()){ //파일존재여부확인
+            if(exFile.isDirectory()){ //파일이 디렉토리인지 확인
+                File[] exFiles = exFile.listFiles();
+                File[] temFiles = temFile.listFiles();
+                for( int i=0; i<exFiles.length; i++){
+                	exFiles[i].delete();   
+                	temFiles[i].delete();
+                }
+            }
+            exFile.delete(); 
+            temFile.delete();
+        }	
 	}*/
-
 }

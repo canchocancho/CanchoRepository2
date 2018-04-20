@@ -5,17 +5,10 @@ var clickedObj;
 
 
 function delIndiFile(delFileName) {
-	var indiFileName = delFileName;
-	alert(indiFileName);
-	
 	$.ajax({
 		type:"POST"
 		,url: "deleteIndiFile"
-		,data: {
-			indiFileName : indiFileName
-		}
 		,success: function() {
-			readFileList();
 		}
 		,error: function(e) {
 			console.log(e);
@@ -25,33 +18,23 @@ function delIndiFile(delFileName) {
 }
 
 function delAll() {
-	var mess = "delAll";
 	$.ajax({
 		type:"GET"
 		,url: "deleteAllFiles"
-		,data: {
-			deleteMess : mess
-		}
 		,success: function() {
-			readFileList();
 		}
 		,error: function(e) {
 			console.log(e);
 		}
 	});
-	
 }
 
 $(function(){
-	$("#imgBtn").on("click",function(){
-		
+	$("#imgBtn").on("click",function(){		
 		var selectedType = $('#selectedFile').val();
-		alert(selectedType);
-		
 		var formData = new FormData();
 		formData.append("file",$("#upload")[0].files[0]);
 		formData.append("fileType", selectedType);
-		
 		$.ajax({
 			type:"POST",						
 			url:"fileupload",				
@@ -60,8 +43,6 @@ $(function(){
 		    contentType: false,
 		    dataType : "text",				
 			success:function(data){
-				alert(data);
-				extract(data);
 				$.ajax({
 					type:"POST"
 					,url: "getFileList"
@@ -69,7 +50,7 @@ $(function(){
 					,success: function(data) {
 							var str = "";
 							for(var li in data) {
-								str += "<div>" + data[li] + "   <button class=\"IndiFile\" filen=\"" + data[li] + "\">Delete</button></div>"
+								str += "<div draggable=\"true\" ondragstart=\"drag(event)\">" + data[li] + "<button class=\"IndiFile\" filen=\"" + data[li] + "\">Delete</button></div>"
 							}
 							str += "<div id=\"deleteAllBox\"><button id=\"deleteAll\">DeleteAll</button></div>";
 							$('#fileListBox').html(str);
@@ -80,24 +61,16 @@ $(function(){
 							$('#deleteAll').on('click', function() {
 								delAll();
 							});
-					}	/*	success end	*/
+					}
 					,error: function(e) {
 						console.log(e);
 					}
 				});
-				
 			},
 			error: function(e){			
 				console.log(e);
 			}
 		});
-	});
-	
-$('#selectedFile').on('change', function() {
-		var selectedType = $('#selectedFile').val();
-		alert(selectedType);
-		readFileList();
-
 	});
 });
 
@@ -121,7 +94,7 @@ $.ajax({
 			$('#deleteAll').on('click', function() {
 				delAll();
 			});
-	}	/*	success end	*/
+	}
 	,error: function(e) {
 		console.log(e);
 	}

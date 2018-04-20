@@ -116,7 +116,6 @@
 		<div  class="main-track ui-state-default" id="video-track">
 			<span class="track-name">
 				<i>메인</i>
-				<!-- <i class="fa fa-video-camera" aria-hidden="true"></i> -->
 			</span>
 		</div>
 	</div>
@@ -124,7 +123,6 @@
 		<div  class="odd-track-container" id="video-1-cont" >
 			<span class="track-name">
 				<i>이미지1</i>
-				<!-- <i class="fa fa-picture-o" aria-hidden="true"></i> -->
 			</span>
 			<div class="track-odd other-track" id="video-1">
 			</div>
@@ -135,7 +133,6 @@
 		<div class="even-track-container" id="audio-1-cont">
 			<span class="track-name">
 				<i>오디오1</i>
-				<!-- <i class="fa fa-music" aria-hidden="true"></i> -->
 			</span>
 			<div class="track-even other-track" id="audio-1">
 			</div>
@@ -145,7 +142,6 @@
 		<div class="odd-track-container" id="video-2-cont">
 			<span class="track-name">
 				<i>이미지2</i>
-				<!-- <i class="fa fa-picture-o" aria-hidden="true"></i> -->
 			</span>
 			<div class="track-odd other-track" id="video-2">
 			</div>
@@ -155,7 +151,6 @@
 		<div class="even-track-container" id="audio-2-cont">
 			<span class="track-name">
 				<i>오디오2</i>
-				<!-- <i class="fa fa-music" aria-hidden="true"></i> -->
 			</span>
 			<div class="track-even other-track" id="audio-2">
 			</div>
