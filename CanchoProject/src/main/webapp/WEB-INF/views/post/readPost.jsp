@@ -4,146 +4,311 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>READ</title>
-		
-		<script type="text/javascript" src="../resources/js/jquery-1.12.4.min.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="This is social network html5 template available in themeforest......">
+		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page">
+		<meta name="robots" content="index, follow">
+		<title>TIMELINE</title>
 
-		<link rel="stylesheet" href="../resources/css/firepad.css" />
-		<link rel="stylesheet" href="../resources/css/firepad_fc_fs.css" />
-		
+    <!-- Stylesheets
+    ================================================= -->
+		<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../resources/css/style.css">
+		<link rel="stylesheet" href="../resources/css/ionicons.min.css">
+    <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+    <link href="../resources/css/emoji.css" rel="stylesheet">
+    
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="../resources/images/fav.png">
+    
 		<script type="text/javascript">
-		
 			<c:if test="${errorMsg != null }">
 				alert('${errorMsg }');
 			</c:if>
-		
-			function deleteCheck(){
-				if(confirm("게시글을 삭제할까요?")){
-					location.href = 'deletePost?post_num=${post.post_num }';
-				} else {
-					return false;
-				}
-			}
-			
-			function checkComment(){
-				
-				var comment_text = document.getElementById("comment_text");
-				
-				if(comment_text.value == ''){
-					alert('댓글의 내용을 입력하세요.');
-					return false;
-				}
-				
-				return true;
-			}
-			
-			function deleteComment(comment_num, post_num){
-				if(confirm("댓글을 삭제할까요?")){
-					location.href = 'deleteComment?comment_num='+comment_num+'&post_num='+post_num;
-				} else {
-					return false;
-				}				
-			}
-			
-		      function updateCommentForm(comment_num, post_num, comment_text){
-
-		         var div = document.getElementById("div"+comment_num);
-		         
-		         var str = '<form id="editForm'+comment_num+'" action="updateComment" method="post">';
-				 str += '<input type="text" name="comment_text" value="'+comment_text+'" autocomplete="off">';
-				 
-		         str += '<input type="hidden" name="comment_num" value="'+comment_num+'">';
-		         str += '<input type="hidden" name="post_num" value="'+post_num+'">';
-		         
-		         str += '<a href="javascript:updateComment('+comment_num+')">[확인]</a>';
-		         str += '<a href="javascript:commentCancel(div'+comment_num+')">[취소]</a>';
-		         str += '</form>';
-		         
-		         div.innerHTML = str;
-		         
-		      }
-			
-			function commentCancel(div){
-				div.innerHTML = "";
-			}
-			
-			function updateComment(comment_num){
-
-				var form = document.getElementById("editForm"+comment_num);
-				form.submit();
-			}			
 		</script>
-		
+
 		<style>
-			table{
-				border-collapse: collapse;
-			}
+			A:link   { text-decoration: none; } /* a 태그에 마우스 올렸을 때 밑줄 같은 거 없애기 */
+			A:visited   { text-decoration: none; }
+			A:active   { text-decoration: none; }
+			A:hover   { text-decoration: none; }
 			
-			table, th, td{
-				text-align: center; border: 1px solid black;
-			}
+			textarea {}
 		</style>
 	</head>
-	
 	<body>
 
-	<div>${postText }</div>
-	
-	<br><br>
-		
-	<div style="text-align: center; width: 100%;">
-		<form action="insertComment" method="post" onsubmit="checkComment();">
-			<input type="hidden" name="post_num" value="${post.post_num }">
-			댓글 : <input type="text" name="comment_text" id="comment_text">
-					<input type="submit" value="작성">
-		</form>
-	</div>
+    <!-- Header
+    ================================================= -->
+		<header id="header">
+      <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
 
-	<br>
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href=""><img src="../resources/images/logo.png" alt="logo"></a>
+          </div>
 
-	<table style="margin: 0 auto;">
-		<tr>
-			<th>작성자</th>
-			<th style="width: 300px;">내용</th>
-			<th>날짜</th>
-			<th></th>
-		</tr>
-	
-		<c:forEach items="${commentList }" var="comment">
-			<tr>
-				<td>${comment.user_id }</td>
-				<td style="text-align: left;">${comment.comment_text }</td>
-				<td>${comment.comment_date }</td>
-				<td>
-					<c:if test="${sessionScope.loginId == comment.user_id }">
-						<a href="javascript:updateCommentForm('${comment.comment_num }', '${comment.post_num }', '${comment.comment_text }')">[수정]</a>
-						<a href="javascript:deleteComment('${comment.comment_num }', '${comment.post_num }')">[삭제]</a>
-					</c:if>
-				
-				</td>
-			</tr>
-			<tr>
-				<!-- 리플 수정 폼이 나타날 위치 -->
-				<td colspan="2">
-					<div id="div${comment.comment_num }"></div>
-				</td>
-			</tr>
-		</c:forEach>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right main-menu">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="../resources/images/down-arrow.png" alt=""></span></a>
+                <ul class="dropdown-menu newsfeed-home">
+                  <li><a href="index.html">Landing Page 1</a></li>
+                  <li><a href="index-register.html">Landing Page 2</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Newsfeed <span><img src="../resources/images/down-arrow.png" alt=""></span></a>
+                <ul class="dropdown-menu newsfeed-home">
+                  <li><a href="newsfeed.html">Newsfeed</a></li>
+                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
+                  <li><a href="newsfeed-friends.html">My friends</a></li>
+                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
+                  <li><a href="newsfeed-images.html">Images</a></li>
+                  <li><a href="newsfeed-videos.html">Videos</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Timeline <span><img src="../resources/images/down-arrow.png" alt=""></span></a>
+                <ul class="dropdown-menu login">
+                  <li><a href="timeline.html">Timeline</a></li>
+                  <li><a href="timeline-about.html">Timeline About</a></li>
+                  <li><a href="timeline-album.html">Timeline Album</a></li>
+                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
+                  <li><a href="edit-profile-basic.html">Edit: Basic Info</a></li>
+                  <li><a href="edit-profile-work-edu.html">Edit: Work</a></li>
+                  <li><a href="edit-profile-interests.html">Edit: Interests</a></li>
+                  <li><a href="edit-profile-settings.html">Account Settings</a></li>
+                  <li><a href="edit-profile-password.html">Change Password</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All Pages <span><img src="../resources/images/down-arrow.png" alt=""></span></a>
+                <ul class="dropdown-menu page-list">
+                  <li><a href="index.html">Landing Page 1</a></li>
+                  <li><a href="index-register.html">Landing Page 2</a></li>
+                  <li><a href="newsfeed.html">Newsfeed</a></li>
+                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
+                  <li><a href="newsfeed-friends.html">My friends</a></li>
+                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
+                  <li><a href="newsfeed-images.html">Images</a></li>
+                  <li><a href="newsfeed-videos.html">Videos</a></li>
+                  <li><a href="timeline.html">Timeline</a></li>
+                  <li><a href="timeline-about.html">Timeline About</a></li>
+                  <li><a href="timeline-album.html">Timeline Album</a></li>
+                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
+                  <li><a href="edit-profile-basic.html">Edit Profile</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="faq.html">FAQ Page</a></li>
+                  <li><a href="404.html">404 Not Found</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="contact.html">Contact</a></li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-sm">
+              <div class="form-group">
+                <i class="icon ion-android-search"></i>
+                <input type="text" class="form-control" placeholder="Search friends, photos, videos">
+              </div>
+            </form>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+      </nav>
+    </header>
+    <!--Header End-->
 
-	</table>
+    <div class="container">
 
-	<br>
+      <!-- Timeline
+      ================================================= -->
+      <div class="timeline">
+        <div class="timeline-cover">
 
-	<div style="text-align: center; width: 100%;">
-		<c:if test="${sessionScope.loginId == post.user_id }">
-			<button onclick="deleteCheck()">삭제</button>
-			<a href="updatePost?post_num=${post.post_num }"><button>수정</button></a>
-		</c:if>
-		<a href="postList"><button>목록으로</button></a>
-	</div>
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo">
+                  <h3>${post.user_id}</h3>
+                  <p class="text-muted">Creative Director</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a href="" class="active">Timeline</a></li>
+                  <li><a href="../user/myPage">About</a></li>
+                  <li><a href="timeline-album.html">Album</a></li>
+                  <li><a href="../user/friendList">Friends</a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  <li>1,299 people following her</li>
+                  <li><button class="btn-primary">Add Friend</button></li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
+          <!--Timeline Menu for Small Screens-->
+          <div class="navbar-mobile hidden-lg hidden-md">
+            <div class="profile-info">
+            
+            <!-- 프로필 사진이 있을 때 -->
+            	<c:if test="${profile.p_originalfile != null }">
+              		<img src="downloadPic?user_id=${profile.user_id }" alt="post-image" class="img-responsive profile-photo">
+              	</c:if>
+              	
+            <!-- 프로필 사진이 없을 때 -->
+            	<c:if test="${profile.p_originalfile == null }">
+              		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="img-responsive profile-photo">
+              	</c:if>
+              	
+              <h4>${post.user_id}</h4>
+              <p class="text-muted">Creative Director</p>
+            </div>
+            <div class="mobile-menu">
+              <ul class="list-inline">
+                <li><a href="timline.html" class="active">Timeline</a></li>
+                <li><a href="timeline-about.html">About</a></li>
+                <li><a href="timeline-album.html">Album</a></li>
+                <li><a href="timeline-friends.html">Friends</a></li>
+              </ul>
+              <button class="btn-primary">Add Friend</button>
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
+
+        </div>
+        <div id="page-contents" style="position: relative;">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
 
 
-	<h3>본문 수정/삭제는 아직</h3>
+            <!-- Post Content
+            ================================================= -->
+                    <!-- <div class="post-text"> -->
+                      <p>${postText }</p>
+                    <!-- </div> -->
+                    <br>
+                    
+                    <div class="line-divider"></div>
+                    
+                    <c:forEach items="${commentList }" var="comment">
+						<c:if test="${post.post_num == comment.post_num }">
+							<div class="post-comment">
+	                     	 
+	                     	 <p><a href="timeline.html" class="profile-link">${comment.user_id }</a> ${comment.comment_text }</p>
+							</div>
+						</c:if>
+                    </c:forEach>
+                    
+                    
+                    <!-- 댓글 달기 -->
+                    <form id="replyForm" action="insertComment" method="post">
+                    <div class="post-comment">
+                      		
+							<input type="hidden" name="post_num" id="post_num" value="${post.post_num }">
+							<input type="text" class="form-control" name="comment_text" id="comment_text" placeholder="Post a comment" autocomplete="off">
+                    </div>
+                    </form>
+                    </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    <!-- Footer
+    ================================================= -->
+    <footer id="footer">
+      <div class="container">
+      	<div class="row">
+          <div class="footer-wrapper">
+            <div class="col-md-3 col-sm-3">
+              <a href=""><img src="../resources/images/logo-black.png" alt="" class="footer-logo"></a>
+              <ul class="list-inline social-icons">
+              	<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <h5>For individuals</h5>
+              <ul class="footer-links">
+                <li><a href="">Signup</a></li>
+                <li><a href="">login</a></li>
+                <li><a href="">Explore</a></li>
+                <li><a href="">Finder app</a></li>
+                <li><a href="">Features</a></li>
+                <li><a href="">Language settings</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <h5>For businesses</h5>
+              <ul class="footer-links">
+                <li><a href="">Business signup</a></li>
+                <li><a href="">Business login</a></li>
+                <li><a href="">Benefits</a></li>
+                <li><a href="">Resources</a></li>
+                <li><a href="">Advertise</a></li>
+                <li><a href="">Setup</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-sm-2">
+              <h5>About</h5>
+              <ul class="footer-links">
+                <li><a href="">About us</a></li>
+                <li><a href="">Contact us</a></li>
+                <li><a href="">Privacy Policy</a></li>
+                <li><a href="">Terms</a></li>
+                <li><a href="">Help</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-3">
+              <h5>Contact Us</h5>
+              <ul class="contact">
+                <li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
+                <li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
+                <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
+              </ul>
+            </div>
+          </div>
+      	</div>
+      </div>
+      <div class="copyright">
+        <p>Thunder Team © 2016. All rights reserved</p>
+      </div>
+		</footer>
+    
+    <!--preloader-->
+    <div id="spinner-wrapper" style="display: none;">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Scripts
+    ================================================= -->
+    
+    <script src="../resources/js/bootstrap.min.js"></script>
+    <script src="../resources/js/jquery-3.1.1.min.js"></script>
+    <script src="../resources/js/jquery.sticky-kit.min.js"></script>
+    <script src="../resources/js/jquery.scrollbar.min.js"></script>
+    <script src="../resources/js/script.js"></script>
+
 	</body>
 </html>

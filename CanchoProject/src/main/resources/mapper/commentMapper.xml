@@ -33,6 +33,8 @@
 			blog_comment
 		where
 			post_num = #{post_num}
+		order by
+			comment_num
 	</select>
 	
 	<delete id="deleteComment" parameterType="int">
