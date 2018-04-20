@@ -37,7 +37,7 @@
 		</c:if>
 			
 			$(function(){
-				//ID중복체크
+/* 				//ID중복체크
 				$('#btn1').on('click', function(){
 					alert("누름");
 					$.ajax({
@@ -59,7 +59,7 @@
 							console.log(err);
 						}
 					});
-				});
+				}); */
 				
 				//유효성 검사
 				$('#joinForm').on('submit',function(){
@@ -202,7 +202,6 @@
 						<form action="user/join" method="post" id="joinForm">
 							<fieldset class="form-group">
 								<input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter id" autocomplete="off">
-								<input type="button" id="btn1" name="btn1" value="check">
 							</fieldset>
 							<fieldset class="form-group">
 								<input type="password" class="form-control" id="user_password" name="user_password" placeholder="Enter a password">
