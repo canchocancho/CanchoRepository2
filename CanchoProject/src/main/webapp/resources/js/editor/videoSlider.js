@@ -208,6 +208,9 @@ function sliderSyncro(slide_type){
  * 비디오 슬라이더 Drag & Drop 세팅
  */
 function videoSlider(){
+	//$( ".other-obj" ).draggable({ axis: "x", containment: '#' + trackId, scroll: false });
+	//$("#cameraCon").draggable({revert:false});
+	
     $("#video-track").sortable({
         revert: true,
         start: function(event, ui) {
@@ -234,6 +237,11 @@ function drag(ev) {
  * 비디오 drag&drop 핸들러
  */
 function videoDragDropEventHandler(){
+	alert('dadadad!');
+	
+	$('i').on('draggable', function(){
+		revert: false;
+	});
 	
 	$('#video-track').on('dragenter dragover', function(e) {
 		e.preventDefault();
