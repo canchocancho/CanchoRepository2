@@ -11,12 +11,11 @@
 	 		user_id
 	 		, user_name
 	 		, user_email
-	 		, user_password
-	 		, user_verify
 	 	from 
 	 		blog_user
 	 	where
-	 		user_id like '%' || #{user_id} || '%'
+            not user_id = #{user_id} 
+            and user_id like '%' || #{searchText} || '%'
 	 </select>
 	 
 	 <!-- 친구 추가 -->

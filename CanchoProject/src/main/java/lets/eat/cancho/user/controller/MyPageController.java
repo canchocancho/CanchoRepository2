@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lets.eat.cancho.friend.dao.FriendDAO;
@@ -98,10 +99,11 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="searchFriendId", method = RequestMethod.POST)
-	public String searchFriendId(String user_id, Model model, HttpSession session){
+	public String searchFriendId(@RequestParam(value="searchText", defaultValue="")String searchText, 
+			String user_id, Model model, HttpSession session){
 		logger.info("친구id 조회 시작");
 		
-		ArrayList<Blog_User> list = dao1.searchFriendId(user_id);
+		ArrayList<Blog_User> list = dao1.searchFriendId(user_id, searchText);
 		model.addAttribute("list", list);
 		
 		String user_id1 = (String)session.getAttribute("loginId");

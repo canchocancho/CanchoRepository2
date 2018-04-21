@@ -20,15 +20,18 @@ private static final Logger logger = LoggerFactory.getLogger(FriendDAO.class);
 	SqlSession sqlSession;
 	
 	//친구 ID 조회
-	public ArrayList<Blog_User> searchFriendId(String user_id){
+	public ArrayList<Blog_User> searchFriendId(String user_id, String searchText){
 		
 		logger.info("친구ID 조회 시작 - 다오");
+		
+		System.out.println(user_id);
+		System.out.println(searchText);
 		
 		ArrayList<Blog_User> list = null;
 		FriendMapper mapper = sqlSession.getMapper(FriendMapper.class);
 			
 		try{
-			list = mapper.searchFriendId(user_id);
+			list = mapper.searchFriendId(user_id, searchText);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

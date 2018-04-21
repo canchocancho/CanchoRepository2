@@ -276,11 +276,17 @@
 		    	  //뒤로가기
 		    	 $('roll-back').onclick = function() {
 		    		 n = canvas.getObjects().length;
-		    		 alert(n);
-		    		 
 		    		 canvas.remove(canvas.item(n-1));
 		    		 n--;
 				  }
+		    	  
+		    	  //글자체 바꾸기
+		    	 $('font-family').onclick = function(){
+		    		  var value = $("#font-family option:selected").val();
+		    		  alert(value);
+		    		  
+		    			
+		    	 }
 		    	  
 		    	  //복사
 		    	  $('copy').onclick = function() {
@@ -436,7 +442,16 @@
 			  	<button id="insertText" class="btn btn-info" style="display: none;">글씨 쓰기</button>
 			  	<div id="textmenu" class="controls" style="display: none;">
 					<p>
-						Font-family: <select id="font-family"><option value="Times New Roman">Times New Roman</option><option value="Pacifico">Pacifico</option><option value="VT323">VT323</option><option value="Quicksand">Quicksand</option><option value="Inconsolata">Inconsolata</option></select>
+						Font-family: 
+						<select id="font-family">
+							<option value="Times New Roman">Times New Roman</option>
+							<option value="Pacifico">Pacifico</option>
+							<option value="VT323">VT323</option>
+							<option value="Quicksand">Quicksand</option>
+							<option value="Inconsolata">Inconsolata</option>
+							<option value="Quicksand">Quicksand</option>
+							<option value="Comic Sans">Comic Sans</option>
+						</select>
 					</p>
 				</div>
 			  	<br>
