@@ -96,7 +96,8 @@ public class UserController {
 							session.setAttribute("profile", user_profile);
 						}
 						
-						ArrayList<Post> postList = postDAO.postList();
+						//타임라인에 표시할 자기랑 자기 친구들 포스팅들
+						ArrayList<Post> postList = postDAO.postList(vo.getUser_id());
 						session.setAttribute("postList", postList);
 						model.addAttribute("postList", postList);
 						

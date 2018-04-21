@@ -219,9 +219,9 @@
             <!-- Post Content
             ================================================= -->
             <!-- 게시글이 하나라도 존재하는 경우 -->
-			<c:if test="${postList != null && postList.size() != 0}">
+			<c:if test="${mypostList != null && mypostList.size() != 0}">
 			
-			<c:forEach items="${postList }" var="post">
+			<c:forEach items="${mypostList }" var="post">
 				  <div class="post-content">
 
 <%--                 <!--Post Date-->

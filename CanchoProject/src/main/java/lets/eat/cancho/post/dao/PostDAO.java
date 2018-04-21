@@ -38,7 +38,7 @@ public class PostDAO {
 	}
 	
 	//포스트 목록
-	public ArrayList<Post> postList(){
+	public ArrayList<Post> postList(String user_id){
 		
 		logger.info("포스트 목록 불러오기");
 		
@@ -46,7 +46,7 @@ public class PostDAO {
 		PostMapper mapper = session.getMapper(PostMapper.class);
 
 		try{
-			list = mapper.postList();
+			list = mapper.postList(user_id);
 			
 		} catch(Exception e){
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class PostDAO {
 	
 	public ArrayList<Post> postListId(String user_id){
 		
-		logger.info("사용자 포스트 목록 불러오기");
+		logger.info("내 글 목록 불러오기");
 		
 		ArrayList<Post> list = new ArrayList<Post>();
 		PostMapper mapper = session.getMapper(PostMapper.class);
