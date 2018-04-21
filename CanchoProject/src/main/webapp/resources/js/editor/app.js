@@ -37,57 +37,47 @@ function mm_load() {
 	    mm_player.canvas_context = canvas.getContext('2d');
 	    mm_player.mash = {};
 	  }
+	  videoSlider();
+	  trackDragAndDropEventHander();
 }
 
-function extract(data){
+/**
+ * MovieMasher masher
+ * mm_player에 이미지를 넣어 동영상처럼 만든다
+ */
+function add_mash(id, url, count,isAudio){
 	var zeroPlus = '';
-    $.ajax({
-   		url : 'extract',
-   		type : 'GET',
-   		data : {
-   			fileName : data
-   		},
-   		success : function(path) {
-   			var url = path.originPath + data +'\\';
-   			var duration = path.count/30
-   			var zeroCount = String(path.count.toString()).length;
-   			for(var i = 0; i <= zeroCount; i++){
-   				zeroPlus += '0';
-    		}
-    		var media = {
-    	    		'label': data,
-   		    		'id': data,
-   		    		'type': 'video', 
-   		    		'url': url,
-   		    		'fps': 30,
-   		    		'pattern': (zeroPlus+'%.jpg'),
-    	    		'duration' : duration
-    	   };
-    		mm_player.add(media, 'video', videoTotalDuration , 0);
-    		/*isAudio ==*/
-    		if(true){
-    			   media = {
-    					      'label': data,
-    					      'type': 'audio',
-    					      'id': data,
-    					      'url': url + 'audio.mp3',
-    					      'duration': duration,
-    			  };
-    			   
-    			  mm_player.add(media, 'audio', videoTotalDuration , 0);
-    		   }
-    		  videoTotalDuration += duration;
-    		  //setMash();
-    		  outputVideoEditor();
-    		  videoSlider();
-    	},
-   		error : function(e) {
-   			alert("추출 실패");
-   		}
-   	});	
+	var duration = count/30;
+	var zeroCount = String(count.toString()).length;
+	for(var i = 0; i <= zeroCount; i++){
+		zeroPlus += '0';
+	}
+	var media = {
+    			'label': id,
+	    		'id': id,
+	    		'type': 'video', 
+	    		'url': url,
+	    		'fps': 30,
+	    		'pattern': (zeroPlus+'%.jpg'),
+	    		'duration' : duration
+   };
+	mm_player.add(media, 'video', videoTotalDuration , 0);
+	if(isAudio ==true){
+		   media = {
+				      'label': id,
+				      'type': 'audio',
+				      'id': 'audio'+ id,
+				      'url': url + 'audio.mp3',
+				      'duration': duration,
+		  };
+		   
+		  mm_player.add(media, 'audio', videoTotalDuration , 0);
+	   }
+	  videoTotalDuration += duration;
+	  outputVideoEditor();
  }
 //드래그 앤 드롭 이벤트
-function eventOnDraw( ctx, eventName ){
+function eventOnDraw(ctx, eventName){
 	  var fireEvent = function(){
 	    var evt = document.createEvent("Events");
 	    evt.initEvent(eventName, true, true);
@@ -114,53 +104,11 @@ function myHandler(){
 	if(document.getElementById('t-slider') != null &&
 	document.getElementById('player-slider') != null) {
 		document.getElementById('t-slider').value = mm_player.position;
-		document.getElementById('player-slider').value = mm_player.position;
-		
-		var videoTrackObjsCnt = $.makeArray($(".video-obj").map(function(){
-		    return $(this).attr("frames");
-		}));
-		
-		var maxValue = 0;
-		
-		for(var j = 0; j < videoTrackObjsCnt.length; j++){
-			maxValue += Number(videoTrackObjsCnt[j]);
-		}
-
-		var trackArr= Object.keys(tracksDuration);
-		for(var i = 0; i < trackArr.length; i++){
-			if( tracksDuration[trackArr[i]] > maxValue )
-				maxValue = tracksDuration[trackArr[i]];
-		}	
-		
-		var time = maxValue * mm_player.position;
-		time = time.toFixed(2);
-		var tempTime = time + '';
-		var tempTimeSplited = tempTime.split('.');
-		var timeEnd = tempTimeSplited[1];
-		var timeSec = tempTimeSplited[0] * 1;
-		var timeStr = ' ';
-
-		function plusZero(time){
-			var t = time + '';
-			if(t.length == 2) return t;
-			else{
-				return '0' + t;
-			}
-		}
-		
-		if (timeSec < 60) {
-			timeStr += '00:00:' + plusZero(timeSec) + ':';
-		} else if (timeSec < 3600){
-			timeStr += '00:' + plusZero(Math.floor(timeSec%3600/60)) + ':' + plusZero(timeSec%60) + ':';
-		} else {
-			timeStr += plusZero(Math.floor(timeSec/3600)) + ':' + plusZero(Math.floor(timeSec%3600/60)) + ':' + plusZero(timeSec%60) + ':';
-		}
-		timeStr += plusZero(timeEnd);
-		$('#time').text(timeStr);
+		document.getElementById('player-slider').value = mm_player.position
 	}
 }
 
-$(document).ready(function () {
+/*$(document).ready(function () {
 	
 	var toolContents = '';
 
@@ -176,9 +124,8 @@ $(document).ready(function () {
 	bottomContents += '<span style="padding-left: 15px"></span>';
 	bottomContents +=	 ' <i class="fa fa-search" aria-hidden="true"></i>';
 	bottomContents +=	 " <input type='range' id='track-zoom' step='0.01' value='1' min='1' max='5' oninput='javascript:zoom();' />";   
-	$('#bottm').html(bottomContents);
+	$('#bottom').html(bottomContents);
 	
-	videoSlider();
-	trackDragAndDropEventHander();
 	
-});
+	
+});*/

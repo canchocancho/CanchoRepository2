@@ -13,6 +13,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,13 +101,13 @@ public class editController {
 	@ResponseBody
 	@RequestMapping(value = "getFileList", method = RequestMethod.POST)
 	public ArrayList<String> getFileList(String selectedType) {
-		System.out.println("안오니?");
-		String type = selectedType;
+		/*String type = selectedType;*/
 		File path = new File("C:/tomolog/temp/");
 		File[] fileList = path.listFiles();
 		ArrayList<String> videoPath = new ArrayList<String>();
 		for (int i = 0; i < fileList.length; i++) {
 			 videoPath.add(fileList[i].toString());
+			 System.out.println(videoPath);
 		}
 			return videoPath;
 		}
@@ -113,26 +115,45 @@ public class editController {
 	@ResponseBody
 	@RequestMapping(value = "getVideoInfo", method = RequestMethod.GET ,
 					produces = "application/json;charset=utf-8")
-	public HashMap getVideoInfo(int ffid, String path){
-		
+	public HashMap getVideoInfo(String ffid, String path){
 		HashMap<String, Object> rtn  = new HashMap<>();
-	
 		//1. 영상의 사진 갯수
-		String videoPath = "C:\\freemiere\\videoExtract\\" + ffid;
+		String videoPath = "C:\\tomolog\\extract\\" + ffid;
 		int count = test.findFileNum(videoPath) - 1;
 		rtn.put("count", count);
 		//2. 영상의 주소
-		String vExtractPath = "storageResources\\videoExtract\\" + ffid + "\\";
+		String vExtractPath = "tomolog\\extract\\" + ffid + "\\";
 		rtn.put("extractPath", vExtractPath);
 		//3.audio 파일 여부
 		boolean isAudio = false;
 		File audio = new File(videoPath + "\\audio.mp3");
 		if(audio.exists()) isAudio=true;
-		
 		rtn.put("isAudio", isAudio);
 		return rtn;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "getObjectInfo", method = RequestMethod.GET ,
+					produces = "application/json;charset=utf-8")
+	public double getObjectInfo(String type, String path){
+		if("image".equalsIgnoreCase(type)){
+			return 2;
+		}
+		String tmp[] = path.split("/");
+		String audioPath = "c:\\tomolog\\temp";
+		for(int i = 2; i < tmp.length; i++){
+			audioPath += '\\';
+			audioPath += tmp[i];
+		}
+		double duration = 0;
+		try {
+		  AudioFile audioFile = AudioFileIO.read(new File(audioPath));
+		  duration = audioFile.getAudioHeader().getTrackLength();
+		} catch (Exception e) {
+		  e.printStackTrace();
+		}
+		return duration;
+	}
 	
 	
 	@RequestMapping(value = "download", method = RequestMethod.GET)
