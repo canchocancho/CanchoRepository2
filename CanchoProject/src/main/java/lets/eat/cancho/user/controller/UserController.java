@@ -352,7 +352,7 @@ public class UserController {
 			logger.info("프로필 저장 종료");
 			session.setAttribute("profile", profile);
 
-			return "user/myPage";
+			return "redirect:myPage";
 		}
 		
 		//수정일 경우
