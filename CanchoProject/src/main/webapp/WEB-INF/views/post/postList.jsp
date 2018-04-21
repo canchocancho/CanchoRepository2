@@ -111,7 +111,7 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="" class="active">Timeline</a></li>
+                  <li><a href="" class="active">My Page</a></li>
                   <li><a href="../user/myPage">Profile</a></li>
                   <li><a href="">Album</a></li>
                   <li><a href="../user/friendList">Friends</a></li>
