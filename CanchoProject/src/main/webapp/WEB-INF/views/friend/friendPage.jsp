@@ -150,7 +150,7 @@
 		                  		<div class="friend-card">
 		                  			<!-- <img src="http://placehold.it/1030x600" alt="profile-cover" class="img-responsive cover"> -->
 
-              							<img src="../post/downloadPic?user_id=${friend.friend_id }" alt="post-image" class="img-responsive cover">
+              							<img src="../post/downloadPic?user_id=${friend.friend_id }" alt="post-image" class="img-responsive cover" onerror="javascript:src={http://placehold.it/1030x600}">
               	
             						<%-- <!-- 프로필 사진이 없을 때 -->
             						<c:if test="${profile.p_originalfile == null }">
