@@ -4,6 +4,7 @@ var aorder = 3;
 var clickedObj;
 
 
+
 /**
  * 개별 파일 삭제
  */
@@ -116,7 +117,7 @@ function volumeControll(){
 function outputFileList(list){
 	var contents = '<div id="dragDropZone">';
 	$.each(list,function(index, item) {
-			alert("파일 불러오기 item : " + item);
+			//alert("파일 불러오기 item : " + item);
 			contents += '<table class="fileBox"><tr><td class="fimage">';
 			var path = item;
 			var pathArray = path.split('\\');

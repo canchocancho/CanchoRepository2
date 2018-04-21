@@ -15,6 +15,9 @@
 	<!-- <link rel="stylesheet" href="resources/css/editor/editor.css" type="text/css"> -->
 	<link href="resources/vendor/colorBox/colorbox.css" rel="stylesh1eet">
 	<link href="resources/css/editor/cancho_editor.css" rel="stylesheet" type="text/css">
+	<!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css" /> -->
+	<link rel="stylesheet" href="resources/css/style.css" />
+<!-- 	<link rel="stylesheet" href="resources/css/ionicons.min.css" /> -->
 	
 	
 	
@@ -45,27 +48,30 @@
     <script src="resources/js/editor/app.js"></script>
     <script src="resources/js/editor/editor.js"></script>
     <script src="resources/js/editor/videoSlider.js"></script>
-    <!-- <style>canvas, textarea { width: 320px; height: 240px; }</style> -->
+    
+    
+   
   </head> 
   <body onload='mm_load()'>
 	<div id="upperContainer">  
 		<div id ="playerContainer">
 	    	<div id="playerBox">
 		    	<canvas id='mm-canvas'></canvas>
-		    	<div>    
-		    		<input type= "range" id="p-slider" step= "0.001" value="0" min="0" max="1" oninput="sliderSyncro('pslider')"/>
-		    	</div>
-		    	
-		    	<div>
-		      		<button onclick="mm_player.paused = false">Play</button>
-		      		<button onclick="mm_player.paused = true">Pause</button>
-		    	</div>
-			</div>
+		    </div>
+		    <div id="range-and-btn">
+			    <div id="player-slider">    
+			    	<input type= "range" id="p-slider" step= "0.001" value="0" min="0" max="1" oninput="sliderSyncro('pslider')"/>
+			    </div>
+			    	
+			    <div id="player-btns">
+			      	<img src="resources/images/playCon.png" onclick="mm_player.paused = false" width="30px" height="30px">
+			      	<img src="resources/images/pauseCon.png" onclick="mm_player.paused = true" width="30px" height="30px">
+			    </div>
+		    </div>
     	</div>
-    	<div id = "volume"></div>
     	<div id ="uploadContainer">
 			<input type="file" id="upload" name="file-data">			
-			<input type="button" id="imgBtn" value="전송">
+			<input class="btn-primary" type="button" id="imgBtn" value="upload">
 		
 			
 				<select id="selectedFile">
@@ -80,56 +86,60 @@
 			
 		</div>    
     </div>
-   	<div id="middle"></div>
-   	<div id = "timeLine">
-   		<div id="all-tracks-container">
-			<span style="padding-left:33px"></span>
-			<span class='fslider'>
-				<input type='range' id='t-slider' step='0.001' value='0' min='0' max='1' oninput='sliderSyncro("tslider")' />
-			</span>
-			<div>
-				<div class="main-track ui-state-default" id="video-track">
-					<span class="track-name">
-						<i class="fa fa-video-camera" aria-hidden="true"></i>
-					</span>
-				</div>
-			</div>
-			<div>
-				<div  class="odd-track-container" id="video-1-cont" >
-					<span class="track-name">
-					</span>
-					<div class="track-odd other-track" id="video-1">
+   	<!-- div id="middle"></div> -->
+   	<div id="downContainer">
+	   	<div id = "timeLine">
+	   		<div id="all-tracks-container">
+				<span style="padding-left:33px"></span>
+				<span class='fslider'>
+					<input type='range' id='t-slider' step='0.001' value='0' min='0' max='1' oninput='sliderSyncro("tslider")' />
+				</span>
+				<div>
+					<div class="main-track ui-state-default" id="video-track">
+						<div id="nno" class="track-name">
+							<!-- <i id="cameraCon" class="fa fa-video-camera" aria-hidden="true"></i> -->
+						</div>
 					</div>
 				</div>
-			</div>	
-			<div>
-				<div class="even-track-container" id="audio-1-cont">
-					<span class="track-name">
-					</span>
-					<div class="track-even other-track" id="audio-1">
+				<div>
+					<div  class="odd-track-container" id="video-1-cont" >
+						<span class="track-name">
+						</span>
+						<div class="track-odd other-track" id="video-1">
+						</div>
+					</div>
+				</div>	
+				<div>
+					<div class="even-track-container" id="audio-1-cont">
+						<span class="track-name">
+						</span>
+						<div class="track-even other-track" id="audio-1">
+						</div>
 					</div>
 				</div>
-			</div>
-			<div>
-				<div class="odd-track-container" id="video-2-cont">
-					<span class="track-name">
-					</span>
-					<div class="track-odd other-track" id="video-2">
+				<div>
+					<div class="odd-track-container" id="video-2-cont">
+						<span class="track-name">
+						</span>
+						<div class="track-odd other-track" id="video-2">
+						</div>
 					</div>
 				</div>
-			</div>
-			<div>
-				<div class="even-track-container" id="audio-2-cont">
-					<span class="track-name">
-					</span>
-					<div class="track-even other-track" id="audio-2">
+				<div>
+					<div class="even-track-container" id="audio-2-cont">
+						<span class="track-name">
+						</span>
+						<div class="track-even other-track" id="audio-2">
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div id = "volume"></div>
 	</div>
 <div id = "bottom">
 </div>
   </body>
 </html>
+
 

@@ -158,6 +158,7 @@
     width: 932px;
     height:1px;
     border:1px;
+    margin-left: 33px;
 }
 
 /* #t-slider::-webkit-slider-thumb {
@@ -205,6 +206,10 @@
     height: 12px;
 }
 
+.ui-state-default {
+	padding-left: 33px;
+}
+
 
 
 #editor-vol{
@@ -242,6 +247,10 @@
 	background-color: #000;
 }
 
+#playCon {
+	width: 5px;
+	height: 5px;
+}
 
 .track-odd{
 	display: inline-block;
