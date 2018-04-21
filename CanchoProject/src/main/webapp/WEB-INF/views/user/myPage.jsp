@@ -54,6 +54,9 @@
                 <a href="">My Page</a>
               </li>
               <li class="dropdown">
+                <a href="../user/friendList">Friends</a>
+              </li>
+              <li class="dropdown">
                 <a href="../user/logout">Logout</a>
               </li>
               <li class="dropdown">
@@ -113,10 +116,10 @@
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                <li><a href="timline.html">Timeline</a></li>
-                <li><a href="timeline-about.html" class="active">About</a></li>
-                <li><a href="">Album</a></li>
-                <li><a href="timeline-friends.html">Friends</a></li>
+                  <li><a href="../post/postList">My Page</a></li>
+                  <li><a href="" class="active">Profile</a></li>
+                  <li><a href="">Album</a></li>
+                  <li><a href="friendList">Friends</a></li>
               </ul>
               <button class="btn-primary">Add Friend</button>
             </div>
@@ -190,27 +193,6 @@
                   <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Location</h4>
                   <p>${sessionScope.profile.p_city }, ${sessionScope.profile.p_country }</p>
                 </div>
-                
-                
-<!--                 <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-heart-outline icon-in-title"></i>Interests</h4>
-                  <ul class="interests list-inline">
-                    <li><span class="int-icons" title="Bycycle riding"><i class="icon ion-android-bicycle"></i></span></li>
-                    <li><span class="int-icons" title="Photography"><i class="icon ion-ios-camera"></i></span></li>
-                    <li><span class="int-icons" title="Shopping"><i class="icon ion-android-cart"></i></span></li>
-                    <li><span class="int-icons" title="Traveling"><i class="icon ion-android-plane"></i></span></li>
-                    <li><span class="int-icons" title="Eating"><i class="icon ion-android-restaurant"></i></span></li>
-                  </ul>
-                </div>
-                <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-chatbubble-outline icon-in-title"></i>Language</h4>
-                    <ul>
-                      <li><a href="">Russian</a></li>
-                      <li><a href="">English</a></li>
-                    </ul>
-                </div> -->
-                
-                
               </div>
               </c:if>
               
@@ -339,25 +321,3 @@
     
   </body>
 </html>
-
-<%-- <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>[ 마이페이지 ]</title>
-</head>
-<body>
-	<ul>
-		<c:choose>
-			<c:when test="${sessionScope.loginId != null }">
-				<h3>${sessionScope.loginName }님의 마이페이지 </h3>
-				<li><a href="updateInfo">회원정보 수정</a></li>
-				<li><a href="friendList">친구리스트</a></li>
-				<li><a href="message">나의 쪽지함</a></li>
-				<li><a href="">설정</a></li>
-			</c:when>
-		</c:choose>
-	</ul>
-
-</body>
-</html> --%>

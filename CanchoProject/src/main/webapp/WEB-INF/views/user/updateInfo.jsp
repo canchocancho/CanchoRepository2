@@ -88,6 +88,9 @@
                 <a href="../post/postList">My Page</a>
               </li>
               <li class="dropdown">
+                <a href="../user/friendList">Friends</a>
+              </li>
+              <li class="dropdown">
                 <a href="../user/logout">Logout</a>
               </li>
               <li class="dropdown">

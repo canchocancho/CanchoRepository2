@@ -80,51 +80,20 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="../resources/images/down-arrow.png" alt=""></span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                </ul>
+                <a href="/cancho">Timeline</a>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Newsfeed <span><img src="../resources/images/down-arrow.png" alt=""></span></a>
+                <a href="../post/postList">My Page</a>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Timeline <span><img src="../resources/images/down-arrow.png" alt=""></span></a>
-                <ul class="dropdown-menu login">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html">Timeline About</a></li>
-                  <li><a href="timeline-album.html">Timeline Album</a></li>
-                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
-                  <li><a href="edit-profile-basic.html">Edit: Basic Info</a></li>
-                  <li><a href="edit-profile-work-edu.html">Edit: Work</a></li>
-                  <li><a href="edit-profile-interests.html">Edit: Interests</a></li>
-                  <li><a href="edit-profile-settings.html">Account Settings</a></li>
-                  <li><a href="edit-profile-password.html">Change Password</a></li>
-                </ul>
+                <a href="">Friends</a>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All Pages <span><img src="../resources/images/down-arrow.png" alt=""></span></a>
-                <ul class="dropdown-menu page-list">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                  <li><a href="newsfeed.html">Newsfeed</a></li>
-                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                  <li><a href="newsfeed-friends.html">My friends</a></li>
-                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
-                  <li><a href="newsfeed-images.html">Images</a></li>
-                  <li><a href="newsfeed-videos.html">Videos</a></li>
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html">Timeline About</a></li>
-                  <li><a href="timeline-album.html">Timeline Album</a></li>
-                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
-                  <li><a href="edit-profile-basic.html">Edit Profile</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                  <li><a href="faq.html">FAQ Page</a></li>
-                  <li><a href="404.html">404 Not Found</a></li>
-                </ul>
+                <a href="logout">Logout</a>
               </li>
-              <li class="dropdown"><a href="contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="contact">Contact</a>
+              </li>
             </ul>
             <form action="searchFriendId" method="post" id="s1" class="navbar-form navbar-right hidden-sm">
               <div class="form-group">
@@ -146,8 +115,16 @@
           ================================================= -->
     			<div class="col-md-3 static">
             <div class="profile-card">
-            	<img src="http://placehold.it/300x300" alt="user" class="profile-photo">
-            	<h5><a href="timeline.html" class="text-white">${sessionScope.loginName }</a></h5>
+                <!-- 프로필 사진이 있을 때 -->
+            	<c:if test="${profile.p_originalfile != null }">
+              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="profile-photo">
+              	</c:if>
+              	
+            	<!-- 프로필 사진이 없을 때 -->
+            	<c:if test="${profile.p_originalfile == null }">
+              		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo">
+              	</c:if>
+            	<h5><a href="../post/postList" class="text-white">${sessionScope.loginName }</a></h5>
             	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
@@ -158,20 +135,6 @@
               <li><i class="icon ion-images"></i><div><a href="newsfeed-images.html">Images</a></div></li>
               <li><i class="icon ion-ios-videocam"></i><div><a href="newsfeed-videos.html">Videos</a></div></li>
             </ul><!--news-feed links ends-->
-            <div id="chat-block">
-              <div class="title">Chat online</div>
-              <ul class="online-users list-inline">
-                <li><a href="newsfeed-messages.html" title="Linda Lohan"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Sophia Lee"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="John Doe"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Alexis Clark"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="James Carter"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Robert Cook"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Richard Bell"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Anna Young"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Julia Cox"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo"><span class="online-dot"></span></a></li>
-              </ul>
-            </div><!--chat block ends-->
           </div>
           
     	<div class="col-md-7">
@@ -185,7 +148,17 @@
 						<c:forEach var="friend" items="${fList }">
 		            		<div class="col-md-6 col-sm-6">
 		                  		<div class="friend-card">
-		                  			<img src="http://placehold.it/1030x600" alt="profile-cover" class="img-responsive cover">
+		                  			<!-- <img src="http://placehold.it/1030x600" alt="profile-cover" class="img-responsive cover"> -->
+
+              							<img src="../post/downloadPic?user_id=${friend.friend_id }" alt="post-image" class="img-responsive cover">
+              	
+            						<%-- <!-- 프로필 사진이 없을 때 -->
+            						<c:if test="${profile.p_originalfile == null }">
+              							<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo">
+              						</c:if> --%>
+		                  			
+		                  			
+		                  			
 		                  		<div class="card-info">
 			                      	<div class="friend-info">
 			                        	<a href="#" class="pull-right text-green">My Friend</a>
@@ -302,14 +275,6 @@
     <script src="../resources/js/jquery.sticky-kit.min.js"></script>
     <script src="../resources/js/jquery.scrollbar.min.js"></script>
     <script src="../resources/js/script.js"></script>
-    
 
-
-
-
-
-
-
-
-
-
+	</body>
+</html>

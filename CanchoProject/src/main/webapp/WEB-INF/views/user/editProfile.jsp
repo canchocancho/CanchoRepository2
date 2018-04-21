@@ -86,6 +86,9 @@
                 <a href="../post/postList">My Page</a>
               </li>
               <li class="dropdown">
+                <a href="../user/friendList">Friends</a>
+              </li>
+              <li class="dropdown">
                 <a href="../user/logout">Logout</a>
               </li>
               <li class="dropdown">
@@ -153,10 +156,10 @@
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                <li><a href="../post/postList">Timeline</a></li>
-                <li><a href="myPage" class="active">About</a></li>
-                <li><a href="">Album</a></li>
-                <li><a href="friendList">Friends</a></li>
+                  <li><a href="../post/postList">My Page</a></li>
+                  <li><a href="myPage" class="active">Profile</a></li>
+                  <li><a href="">Album</a></li>
+                  <li><a href="friendList">Friends</a></li>
               </ul>
               <button class="btn-primary">Add Friend</button>
             </div>
