@@ -14,8 +14,7 @@
 	 	from 
 	 		blog_user
 	 	where
-            not user_id = #{user_id} 
-            and user_id like '%' || #{searchText} || '%'
+           user_id like '%' || #{user_id} || '%'
 	 </select>
 	 
 	 <!-- 친구 추가 -->

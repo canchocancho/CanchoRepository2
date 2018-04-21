@@ -383,8 +383,12 @@ public class UserController {
 		}
 	}
 	
-	
-	
+	//contact 페이지로 이동
+	@RequestMapping(value="contact", method = RequestMethod.GET)
+	public String contact(){
+
+		return "user/contact";
+	}
 	
 	
 }

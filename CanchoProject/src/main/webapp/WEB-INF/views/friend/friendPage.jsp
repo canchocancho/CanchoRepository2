@@ -137,8 +137,7 @@
             <form action="searchFriendId" method="post" id="s1" class="navbar-form navbar-right hidden-sm">
               <div class="form-group">
                 <i class="icon ion-android-search" onclick="formSubmit();" style="cursor: pointer;"></i>
-                <input type="text" id="searchText" name="searchText" class="form-control" placeholder="Search friends by ID" value="${searchText }">
-                <input type="hidden" id="user_id" name="user_id" value="${sessionScope.loginId }">
+                <input type="text" id="user_id" name="user_id" class="form-control" placeholder="Search friends by ID">
               </div>
             </form>
           </div><!-- /.navbar-collapse -->
@@ -192,7 +191,6 @@
             	<div class="row">
 		            <c:if test="${fList != null }">
 						<c:forEach var="friend" items="${fList }">
-							
 		            		<div class="col-md-6 col-sm-6">
 		                  		<div class="friend-card">
 		                  			<img src="http://placehold.it/1030x600" alt="profile-cover" class="img-responsive cover">
@@ -220,11 +218,13 @@
               	<div class="follow-user">
 		            <c:if test="${list != null }">
 						<c:forEach var="user" items="${list }">
+							<c:if test="${user.user_id != sessionScope.loginId }">
 							<img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left">
 				                <div>
 				                  <h5><a href="timeline.html">${user.user_id }</a></h5>
 				                  <a href="javascript:insertFriend('${user.user_id }')" class="text-green">Add friend</a>
 				                </div>
+				                </c:if>
 						</c:forEach>
 					</c:if>
 			 	</div>
@@ -241,7 +241,7 @@
       	<div class="row">
           <div class="footer-wrapper">
             <div class="col-md-3 col-sm-3">
-              <a href=""><img src="images/logo-black.png" alt="" class="footer-logo"></a>
+              <a href=""><img src="../resources/images/logo-black.png" alt="" class="footer-logo"></a>
               <ul class="list-inline social-icons">
               	<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
               	<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
@@ -305,17 +305,12 @@
 
     <!-- Scripts
     ================================================= -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.sticky-kit.min.js"></script>
-    <script src="js/jquery.scrollbar.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="../resources/js/jquery-3.1.1.min.js"></script>
+    <script src="../resources/js/bootstrap.min.js"></script>
+    <script src="../resources/js/jquery.sticky-kit.min.js"></script>
+    <script src="../resources/js/jquery.scrollbar.min.js"></script>
+    <script src="../resources/js/script.js"></script>
     
-  
-
-</body>
-</html>
-
 
 
 
