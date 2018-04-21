@@ -15,6 +15,9 @@
 	<!-- <link rel="stylesheet" href="resources/css/editor/editor.css" type="text/css"> -->
 	<link href="resources/vendor/colorBox/colorbox.css" rel="stylesh1eet">
 	<link href="resources/css/editor/cancho_editor.css" rel="stylesheet" type="text/css">
+	<!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css" /> -->
+	<link rel="stylesheet" href="resources/css/style.css" />
+<!-- 	<link rel="stylesheet" href="resources/css/ionicons.min.css" /> -->
 	
 	
 	
@@ -57,15 +60,15 @@
 		    	</div>
 		    	
 		    	<div>
-		      		<button onclick="mm_player.paused = false">Play</button>
-		      		<button onclick="mm_player.paused = true">Pause</button>
+		      		<button class="btn-primary" onclick="mm_player.paused = false">Play</button>
+		      		<button class="btn-primary" onclick="mm_player.paused = true">Pause</button>
 		    	</div>
 			</div>
     	</div>
     	<div id = "volume"></div>
     	<div id ="uploadContainer">
 			<input type="file" id="upload" name="file-data">			
-			<input type="button" id="imgBtn" value="전송">
+			<input class="btn-primary" type="button" id="imgBtn" value="upload">
 		
 			
 				<select id="selectedFile">
