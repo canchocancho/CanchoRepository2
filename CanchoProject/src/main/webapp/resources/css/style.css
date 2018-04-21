@@ -2042,7 +2042,7 @@ input:checked + .slider:before{
   ==================================================*/
 
 .page-title-section.faq{
-  background: linear-gradient(to right, rgba(0,0,0, 0.5) , rgba(0,0,0, 0.5)), url("http://placehold.it/1920x500") fixed no-repeat;
+  background: linear-gradient(to right, rgba(0,0,0, 0.5) , rgba(0,0,0, 0.5)), url("../images/1920500.jpg") fixed no-repeat;
   background-size: cover;
   background-position: center;
   padding: 90px 0 110px;
