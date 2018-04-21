@@ -260,6 +260,7 @@ function videoDragDropEventHandler(){
 			checkFileType(data) != 'transition') return;
 
 		if(checkFileType(data) == 'video') {
+			alert('checkFileType');
 			addVideoTrackVideoObj(data);
 		}else{
 			return;
@@ -392,6 +393,7 @@ function add_media(trackId, id, url, fname, duration){
  * 메인트랙 오브젝트 추가
  */
 function addVideoTrackVideoObj(id){
+	alert('addVideoTrackVideoObj');
 	var ffid = $('#' + id).attr('ffid');
 	var path = $('#' + id).attr('path');
 	var fname = getFileName(path);	
