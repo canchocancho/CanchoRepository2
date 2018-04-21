@@ -191,7 +191,6 @@
             	<div class="row">
 		            <c:if test="${fList != null }">
 						<c:forEach var="friend" items="${fList }">
-							
 		            		<div class="col-md-6 col-sm-6">
 		                  		<div class="friend-card">
 		                  			<img src="http://placehold.it/1030x600" alt="profile-cover" class="img-responsive cover">
@@ -219,11 +218,13 @@
               	<div class="follow-user">
 		            <c:if test="${list != null }">
 						<c:forEach var="user" items="${list }">
+							<c:if test="${user.user_id != sessionScope.loginId }">
 							<img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left">
 				                <div>
 				                  <h5><a href="timeline.html">${user.user_id }</a></h5>
 				                  <a href="javascript:insertFriend('${user.user_id }')" class="text-green">Add friend</a>
 				                </div>
+				                </c:if>
 						</c:forEach>
 					</c:if>
 			 	</div>
