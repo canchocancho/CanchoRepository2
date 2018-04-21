@@ -328,7 +328,7 @@
 				return false;
 			}
 			
-			var str = $(".CodeMirror-code").html();//
+			var str = $(".CodeMirror-code").html();
 			var hidden_form = document.hidden_form;
 			
 			hidden_form.hidden_data.value = String(str);
