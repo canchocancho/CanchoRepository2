@@ -6,7 +6,7 @@
 <mapper namespace="lets.eat.cancho.friend.dao.FriendMapper">
 	
 	 <!-- 친구 ID 검색 -->
-	 <select id="searchFriendId" parameterType="string" resultType="user">
+	 <select id="searchFriendId" resultType="user">
 	 	select
 	 		user_id
 	 		, user_name

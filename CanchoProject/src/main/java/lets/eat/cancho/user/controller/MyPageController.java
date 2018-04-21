@@ -99,11 +99,10 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value="searchFriendId", method = RequestMethod.POST)
-	public String searchFriendId(@RequestParam(value="searchText", defaultValue="")String searchText, 
-			String user_id, Model model, HttpSession session){
+	public String searchFriendId(String user_id, Model model, HttpSession session){
 		logger.info("친구id 조회 시작");
 		
-		ArrayList<Blog_User> list = dao1.searchFriendId(user_id, searchText);
+		ArrayList<Blog_User> list = dao1.searchFriendId(user_id);
 		model.addAttribute("list", list);
 		
 		String user_id1 = (String)session.getAttribute("loginId");

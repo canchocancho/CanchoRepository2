@@ -8,7 +8,7 @@ import lets.eat.cancho.user.vo.Blog_User;
 public interface FriendMapper {
 	
 	//친구 id 검색
-	public ArrayList<Blog_User> searchFriendId(String user_id, String searchText);
+	public ArrayList<Blog_User> searchFriendId(String user_id);
 	
 	//친구 추가
 	public int insertFriendId(Friend friend);
