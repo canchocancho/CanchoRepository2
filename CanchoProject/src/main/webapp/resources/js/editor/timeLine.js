@@ -537,6 +537,10 @@ function addVideoTrackImageObj(id){
 }
 
 function videoDragDropEventHandler(){
+	$('i').on('draggable', function(){
+		revert: false;
+	});
+	
 	$('#video-track').on('dragenter dragover', function(e) {
 		e.preventDefault();
 		$(this).css('border', '2px solid #ff0080');
