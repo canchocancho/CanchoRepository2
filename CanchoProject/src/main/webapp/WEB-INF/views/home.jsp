@@ -64,7 +64,7 @@
 							console.log(err);
 						}
 					});
-				}); */
+				});  */
 				
 				//유효성 검사
 				$('#joinForm').on('submit',function(){
