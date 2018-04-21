@@ -364,7 +364,7 @@
 		    		/* document.getElementById('font-family').onchange = function() {
 		    		  if (this.value !== 'Times New Roman') {
 		    		    loadAndUse(this.value);
-		    		  } else {
+		    		  } else {                                         
 		    		    canvas.getActiveObject().set("fontFamily", this.value);
 		    		    canvas.requestRenderAll();
 		    		  }
