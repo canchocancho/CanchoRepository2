@@ -280,14 +280,6 @@
 		    		 n--;
 				  }
 		    	  
-		    	  //글자체 바꾸기
-		    	 $('font-family').onclick = function(){
-		    		  var value = $("#font-family option:selected").val();
-		    		  alert(value);
-		    		  
-		    			
-		    	 }
-		    	  
 		    	  //복사
 		    	  $('copy').onclick = function() {
 				  		canvas.getActiveObject().clone(function(cloned) {
@@ -319,13 +311,38 @@
 				  			canvas.requestRenderAll();
 				  		});
 				  	}
+		    	 
+		    	  //글씨체 변경
+		    	  $('font-family').onchange = function(){
+		    	  	 alert(this.value);
+		    	  	 
+		    	  	if (this.value != 'Times New Roman') {
+		    		    loadAndUse(this.value);
+		    		  } else {
+		    		    canvas.getActiveObject().set("fontFamily", this.value);
+		    		    canvas.requestRenderAll();
+		    		  }
+		    	  	
+		    	  	function loadAndUse(font) {
+			    		  var myfont = new FontFaceObserver(font)
+			    		  myfont.load()
+			    		    .then(function() {
+			    		      // when font is loaded, use it.
+			    		      canvas.getActiveObject().set("fontFamily", font);
+			    		      canvas.requestRenderAll();
+			    		    }).catch(function(e) {
+			    		      console.log(e)
+			    		      alert('font loading failed ' + font);
+			    		    });
+			    		} 
+		    	  };
 		    	  
 		    	  //insertText
 		    	  $('insertText').onclick = function() {
 
 		    		var fonts = ["Pacifico", "VT323", "Quicksand", "Inconsolata"];
 
-		    		var textbox = new fabric.Textbox('글자를 입력하세요.', {
+		    		var textbox = new fabric.Textbox('Hello TomoLog', {
 		    		  left: 50,
 		    		  top: 50,
 		    		  width: 150,
@@ -333,26 +350,27 @@
 		    		});
 		    		canvas.add(textbox).setActiveObject(textbox);
 		    		fonts.unshift('Times New Roman');
+		    		
 		    		// Populate the fontFamily select
-		    		var select = document.getElementById("font-family");
+		    		 /* var select = document.getElementById("font-family");
 		    		fonts.forEach(function(font) {
 		    		  var option = document.createElement('option');
 		    		  option.innerHTML = font;
 		    		  option.value = font;
 		    		  select.appendChild(option);
-		    		});
+		    		}); */
 
 		    		// Apply selected font on change
-		    		document.getElementById('font-family').onchange = function() {
+		    		/* document.getElementById('font-family').onchange = function() {
 		    		  if (this.value !== 'Times New Roman') {
 		    		    loadAndUse(this.value);
 		    		  } else {
 		    		    canvas.getActiveObject().set("fontFamily", this.value);
 		    		    canvas.requestRenderAll();
 		    		  }
-		    		};
+		    		}; */
 
-		    		function loadAndUse(font) {
+		    		/* function loadAndUse(font) {
 		    		  var myfont = new FontFaceObserver(font)
 		    		  myfont.load()
 		    		    .then(function() {
@@ -363,7 +381,7 @@
 		    		      console.log(e)
 		    		      alert('font loading failed ' + font);
 		    		    });
-		    		}
+		    		}  */
 		    	  }
 		    	  
 		    	  
@@ -449,8 +467,6 @@
 							<option value="VT323">VT323</option>
 							<option value="Quicksand">Quicksand</option>
 							<option value="Inconsolata">Inconsolata</option>
-							<option value="Quicksand">Quicksand</option>
-							<option value="Comic Sans">Comic Sans</option>
 						</select>
 					</p>
 				</div>
