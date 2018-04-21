@@ -6,7 +6,7 @@
 <mapper namespace="lets.eat.cancho.friend.dao.FriendMapper">
 	
 	 <!-- 친구 ID 검색 -->
-	 <select id="searchFriendId" resultType="user">
+	 <select id="searchFriendId" parameterType="string" resultType="user">
 	 	select
 	 		user_id
 	 		, user_name
@@ -14,8 +14,7 @@
 	 	from 
 	 		blog_user
 	 	where
-            not user_id = #{user_id} 
-            and user_id like '%' || #{searchText} || '%'
+           user_id like '%' || #{user_id} || '%'
 	 </select>
 	 
 	 <!-- 친구 추가 -->

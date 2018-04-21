@@ -137,8 +137,7 @@
             <form action="searchFriendId" method="post" id="s1" class="navbar-form navbar-right hidden-sm">
               <div class="form-group">
                 <i class="icon ion-android-search" onclick="formSubmit();" style="cursor: pointer;"></i>
-                <input type="text" id="searchText" name="searchText" class="form-control" placeholder="Search friends by ID" value="${searchText }">
-                <input type="hidden" id="user_id" name="user_id" value="${sessionScope.loginId }">
+                <input type="text" id="user_id" name="user_id" class="form-control" placeholder="Search friends by ID">
               </div>
             </form>
           </div><!-- /.navbar-collapse -->
@@ -311,7 +310,6 @@
     <script src="../resources/js/jquery.scrollbar.min.js"></script>
     <script src="../resources/js/script.js"></script>
     
-
 
 
 
