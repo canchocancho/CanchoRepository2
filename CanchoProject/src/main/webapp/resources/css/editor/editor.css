@@ -261,7 +261,7 @@
 .main-track{
 	width: 968px; 
 	height: 60px; 
-	background-color: #262626;		
+	background-color: #262626;
 }
 
 .odd-track-container{
@@ -297,7 +297,7 @@ audio {
 .video-obj{
 	overflow:hidden;
 	display: inline-block;
-	background-color:#26b999;
+	background-color:#0100FF;
 	border: 2px solid;
 	border-color: #2e2e2e;
 	cursor: pointer;

@@ -12,9 +12,9 @@
 	<link rel="stylesheet" href="resources/vendor/w2ui/w2ui-1.5.rc1.min.css" type="text/css">
 	<link rel="stylesheet"  href="resources/vendor/font-awesome/css/font-awesome.min.css" type="text/css">
 	<link rel="stylesheet" href="resources/vendor/zTree/css/awesomeStyle/awesome.css" type="text/css">
-	<!--<link rel="stylesheet" href="resources/css/editor/editor.css" type="text/css"> -->
+	<!-- <link rel="stylesheet" href="resources/css/editor/editor.css" type="text/css"> -->
 	<link href="resources/vendor/colorBox/colorbox.css" rel="stylesh1eet">
-	<link href="resources/css/editor/cancho_editor.css" rel="stylesheet">
+	<link href="resources/css/editor/cancho_editor.css" rel="stylesheet" type="text/css">
 	
 	
 	
@@ -41,32 +41,29 @@
     <script src="resources/vendor/moviemasher/src/others/players.js"></script>
     <script src="resources/vendor/moviemasher/src/others/time.js"></script>
     <script src="resources/vendor/moviemasher/src/others/util.js"></script>
-    <script src="resources/vendor/moviemasher/app/app.js"></script>
     
+    <script src="resources/js/editor/app.js"></script>
     <script src="resources/js/editor/editor.js"></script>
     <script src="resources/js/editor/videoSlider.js"></script>
-    <script src="resources/js/editor/timeLine2.js"></script>
     <!-- <style>canvas, textarea { width: 320px; height: 240px; }</style> -->
   </head> 
   <body onload='mm_load()'>
 	<div id="upperContainer">  
 		<div id ="playerContainer">
-	    	<canvas id='mm-canvas'></canvas>
-	    	<div>    
-	    		<input type= "range" id="p-slider" step= "0.001" value="0" min="0" max="1" oninput="sliderSyncro('pslider')"/>
-	    	</div>
-	    	
-	    	<div>
-	      		<button onclick="mm_player.paused = false">Play</button>
-	      		<button onclick="mm_player.paused = true">Pause</button>
-	      		<button onclick="extract()">pika</button>
-	    	</div>
-
+	    	<div id="playerBox">
+		    	<canvas id='mm-canvas'></canvas>
+		    	<div>    
+		    		<input type= "range" id="p-slider" step= "0.001" value="0" min="0" max="1" oninput="sliderSyncro('pslider')"/>
+		    	</div>
+		    	
+		    	<div>
+		      		<button onclick="mm_player.paused = false">Play</button>
+		      		<button onclick="mm_player.paused = true">Pause</button>
+		    	</div>
+			</div>
     	</div>
-    	
+    	<div id = "volume"></div>
     	<div id ="uploadContainer">
-			
-		
 			<input type="file" id="upload" name="file-data">			
 			<input type="button" id="imgBtn" value="전송">
 		
@@ -84,58 +81,53 @@
 		</div>    
     </div>
    	<div id="middle"></div>
-    <div id = "timeLine">
-    <div id="all-tracks-container">
-    <div id = "volume"></div>
-	<span style="padding-left:33px"></span>
-	<span class='fslider'>
-		<input type='range' id='t-slider' step='0.001' value='0' min='0' max='1' oninput='sliderSyncro("tslider")' />
-	</span>
-	<div>
-		<div  class="main-track ui-state-default" id="video-track">
-			<span class="track-name">
-				<i>메인</i>
+   	<div id = "timeLine">
+   		<div id="all-tracks-container">
+			<span style="padding-left:33px"></span>
+			<span class='fslider'>
+				<input type='range' id='t-slider' step='0.001' value='0' min='0' max='1' oninput='sliderSyncro("tslider")' />
 			</span>
-		</div>
-	</div>
-	<div>
-		<div  class="odd-track-container" id="video-1-cont" >
-			<span class="track-name">
-				<i>이미지1</i>
-			</span>
-			<div class="track-odd other-track" id="video-1">
+			<div>
+				<div class="main-track ui-state-default" id="video-track">
+					<span class="track-name">
+						<i class="fa fa-video-camera" aria-hidden="true"></i>
+					</span>
+				</div>
+			</div>
+			<div>
+				<div  class="odd-track-container" id="video-1-cont" >
+					<span class="track-name">
+					</span>
+					<div class="track-odd other-track" id="video-1">
+					</div>
+				</div>
+			</div>	
+			<div>
+				<div class="even-track-container" id="audio-1-cont">
+					<span class="track-name">
+					</span>
+					<div class="track-even other-track" id="audio-1">
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="odd-track-container" id="video-2-cont">
+					<span class="track-name">
+					</span>
+					<div class="track-odd other-track" id="video-2">
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="even-track-container" id="audio-2-cont">
+					<span class="track-name">
+					</span>
+					<div class="track-even other-track" id="audio-2">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	
-	<div>
-		<div class="even-track-container" id="audio-1-cont">
-			<span class="track-name">
-				<i>오디오1</i>
-			</span>
-			<div class="track-even other-track" id="audio-1">
-			</div>
-		</div>
-	</div>
-	<div>
-		<div class="odd-track-container" id="video-2-cont">
-			<span class="track-name">
-				<i>이미지2</i>
-			</span>
-			<div class="track-odd other-track" id="video-2">
-			</div>
-		</div>
-	</div>
-	<div>
-		<div class="even-track-container" id="audio-2-cont">
-			<span class="track-name">
-				<i>오디오2</i>
-			</span>
-			<div class="track-even other-track" id="audio-2">
-			</div>
-		</div>
-	</div>
-</div>
 <div id = "bottom">
 </div>
   </body>
