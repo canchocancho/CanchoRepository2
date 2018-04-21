@@ -11,6 +11,12 @@ public class Blog_User {
 	public Blog_User() {
 		super();
 	}
+	
+	public Blog_User(String user_id, String user_name, String user_email){
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.user_email = user_email;
+	}
 
 	public Blog_User(String user_id, String user_name, String user_email, String user_password, String user_verify,
 			String user_deleted) {
