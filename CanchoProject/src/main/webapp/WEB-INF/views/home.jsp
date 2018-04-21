@@ -481,7 +481,8 @@
               
               
               <div class="post-container">
-                <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
+                <!-- <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" /> -->
+                <img src="post/downloadPic?user_id=${post.user_id }" alt="post-image" class="profile-photo-md pull-left" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">
                 <div class="post-detail">
                   <div class="user-info">
                     <h5><a href="timeline.html" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>

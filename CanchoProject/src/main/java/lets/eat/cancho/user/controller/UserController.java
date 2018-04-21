@@ -343,7 +343,7 @@ public class UserController {
 			
 			if(result != 1){
 				//등록실패
-				model.addAttribute("errorMsg", "오류가 발생했습니다.");
+				model.addAttribute("errorMsg", "필수정보는 모두 기입해주세요.");
 				logger.info("프로필 저장 실패");
 				
 				return "user/editProfile";
@@ -370,7 +370,7 @@ public class UserController {
 	        int result = dao.updateProfile(profile);
 	        
 	        if(result != 1){
-	        	model.addAttribute("errorMsg", "오류가 발생했습니다.");
+	        	model.addAttribute("errorMsg", "필수정보는 모두 기입해주세요.");
 	        	logger.info("프로필 업데이트 실패");
 	        	
 	        	return "user/editProfile";

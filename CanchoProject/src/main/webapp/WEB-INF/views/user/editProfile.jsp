@@ -5,7 +5,7 @@
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
+		<script type="text/javascript" src="<c:url value="../resources/js/jquery-3.2.1.js" />"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="This is social network html5 template available in themeforest......" />
 		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
@@ -216,7 +216,7 @@
                     	<div class="form-group col-xs-12">
                       <label for="my-company">Date of Birth<span style="color: red">*</span></label>
                         <label for="month" class="sr-only"></label>
-                        <input id="p_birthDate" class="form-control input-group-lg" type="text" name="p_birthDate" title="Enter birthdate" placeholder="YYYY-MM-DD" autocomplete="off" value="${profile.p_birthDate }"/>
+                        <input type="text" id="p_birthDate" name="p_birthDate" class="form-control input-group-lg" title="Enter birthdate" placeholder="YYYY-MM-DD" autocomplete="off" value="${profile.p_birthDate }"/>
                       </div>
                      </div>
                     <div class="form-group gender">

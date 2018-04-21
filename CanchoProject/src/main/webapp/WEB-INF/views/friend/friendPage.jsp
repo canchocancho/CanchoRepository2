@@ -148,17 +148,7 @@
 						<c:forEach var="friend" items="${fList }">
 		            		<div class="col-md-6 col-sm-6">
 		                  		<div class="friend-card">
-		                  			<!-- <img src="http://placehold.it/1030x600" alt="profile-cover" class="img-responsive cover"> -->
-
-              							<img src="../post/downloadPic?user_id=${friend.friend_id }" alt="post-image" class="img-responsive cover" onerror="javascript:src={http://placehold.it/1030x600 }">
-              	
-            						<%-- <!-- 프로필 사진이 없을 때 -->
-            						<c:if test="${profile.p_originalfile == null }">
-              							<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo">
-              						</c:if> --%>
-		                  			
-		                  			
-		                  			
+              							<img src="../post/downloadPic?user_id=${friend.friend_id }" alt="post-image" class="img-responsive cover" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">	
 		                  		<div class="card-info">
 			                      	<div class="friend-info">
 			                        	<a href="#" class="pull-right text-green">My Friend</a>
