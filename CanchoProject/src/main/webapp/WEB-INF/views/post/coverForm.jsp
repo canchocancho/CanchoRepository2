@@ -321,6 +321,14 @@
 		    		 canvas.requestRenderAll();
 		    	  };
 		    	  
+		    	  //폰트 색상 변경
+		    	  $('font-color').onchange = function(){
+			    	  	 alert(this.value);
+			    	  	 
+			    	  	 canvas.getActiveObject().set("fill", 'rgb(255,255,255)');
+			    		 canvas.requestRenderAll();
+			      };
+		    	  
 		    	  //insertText
 		    	  $('insertText').onclick = function() {
 
@@ -328,7 +336,10 @@
 		    		  left: 50,
 		    		  top: 50,
 		    		  width: 150,
-		    		  fontSize: 20
+		    		  fontSize: 20,
+		    		  textBackgroundColor: 'rgb(0,200,0)',
+		    		  underline: true,
+		    		  //fill: 'rgb(255,255,255)'
 		    		});
 		    		canvas.add(textbox).setActiveObject(textbox);
 		    		fonts.unshift('Times New Roman');
@@ -426,6 +437,13 @@
 							<option value="Indie Flower">Indie Flower</option>
 							<option value="PT Sans Narrow">PT Sans Narrow</option>
 							<option value="Lobster">Lobster</option>
+						</select>
+					</p>
+						<p>
+						Font-Color:
+						<select id="font-color">
+							<option value="white">white</option>
+							<option value="red">red</option>
 						</select>
 					</p>
 				</div>
