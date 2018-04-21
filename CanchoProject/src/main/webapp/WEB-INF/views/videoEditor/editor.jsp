@@ -48,7 +48,9 @@
     <script src="resources/js/editor/app.js"></script>
     <script src="resources/js/editor/editor.js"></script>
     <script src="resources/js/editor/videoSlider.js"></script>
-    <!-- <style>canvas, textarea { width: 320px; height: 240px; }</style> -->
+    
+    
+   
   </head> 
   <body onload='mm_load()'>
 	<div id="upperContainer">  
@@ -94,9 +96,9 @@
 				</span>
 				<div>
 					<div class="main-track ui-state-default" id="video-track">
-						<span class="track-name">
+						<div id="nno" class="track-name">
 							<!-- <i id="cameraCon" class="fa fa-video-camera" aria-hidden="true"></i> -->
-						</span>
+						</div>
 					</div>
 				</div>
 				<div>

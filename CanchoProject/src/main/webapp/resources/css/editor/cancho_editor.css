@@ -151,7 +151,7 @@ input {
 }
 
 .main-track{
-	width: 968px; 
+	width: 999px; 
 	height: 60px; 
 	background-color: #262626;		
 }
@@ -227,6 +227,12 @@ audio {
 	height: 52px ; 
 	width: auto; 
 	vertical-align: middle
+}
+
+#nno {
+	width: 30px;
+	background-color: orange;
+	
 }
 
 .image-obj{
