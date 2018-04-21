@@ -135,28 +135,6 @@ public class MyPageController {
 		
 		return "redirect:friendList";
 	}
-	
-	@RequestMapping(value="message", method=RequestMethod.GET)
-	public String message(){
-		logger.info("쪽지함 페이지 이동");
-		
-		return "friend/message";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }

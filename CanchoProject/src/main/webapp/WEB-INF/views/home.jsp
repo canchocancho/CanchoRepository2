@@ -64,7 +64,7 @@
 							console.log(err);
 						}
 					});
-				}); */
+				});  */
 				
 				//유효성 검사
 				$('#joinForm').on('submit',function(){
@@ -126,73 +126,20 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href=""><img src="resources/images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="/cancho"><img src="resources/images/logo.png" alt="logo" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                </ul>
+                <a href="user/loginPage">Login</a>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Newsfeed <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="newsfeed.html">Newsfeed</a></li>
-                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                  <li><a href="newsfeed-friends.html">My friends</a></li>
-                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
-                  <li><a href="newsfeed-images.html">Images</a></li>
-                  <li><a href="newsfeed-videos.html">Videos</a></li>
-                </ul>
+              	<a href="user/contact">Contact</a>
               </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Timeline <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu login">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html">Timeline About</a></li>
-                  <li><a href="timeline-album.html">Timeline Album</a></li>
-                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
-                  <li><a href="edit-profile-basic.html">Edit: Basic Info</a></li>
-                  <li><a href="edit-profile-work-edu.html">Edit: Work</a></li>
-                  <li><a href="edit-profile-interests.html">Edit: Interests</a></li>
-                  <li><a href="edit-profile-settings.html">Account Settings</a></li>
-                  <li><a href="edit-profile-password.html">Change Password</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All Pages <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu page-list">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                  <li><a href="newsfeed.html">Newsfeed</a></li>
-                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                  <li><a href="newsfeed-friends.html">My friends</a></li>
-                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
-                  <li><a href="newsfeed-images.html">Images</a></li>
-                  <li><a href="newsfeed-videos.html">Videos</a></li>
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html">Timeline About</a></li>
-                  <li><a href="timeline-album.html">Timeline Album</a></li>
-                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
-                  <li><a href="edit-profile-basic.html">Edit Profile</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                  <li><a href="faq.html">FAQ Page</a></li>
-                  <li><a href="404.html">404 Not Found</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a href="contact.html">Contact</a></li>
             </ul>
-            <form class="navbar-form navbar-right hidden-sm">
-              <div class="form-group">
-                <i class="icon ion-android-search"></i>
-                <input type="text" class="form-control" placeholder="Search friends, photos, videos">
-              </div>
-            </form>
+
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
       </nav>
@@ -436,73 +383,28 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href=""><img src="resources/images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="/cancho"><img src="resources/images/logo.png" alt="logo" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                </ul>
+                <a href="/cancho">Timeline</a>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Newsfeed <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="newsfeed.html">Newsfeed</a></li>
-                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                  <li><a href="newsfeed-friends.html">My friends</a></li>
-                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
-                  <li><a href="newsfeed-images.html">Images</a></li>
-                  <li><a href="newsfeed-videos.html">Videos</a></li>
-                </ul>
+                <a href="post/postList">My Page</a>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Timeline <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu login">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html">Timeline About</a></li>
-                  <li><a href="timeline-album.html">Timeline Album</a></li>
-                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
-                  <li><a href="edit-profile-basic.html">Edit: Basic Info</a></li>
-                  <li><a href="edit-profile-work-edu.html">Edit: Work</a></li>
-                  <li><a href="edit-profile-interests.html">Edit: Interests</a></li>
-                  <li><a href="edit-profile-settings.html">Account Settings</a></li>
-                  <li><a href="edit-profile-password.html">Change Password</a></li>
-                </ul>
+                <a href="user/friendList">Friends</a>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All Pages <span><img src="resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu page-list">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                  <li><a href="newsfeed.html">Newsfeed</a></li>
-                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                  <li><a href="newsfeed-friends.html">My friends</a></li>
-                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
-                  <li><a href="newsfeed-images.html">Images</a></li>
-                  <li><a href="newsfeed-videos.html">Videos</a></li>
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html">Timeline About</a></li>
-                  <li><a href="timeline-album.html">Timeline Album</a></li>
-                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
-                  <li><a href="edit-profile-basic.html">Edit Profile</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                  <li><a href="faq.html">FAQ Page</a></li>
-                  <li><a href="404.html">404 Not Found</a></li>
-                </ul>
+                <a href="user/logout">Logout</a>
               </li>
-              <li class="dropdown"><a href="contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="user/contact">Contact</a>
+              </li>
             </ul>
-            <form class="navbar-form navbar-right hidden-sm">
-              <div class="form-group">
-                <i class="icon ion-android-search"></i>
-                <input type="text" class="form-control" placeholder="Search friends, photos, videos">
-              </div>
-            </form>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
       </nav>
@@ -549,25 +451,6 @@
             ================================================= -->
             <div class="create-post">
             <button class="btn btn-primary pull-right" onclick="createPost();">Publish</button>
-<!--             	<div class="row">
-            		<div class="col-md-7 col-sm-7">
-                  <div class="form-group">
-                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-md" />
-                    <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-                  </div>
-                </div>
-            		<div class="col-md-5 col-sm-5">
-                  <div class="tools">
-                    <ul class="publishing-tools list-inline">
-                      <li><a href="#"><i class="ion-compose"></i></a></li>
-                      <li><a href="#"><i class="ion-images"></i></a></li>
-                      <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-                      <li><a href="#"><i class="ion-map"></i></a></li>
-                    </ul>
-                    
-                  </div>
-                </div>
-            	</div> -->
             </div><!-- Post Create Box End-->
 
             <!-- Post Content
@@ -598,7 +481,8 @@
               
               
               <div class="post-container">
-                <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
+                <!-- <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" /> -->
+                <img src="post/downloadPic?user_id=${post.user_id }" alt="post-image" class="profile-photo-md pull-left" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">
                 <div class="post-detail">
                   <div class="user-info">
                     <h5><a href="timeline.html" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>
@@ -608,15 +492,6 @@
                     <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
                     <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
                   </div>
-                 <!--  <div class="line-divider"></div>
-                  <div class="post-text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                  </div> 
-                  <div class="line-divider"></div>
-                  <div class="post-comment">
-                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                  </div>-->
                 </div>
               </div>
             </div>

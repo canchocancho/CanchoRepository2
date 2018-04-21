@@ -252,6 +252,11 @@
 	height: 5px;
 }
 
+#playCon {
+	width: 5px;
+	height: 5px;
+}
+
 .track-odd{
 	display: inline-block;
 	width: 926px; 
@@ -304,6 +309,7 @@ audio {
 }
 
 .video-obj{
+	margin-left: 33px;
 	overflow:hidden;
 	display: inline-block;
 	background-color:#0100FF;

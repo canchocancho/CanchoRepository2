@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="<c:url value="/resources/js/html2canvas.js" />"></script>
 
 		<script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Cute+Font|Do+Hyeon|Gaegu|Gamja+Flower|Gugi|Indie+Flower|Lato|Lobster|Lora|Oswald|PT+Sans+Narrow|Roboto|Roboto+Condensed|Slabo+27px|Ubuntu" rel="stylesheet">
 		
 		<style>
 			#div_root{
@@ -276,8 +277,6 @@
 		    	  //뒤로가기
 		    	 $('roll-back').onclick = function() {
 		    		 n = canvas.getObjects().length;
-		    		 alert(n);
-		    		 
 		    		 canvas.remove(canvas.item(n-1));
 		    		 n--;
 				  }
@@ -313,51 +312,37 @@
 				  			canvas.requestRenderAll();
 				  		});
 				  	}
+		    	 
+		    	  //글씨체 변경
+		    	  $('font-family').onchange = function(){
+		    	  	 alert(this.value);
+		    	  	 
+		    	  	 canvas.getActiveObject().set("fontFamily", this.value);
+		    		 canvas.requestRenderAll();
+		    	  };
+		    	  
+		    	  //폰트 색상 변경
+		    	  $('font-color').onchange = function(){
+			    	  	 alert(this.value);
+			    	  	 
+			    	  	 canvas.getActiveObject().set("fill", 'rgb(255,255,255)');
+			    		 canvas.requestRenderAll();
+			      };
 		    	  
 		    	  //insertText
 		    	  $('insertText').onclick = function() {
 
-		    		var fonts = ["Pacifico", "VT323", "Quicksand", "Inconsolata"];
-
-		    		var textbox = new fabric.Textbox('글자를 입력하세요.', {
+		    		var textbox = new fabric.Textbox('Hello TomoLog', {
 		    		  left: 50,
 		    		  top: 50,
 		    		  width: 150,
-		    		  fontSize: 20
+		    		  fontSize: 20,
+		    		  textBackgroundColor: 'rgb(0,200,0)',
+		    		  underline: true,
+		    		  //fill: 'rgb(255,255,255)'
 		    		});
 		    		canvas.add(textbox).setActiveObject(textbox);
 		    		fonts.unshift('Times New Roman');
-		    		// Populate the fontFamily select
-		    		var select = document.getElementById("font-family");
-		    		fonts.forEach(function(font) {
-		    		  var option = document.createElement('option');
-		    		  option.innerHTML = font;
-		    		  option.value = font;
-		    		  select.appendChild(option);
-		    		});
-
-		    		// Apply selected font on change
-		    		document.getElementById('font-family').onchange = function() {
-		    		  if (this.value !== 'Times New Roman') {
-		    		    loadAndUse(this.value);
-		    		  } else {
-		    		    canvas.getActiveObject().set("fontFamily", this.value);
-		    		    canvas.requestRenderAll();
-		    		  }
-		    		};
-
-		    		function loadAndUse(font) {
-		    		  var myfont = new FontFaceObserver(font)
-		    		  myfont.load()
-		    		    .then(function() {
-		    		      // when font is loaded, use it.
-		    		      canvas.getActiveObject().set("fontFamily", font);
-		    		      canvas.requestRenderAll();
-		    		    }).catch(function(e) {
-		    		      console.log(e)
-		    		      alert('font loading failed ' + font);
-		    		    });
-		    		}
 		    	  }
 		    	  
 		    	  
@@ -436,7 +421,30 @@
 			  	<button id="insertText" class="btn btn-info" style="display: none;">글씨 쓰기</button>
 			  	<div id="textmenu" class="controls" style="display: none;">
 					<p>
-						Font-family: <select id="font-family"><option value="Times New Roman">Times New Roman</option><option value="Pacifico">Pacifico</option><option value="VT323">VT323</option><option value="Quicksand">Quicksand</option><option value="Inconsolata">Inconsolata</option></select>
+						Font-family: 
+						<select id="font-family">
+							<option value="Roboto">Roboto</option>
+							<option value="Do Hyeon">Do Hyeon</option>
+							<option value="Gugi">Gugi</option>
+							<option value="Lato">Lato</option>
+							<option value="Lora">Lora</option>
+							<option value="Oswald">Oswald</option>
+							<option value="Slabo">Slabo</option>
+							<option value="Cute Font">Cute Font</option>
+							<option value="Ubuntu">Ubuntu</option>
+							<option value="Gamja Flower">Gamja Flower</option>
+							<option value="Gaegu">Gaegu</option>
+							<option value="Indie Flower">Indie Flower</option>
+							<option value="PT Sans Narrow">PT Sans Narrow</option>
+							<option value="Lobster">Lobster</option>
+						</select>
+					</p>
+						<p>
+						Font-Color:
+						<select id="font-color">
+							<option value="white">white</option>
+							<option value="red">red</option>
+						</select>
 					</p>
 				</div>
 			  	<br>

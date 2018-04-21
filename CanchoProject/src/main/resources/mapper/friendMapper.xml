@@ -11,12 +11,10 @@
 	 		user_id
 	 		, user_name
 	 		, user_email
-	 		, user_password
-	 		, user_verify
 	 	from 
 	 		blog_user
 	 	where
-	 		user_id like '%' || #{user_id} || '%'
+           user_id like '%' || #{user_id} || '%'
 	 </select>
 	 
 	 <!-- 친구 추가 -->

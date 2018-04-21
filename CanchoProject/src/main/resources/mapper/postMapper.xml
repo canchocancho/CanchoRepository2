@@ -35,16 +35,28 @@
 	</insert>
 	
 	<!-- 포스트 목록 -->
-	<select id="postList" resultType="Post">
+	<select id="postList" parameterType="String" resultType="Post">
 		select
 			*
 		from
 			blog_post
+		where
+			user_id
+		in
+			(select
+				friend_id
+			from
+				blog_friend
+			where
+				user_id = #{user_id}
+			)
+		or
+			user_id = #{user_id}		
 		order by
 			post_num desc
 	</select>
 	
-	<!-- 포스트 목록 -->
+	<!-- 내 글 목록 -->
 	<select id="postListId" parameterType="String" resultType="Post">
 		select
 			*

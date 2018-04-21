@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -42,73 +41,28 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../post/postList"><img src="../resources/images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="../"><img src="../resources/images/logo.png" alt="logo" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="../resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                </ul>
+                <a href="/cancho">Timeline</a>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Newsfeed <span><img src="../resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="newsfeed.html">Newsfeed</a></li>
-                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                  <li><a href="newsfeed-friends.html">My friends</a></li>
-                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
-                  <li><a href="newsfeed-images.html">Images</a></li>
-                  <li><a href="newsfeed-videos.html">Videos</a></li>
-                </ul>
+                <a href="">My Page</a>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Timeline <span><img src="../resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu login">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html">Timeline About</a></li>
-                  <li><a href="timeline-album.html">Timeline Album</a></li>
-                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
-                  <li><a href="edit-profile-basic.html">Edit: Basic Info</a></li>
-                  <li><a href="edit-profile-work-edu.html">Edit: Work</a></li>
-                  <li><a href="edit-profile-interests.html">Edit: Interests</a></li>
-                  <li><a href="edit-profile-settings.html">Account Settings</a></li>
-                  <li><a href="edit-profile-password.html">Change Password</a></li>
-                </ul>
+                <a href="../user/friendList">Friends</a>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All Pages <span><img src="../resources/images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu page-list">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                  <li><a href="newsfeed.html">Newsfeed</a></li>
-                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                  <li><a href="newsfeed-friends.html">My friends</a></li>
-                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
-                  <li><a href="newsfeed-images.html">Images</a></li>
-                  <li><a href="newsfeed-videos.html">Videos</a></li>
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html">Timeline About</a></li>
-                  <li><a href="timeline-album.html">Timeline Album</a></li>
-                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
-                  <li><a href="edit-profile-basic.html">Edit Profile</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                  <li><a href="faq.html">FAQ Page</a></li>
-                  <li><a href="404.html">404 Not Found</a></li>
-                </ul>
+                <a href="../user/logout">Logout</a>
               </li>
-              <li class="dropdown"><a href="contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="../user/contact">Contact</a>
+              </li>
             </ul>
-            <form class="navbar-form navbar-right hidden-sm">
-              <div class="form-group">
-                <i class="icon ion-android-search"></i>
-                <input type="text" class="form-control" placeholder="Search friends, photos, videos">
-              </div>
-            </form>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
       </nav>
@@ -127,17 +81,24 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+                  <!-- 프로필 사진이 있을 때 -->
+            	<c:if test="${profile.p_originalfile != null }">
+              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="img-responsive profile-photo">
+              	</c:if>
+              	
+            	<!-- 프로필 사진이 없을 때 -->
+            	<c:if test="${profile.p_originalfile == null }">
+              		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="img-responsive profile-photo">
+              	</c:if>
                   <h3>${sessionScope.loginName }</h3>
-                  <p class="text-muted">Creative Director</p>
                 </div>
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="../post/postList">Timeline</a></li>
-                  <li><a href="" class="active">About</a></li>
-                  <li><a href="timeline-album.html">Album</a></li>
-                  <li><a href="timeline-friends.html">Friends</a></li>
+                  <li><a href="../post/postList">My Page</a></li>
+                  <li><a href="" class="active">Profile</a></li>
+                  <li><a href="">Album</a></li>
+                  <li><a href="friendList">Friends</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
                   <li>1,299 people following me</li>
@@ -152,14 +113,13 @@
             <div class="profile-info">
               <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
               <h4>${sessionScope.loginName }</h4>
-              <p class="text-muted">Creative Director</p>
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                <li><a href="timline.html">Timeline</a></li>
-                <li><a href="timeline-about.html" class="active">About</a></li>
-                <li><a href="timeline-album.html">Album</a></li>
-                <li><a href="timeline-friends.html">Friends</a></li>
+                  <li><a href="../post/postList">My Page</a></li>
+                  <li><a href="" class="active">Profile</a></li>
+                  <li><a href="">Album</a></li>
+                  <li><a href="friendList">Friends</a></li>
               </ul>
               <button class="btn-primary">Add Friend</button>
             </div>
@@ -173,8 +133,8 @@
               <!--Edit Profile Menu-->
               <ul class="edit-menu">
               	<li class="active"><i class="icon ion-ios-information-outline"></i><a href="">Basic Information</a></li>
-              	<li><i class="icon ion-ios-briefcase-outline"></i><a href="">Education and Work(안함)</a></li>
-              	<li><i class="icon ion-ios-heart-outline"></i><a href="">My Interests(안함)</a></li>
+<!--               	<li><i class="icon ion-ios-briefcase-outline"></i><a href="">Education and Work(안함)</a></li>
+              	<li><i class="icon ion-ios-heart-outline"></i><a href="">My Interests(안함)</a></li> -->
                 <li><i class="icon ion-ios-settings"></i><a href="editProfile">Profile Update</a></li>
               	<li><i class="icon ion-ios-locked-outline"></i><a href="updateInfo">Change Information</a></li>
               </ul>
@@ -233,27 +193,6 @@
                   <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Location</h4>
                   <p>${sessionScope.profile.p_city }, ${sessionScope.profile.p_country }</p>
                 </div>
-                
-                
-<!--                 <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-heart-outline icon-in-title"></i>Interests</h4>
-                  <ul class="interests list-inline">
-                    <li><span class="int-icons" title="Bycycle riding"><i class="icon ion-android-bicycle"></i></span></li>
-                    <li><span class="int-icons" title="Photography"><i class="icon ion-ios-camera"></i></span></li>
-                    <li><span class="int-icons" title="Shopping"><i class="icon ion-android-cart"></i></span></li>
-                    <li><span class="int-icons" title="Traveling"><i class="icon ion-android-plane"></i></span></li>
-                    <li><span class="int-icons" title="Eating"><i class="icon ion-android-restaurant"></i></span></li>
-                  </ul>
-                </div>
-                <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-chatbubble-outline icon-in-title"></i>Language</h4>
-                    <ul>
-                      <li><a href="">Russian</a></li>
-                      <li><a href="">English</a></li>
-                    </ul>
-                </div> -->
-                
-                
               </div>
               </c:if>
               
@@ -382,25 +321,3 @@
     
   </body>
 </html>
-
-<%-- <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>[ 마이페이지 ]</title>
-</head>
-<body>
-	<ul>
-		<c:choose>
-			<c:when test="${sessionScope.loginId != null }">
-				<h3>${sessionScope.loginName }님의 마이페이지 </h3>
-				<li><a href="updateInfo">회원정보 수정</a></li>
-				<li><a href="friendList">친구리스트</a></li>
-				<li><a href="message">나의 쪽지함</a></li>
-				<li><a href="">설정</a></li>
-			</c:when>
-		</c:choose>
-	</ul>
-
-</body>
-</html> --%>

@@ -236,6 +236,46 @@ function drag(ev) {
 /**
  * 비디오 drag&drop 핸들러
  */
+function videoDragDropEventHandler(){
+	alert('dadadad!');
+	
+	$('i').on('draggable', function(){
+		revert: false;
+	});
+	
+	$('#video-track').on('dragenter dragover', function(e) {
+		e.preventDefault();
+		$(this).css('border', '2px solid #ff0080');
+	});
+	
+	$('#video-track').on('drop', function(e) {
+		
+		e.preventDefault();
+		$(this).css('border', '0px');
+		var data = e.originalEvent.dataTransfer.getData("text");
+		if(data=='') return;
+		alert("비디오 핸들러 : " + data);
+		if( checkFileType(data) != 'video' && 
+			checkFileType(data) != 'image' &&
+			checkFileType(data) != 'transition') return;
+
+		if(checkFileType(data) == 'video') {
+			alert('checkFileType');
+			addVideoTrackVideoObj(data);
+		}else{
+			return;
+		}
+	});
+	
+	$('#video-track').on('dragleave dragend', function(e) {
+		e.preventDefault();
+		$(this).css('border', '0px');
+	});	
+}
+
+/**
+ * 메인트랙 drag&drop
+ */
 function trackDragAndDropEventHander(){
 	videoDragDropEventHandler();
 	var trackArr= Object.keys(tracksDuration);
@@ -250,42 +290,10 @@ function trackDragAndDropEventHander(){
 		subTrackDragDropEventHandler(trackArr[i], type);
 	}
 }
-
-/**
- * 메인 drag&drop
- */
-function videoDragDropEventHandler(){
-	
-	$('#video-track').on('dragenter dragover', function(e) {
-		e.preventDefault();
-		$(this).css('border', '2px solid #ff0080');
-	});
-	
-	$('#video-track').on('drop', function(e) {
-		e.preventDefault();
-		$(this).css('border', '0px');
-		var data = e.originalEvent.dataTransfer.getData("text");
-		if(data==''){
-			return;
-		}
-		if(checkFileType(data) != 'video') {
-			return;
-		}else if(checkFileType(data) == 'video') {
-			addVideoTrackVideoObj(data);
-		}
-	});
-	
-	$('#video-track').on('dragleave dragend', function(e) {
-		e.preventDefault();
-		$(this).css('border', '0px');
-	});	
-}
-
 /**
  * 서브트랙 drag&drop
  */
 function subTrackDragDropEventHandler(trackId, type){
-	
 	$('#' + trackId).on('dragenter dragover', function(e) {
 		e.preventDefault();
 		$('#' + trackId + '-cont').css('border', '2px solid #ff0080');
@@ -295,12 +303,8 @@ function subTrackDragDropEventHandler(trackId, type){
 		e.preventDefault();
 		$('#' + trackId + '-cont').css('border', '0px');
 		var data = e.originalEvent.dataTransfer.getData("text");
-		if(data==''){
-			return;
-		}
-		if(checkFileType(data) != type){
-			return;
-		}
+		if(data=='') return;
+		if(checkFileType(data) != type) return;
 		addSubTrackObj(trackId, data);
 	});
 	$('#' + trackId).on('dragleave dragend', function(e) {
@@ -313,9 +317,6 @@ function subTrackDragDropEventHandler(trackId, type){
  * 서브트랙 오브젝트 추가
  */
 function addSubTrackObj(trackId, id){
-	if(video0TrackobjNum == 0){
-		return;
-	}
 	var path = $('#' + id).attr('path');
 	var fname = getFileName(path);
 	var type = getFileType(path);
@@ -358,7 +359,7 @@ function addSubTrackObj(trackId, id){
 			$('#' + newid).attr('frame', addedClip.frame);
 			
 			resizeOtherTrackObj(newid, trackId);
-			/*trackObjEventRegister();*/
+			trackObjEventRegister();
 		    $(".draggable").draggable({
 		        stop: function() {
 		        	updateLocationObj($(this).attr('id'), $(this).attr('trackId'));
@@ -370,9 +371,6 @@ function addSubTrackObj(trackId, id){
 	});	
 }
 
-/**
- * 미디어 mash추가
- */
 function add_media(trackId, id, url, fname, duration){
 	var trackInfos = trackId.split('-');
 	var type = trackInfos[0];
@@ -387,7 +385,7 @@ function add_media(trackId, id, url, fname, duration){
 		add['duration']  = duration;
 	}
 	mm_player.add(add, trackInfos[0], tracksDuration[trackId] , trackInfos[1]*1);
-	tracksDuration[trackId] += duration;
+	tracksDuration[trackId] += duration;	
 	return mm_player.selectedClip;
 }
 
@@ -395,6 +393,7 @@ function add_media(trackId, id, url, fname, duration){
  * 메인트랙 오브젝트 추가
  */
 function addVideoTrackVideoObj(id){
+	alert('addVideoTrackVideoObj');
 	var ffid = $('#' + id).attr('ffid');
 	var path = $('#' + id).attr('path');
 	var fname = getFileName(path);	
@@ -410,9 +409,8 @@ function addVideoTrackVideoObj(id){
 			var html = $('#video-track').html();
 			var newid = 'video'+'Obj' + video0TrackobjNum;
 			video0TrackobjNum++;
-			var frames = videoInfo.count/30; 
 			html += '<div class="ui-state-default video-obj track-obj" ';
-			html += ' frames=' + frames +' ';
+			html += ' frames=' + videoInfo.count/30 +' ';
 			html += ' id=' + newid +' ';
 			html += ' itemId=' + id +' ';
 			html += ' clicked=' + 'false' +' ';
@@ -431,40 +429,40 @@ function addVideoTrackVideoObj(id){
 }
 
 function resizeTrackObj(maxValue){
-	
 	var videoTrackObjsCnt = $.makeArray($(".video-obj").map(function(){
 	    return $(this).attr("frames");
 	}));
+	alert("리사이즈 : " + videoTrackObjsCnt);
 	
-	var videoTotalLength = 0;
+	var videoTrackTotalCnt = 0;
 	
 	for(var j = 0; j < videoTrackObjsCnt.length; j++){
-		videoTotalLength += Number(videoTrackObjsCnt[j]);
+		videoTrackTotalCnt += Number(videoTrackObjsCnt[j]);
 	}
 	
-	if(maxValue != null && maxValue < videoTotalLength)
-		maxValue = videoTotalLength;
+	if(maxValue != null && maxValue < videoTrackTotalCnt)
+		maxValue = videoTrackTotalCnt;
 	
 	var trackArr= Object.keys(tracksDuration);
 	for(var i = 0; i < trackArr.length; i++){
 		if( tracksDuration[trackArr[i]] > maxValue )
 			maxValue = tracksDuration[trackArr[i]];
-	}
+	}	
 	
-	//추가된 오브젝트의 갯수
-	var totalNumberOfObj = $.makeArray($(".track-obj").map(function(){
-	    return $(this).attr("id");   
+	var IdsOftrackObjs = $.makeArray($(".track-obj").map(function(){
+	    return $(this).attr("id");
 	}));
-	if(maxValue==1) {
-		maxValue = 2;
-	}
-	for(var i = 0; i < totalNumberOfObj.length; i++){
-		var thisId = totalNumberOfObj[i];
+	
+	if(maxValue==1) maxValue = 2;
+	for(var i = 0; i < IdsOftrackObjs.length; i++){
+		var thisId = IdsOftrackObjs[i];
 		var thisCnt = $('#' + thisId).attr('frames');
 		var newWidth = ( trackWidth * thisCnt ) / maxValue;
-		$('#'+thisId).css({
-			'heigth': trackHeight,'width': newWidth
-		});	
+		$('#'+thisId).css({	
+							'heigth': trackHeight,
+							'width': newWidth
+		});
+		
 	}
 }
 
@@ -486,8 +484,9 @@ function resizeOtherTrackObj(id, trackId){
 	} else {
 		var thisCnt = $('#' + id).attr('frames');
 		var newWidth = ( trackWidth * thisCnt ) / videoTrackTotalCnt;
-		$('#'+id).css({
-			'heigth': trackHeight, 'width': newWidth
+		$('#'+id).css({	
+							'heigth': trackHeight,
+							'width': newWidth
 		});
 	}
 }

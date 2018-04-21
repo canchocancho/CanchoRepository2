@@ -96,7 +96,8 @@ public class UserController {
 							session.setAttribute("profile", user_profile);
 						}
 						
-						ArrayList<Post> postList = postDAO.postList();
+						//타임라인에 표시할 자기랑 자기 친구들 포스팅들
+						ArrayList<Post> postList = postDAO.postList(vo.getUser_id());
 						session.setAttribute("postList", postList);
 						model.addAttribute("postList", postList);
 						
@@ -342,7 +343,7 @@ public class UserController {
 			
 			if(result != 1){
 				//등록실패
-				model.addAttribute("errorMsg", "오류가 발생했습니다.");
+				model.addAttribute("errorMsg", "필수정보는 모두 기입해주세요.");
 				logger.info("프로필 저장 실패");
 				
 				return "user/editProfile";
@@ -351,7 +352,7 @@ public class UserController {
 			logger.info("프로필 저장 종료");
 			session.setAttribute("profile", profile);
 
-			return "user/myPage";
+			return "redirect:myPage";
 		}
 		
 		//수정일 경우
@@ -369,7 +370,7 @@ public class UserController {
 	        int result = dao.updateProfile(profile);
 	        
 	        if(result != 1){
-	        	model.addAttribute("errorMsg", "오류가 발생했습니다.");
+	        	model.addAttribute("errorMsg", "필수정보는 모두 기입해주세요.");
 	        	logger.info("프로필 업데이트 실패");
 	        	
 	        	return "user/editProfile";
@@ -382,8 +383,12 @@ public class UserController {
 		}
 	}
 	
-	
-	
+	//contact 페이지로 이동
+	@RequestMapping(value="contact", method = RequestMethod.GET)
+	public String contact(){
+
+		return "user/contact";
+	}
 	
 	
 }
