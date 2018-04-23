@@ -35,9 +35,8 @@ import lets.eat.cancho.editor.util.test;
 
 @Controller
 public class editController {
-	
 	int Cnt = 0;
-	HashMap<String, String> deleteMap = new HashMap<String, String>();
+	HashMap<String, String> delMap = new HashMap<String, String>();
 	
 	/*사용자에 토모로그 폴더 생기게*/
 	
@@ -50,23 +49,10 @@ public class editController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "extract", method = RequestMethod.GET)
-	public HashMap<String, Object> extract(String fileName){
-		HashMap<String, Object> rtn  = new HashMap<>();
-		String originPath = "tomolog\\extract\\";
-		String videoPath = "C:\\tomolog\\extract\\"+fileName+"\\";
-		System.out.println(videoPath);
-		int count = test.findFileNum(videoPath) - 1;
-		rtn.put("count", count);
-		rtn.put("originPath", originPath);
-		return rtn;
-	}
-	
-	@ResponseBody
 	@RequestMapping(value="fileupload", method = RequestMethod.POST)
-	public String fileupload(MultipartHttpServletRequest request, HttpServletResponse response, String selectedType) {
+	public ArrayList<String> fileupload(MultipartHttpServletRequest request, HttpServletResponse response) {
 		Iterator<String> itr =  request.getFileNames();
-        String fileType = request.getParameter("fileType");
+		ArrayList<String> fileList = new ArrayList<String>();
         String savedfile = "";
         String fileName = "";
         if(itr.hasNext()) {
@@ -76,10 +62,9 @@ public class editController {
 				
 				// 파일 종류 판별
 				int fileLength = savedfile.length();
-				String ext;
 				int lastIndex = savedfile.lastIndexOf('.');
 				fileName = savedfile.substring(0, lastIndex);
-				String extName = savedfile.substring(lastIndex+1, fileLength);	//	확장자 구하기
+				String extName = savedfile.substring(lastIndex+1, fileLength);
 				
 				/*// 페이지에 넘겨줄 파일경로가 담긴 리스트
 				case "mp4": videoList.add(savedfile); break;
@@ -91,23 +76,22 @@ public class editController {
 				case "png": imageList.add(savedfile); break;
 				}*/
 				if(extName.equals("mp4") || extName.equals("ogg") || extName.equals("webm")) {
-					ImageFileManager.extractVideo(fileName, fileName);
+					ImageFileManager.extractVideo(fileName);
 				}
 			}
-        } 
-        return fileName;
+        }
+        fileList = getFileList();
+        return fileList;
     }
 	
 	@ResponseBody
 	@RequestMapping(value = "getFileList", method = RequestMethod.POST)
-	public ArrayList<String> getFileList(String selectedType) {
-		/*String type = selectedType;*/
+	public ArrayList<String> getFileList() {
 		File path = new File("C:/tomolog/temp/");
 		File[] fileList = path.listFiles();
 		ArrayList<String> videoPath = new ArrayList<String>();
 		for (int i = 0; i < fileList.length; i++) {
 			 videoPath.add(fileList[i].toString());
-			 System.out.println(videoPath);
 		}
 			return videoPath;
 		}
@@ -117,21 +101,17 @@ public class editController {
 					produces = "application/json;charset=utf-8")
 	public HashMap getVideoInfo(String ffid, String path){
 		HashMap<String, Object> rtn  = new HashMap<>();
-		//1. 영상의 사진 갯수
 		String videoPath = "C:\\tomolog\\extract\\" + ffid;
+		String vExtractPath = "tomolog\\extract\\" + ffid + "\\";
 		int count = test.findFileNum(videoPath) - 1;
 		rtn.put("count", count);
-		//2. 영상의 주소
-		String vExtractPath = "tomolog\\extract\\" + ffid + "\\";
 		rtn.put("extractPath", vExtractPath);
-		//3.audio 파일 여부
 		boolean isAudio = false;
 		File audio = new File(videoPath + "\\audio.mp3");
 		if(audio.exists()) isAudio=true;
 		rtn.put("isAudio", isAudio);
 		return rtn;
 	}
-	
 	@ResponseBody
 	@RequestMapping(value = "getObjectInfo", method = RequestMethod.GET ,
 					produces = "application/json;charset=utf-8")
@@ -182,23 +162,36 @@ public class editController {
 			e.printStackTrace();
 		}
 	}
-	
-	/*@ResponseBody
-	@RequestMapping(value = "deleteAllFiles", method = RequestMethod.GET)
-	public void deleteAllFiles() {
-		File exFile = new File("C:/tomolog/extract/");
-		File temFile = new File("C:/tomolog/temp/");
-        if(exFile.exists()){ //파일존재여부확인
-            if(exFile.isDirectory()){ //파일이 디렉토리인지 확인
-                File[] exFiles = exFile.listFiles();
-                File[] temFiles = temFile.listFiles();
-                for( int i=0; i<exFiles.length; i++){
-                	exFiles[i].delete();   
-                	temFiles[i].delete();
-                }
-            }
-            exFile.delete(); 
-            temFile.delete();
-        }	
-	}*/
+	@ResponseBody
+	   @RequestMapping(value = "delIndiFile", method = RequestMethod.POST)
+	   public String deleteAllFiles(String fileName, String fileType, String fileExt) {
+	      
+	      delMap = new HashMap<String,String>();
+	      
+	      System.out.println("the delIndiFile : fileName is : " + fileName);
+	      System.out.println("the delIndiFile : fileType is : " + fileType);
+	      System.out.println("the delIndiFile : fileExt is : " + fileExt);
+	      
+	      String fullpath = uploadPath + fileName + fileExt;
+	      String fullpathEx = extractPath;
+	      
+	   
+	      delMap.put("fullpath", fullpath);
+	      
+	      if(fileType.equals("video")) {
+	         fullpathEx = fullpathEx + fileName;
+	         delMap.put("fullpathEx", fullpathEx);
+	      }
+	      else {
+	         delMap.put("fullpathEx", "notVideo");
+	      }
+	      
+	      delMap.put("fileName", fileName);
+	      
+	      boolean result = FileService.deleteFile(delMap);
+	      
+	      return "redirect:/getFileList";
+	      
+	   
+	   }
 }

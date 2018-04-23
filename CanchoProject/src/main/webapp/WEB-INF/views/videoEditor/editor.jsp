@@ -8,16 +8,15 @@
     
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="resources/vendor/jquery/jquery-ui-1.12.1/jquery-ui.css">
-	<link rel="stylesheet" href="resources/vendor/metisMenu/metisMenu.min.css">
-	<link rel="stylesheet" href="resources/vendor/w2ui/w2ui-1.5.rc1.min.css" type="text/css">
 	<link rel="stylesheet"  href="resources/vendor/font-awesome/css/font-awesome.min.css" type="text/css">
 	<link rel="stylesheet" href="resources/vendor/zTree/css/awesomeStyle/awesome.css" type="text/css">
 	<!-- <link rel="stylesheet" href="resources/css/editor/editor.css" type="text/css"> -->
 	<link href="resources/vendor/colorBox/colorbox.css" rel="stylesh1eet">
 	<link href="resources/css/editor/cancho_editor.css" rel="stylesheet" type="text/css">
+	<link href="resources/css/editor/timeslider.css" rel="stylesheet" type="text/css">
 	<!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css" /> -->
 	<link rel="stylesheet" href="resources/css/style.css" />
-<!-- 	<link rel="stylesheet" href="resources/css/ionicons.min.css" /> -->
+	<!-- 	<link rel="stylesheet" href="resources/css/ionicons.min.css" /> -->
 	
 	
 	
@@ -45,6 +44,7 @@
     <script src="resources/vendor/moviemasher/src/others/time.js"></script>
     <script src="resources/vendor/moviemasher/src/others/util.js"></script>
     
+    <script src="resources/js/timeslider.js"></script>
     <script src="resources/js/editor/app.js"></script>
     <script src="resources/js/editor/editor.js"></script>
     <script src="resources/js/editor/videoSlider.js"></script>
@@ -60,9 +60,8 @@
 		    </div>
 		    <div id="range-and-btn">
 			    <div id="player-slider">    
-			    	<input type= "range" id="p-slider" step= "0.001" value="0" min="0" max="1" oninput="sliderSyncro('pslider')"/>
+			    	<input type= 'range' id='p-slider' step= '0.001' value='0' min='0' max='1' oninput='sliderSyncro("pslider")'/>
 			    </div>
-			    	
 			    <div id="player-btns">
 			      	<img src="resources/images/playCon.png" onclick="mm_player.paused = false" width="30px" height="30px">
 			      	<img src="resources/images/pauseCon.png" onclick="mm_player.paused = true" width="30px" height="30px">
@@ -96,39 +95,38 @@
 				</span>
 				<div>
 					<div class="main-track ui-state-default" id="video-track">
-						<div id="nno" class="track-name">
-							<!-- <i id="cameraCon" class="fa fa-video-camera" aria-hidden="true"></i> -->
+						<div class="track-name">
 						</div>
 					</div>
 				</div>
 				<div>
-					<div  class="odd-track-container" id="video-1-cont" >
-						<span class="track-name">
-						</span>
-						<div class="track-odd other-track" id="video-1">
+					<div  class="odd-track-container" id="image-1-cont" >
+						<div class="track-name">
+						</div>
+						<div class="track-odd other-track" id="image-1">
 						</div>
 					</div>
 				</div>	
 				<div>
 					<div class="even-track-container" id="audio-1-cont">
-						<span class="track-name">
-						</span>
+						<div class="track-name">
+						</div>
 						<div class="track-even other-track" id="audio-1">
 						</div>
 					</div>
 				</div>
 				<div>
-					<div class="odd-track-container" id="video-2-cont">
-						<span class="track-name">
-						</span>
-						<div class="track-odd other-track" id="video-2">
+					<div class="odd-track-container" id="image-2-cont">
+						<div class="track-name">
+						</div>
+						<div class="track-odd other-track" id="image-2">
 						</div>
 					</div>
 				</div>
 				<div>
 					<div class="even-track-container" id="audio-2-cont">
-						<span class="track-name">
-						</span>
+						<div class="track-name">
+						</div>
 						<div class="track-even other-track" id="audio-2">
 						</div>
 					</div>
@@ -138,6 +136,7 @@
 		<div id = "volume"></div>
 	</div>
 <div id = "bottom">
+<button id="split" class="itool fa fa-scissors" aria-hidden="true"> split</button>
 </div>
   </body>
 </html>

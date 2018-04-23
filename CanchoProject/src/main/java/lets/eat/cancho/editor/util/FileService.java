@@ -100,61 +100,64 @@ public class FileService {
 	 * @return 삭제 여부
 	 */
 	public static boolean deleteFile(HashMap<String, String>delMap) {
-		//파일 삭제 여부를 리턴할 변수
-		boolean result = false;
-		
-		System.out.println("삭제부분입니다");
-		System.out.println(delMap.get("fullpath"));
-		
-		System.out.println("fullpath : " + delMap.get("fullpath"));
-		System.out.println("fullpathEx : " + delMap.get("fullpathEx"));
-		
-		String fullpath = (String)delMap.get("fullpath");
-		String fullpathEx = (String)delMap.get("fullpathEx");
-		
-		//전달된 전체 경로로 File객체 생성
-		File delFile = new File(fullpath);
-		
-		
-		
-		//해당 파일이 존재하면 삭제
-		if (delFile.isFile()) {
-			try {
-				
-			delFile.delete();
-			
-			if(!(fullpathEx.equals("notVideo")))	{
-				File delDirec = new File(fullpathEx);
-				
-			    String[] fnameList = delDirec.list();
-			    int fCnt = fnameList.length;
-			    String childPath = "";
-			    
-			    for(int i = 0; i < fCnt; i++) {
-			      childPath = fullpathEx + "/" +fnameList[i];
-			      File f = new File(childPath);
-			      if( ! f.isDirectory()) {
-			        f.delete();   //파일이면 바로 삭제
-			      }
-			      /*else {
-			        deleteFolder(childPath);
-			      }*/
-			    }
-			    
-			    File f = new File(fullpathEx);
-			    f.delete();   //폴더는 맨 나중에 삭제
-				
-			}
-			result = true;
-			
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-		return result;
-	}
+	      //파일 삭제 여부를 리턴할 변수
+	      boolean result = false;
+	      
+	      System.out.println("삭제부분입니다???");
+	      System.out.println(delMap.get("fullpath"));
+	      
+	      System.out.println("fullpath : " + delMap.get("fullpath"));
+	      System.out.println("fullpathEx : " + delMap.get("fullpathEx"));
+	      
+	      String fullpath = (String)delMap.get("fullpath");
+	      String fullpathEx = (String)delMap.get("fullpathEx");
+	      
+	      //전달된 전체 경로로 File객체 생성
+	      File delFile = new File(fullpath);
+	      System.out.println(delFile.exists());
+	      System.out.println(delFile.isFile());
+	      
+	      
+	      
+	      //해당 파일이 존재하면 삭제
+	      if (delFile.isFile()) {
+	         System.out.println("삭제하러 들어왔음다");
+	         try {
+	            
+	         delFile.delete();
+	         
+	         if(!(fullpathEx.equals("notVideo")))   {
+	            
+	            System.out.println("비디오입니다");
+	            
+	            File delDirec = new File(fullpathEx);
+	            
+	             String[] fnameList = delDirec.list();
+	             int fCnt = fnameList.length;
+	             String childPath = "";
+	             
+	             for(int i = 0; i < fCnt; i++) {
+	               childPath = fullpathEx + "/" +fnameList[i];
+	               File f = new File(childPath);
+	               if( ! f.isDirectory()) {
+	                 f.delete();   //파일이면 바로 삭제
+	               }
+	             }
+	             
+	             File f = new File(fullpathEx);
+	             f.delete();   //폴더는 맨 나중에 삭제
+	            
+	         }
+	         result = true;
+	         
+	         }catch (Exception e) {
+	            e.printStackTrace();
+	         }
+	         
+	      }
+	      
+	      return result;
+	   }
 	
 	// 전체 파일 삭제
 	public static boolean deleteAllFiles(ArrayList<String>list, String path) {
