@@ -181,11 +181,6 @@
 			<c:forEach items="${mypostList }" var="post">
 				  <div class="post-content">
 
-<%--                 <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>${post.user_id }</h5>
-                </div><!--Post Date End--> --%>
-
 				<!-- 표지가 있을 경우 -->
 				<c:if test="${post.originalfile != null }">
 				<a href="readOnePost?post_num=${post.post_num }">
@@ -203,10 +198,20 @@
                 
                 
                 <div class="post-container">
-                  <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left">
+                
+                <!-- 프로필 사진이 있을 때 -->
+            	<c:if test="${profile.p_originalfile != null }">
+              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="profile-photo-md pull-left">
+              	</c:if>
+              	
+            	<!-- 프로필 사진이 없을 때 -->
+            	<c:if test="${profile.p_originalfile == null }">
+              		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo-md pull-left">
+              	</c:if>
+                  
                   <div class="post-detail">
                     <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>
+                      <h5><a href="" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>
                       <p class="text-muted">${post.post_date }</p>
                     </div>
                     <div class="reaction">

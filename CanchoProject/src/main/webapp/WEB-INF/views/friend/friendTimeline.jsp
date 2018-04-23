@@ -198,12 +198,12 @@
                 <div class="post-container">
                 <!-- 프로필 사진이 있을 때 -->
             	<c:if test="${profile.p_originalfile != null }">
-              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="profile-photo">
+              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="profile-photo-md pull-left">
               	</c:if>
               	
             	<!-- 프로필 사진이 없을 때 -->
             	<c:if test="${profile.p_originalfile == null }">
-              		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo">
+              		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo-md pull-left">
               	</c:if>
                   
                   
