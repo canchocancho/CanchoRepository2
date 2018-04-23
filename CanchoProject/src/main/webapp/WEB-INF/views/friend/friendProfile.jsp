@@ -100,7 +100,6 @@
                   <li><a href="">Album</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
-                  <li>1,299 people following me</li>
                   <li><button class="btn-primary">Add Friend</button></li>
                 </ul>
               </div>

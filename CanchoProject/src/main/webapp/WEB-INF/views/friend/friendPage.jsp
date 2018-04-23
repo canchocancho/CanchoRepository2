@@ -148,7 +148,7 @@
 						<c:forEach var="friend" items="${fList }">
 		            		<div class="col-md-6 col-sm-6">
 		                  		<div class="friend-card">
-              							<img src="../post/downloadPic?user_id=${friend.friend_id }" alt="post-image" class="img-responsive cover" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">	
+              					<img src="../post/downloadPic?user_id=${friend.friend_id }" alt="" class="img-responsive cover" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">	
 		                  		<div class="card-info">
 			                      	<div class="friend-info">
 			                        	<a href="#" class="pull-right text-green">My Friend</a>
@@ -174,7 +174,8 @@
 		            <c:if test="${list != null }">
 						<c:forEach var="user" items="${list }">
 							<c:if test="${user.user_id != sessionScope.loginId }">
-							<img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left">
+				            <img src="../post/downloadPic?user_id=${user.user_id }" alt="" class="profile-photo-sm pull-left" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">
+				            
 				                <div>
 				                  <h5><a href="friendPage?friend_id=${user.user_id }">${user.user_id }</a></h5>
 				                  <a href="javascript:insertFriend('${user.user_id }')" class="text-green">Add friend</a>
