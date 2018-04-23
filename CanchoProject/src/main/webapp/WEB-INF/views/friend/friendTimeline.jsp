@@ -196,9 +196,6 @@
                 
                 
                 <div class="post-container">
-                
-<!--                   <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left">
-                   -->
                 <!-- 프로필 사진이 있을 때 -->
             	<c:if test="${profile.p_originalfile != null }">
               		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="profile-photo">
