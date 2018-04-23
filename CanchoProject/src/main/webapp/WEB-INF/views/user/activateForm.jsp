@@ -93,13 +93,13 @@
                   <!--Login Form-->
                   <form name="Activate_form" id='Activate_form' action="activate" method="post">
                      <div class="row">
-                      <div class="form-group col-xs-12">
+                      <div class="form-group col-xs-12" style="float: none;">
                         <label for="my-id" class="sr-only">ID</label>
                         <input id="user_id" class="form-control input-group-lg" type="text" name="user_id" title="Enter ID" placeholder="Your ID" autocomplete="off"/>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="form-group col-xs-12">
+                      <div class="form-group col-xs-12" style="float: none;">
                         <label for="my-password" class="sr-only">Password</label>
                         <input id="user_password" class="form-control input-group-lg" type="password" name="user_password" title="Enter password" placeholder="Password"/>
                       </div>

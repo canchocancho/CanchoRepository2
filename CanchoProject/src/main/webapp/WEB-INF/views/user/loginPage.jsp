@@ -5,7 +5,7 @@
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
+		<script type="text/javascript" src="<c:url value="../resources/js/jquery-3.2.1.js" />"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="This is social network html5 template available in themeforest......" />
 		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
@@ -95,7 +95,7 @@
                   <form name="Login_form" id='Login_form' action="login" method="post">
                      <div class="row">
                       <div class="form-group col-xs-12" style="float: none;">
-                        <label for="my-id" class="sr-only">Email</label>
+                        <label for="my-id" class="sr-only">ID</label>
                         <input id="user_id" class="form-control input-group-lg" type="text" name="user_id" title="Enter ID" placeholder="Your ID" autocomplete="off"/>
                       </div>
                     </div>
@@ -106,7 +106,7 @@
                       </div>
                     </div>
                   </form><!--Login Form Ends-->
-                  <p><a href="#">Forgot Password?</a></p>
+                  <p><a href="activateForm">Activate Account</a></p>
                   <br>
                   <button class="btn btn-primary" onClick="formCheck();">Login Now</button>
         </div>
