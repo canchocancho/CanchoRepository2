@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
+		<script type="text/javascript" src="<c:url value="../resources/js/jquery-3.2.1.js" />"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="This is social network html5 template available in themeforest......">
 		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page">
@@ -214,7 +214,15 @@
               </div>
 			</c:forEach>
 			</c:if>
-
+			
+			<c:if test="${mypostList == null || mypostList.size() == 0}">
+			
+			<div style="text-align: center;">
+			<p>There is no post at all!</p>
+			<p>How about posting about yourself?</p>
+			</div>
+			
+			</c:if>
             </div>
             
           <!-- Newsfeed Common Side Bar Right

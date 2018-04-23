@@ -498,6 +498,15 @@
 			
 			</c:forEach>
 			</c:if>
+			
+			<c:if test="${mypostList == null || mypostList.size() == 0}">
+			
+			<div style="text-align: center;">
+			<p>There is no post at all!</p>
+			<p>How about posting about yourself or following some friends?</p>
+			</div>
+			
+			</c:if>
           </div>
 
           <!-- Newsfeed Common Side Bar Right
