@@ -224,6 +224,8 @@
 					<br>
 					<input type="submit" value="Update Information" class="btn btn-primary">
                   </form>
+                  <br>
+                  <p style="text-align: right;"><a href="deletePage">Deactivate Account</a></p>
                 </div>
               </div>
             </div>
