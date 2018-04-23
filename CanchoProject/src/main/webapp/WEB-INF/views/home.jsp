@@ -472,9 +472,7 @@
                 ${post.post_title }</a></h1>
                 </div>
                 </c:if>   
-              
-              
-              
+
               <div class="post-container">
                 <img src="post/downloadPic?user_id=${post.user_id }" alt="post-image" class="profile-photo-md pull-left" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">
                 <div class="post-detail">

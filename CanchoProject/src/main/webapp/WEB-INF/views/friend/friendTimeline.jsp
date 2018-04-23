@@ -73,7 +73,7 @@
                 <a href="../post/postList">My Page</a>
               </li>
               <li class="dropdown">
-                <a href="../post/friendList">Friends</a>
+                <a href="../user/friendList">Friends</a>
               </li>
               <li class="dropdown">
                 <a href="../user/logout">Logout</a>
@@ -182,24 +182,38 @@
 				<!-- 표지가 있을 경우 -->
 				<c:if test="${post.originalfile != null }">
 				<a href="readOnePost?post_num=${post.post_num }">
-				<img src="download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
+				<img src="../post/download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
 				</a>
 				</c:if>
                 
                 <!-- 표지가 없을 경우 -->
                 <c:if test="${post.originalfile == null }">
                 <div class="user-info">
-                <h1 style="text-align: center;"><a href="readOnePost?post_num=${post.post_num }">
+                <h1 style="text-align: center;"><a href="../post/readOnePost?post_num=${post.post_num }">
                 ${post.post_title }</a></h1>
                 </div>
                 </c:if>
                 
                 
                 <div class="post-container">
-                  <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left">
+                
+<!--                   <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left">
+                   -->
+                <!-- 프로필 사진이 있을 때 -->
+            	<c:if test="${profile.p_originalfile != null }">
+              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="profile-photo">
+              	</c:if>
+              	
+            	<!-- 프로필 사진이 없을 때 -->
+            	<c:if test="${profile.p_originalfile == null }">
+              		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo">
+              	</c:if>
+                  
+                  
+                  
                   <div class="post-detail">
                     <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>
+                      <h5><a href="" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>
                       <p class="text-muted">${post.post_date }</p>
                     </div>
                     <div class="reaction">
