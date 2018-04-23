@@ -321,12 +321,115 @@
 		    		 canvas.requestRenderAll();
 		    	  };
 		    	  
-		    	  //폰트 색상 변경
+		    	  //글자 색상 변경
 		    	  $('font-color').onchange = function(){
 			    	  	 alert(this.value);
 			    	  	 
-			    	  	 canvas.getActiveObject().set("fill", 'rgb(255,255,255)');
-			    		 canvas.requestRenderAll();
+			    	  	if (this.value == 'Red') {
+			    	  		 canvas.getActiveObject().set("fill", 'rgb(255,0,0)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Orange') {
+			    	  		 canvas.getActiveObject().set("fill", 'rgb(255,187,0)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Yellow') {
+			    	  		 canvas.getActiveObject().set("fill", 'rgb(255,228,0)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	 
+			    	  	if (this.value == 'Green') {
+			    	  		 canvas.getActiveObject().set("fill", 'rgb(0,200,0)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Light Blue') {
+			    	  		 canvas.getActiveObject().set("fill", 'rgb(0,216,255)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Blue') {
+			    	  		 canvas.getActiveObject().set("fill", 'rgb(0,84,255)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Purple') {
+			    	  		 canvas.getActiveObject().set("fill", 'rgb(95,0,255)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Pink') {
+			    	  		 canvas.getActiveObject().set("fill", 'rgb(255,0,127)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Black') {
+			    	  		 canvas.getActiveObject().set("fill", 'rgb(0,0,0)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'White') {
+			    	  		 canvas.getActiveObject().set("fill", 'rgb(255,255,255)');
+				    		 canvas.requestRenderAll();
+						}
+			      };
+		    	  
+		    	  
+		    	  //폰트 배경 색상 변경
+		    	  $('font-background').onchange = function(){
+			    	  	alert(this.value);
+			    	  	 
+			    	  	if (this.value == 'Red') {
+			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(255,0,0)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Orange') {
+			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(255,187,0)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Yellow') {
+			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(255,228,0)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	 
+			    	  	if (this.value == 'Green') {
+			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(0,200,0)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Light Blue') {
+			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(0,216,255)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Blue') {
+			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(0,84,255)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Purple') {
+			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(95,0,255)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Pink') {
+			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(255,0,127)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'Black') {
+			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(0,0,0)');
+				    		 canvas.requestRenderAll();
+						}
+			    	  	
+			    	  	if (this.value == 'White') {
+			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(255,255,255)');
+				    		 canvas.requestRenderAll();
+						}
 			      };
 		    	  
 		    	  //insertText
@@ -337,12 +440,9 @@
 		    		  top: 50,
 		    		  width: 150,
 		    		  fontSize: 20,
-		    		  textBackgroundColor: 'rgb(0,200,0)',
-		    		  underline: true,
-		    		  //fill: 'rgb(255,255,255)'
 		    		});
 		    		canvas.add(textbox).setActiveObject(textbox);
-		    		fonts.unshift('Times New Roman');
+		    		fonts.unshift('Times New Roman');//
 		    	  }
 		    	  
 		    	  
@@ -423,6 +523,7 @@
 					<p>
 						Font-family: 
 						<select id="font-family">
+							<option value="Select" selected="selected">Select</option>
 							<option value="Roboto">Roboto</option>
 							<option value="Do Hyeon">Do Hyeon</option>
 							<option value="Gugi">Gugi</option>
@@ -439,11 +540,36 @@
 							<option value="Lobster">Lobster</option>
 						</select>
 					</p>
-						<p>
+					<p>
 						Font-Color:
 						<select id="font-color">
-							<option value="white">white</option>
-							<option value="red">red</option>
+							<option value="Select" selected="selected">Select</option>
+							<option value="White">White</option>
+							<option value="Red">Red</option>
+							<option value="Orange">Orange</option>
+							<option value="Yellow">Yellow</option>
+							<option value="Green">Green</option>
+							<option value="Light Blue">Light Blue</option>
+							<option value="Blue">Blue</option>
+							<option value="Purple">Purple</option>
+							<option value="Pink">Pink</option>
+							<option value="Black">Black</option>
+						</select>
+					</p>
+					<p>
+						Font-Background:
+						<select id="font-background">
+							<option value="Select" selected="selected">Select</option>
+							<option value="Red">Red</option>
+							<option value="Orange">Orange</option>
+							<option value="Yellow">Yellow</option>
+							<option value="Green">Green</option>
+							<option value="Light Blue">Light Blue</option>
+							<option value="Blue">Blue</option>
+							<option value="Purple">Purple</option>
+							<option value="Pink">Pink</option>
+							<option value="Black">Black</option>
+							<option value="White">White</option>
 						</select>
 					</p>
 				</div>

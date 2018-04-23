@@ -8,19 +8,39 @@ var clickedObj;
 /**
  * 개별 파일 삭제
  */
-function delIndiFile(delFileName) {
-	$.ajax({
-		type:"POST"
-		,url: "deleteIndiFile"
-		,success: function() {
-		}
-		,error: function(e) {
-			console.log(e);
-		}
-		
-	}); 
-}
-
+function delIndiFile(fileName, fileType, fileExt) {
+	   
+	   var fileName = fileName;
+	   var fileType = fileType;
+	   var fileExt = fileExt;
+	   
+	   $.ajax({
+	      type:"POST"
+	      ,url: "delIndiFile"
+	      ,data: {
+	         fileName : fileName
+	         ,fileType : fileType
+	         ,fileExt : fileExt
+	      }
+	      ,success: function() {
+	         $.ajax({
+	               type:"POST"
+	               ,url: "getFileList"
+	               ,datatype: "json"
+	               ,success: function(data) {
+	                     outputFileList(data);
+	               }
+	               ,error: function(e) {
+	                  console.log(e);
+	               }
+	            });
+	      }
+	      ,error: function(e) {
+	         console.log(e);
+	      }
+	      
+	   }); 
+	}
 /**
  * 전체 파일 삭제
  */
@@ -53,6 +73,23 @@ $(function(){
 		    contentType: false,
 		    dataType : "text",				
 			success:function(data){
+				$.ajax({
+					type:"POST"
+					,url: "getFileList"
+					,datatype: "json"
+					,success: function(data) {
+							var str = "";
+							for(var li in data) {
+								str += "<div>" + data[li] + "<button class=\"IndiFile\" filen=\"" + data[li] + "\">Delete</button></div>"
+							}
+							str += "<div id=\"deleteAllBox\"><button id=\"deleteAll\">DeleteAll</button></div>";
+							$('#fileListBox').html(str);
+							outputFileList(data);
+					}
+					,error: function(e) {
+						console.log(e);
+					}
+				});
 			},
 			error: function(e){			
 				console.log(e);
@@ -76,16 +113,7 @@ $.ajax({
 			}
 			str += "<div id=\"deleteAllBox\"><button id=\"deleteAll\">DeleteAll</button></div>";
 			$('#fileListBox').html(str);
-			$('.IndiFile').on('click', function() {
-				var delFileName = $(this).attr("filen");
-				console.log("the fileName is " + delFileName);
-				delIndiFile(delFileName);
-			});
-			$('#deleteAll').on('click', function() {
-				delAll();
-			});
 			outputFileList(data);
-			
 	}
 	,error: function(e) {
 		console.log(e);
@@ -117,7 +145,6 @@ function volumeControll(){
 function outputFileList(list){
 	var contents = '<div id="dragDropZone">';
 	$.each(list,function(index, item) {
-			//alert("파일 불러오기 item : " + item);
 			contents += '<table class="fileBox"><tr><td class="fimage">';
 			var path = item;
 			var pathArray = path.split('\\');
@@ -131,8 +158,9 @@ function outputFileList(list){
 			var fileType = getFileType(item);
 			var lastOfIndex = pathArray[pathArray.length-1].lastIndexOf(".");
 			var fileName = pathArray[pathArray.length-1].substring(0,lastOfIndex);
+			var fileExt = pathArray[pathArray.length-1].substring(lastOfIndex,pathArray[pathArray.length-1].length);
 			if( fileType == 'image'){
-				contents += '<img id="image' + index + '" ondragstart="drag(event)" draggable="true" class="file fimage-editor" path="' + imgPath + '" src="' + imgPath +'">';
+				contents += '<img id="image' + index + '" ondragstart="drag(event)" draggable="true" class="file fimage-editor" path="' + imgPath + '" src="' + imgPath +'" width = "100" height = "100">';
 			}
 			else if(fileType == 'video'){
 				var p = item;
@@ -154,9 +182,10 @@ function outputFileList(list){
 				contents +=   '<source src="' + videoPath + '" type="video/ogg">';
 				contents +=   '<source src="' + videoPath + '" type="video/webm">';
 				contents +=   'Your browser does not support the video tag.';
-				contents += '</video>';				
+				contents += '</video>';
+				
 			}
-			/*else if(fileType == 'audio'){
+			else if(fileType == 'audio'){
 				
 				var p = item.path;
 				var audioPathrray = p.split('\\');
@@ -170,9 +199,9 @@ function outputFileList(list){
 				contents +='<audio controls>';
 				contents +='  <source src=' + audioPath + ' type="audio/mpeg">';
 				contents +='  Your browser does not support the audio tag.';
-				contents +='</audio>';
-				  
-			}*/
+				contents +='</audio>';	  
+			}
+		contents += '<img src="resources/images/cancelCon.png" width="20px" height="20px" onclick="delIndiFile(\''+fileName+ '\',\'' + fileType + '\',\'' + fileExt + '\')">';
 		contents += '</td></tr>';
 	});
 	

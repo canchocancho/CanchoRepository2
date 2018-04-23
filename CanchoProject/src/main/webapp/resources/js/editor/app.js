@@ -45,7 +45,7 @@ function mm_load() {
  * MovieMasher masher
  * mm_player에 이미지를 넣어 동영상처럼 만든다
  */
-function add_mash(id, url, count,isAudio){
+function add_mash(id,url,count,isAudio){
 	var zeroPlus = '';
 	var duration = count/30;
 	var zeroCount = String(count.toString()).length;
@@ -74,9 +74,30 @@ function add_mash(id, url, count,isAudio){
 		  mm_player.add(media, 'audio', videoTotalDuration , 0);
 	   }
 	  videoTotalDuration += duration;
-	  outputVideoEditor();
+	  /*outputVideoEditor();*/
  }
-//드래그 앤 드롭 이벤트
+/**
+ * 추가 미디어 mash추가
+ */
+function add_media(trackId, id, url, fname, duration){
+	var trackInfos = trackId.split('-');
+	var type = trackInfos[0];
+	var add = {
+		      'label': fname,
+		      'type': type,
+		      'id': id,
+		      'url': url,
+	};
+	if(type == 'audio'){
+		add['duration']  = duration;
+	}
+	mm_player.add(add, trackInfos[0], subTracksDuration[trackId] , trackInfos[1]*1);
+	subTracksDuration[trackId] += duration;
+	return mm_player.selectedClip;
+}
+/**
+ * 드래그 드롭 이벤트 설정
+ */
 function eventOnDraw(ctx, eventName){
 	  var fireEvent = function(){
 	    var evt = document.createEvent("Events");
@@ -102,9 +123,9 @@ function eventOnDraw(ctx, eventName){
 
 function myHandler(){
 	if(document.getElementById('t-slider') != null &&
-	document.getElementById('player-slider') != null) {
+	document.getElementById('p-slider') != null) {
 		document.getElementById('t-slider').value = mm_player.position;
-		document.getElementById('player-slider').value = mm_player.position
+		document.getElementById('p-slider').value = mm_player.position;
 	}
 }
 

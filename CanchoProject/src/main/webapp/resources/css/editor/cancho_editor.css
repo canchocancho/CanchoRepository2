@@ -229,7 +229,7 @@ audio {
 	vertical-align: middle
 }
 
-#nno {
+.track-name {
 	width: 30px;
 	background-color: orange;
 	

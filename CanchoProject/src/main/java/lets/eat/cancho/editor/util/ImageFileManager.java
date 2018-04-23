@@ -125,11 +125,11 @@ public class ImageFileManager {
 		}
 	}
 	
-	public static void extractVideo(String fileName, String ffid){
+	public static void extractVideo(String ffid){
 		Thread thread = new Thread(() -> {
 			
 			String originP = "c:\\tomolog\\temp\\";
-			String originPath = originP + fileName + ".mp4";
+			String originPath = originP + ffid + ".mp4";
 			Runtime run = Runtime.getRuntime();
 		
 			File dir = new File("c:\\tomolog\\extract\\" + ffid +"\\");

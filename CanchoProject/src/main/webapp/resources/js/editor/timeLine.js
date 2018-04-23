@@ -327,7 +327,7 @@ function getLabel(id){
 	}
 	return label;
 }
-
+////
 function video0TrackRedraw(){
 	video0TrackobjNum = 0;
 	var html = '';
