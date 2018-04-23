@@ -151,9 +151,10 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo">
+
+                <img src="downloadPic?user_id=${post.user_id }" alt="post-image" class="img-responsive profile-photo" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">
+
                   <h3>${post.user_id}</h3>
-                  <p class="text-muted">Creative Director</p>
                 </div>
               </div>
               <div class="col-md-9">

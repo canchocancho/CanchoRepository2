@@ -478,7 +478,15 @@
                 <img src="post/downloadPic?user_id=${post.user_id }" alt="post-image" class="profile-photo-md pull-left" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">
                 <div class="post-detail">
                   <div class="user-info">
+
+                    <c:if test="${post.user_id == sessionScope.loginId }">
+                    <h5><a href="post/postList" class="profile-link">${post.user_id }</a><span class="following">following</span></h5>
+                    </c:if>
+                    
+                    <c:if test="${post.user_id != sessionScope.loginId }">
                     <h5><a href="user/friendPage?friend_id=${post.user_id }" class="profile-link">${post.user_id }</a><span class="following">following</span></h5>
+                    </c:if>
+
                     <p class="text-muted">${post.post_date }</p>
                   </div>
                   <div class="reaction">
