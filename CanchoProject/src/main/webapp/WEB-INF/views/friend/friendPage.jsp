@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
+<script type="text/javascript" src="<c:url value="../resources/js/jquery-3.2.1.js" />"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="This is social network html5 template available in themeforest......">
 <meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page">
@@ -98,7 +98,7 @@
             <form action="searchFriendId" method="post" id="s1" class="navbar-form navbar-right hidden-sm">
               <div class="form-group">
                 <i class="icon ion-android-search" onclick="formSubmit();" style="cursor: pointer;"></i>
-                <input type="text" id="user_id" name="user_id" class="form-control" placeholder="Search friends by ID">
+                <input type="text" id="user_id" name="user_id" class="form-control" placeholder="Search friends by ID" autocomplete="off">
               </div>
             </form>
           </div><!-- /.navbar-collapse -->
@@ -152,7 +152,7 @@
 		                  		<div class="card-info">
 			                      	<div class="friend-info">
 			                        	<a href="#" class="pull-right text-green">My Friend</a>
-			                      		<h5><a href="timeline.html" class="profile-link">${friend.friend_id }</a></h5>
+			                      		<h5><a href="friendPage?friend_id=${friend.friend_id }" class="profile-link">${friend.friend_id }</a></h5>
 			                      	</div>
 		                    	</div>
 		                 		</div>
@@ -176,7 +176,7 @@
 							<c:if test="${user.user_id != sessionScope.loginId }">
 							<img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left">
 				                <div>
-				                  <h5><a href="timeline.html">${user.user_id }</a></h5>
+				                  <h5><a href="friendPage?friend_id=${user.user_id }">${user.user_id }</a></h5>
 				                  <a href="javascript:insertFriend('${user.user_id }')" class="text-green">Add friend</a>
 				                </div>
 				                </c:if>
