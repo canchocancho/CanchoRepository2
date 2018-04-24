@@ -19,7 +19,9 @@ CREATE TABLE blog_post
     user_id             VARCHAR2(45)     NOT NULL, 
     originalfile		VARCHAR2(200),
 	savedfile			VARCHAR2(100),
-    post_date           DATE             default SYSDATE, 
+    post_date           DATE             default SYSDATE,
+    post_like			INT 			 default 0,
+    post_dislike		INT   			 default 0
     CONSTRAINT BLOG_POST_PK PRIMARY KEY (post_num)
 );
 
