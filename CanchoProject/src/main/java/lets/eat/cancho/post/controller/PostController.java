@@ -12,9 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.inject.Inject;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,12 +19,10 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -47,9 +42,6 @@ import lets.eat.cancho.user.vo.Blog_Profile;
 @SessionAttributes("post")
 public class PostController {
 	
-	@Inject
-	private JavaMailSender mailSender;
-
 	@Autowired
 	PostDAO dao;
 	
@@ -255,46 +247,24 @@ public class PostController {
 	      }
 	   }
 	
-	@RequestMapping(value="invite", method=RequestMethod.POST)
-	public String invite(String user_id, String url, String friend_id, Model model) throws
-	MessagingException, UnsupportedEncodingException {
+	//좋아요
+	@RequestMapping(value="postLike", method=RequestMethod.GET)
+	public String postLike(Post post, Model model, HttpSession session){
 		
-		logger.info("초대 시작");
+		logger.info("포스트 좋아요");
+		System.out.println(post.getPost_num());
+		System.out.println(post.getUser_id());
 		
-		String email = userDAO.searchUserOne(friend_id).getUser_email(); //초대받을 사람 이메일
+		Post p_update = post;
+		p_update.setPost_num(post.getPost_num());
+		p_update.setUser_id(post.getUser_id());
 		
-		//관리자 계정
-				String admin = "canchoad@gmail.com";
-				
-				//Server Address
-				/*String serverAddress = "http://203.233.199.106:8888/cancho/";
-				
-				serverAddress + "user/verify?user_id="
-				+ user.getUser_id()*/
-
-				//인증을 위한 E-mail을 보내는 부분		
-				MimeMessage message = mailSender.createMimeMessage();
-				MimeMessageHelper messageHelper 
-				                      = new MimeMessageHelper(message, true, "UTF-8");
-				 
-				    messageHelper.setFrom(admin);  					//보내는 사람 (생략 시 정상작동 안 함)
-				    messageHelper.setTo(email);     	//받는 사람 이메일
-				    messageHelper.setSubject("[포스팅 초대]"); 			//메일 제목(생략 가능)
-				    messageHelper.setText(							//메일 내용
-				    		  new StringBuffer().append("포스팅 초대가 도착했어요! \n")
-								.append(user_id+"님으로부터 포스팅 초대를 받았습니다. \n"
-										+ url)
-								.append("\n지금 당장 해당 주소로 들어오세요.").toString());	
-					 try {
-						 //메일 보내기
-					      mailSender.send(message);
-					 }
-					 catch(MailException e){
-					      e.printStackTrace();
-					 }
-
-		model.addAttribute("errorMsg", "친구에게 초대 메일을 발송하였습니다.");
-					 
-		return "post/postForm";
+		int result = dao.updateLike(p_update);
+		
+		return "redirect:/";
 	}
+	
+	
+	
+
 }
