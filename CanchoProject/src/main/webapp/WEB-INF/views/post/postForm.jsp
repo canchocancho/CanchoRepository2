@@ -64,7 +64,10 @@
   </style>
   
   <script type="text/javascript">
-  
+	<c:if test ="${errorMsg != null}">
+		alert("${errorMsg}");
+	</c:if>
+
   var FirepadUserList = (function() {
 	  function FirepadUserList(ref, place, userId, displayName) {
 	    if (!(this instanceof FirepadUserList)) {
