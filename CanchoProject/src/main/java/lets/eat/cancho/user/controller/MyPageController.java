@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lets.eat.cancho.friend.dao.FriendDAO;
@@ -104,6 +105,18 @@ public class MyPageController {
 		logger.info("친구id 조회 종료");
 		
 		return "friend/friendPage";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="searchFriendList", method = RequestMethod.POST)
+	public ArrayList<Friend> searchFriendList(String user_id, HttpSession session){
+		logger.info("친구 리스트 조회 시작");
+
+		ArrayList<Friend> fList = dao1.selectFriendList(user_id);
+		
+		logger.info("친구리스트 조회 종료");
+		
+		return fList;
 	}
 	
 	@RequestMapping(value="insertFriend", method = RequestMethod.GET)

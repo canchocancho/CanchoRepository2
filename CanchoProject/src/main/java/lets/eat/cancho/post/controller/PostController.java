@@ -245,5 +245,15 @@ public class PostController {
 	         e.printStackTrace();
 	      }
 	   }
+	
+	@RequestMapping(value="invite", method=RequestMethod.POST)
+	public String invite(String user_id, String url, String friend_id){
+		
+		logger.info("초대 시작");
+		
+		
+		
+		return "";
+	}
 
 }
