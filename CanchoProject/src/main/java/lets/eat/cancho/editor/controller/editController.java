@@ -120,11 +120,12 @@ public class editController {
 			return 2;
 		}
 		String tmp[] = path.split("/");
-		String audioPath = "c:\\tomolog\\temp";
+		String audioPath = "\\tomolog";
 		for(int i = 2; i < tmp.length; i++){
 			audioPath += '\\';
 			audioPath += tmp[i];
 		}
+		System.out.println(audioPath);
 		double duration = 0;
 		try {
 		  AudioFile audioFile = AudioFileIO.read(new File(audioPath));

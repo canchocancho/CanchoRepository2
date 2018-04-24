@@ -39,6 +39,7 @@ function mm_load() {
 	  }
 	  videoSlider();
 	  trackDragAndDropEventHander();
+	  timeLineMenuEventHandler();
 }
 
 /**
@@ -74,7 +75,6 @@ function add_mash(id,url,count,isAudio){
 		  mm_player.add(media, 'audio', videoTotalDuration , 0);
 	   }
 	  videoTotalDuration += duration;
-	  /*outputVideoEditor();*/
  }
 /**
  * 추가 미디어 mash추가

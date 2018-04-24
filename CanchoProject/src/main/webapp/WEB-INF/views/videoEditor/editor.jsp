@@ -9,23 +9,16 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="resources/vendor/jquery/jquery-ui-1.12.1/jquery-ui.css">
 	<link rel="stylesheet"  href="resources/vendor/font-awesome/css/font-awesome.min.css" type="text/css">
-	<link rel="stylesheet" href="resources/vendor/zTree/css/awesomeStyle/awesome.css" type="text/css">
 	<!-- <link rel="stylesheet" href="resources/css/editor/editor.css" type="text/css"> -->
 	<link href="resources/vendor/colorBox/colorbox.css" rel="stylesh1eet">
 	<link href="resources/css/editor/cancho_editor.css" rel="stylesheet" type="text/css">
-	<link href="resources/css/editor/timeslider.css" rel="stylesheet" type="text/css">
 	<!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css" /> -->
 	<link rel="stylesheet" href="resources/css/style.css" />
 	<!-- 	<link rel="stylesheet" href="resources/css/ionicons.min.css" /> -->
 	
-	
-	
 	<script type="text/javascript" src="resources/vendor/jquery/jquery.js"></script>
 	<script type="text/javascript" src="resources/vendor/jquery/jquery-ui-1.12.1/jquery-ui.js"></script>
 	
-	<script type="text/javascript" src="resources/vendor/w2ui/w2ui-1.5.rc1.min.js"></script>
-	<script type="text/javascript" src="resources/vendor/metisMenu/metisMenu.min.js"></script>
-	<script type="text/javascript" src="resources/vendor/zTree/js/jquery.ztree.all.min.js"></script>
 	<script type="text/javascript" src="resources/vendor/colorBox/jquery.colorbox-min.js"></script>
     
     <script src="resources/vendor/moviemasher/bower_components/opentype.js/dist/opentype.min.js"></script>
@@ -53,6 +46,18 @@
    
   </head> 
   <body onload='mm_load()'>
+  <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
+
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <img id="logologo" src="resources/images/logo.png" alt="logo" /></a>
+          </div>
+
+          
+        </div><!-- /.container -->
+      </nav>
+    </header>
 	<div id="upperContainer">  
 		<div id ="playerContainer">
 	    	<div id="playerBox">
@@ -69,22 +74,25 @@
 		    </div>
     	</div>
     	<div id ="uploadContainer">
-			<input type="file" id="upload" name="file-data">			
-			<input class="btn-primary" type="button" id="imgBtn" value="upload">
-		
-			
-				<select id="selectedFile">
-					<option>Video</option>
-					<option>Image</option>
-					<option>Audio</option>
-				</select>
+			<div id="upperBar">
+            <input type="file" id="upload" name="file-data">         
+            <input class="btn-primary" type="button" id="imgBtn" value="upload">
+            <select id="selectedFile">
+               <option value="video">Video</option>
+               <option value="image">Image</option>
+               <option value="audio">Audio</option>
+            </select>
+         </div>
 				<div id="fileBox">
-					<div id="fileListBox">
-					</div>
-				</div>
-			
+				</div>	
 		</div>    
     </div>
+    	<div id = "bottom">
+		<button id="split">split</button>
+		<button id="mute" clicked = "false"> mute</button>
+		<button id="delete">delete</button>
+		<button id="clear">clear</button>
+		</div>
    	<!-- div id="middle"></div> -->
    	<div id="downContainer">
 	   	<div id = "timeLine">
@@ -135,9 +143,6 @@
 		</div>
 		<div id = "volume"></div>
 	</div>
-<div id = "bottom">
-<button id="split" class="itool fa fa-scissors" aria-hidden="true"> split</button>
-</div>
   </body>
 </html>
 

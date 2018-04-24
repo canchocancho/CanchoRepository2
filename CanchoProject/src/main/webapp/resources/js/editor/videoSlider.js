@@ -14,7 +14,6 @@ var subTrackObjNum = {
 		"audio-1" : 0,
 		"audio-2" : 0
 };
-var current_time = (new Date()).getTime() + ((new Date()).getTimezoneOffset() * 60 * 1000 * -1);
 /**
  * 현재 mash된 미디어의 라벨
  */
@@ -91,9 +90,9 @@ function getTotalDur(){
 	durations[durations.length] = videoTrackTotalCnt;
 	
 	var biggest = -1;
-	for (var i = 0; i < duration.length; i++) {
-		if (duration[i] > biggest) {
-			biggest = duration[i];
+	for (var i = 0; i < durations.length; i++) {
+		if (durations[i] > biggest) {
+			biggest = durations[i];
 		}
 	}
 	return biggest;
@@ -141,6 +140,13 @@ function checkFileType(data){
 	if(data.indexOf("audio") != -1) return 'audio';
 	if(data.indexOf("image") != -1) return 'image';
 }
+
+function checkTrackType(data){
+	if(data.indexOf("videoObj") != -1) return 'video';
+	if(data.indexOf("image-") != -1) return 'image';
+	if(data.indexOf("audio-") != -1) return 'audio';
+}
+
 /**
  * 비디오트랙 클릭 이벤트 등록
  */
@@ -161,7 +167,7 @@ function video0TrackEventRegister(){
 				if(clickedObj == thisId) continue;
 				$('#' + thisId).css({'border-color': '#2e2e2e'});
 				$('#' + thisId).attr('clicked', 'false');
-			}	
+			}
 		}
 		else {
 			$(this).css({'border-color': '#2e2e2e'});
@@ -178,6 +184,19 @@ function video0TrackEventRegister(){
 function video0TrackEventRemover(){
 	$('.video-obj').off('click');	
 }
+
+function seletedFreeOtherObj(){
+	var IdsOftrackObjs = $.makeArray($(".track-obj").map(function(){
+	    return $(this).attr("id");
+	}));
+	for(var i = 0; i < IdsOftrackObjs.length; i++){
+		var thisId = IdsOftrackObjs[i];
+		if(clickedObj == thisId) continue;
+		$('#' + thisId).css({'border-color': '#2e2e2e'});
+		$('#' + thisId).attr('clicked', 'false');
+	}	
+}
+
 
 /**
  * 일반 Movie Player와 비디오 슬라이더의 싱크를 맞춰 준다. 
@@ -322,9 +341,9 @@ function addVideoTrackVideoObj(id){
  * 서브트랙 오브젝트 추가
  */
 function addSubTrackObj(trackId, id){
-	if(video0TrackobjNum == 0){
+	/*if(video0TrackobjNum == 0){
 		return;
-	}
+	}*/
 	var path = $('#' + id).attr('path');
 	var fname = getFileName(path);
 	var type = getFileType(path);
@@ -438,7 +457,6 @@ function resizeSubTrackObj(id, trackId){
 
 function updateLocationObj(id, trackId){
 	var position = $("#" + id).position();
-		alert(position);
 	var maxDuration = getTotalDur();
 	var leftPosition = position.left;
 	var unitDuration = maxDuration / trackWidth;
@@ -507,8 +525,6 @@ function videoTrackSplitEventHandler(){
 		videoClipSplit();
 		video0TrackRedraw();
 		timeLineSplitEventHandlerRemove();
-		/*var html = "";
-		$("#video-track").html(html);*/
 	});
 }
 
@@ -523,8 +539,6 @@ function video0TrackRedraw(){
 	html +='</div>';
 	var mash = mm_player.mash;
 	var media = mash.media;
-	
-	
 	var video0Clips = mm_player.mash.video[0].clips;
 	for(var i = 0; i<video0Clips.length; i++){
 		var label = getLabel(video0Clips[i].id);
@@ -561,10 +575,8 @@ function video0TrackRedraw(){
 	video0TrackEventRegister();
 }
 
-///
 ///으아아아아아아  이건 진짜 모르겠다 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 function reorderingVideo0Clips(videoOrders){
-	alert(videoOrders);
 	var video0Clips = mm_player.mash.video[0].clips;
 	var newVideo0Clips = [];
 	var imgIdxs = [];
@@ -617,7 +629,6 @@ function reorderingVideo0Clips(videoOrders){
 	
 	video0TrackRedraw();
 }
-
 function reorderingAudio0(videoOrders, imgIdxs){
 	var rtn = [];
 	var idx = 0;
@@ -627,10 +638,7 @@ function reorderingAudio0(videoOrders, imgIdxs){
 		var cont = true;
 		var num2 = num;
 		for(var j = 0; j < imgIdxs.length; j++){
-			//alert(num + ' -> num' );
-			//alert(imgIdxs[j] + ' -> imgIdxs[j]' );
 			if(num == imgIdxs[j]) {
-				//alert(num + ', ' + imgIdxs[j]);
 				cont=false;
 				break; 
 			}
@@ -642,7 +650,174 @@ function reorderingAudio0(videoOrders, imgIdxs){
 		rtn[idx] = num2;
 		idx++;
 	}
-	
-	//alert(JSON.stringify(rtn));
 	return rtn;
+}
+
+//오브젝트 선택
+function trackObjEventRegister(){
+	$('.other-obj').off('click');
+	$('.other-obj').on('click', function(e) {
+
+		var clicked = $(this).attr('clicked');
+		
+		if(clicked == 'false') {
+			$(this).css({'border-color': '#fff'});
+			$(this).attr('clicked', 'true');
+			
+			clickedObj = $(this).attr('id');
+			var trackId = $(this).attr('trackId');
+			var idInfo = clickedObj.split('-');
+			if(idInfo[0] == 'audio'){
+				audioTrackSplitEventHandler();
+			} 
+			seletedFreeOtherObj();
+			
+		}
+		else {
+			$(this).css({'border-color': '#2e2e2e'});
+			$(this).attr('clicked', 'false');
+			timeLineSplitEventHandlerRemove();
+			clickedObj = '';
+		}
+	});
+}
+
+//Mute 기능
+$(function(){
+	$('#mute').on('click',function(e){
+		var volume = mm_player.mash.audio[0].clips;
+		alert(volume[selectedClipNum].gain);
+		if (volume[selectedClipNum].gain == 1) {
+			mm_player.mash.audio[0].clips[selectedClipNum].gain = 0;
+		}else{
+			mm_player.mash.audio[0].clips[selectedClipNum].gain = 1;
+		}
+		mm_player.__adjust_gain(mm_player.mash.audio[0].clips);
+	});
+});
+
+function reAssignUiId(videoOrders, removeIdx){
+	var newVideoOrders = [];
+	newVideoOrders[0] = '';
+	var idx = 1;
+	for(var i = 1; i<videoOrders.length; i++){
+		var num = 1 * videoOrders[i].charAt(videoOrders[i].length-1);
+		if(num == removeIdx) {
+			$('#' + videoOrders[i]).attr('frames', 0);
+			continue;
+		}
+		var newIdx = 0;
+		if(num > removeIdx) newIdx = num - 1;
+		else newIdx=  num;
+			
+		var newid = 'video'+'Obj' + newIdx;
+		$('#' + videoOrders[i]).attr('id', newid);
+		newVideoOrders[idx] = newid;
+		idx++;
+	}
+
+	return newVideoOrders;
+}
+function selectedObjDelete(objId){
+	var track = checkTrackType(objId);
+	if( track == 'video' ) {
+		var audio0Clips = mm_player.mash.audio[0].clips;
+		var index = 0;
+		var selectedAudioClip;
+		for(var i = 0; i < mm_player.mash.video[0].clips.length; i++){
+			
+			if( getType(mm_player.mash.video[0].clips[i].id) == 'image' ||
+					getType(mm_player.mash.video[0].clips[i].id) == 'transition'	) continue;
+			if(i==selectedClipNum) {
+				selectedAudioClip = audio0Clips[index];
+				break;
+			}
+			index++;
+		}
+		
+		var video0Clips = mm_player.mash.video[0].clips;
+		var selectedClip = video0Clips[selectedClipNum];
+
+		mm_player.remove(selectedClip, 'video', 0);
+		mm_player.remove(selectedAudioClip, 'audio', 0);
+    	var idsInOrder = $("#video-track").sortable("toArray");
+    	var newIdsInOrder =  reAssignUiId(idsInOrder, selectedClipNum);
+    	clickedObj = '';
+    	selectedClipNum = 0;
+    	reorderingVideo0Clips(newIdsInOrder);	
+		timeLineSplitEventHandlerRemove();
+		videoTotalDuration -= selectedClip.frames;
+	}
+	else if( track == 'image' || track == 'audio' ){
+		var idInfo = objId.split('-');
+		var trackId = $('#' + objId).attr('trackId');
+		var trackInfo = trackId.split('-');
+		var frame = $("#" + objId).attr('frame');
+		var clips ;
+		
+		if(track == 'image')
+			clips = mm_player.mash.video[trackInfo[1]*1].clips;
+		else
+			clips = mm_player.mash.audio[trackInfo[1]*1].clips;
+		
+		var index = 0;
+		for(var i = 0; i < clips.length; i++){
+			if(clips[i].frame == frame){
+				index = i;
+				break;
+			}
+		}
+		
+		var selectedClip = clips[index];
+		if(track == 'image') track = 'video';
+		//alert(track);
+		mm_player.remove(selectedClip, track, trackInfo[1]*1);
+		//alert(JSON.stringify(mm_player.mash.audio[trackInfo[1]*1].clips));
+		if(track == 'audio') {
+			for(var i = 0; i < mm_player.mash.audio[trackInfo[1]*1].clips.length; i++){
+				mm_player.selectedClip = mm_player.mash.audio[trackInfo[1]*1].clips[i];
+				mm_player.change('frames');
+			}
+		} else {
+			
+			for(var i = 0; i < mm_player.mash.video[trackInfo[1]*1].clips.length; i++){
+				mm_player.selectedClip = mm_player.mash.video[trackInfo[1]*1].clips[i];
+				mm_player.change('frames');
+			}	
+		}
+		
+    	clickedObj = '';
+    	selectedClipNum = 0;
+		tracksDuration[trackId] = tracksDuration[trackId] - selectedClip.frames;
+		reDrawTrackAfterRemove(trackId, objId);
+		$( ".other-obj" ).draggable({ axis: "x", containment: '#' + trackId, scroll: false });
+		trackObjEventRegister();
+	    $( ".draggable" ).draggable({
+	        stop: function() {
+	        	updateLocationObj($(this).attr('id'), $(this).attr('trackId'));
+	        }
+	     });
+	}
+	/*resizeTrackObj(0);*/
+	var trackArr= Object.keys(subTracksDuration);
+	for(var i = 0; i < trackArr.length; i++){
+		otherObjMove(trackArr[i]);
+	}
+}
+
+function otherObjMove(track){
+	var max = getTotalDur();
+	var unit = trackWidth / max;
+	
+	var idOfObj = $.makeArray($('.' + track + '-obj').map(function(){
+	    return $(this).attr("id");
+	}));
+	for(var i = 0; i < idOfObj.length; i++){
+		var left = unit * $('#' + idOfObj[i]).attr('frame') ;
+		var width = unit * $('#' + idOfObj[i]).attr('frames');
+		var right = left + width;
+		
+		$("#" + idOfObj[i]).parent().css({position: 'relative'});
+		$("#" + idOfObj[i]).css({left: left, width: width, position:'absolute'});
+	}
 }

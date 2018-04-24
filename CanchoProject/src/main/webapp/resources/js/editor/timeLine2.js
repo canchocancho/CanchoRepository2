@@ -185,8 +185,6 @@ function updateLocationObj(id, trackId){
 function audioTrackSplitEventHandler(){
 	$('#split').off('click');
 	$('#split').on('click', function(){
-		//alert("audio split");
-		addUndoArr(mm_player.mash);
 		var idInfo = clickedObj.split('-');
 		var trackId = $('#' + clickedObj).attr('trackId');
 		var trackInfo = trackId.split('-');
@@ -200,19 +198,11 @@ function audioTrackSplitEventHandler(){
 				break;
 			}
 		}
-		
 		var selectedClip = mm_player.mash.audio[trackInfo[1]*1].clips[index];
-		
 		mm_player.selectedClip = selectedClip;
 		mm_player.split();
-		
-	//	alert(JSON.stringify(mm_player.mash));
-		
 		reDrawTrack(clickedObj, trackInfo, index);
 		timeLineSplitEventHandlerRemove();
-	//	trackObjEventRegister();
-		setMash();
-		clearEditor();
 	});
 }
 
@@ -634,7 +624,7 @@ function volumeControllOther(){
 function checkTrackType(data){
 	//alert(data);
 	if(data.indexOf("videoObj") != -1) return 'video';
-	if(data.indexOf("video-") != -1) return 'image';
+	if(data.indexOf("image-") != -1) return 'image';
 	if(data.indexOf("audio-") != -1) return 'audio';
 }
 

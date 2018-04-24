@@ -4,9 +4,10 @@ body {
 
 	width: 100%;
 	margin: 0px;
+	background: white;
 	/* background-color: #0093b7;  */
-	background-image: url(../../images/editorBg2.jpg);
-	background-size: cover; 
+	/* background-image: url(../../images/editorBg2.jpg);
+	background-size: cover;  */
 	/* background-color: white; */
 	
 }
@@ -41,6 +42,7 @@ body {
 	height: 45%;
 	text-align: center;
 	background-color: rgba(255,255,255,0.5);
+	margin-top: 60px;
 	/* margin: 20px auto; */
 	/* background-color: gray; */
 }
@@ -51,23 +53,23 @@ body {
 	height: 95%;
 	/* overflow: auto; */
 	text-align: center;
+	margin-top: 20px;
 	/* background-color: red; */
 }
 
 #playerBox {
 	width: 90%;
 	height: 80%;
-	margin: 10px auto;
-	text-align: center;
+	padding-right: 60px;
+	/* text-align: center; */
 	/* background-color: orange; */
 }
 
 #range-and-btn {
 	width: 360px;
 	height: 18%;
+	padding-left: 90px;
 	text-align: center;
-	margin: 5px auto;
-	/* d */
 }
 
 #plyear-btns {
@@ -83,7 +85,7 @@ body {
 } */
 
 #p-slider {
-	width: 80%;
+	width: 70%;
 	height: 30px;
 	float: right;
 }
@@ -91,12 +93,13 @@ body {
 #mm-canvas {
 	width: 360px;
 	height: 99%;
+	margin-left: 0px;
 }
 
 #plyear-slicer {
 	width: 70%;
 	height: 90%;
-	flo
+	
 }
 
 
@@ -106,11 +109,14 @@ input {
 }
 
 #uploadContainer {
-	float: right;
+	/* float: right; */
 	width: 45%;
 	text-align: center;
 	height: 95%;
-	margin: 0px auto;
+	margin-left: 300px;
+	/* background-color: red; */
+	/* float: left; */
+	
 }
 
 
@@ -268,7 +274,8 @@ audio {
 }
 
 #timeLine {
-	margin: 0 auto;
+	/* margin: 0 auto; */
+	margin-left: 100px;
 	width:85%;
 	height: 90%;
 }
@@ -406,7 +413,77 @@ audio {
 
 #downContainer {
 	width: 100%;
-	height: 55%;
+	height: 50%;
 	overflow: auto;
+}
+
+#logologo {
+	margin-top: 15px;
+	margin-left: 24px;
+}
+
+
+/*
+
+bootstrap 부분
+
+*/
+
+  .navbar-fixed-top .navbar-collapse,
+  .navbar-static-top .navbar-collapse,
+  .navbar-fixed-bottom .navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+.navbar-fixed-top {
+  max-height: 340px;
+}
+@media (max-device-width: 480px) and (orientation: landscape) {
+  .navbar-fixed-top {
+    max-height: 200px;
+  }
+}
+.container > .navbar-header,
+.container-fluid > .navbar-header,{
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+@media (min-width: 768px) {
+  .container > .navbar-header,
+  .container-fluid > .navbar-header,
+  .container > .navbar-collapse,
+  .container-fluid > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+.navbar-static-top {
+  z-index: 1000;
+  border-width: 0 0 1px;
+}
+@media (min-width: 768px) {
+  .navbar-static-top {
+    border-radius: 0;
+  }
+}
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+@media (min-width: 768px) {
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    border-radius: 0;
+  }
+}
+.navbar-fixed-top {
+  top: 0;
+  border-width: 0 0 1px;
+  height: 55.7px;
 }
 
