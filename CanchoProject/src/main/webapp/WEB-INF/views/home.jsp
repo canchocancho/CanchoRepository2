@@ -66,6 +66,35 @@
 					});
 				});  */
 				
+				//좋아요
+				/* $('#like').on('click', function(){
+					alert("좋아요!");
+					
+					var loginId = $('#like_loginId').val();
+					var post_num = $('#like_postnum').val();
+					
+					alert(loginId);
+					alert(post_num);
+					
+					/* $.ajax({
+						url : "post/postLike",
+						type : "get",
+						data: {
+							user_id : loginId,
+							post_num : post_num
+						},
+						success : function(){
+							alert("성공");
+						},
+						error : function(e){
+							alert("실패");
+						}
+					}); */
+					/* href="post/postLike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" 
+					 */
+				}); */
+				
+				
 				//유효성 검사
 				$('#joinForm').on('submit',function(){
 					var id = $('#user_id').val();
@@ -490,7 +519,9 @@
                     <p class="text-muted">${post.post_date }</p>
                   </div>
                   <div class="reaction">
-                    <a href="post/postLike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" class="btn text-green"><i class="icon ion-thumbsup"></i>${update.post_like }</a>
+                    <a href="post/postLike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" class="btn text-green"><i class="icon ion-thumbsup"></i>${post.post_like}</a>
+                    <%-- <input type="hidden" id="like_loginId" value="${sessionScope.loginId }">
+                    <input type="hidden" id="like_postnum" value="${post.post_num }"> --%>
                     <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
                   </div>
                 </div>

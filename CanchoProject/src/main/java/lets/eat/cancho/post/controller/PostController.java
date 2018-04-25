@@ -28,8 +28,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -260,16 +262,17 @@ public class PostController {
 	public String postLike(Post post, Model model, HttpSession session){
 		
 		logger.info("포스트 좋아요");
-		System.out.println(post.getPost_num());
 		System.out.println(post.getUser_id());
+		System.out.println(post.getPost_num());
 		
-		Post p_update = post;
-		p_update.setPost_num(post.getPost_num());
-		p_update.setUser_id(post.getUser_id());
+		int result = dao.updateLike(post);
 		
-		int result = dao.updateLike(p_update);
+		ArrayList<Post> postList = dao.postList(post.getUser_id());
+		session.setAttribute("postList", postList);
+		model.addAttribute("postList", postList);
 		
 		return "redirect:/";
+		
 	}
 	
 	//초대하기
