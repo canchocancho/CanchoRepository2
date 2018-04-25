@@ -500,7 +500,7 @@
 			</c:forEach>
 			</c:if>
 			
-			<c:if test="${mypostList == null || mypostList.size() == 0}">
+			<c:if test="${postList == null || postList.size() == 0}">
 			
 			<div style="text-align: center;">
 			<p>There is no post at all!</p>
