@@ -66,35 +66,6 @@
 					});
 				});  */
 				
-				//좋아요
-				/* $('#like').on('click', function(){
-					alert("좋아요!");
-					
-					var loginId = $('#like_loginId').val();
-					var post_num = $('#like_postnum').val();
-					
-					alert(loginId);
-					alert(post_num);
-					
-					/* $.ajax({
-						url : "post/postLike",
-						type : "get",
-						data: {
-							user_id : loginId,
-							post_num : post_num
-						},
-						success : function(){
-							alert("성공");
-						},
-						error : function(e){
-							alert("실패");
-						}
-					}); */
-					/* href="post/postLike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" 
-					 */
-				}); */
-				
-				
 				//유효성 검사
 				$('#joinForm').on('submit',function(){
 					var id = $('#user_id').val();
@@ -519,9 +490,7 @@
                     <p class="text-muted">${post.post_date }</p>
                   </div>
                   <div class="reaction">
-                    <a href="post/postLike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" class="btn text-green"><i class="icon ion-thumbsup"></i>${post.post_like}</a>
-                    <%-- <input type="hidden" id="like_loginId" value="${sessionScope.loginId }">
-                    <input type="hidden" id="like_postnum" value="${post.post_num }"> --%>
+                    <a href="post/postLike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" class="btn text-green"><i class="icon ion-thumbsup"></i>${update.post_like }</a>
                     <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
                   </div>
                 </div>
@@ -531,7 +500,7 @@
 			</c:forEach>
 			</c:if>
 			
-			<c:if test="${mypostList == null || mypostList.size() == 0}">
+			<c:if test="${postList == null || postList.size() == 0}">
 			
 			<div style="text-align: center;">
 			<p>There is no post at all!</p>
@@ -539,49 +508,6 @@
 			</div>
 			
 			</c:if>
-          </div>
-
-          <!-- Newsfeed Common Side Bar Right
-          ================================================= -->
-    			<div class="col-md-2 static">
-            <div class="suggestions" id="sticky-sidebar">
-              <h4 class="grey">Who to Follow</h4>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Diana Amber</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Cris Haris</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Brian Walton</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Olivia Steward</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Sophia Page</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-            </div>
           </div>
     		</div>
     	</div>

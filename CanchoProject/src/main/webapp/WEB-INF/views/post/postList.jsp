@@ -211,7 +211,7 @@
                       <p class="text-muted">${post.post_date }</p>
                     </div>
                     <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i>${post.post_like }</a>
+                      <a class="btn text-green"><i class="icon ion-thumbsup"></i>13</a>
                       <a class="btn text-red"><i class="fa fa-thumbs-down"></i>0</a>
                     </div>
                   </div>
@@ -230,37 +230,6 @@
 			</c:if>
             </div>
             
-          <!-- Newsfeed Common Side Bar Right
-          ================================================= -->
-            <div class="col-md-2 static">
-              <div id="sticky-sidebar" class="" style="">
-                <h4 class="grey">Sarah's activity</h4>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>
-                    <p class="text-muted">5 mins ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>
-                    <p class="text-muted">an hour ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>
-                    <p class="text-muted">4 hours ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>
-                    <p class="text-muted">a day ago</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
