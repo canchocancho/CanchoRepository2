@@ -23,6 +23,7 @@ CREATE TABLE blog_post
     post_like			INT 			 default 0,
     post_dislike		INT   			 default 0
     CONSTRAINT BLOG_POST_PK PRIMARY KEY (post_num)
+
 );
 
 -- blog_post sequence
