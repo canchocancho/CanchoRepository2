@@ -350,7 +350,27 @@
 			
 			invite_form.friend_id.value = String(friend_id);
 			
-			 $('#invite_form').submit();
+			 /* $('#invite_form').submit(); */
+
+				var friend_id = $('#friend_id').val();
+				var url = $('#url').val();
+				var user_id = $('#user_id').val();
+				
+				$.ajax({
+					url : "invite",
+					type : "post",
+					data : {
+						friend_id : friend_id,
+						url : url,
+						user_id : user_id
+					},
+					success : function(){
+						alert("초대 메일을 발송하였습니다.");
+					},
+					error : function(e){
+						alert("알 수 없는 오류가 발생하였습니다. 다시 시도해주세요.");
+					}
+				}); 
 		}
 
 		//표지 만들기
