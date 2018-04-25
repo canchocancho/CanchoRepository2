@@ -11,4 +11,7 @@ public interface PostMapper {
 	public ArrayList<Post> postListId(String user_id);
 	public String readPost(int post_num);
 	public Post bringPost(int post_num);
+	public int updateLike(Post post);
+	public int updateDislike(Post post);
+	
 }

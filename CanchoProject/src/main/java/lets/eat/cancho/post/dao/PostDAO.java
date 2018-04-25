@@ -109,5 +109,39 @@ public class PostDAO {
 		
 		return post;
 	}
+	
+	//포스트 좋아요
+	public int updateLike(Post post){
+		logger.info("좋아요 업데이트");
+		
+		int result = 0;
+		PostMapper mapper = session.getMapper(PostMapper.class);
+
+		try{
+			result = mapper.updateLike(post);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	//포스트 싫어요
+		public int updateDislike(Post post){
+			logger.info("싫어요 업데이트");
+			
+			int result = 0;
+			PostMapper mapper = session.getMapper(PostMapper.class);
+
+			try{
+				result = mapper.updateDislike(post);
+				
+			} catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
 
 }

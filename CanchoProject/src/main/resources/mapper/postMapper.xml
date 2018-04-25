@@ -87,5 +87,29 @@
 		where
 			post_num = #{post_num}
 	</select>
+	
+	<!-- 포스트 좋아요 -->
+	<update id="updateLike" parameterType="Post">
+		update 
+			blog_post
+		set
+			post_like = post_like + 1
+		where
+			not user_id = #{user_id}
+			and post_num = #{post_num}
+	</update>
+	
+	<!-- 포스트 싫어요 -->
+	<update id="updateDislike" parameterType="Post">
+		update 
+			blog_post
+		set
+			post_dislike = post_dislike + 1
+		where
+			not user_id = #{user_id}
+			and post_num = #{post_num}
+	</update>
+	
+	
 
 </mapper>

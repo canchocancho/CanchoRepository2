@@ -12,11 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lets.eat.cancho.friend.dao.FriendDAO;
 import lets.eat.cancho.friend.vo.Friend;
+import lets.eat.cancho.post.dao.PostDAO;
+import lets.eat.cancho.post.vo.Post;
 import lets.eat.cancho.user.dao.UserDAO;
+import lets.eat.cancho.user.vo.Blog_Profile;
 import lets.eat.cancho.user.vo.Blog_User;
 
 @Controller
@@ -29,6 +33,9 @@ public class MyPageController {
 	
 	@Autowired
 	FriendDAO dao1;
+	
+	@Autowired
+	PostDAO dao2;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 	
@@ -70,19 +77,6 @@ public class MyPageController {
 		return "redirect:updateInfo";
 	}
 	
-/*	@RequestMapping(value="updateComplete", method = RequestMethod.GET)
-	public String update(SessionStatus status, @ModelAttribute("user")Blog_User user, Model model, HttpSession session){
-		logger.info("회원정보 수정 성공 후 홈으로 돌아가기 시작");
-		
-		session.setAttribute("loginName", user.getUser_name());
-		
-		status.setComplete();
-		
-		logger.info("회원정보 수정 성공 후 홈으로 돌아가기 종료");
-		
-		return "redirect:/";
-	}*/
-	
 	@RequestMapping(value="friendList", method = RequestMethod.GET)
 	public String friendList(HttpSession session, Model model){
 		logger.info("친구리스트 페이지 이동 시작");
@@ -113,6 +107,18 @@ public class MyPageController {
 		return "friend/friendPage";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="searchFriendList", method = RequestMethod.POST)
+	public ArrayList<Friend> searchFriendList(String user_id, HttpSession session){
+		logger.info("친구 리스트 조회 시작");
+
+		ArrayList<Friend> fList = dao1.selectFriendList(user_id);
+		
+		logger.info("친구리스트 조회 종료");
+		
+		return fList;
+	}
+	
 	@RequestMapping(value="insertFriend", method = RequestMethod.GET)
 	public String insertFriend(String user_id, HttpSession session, Model model){
 		logger.info("친구 추가 시작");
@@ -134,6 +140,40 @@ public class MyPageController {
 		logger.info("친구 추가 종료");
 		
 		return "redirect:friendList";
+	}
+	
+	//친구 담벼락 페이지로 이동
+	@RequestMapping(value="friendPage", method=RequestMethod.GET)
+	public String friendPage(String friend_id, HttpSession session, Model model){
+		logger.info("친구 프로필 페이지로 이동");
+		
+		ArrayList<Post> postList = dao2.postListId(friend_id);
+		model.addAttribute("postList", postList); //포스트 리스트 담기
+		
+		Blog_Profile profile = dao.readProfile(friend_id);
+		model.addAttribute("profile", profile);
+		
+		Blog_User user = dao.searchUserOne(friend_id);
+		model.addAttribute("loginName", user.getUser_name());
+		
+		return "friend/friendTimeline";
+	}
+	
+	//친구 프로필 페이지로 이동
+	@RequestMapping(value="friendProfile", method=RequestMethod.GET)
+	public String friendProfile(String friend_id, HttpSession session, Model model){
+		logger.info("친구 프로필 페이지로 이동");
+		
+		ArrayList<Post> postList = dao2.postListId(friend_id);
+		model.addAttribute("postList", postList); //포스트 리스트 담기
+		
+		Blog_Profile profile = dao.readProfile(friend_id);
+		model.addAttribute("profile", profile);
+		
+		Blog_User user = dao.searchUserOne(friend_id);
+		model.addAttribute("loginName", user.getUser_name());
+		
+		return "friend/friendProfile";
 	}
 
 	

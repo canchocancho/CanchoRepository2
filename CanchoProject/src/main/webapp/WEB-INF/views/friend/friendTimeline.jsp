@@ -70,7 +70,7 @@
                 <a href="/cancho">Timeline</a>
               </li>
               <li class="dropdown">
-                <a href="postList">My Page</a>
+                <a href="../post/postList">My Page</a>
               </li>
               <li class="dropdown">
                 <a href="../user/friendList">Friends</a>
@@ -102,22 +102,24 @@
                 <div class="profile-info">
                   <!-- 프로필 사진이 있을 때 -->
             	<c:if test="${profile.p_originalfile != null }">
-              		<img src="downloadPic?user_id=${profile.user_id }" alt="post-image" class="img-responsive profile-photo">
+              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="img-responsive profile-photo">
               	</c:if>
               	
             	<!-- 프로필 사진이 없을 때 -->
             	<c:if test="${profile.p_originalfile == null }">
               		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="img-responsive profile-photo">
               	</c:if>
-                  <h3>${sessionScope.loginName}</h3>
+                  <h3>${loginName}</h3>
                 </div>
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li><a href="" class="active">My Page</a></li>
-                  <li><a href="../user/myPage">Profile</a></li>
+                  <li><a href="friendProfile?friend_id=${profile.user_id }">Profile</a></li>
                   <li><a href="">Album</a></li>
-                  <li><a href="../user/friendList">Friends</a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  <li><button class="btn-primary">Add Friend</button></li>
                 </ul>
               </div>
             </div>
@@ -129,7 +131,7 @@
             
             <!-- 프로필 사진이 있을 때 -->
             	<c:if test="${profile.p_originalfile != null }">
-              		<img src="downloadPic?user_id=${profile.user_id }" alt="post-image" class="img-responsive profile-photo">
+              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="img-responsive profile-photo">
               	</c:if>
               	
             <!-- 프로필 사진이 없을 때 -->
@@ -137,14 +139,13 @@
               		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="img-responsive profile-photo">
               	</c:if>
               	
-              <h4>${sessionScope.loginName}</h4>
+              <h4>${loginName}</h4>
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                <li><a href="postList" class="active">My Page</a></li>
-                <li><a href="myPage">Profile</a></li>
-                <li><a href="">Album</a></li>
-                <li><a href="friendList">Friends</a></li>
+                  <li><a href="" class="active">My Page</a></li>
+                  <li><a href="friendProfile?friend_id=${profile.user_id }">Profile</a></li>
+                  <li><a href="">Album</a></li>
               </ul>
               
               <c:if test="${profile.p_originalfile != null }">
@@ -164,7 +165,7 @@
               ================================================= -->
               <div class="create-post">
                 <div class="row">
-                      <button class="btn btn-primary pull-right" onclick="createPost();">Publish</button>
+                      <!-- <button class="btn btn-primary pull-right" onclick="createPost();">Publish</button> -->
                 </div>
               </div><!-- Post Create Box End-->
 
@@ -172,29 +173,28 @@
             <!-- Post Content
             ================================================= -->
             <!-- 게시글이 하나라도 존재하는 경우 -->
-			<c:if test="${mypostList != null && mypostList.size() != 0}">
+			<c:if test="${postList != null && postList.size() != 0}">
 			
-			<c:forEach items="${mypostList }" var="post">
+			<c:forEach items="${postList }" var="post">
 				  <div class="post-content">
 
 				<!-- 표지가 있을 경우 -->
 				<c:if test="${post.originalfile != null }">
 				<a href="readOnePost?post_num=${post.post_num }">
-				<img src="download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
+				<img src="../post/download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
 				</a>
 				</c:if>
                 
                 <!-- 표지가 없을 경우 -->
                 <c:if test="${post.originalfile == null }">
                 <div class="user-info">
-                <h1 style="text-align: center;"><a href="readOnePost?post_num=${post.post_num }">
+                <h1 style="text-align: center;"><a href="../post/readOnePost?post_num=${post.post_num }">
                 ${post.post_title }</a></h1>
                 </div>
                 </c:if>
                 
                 
                 <div class="post-container">
-                
                 <!-- 프로필 사진이 있을 때 -->
             	<c:if test="${profile.p_originalfile != null }">
               		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="profile-photo-md pull-left">
@@ -204,6 +204,8 @@
             	<c:if test="${profile.p_originalfile == null }">
               		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo-md pull-left">
               	</c:if>
+                  
+                  
                   
                   <div class="post-detail">
                     <div class="user-info">
@@ -220,16 +222,47 @@
 			</c:forEach>
 			</c:if>
 			
-			<c:if test="${mypostList == null || mypostList.size() == 0}">
+			<c:if test="${postList == null || postList.size() == 0}">
 			
 			<div style="text-align: center;">
+			<br>
 			<p>There is no post at all!</p>
-			<p>How about posting about yourself?</p>
 			</div>
 			
 			</c:if>
             </div>
             
+          <!-- Newsfeed Common Side Bar Right
+          ================================================= -->
+            <div class="col-md-2 static">
+              <div id="sticky-sidebar" class="" style="">
+                <h4 class="grey">Sarah's activity</h4>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>
+                    <p class="text-muted">5 mins ago</p>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>
+                    <p class="text-muted">an hour ago</p>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>
+                    <p class="text-muted">4 hours ago</p>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>
+                    <p class="text-muted">a day ago</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

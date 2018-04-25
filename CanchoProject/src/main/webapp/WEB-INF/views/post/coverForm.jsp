@@ -34,44 +34,113 @@
 			}
 					
 			#div_menu{
-				width:20%;
-				height:600px;
+				width:238px;
+				height:500px;
 				float:left;
 				background-color:#99ffb3;
 			}
 					
 			#div_con{
-				width:80%;
-				height:600px;
-				float:left;
+				width:1013px;
+				height:500px;
+				float:right;
+			}
+			
+			.btn1 {
+			  background: #a234d9;
+			  background-image: -webkit-linear-gradient(top, #a234d9, #2b84b8);
+			  background-image: -moz-linear-gradient(top, #a234d9, #2b84b8);
+			  background-image: -ms-linear-gradient(top, #a234d9, #2b84b8);
+			  background-image: -o-linear-gradient(top, #a234d9, #2b84b8);
+			  background-image: linear-gradient(to bottom, #a234d9, #2b84b8);
+			  -webkit-border-radius: 20;
+			  -moz-border-radius: 20;
+			  border-radius: 20px;
+			  font-family: Arial;
+			  color: #ffffff;
+			  font-size: 18px;
+			  padding: 5px 10px 5px 10px;
+			  text-decoration: none;
+			}
+			
+			.btn1:hover {
+			  background: #3cb0fd;
+			  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+			  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+			  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+			  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+			  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+			  text-decoration: none;
 			}
 		</style>
 		
 		<script type="text/javascript">
 			function changeBackground(img){
-				if(img == 'delete'){
+				if(img == '0'){
 					document.getElementById("c").style.background = "";
 				}
-				if(img == 'cd'){
-					document.getElementById("c").style.background = "url(../resources/img/cd.jpg)";
+				if(img == '1'){
+					document.getElementById("c").style.background = "url(../resources/img/autumn.jpg)";
 				}
-				if(img == 'christmas'){
+				if(img == '2'){
+					document.getElementById("c").style.background = "url(../resources/img/autumn2.jpg)";
+				}
+				if(img == '3'){
+					document.getElementById("c").style.background = "url(../resources/img/blackboard.jpg)";
+				}
+				if(img == '4'){
 					document.getElementById("c").style.background = "url(../resources/img/christmas.jpg)";
 				}
-				if(img == 'diary'){
-					document.getElementById("c").style.background = "url(../resources/img/diary.jpg)";
+				if(img == '5'){
+					document.getElementById("c").style.background = "url(../resources/img/christmas2.jpg)";
 				}
-				if(img == 'label'){
-					document.getElementById("c").style.background = "url(../resources/img/label.jpg)";
+				if(img == '6'){
+					document.getElementById("c").style.background = "url(../resources/img/christmas3.jpg)";
 				}
-				if(img == 'menu'){
-					document.getElementById("c").style.background = "url(../resources/img/menu.jpg)";
+				if(img == '7'){
+					document.getElementById("c").style.background = "url(../resources/img/christmas4.jpg)";
 				}
-				if(img == 'paper'){
-					document.getElementById("c").style.background = "url(../resources/img/paper.jpg)";
+				if(img == '8'){
+					document.getElementById("c").style.background = "url(../resources/img/christmas5.jpg)";
 				}
-				if(img == 'poster'){
+				if(img == '9'){
+					document.getElementById("c").style.background = "url(../resources/img/christmas6.jpg)";
+				}
+				if(img == '10'){
+					document.getElementById("c").style.background = "url(../resources/img/flower.jpg)";
+				}
+				if(img == '11'){
+					document.getElementById("c").style.background = "url(../resources/img/flower2.jpg)";
+				}
+				if(img == '12'){
+					document.getElementById("c").style.background = "url(../resources/img/flower3.jpg)";
+				}
+				if(img == '13'){
+					document.getElementById("c").style.background = "url(../resources/img/flower4.jpg)";
+				}
+				if(img == '14'){
+					document.getElementById("c").style.background = "url(../resources/img/notebook.jpg)";
+				}
+				if(img == '15'){
+					document.getElementById("c").style.background = "url(../resources/img/pattern.jpg)";
+				}
+				if(img == '16'){
+					document.getElementById("c").style.background = "url(../resources/img/pattern2.jpg)";
+				}
+				if(img == '17'){
 					document.getElementById("c").style.background = "url(../resources/img/poster.jpg)";
+				}
+				if(img == '18'){
+					document.getElementById("c").style.background = "url(../resources/img/poster2.jpg)";
+				}
+				if(img == '19'){
+					document.getElementById("c").style.background = "url(../resources/img/workplace.jpg)";
+				}
+				if(img == '20'){
+					document.getElementById("c").style.background = "url(../resources/img/workplace2.jpg)";
+				}
+				if(img == '21'){
+					document.getElementById("c").style.background = "url(../resources/img/workplace3.jpg)";
 				}
 			}
 
@@ -483,20 +552,42 @@
 	<body>
 		<!-- 맨 위 메뉴 바 부분 -->
 		<div id="div_root" style="text-align: center;">
-			<h3>나만의 표지를 꾸며봅시다.</h3>
+			<h3>Let's make your own cover:)</h3>
 		</div>
 		
 		<!-- 편집 메뉴 영역 -->
 		<div id="div_top">
 				Background
-				<button type="button" onClick="changeBackground('delete')">배경 삭제</button>
+				<!-- <button type="button" onClick="changeBackground('delete')">배경 삭제</button>
 			    <button type="button" onClick="changeBackground('cd')">CD</button>
 			    <button type="button" onClick="changeBackground('christmas')">Christmas</button>
 			    <button type="button" onClick="changeBackground('diary')">Diary</button>
 			    <button type="button" onClick="changeBackground('label')">Label</button>
 			    <button type="button" onClick="changeBackground('menu')">Menu</button>
 			    <button type="button" onClick="changeBackground('paper')">Paper</button>
-			    <button type="button" onClick="changeBackground('poster')">Poster</button>
+			    <button type="button" onClick="changeBackground('poster')">Poster</button> -->
+			    <button type="button" class="btn1" onClick="changeBackground('0')">배경 삭제</button>
+			    <button type="button" class="btn1" onClick="changeBackground('1')">Autumn</button>
+			    <button type="button" class="btn1" onClick="changeBackground('2')">Autumn2</button>
+			    <button type="button" class="btn1" onClick="changeBackground('3')">Blackboard</button>
+			    <button type="button" class="btn1" onClick="changeBackground('4')">Christmas</button>
+			    <button type="button" class="btn1" onClick="changeBackground('5')">Christmas2</button>
+			    <button type="button" class="btn1" onClick="changeBackground('6')">Christmas3</button>
+			    <button type="button" class="btn1" onClick="changeBackground('7')">Christmas4</button>
+			    <button type="button" class="btn1" onClick="changeBackground('8')">Christmas5</button>
+			    <button type="button" class="btn1" onClick="changeBackground('9')">Christmas6</button>
+			    <button type="button" class="btn1" onClick="changeBackground('10')">Flower</button>
+			    <button type="button" class="btn1" onClick="changeBackground('11')">Flower2</button>
+			    <button type="button" class="btn1" onClick="changeBackground('12')">Flower3</button>
+			    <button type="button" class="btn1" onClick="changeBackground('13')">Flower4</button>
+			    <button type="button" class="btn1" onClick="changeBackground('14')">Notebook</button>
+			    <button type="button" class="btn1" onClick="changeBackground('15')">Pattern</button>
+			    <button type="button" class="btn1" onClick="changeBackground('16')">Pattern2</button>
+			    <button type="button" class="btn1" onClick="changeBackground('17')">Poster</button>
+			    <button type="button" class="btn1" onClick="changeBackground('18')">Poster2</button>
+			    <button type="button" class="btn1" onClick="changeBackground('19')">Workplace</button>
+			    <button type="button" class="btn1" onClick="changeBackground('20')">Workplace2</button>
+			    <button type="button" class="btn1" onClick="changeBackground('21')">Workplace3</button>
 			    <br>
 				
 <!-- 			<div class="buttons">
@@ -618,11 +709,11 @@
 		
 		<!-- 내용(표지 부분) 영역 -->
 		<div id="div_con" class="div_con">
-		
-			<!-- 캔버스 -->
-			<canvas id="c" width="1200" height="600"></canvas>
 
-		</div>
+			<!-- 캔버스 -->
+			<canvas id="c" width="1013" height="500"></canvas>
+
+ 		</div>
 
 	</body>
 </html>

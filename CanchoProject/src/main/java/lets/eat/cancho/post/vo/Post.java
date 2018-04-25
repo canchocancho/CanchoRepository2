@@ -10,13 +10,15 @@ public class Post {
 	private String originalfile;
 	private String savedfile;
 	private String post_date;
+	private String post_like;
+	private String post_dislike;
 	
 	public Post() {
 		super();
 	}
 
 	public Post(int post_num, String post_title, String post_title_clean, String post_file, String user_id,
-			String originalfile, String savedfile, String post_date) {
+			String originalfile, String savedfile, String post_date, String post_like, String post_dislike) {
 		super();
 		this.post_num = post_num;
 		this.post_title = post_title;
@@ -26,6 +28,8 @@ public class Post {
 		this.originalfile = originalfile;
 		this.savedfile = savedfile;
 		this.post_date = post_date;
+		this.post_like = post_like;
+		this.post_dislike = post_dislike;
 	}
 
 	public int getPost_num() {
@@ -92,11 +96,30 @@ public class Post {
 		this.post_date = post_date;
 	}
 
+	public String getPost_like() {
+		return post_like;
+	}
+
+	public void setPost_like(String post_like) {
+		this.post_like = post_like;
+	}
+
+	public String getPost_dislike() {
+		return post_dislike;
+	}
+
+	public void setPost_dislike(String post_dislike) {
+		this.post_dislike = post_dislike;
+	}
+
 	@Override
 	public String toString() {
 		return "Post [post_num=" + post_num + ", post_title=" + post_title + ", post_title_clean=" + post_title_clean
 				+ ", post_file=" + post_file + ", user_id=" + user_id + ", originalfile=" + originalfile
-				+ ", savedfile=" + savedfile + ", post_date=" + post_date + "]";
+				+ ", savedfile=" + savedfile + ", post_date=" + post_date + ", post_like=" + post_like
+				+ ", post_dislike=" + post_dislike + "]";
 	}
+
+	
 
 }

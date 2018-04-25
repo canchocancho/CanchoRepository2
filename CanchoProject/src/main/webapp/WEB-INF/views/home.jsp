@@ -430,8 +430,6 @@
               		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo">
               	</c:if>
 
-            	<!-- <img src="http://placehold.it/300x300" alt="user" class="profile-photo" /> -->
-            	
             	<h5><a href="timeline.html" class="text-white">${loginName }</a></h5>
             	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
@@ -459,10 +457,7 @@
             <c:forEach items="${postList }" var="post">
             
             <div class="post-content">
-             <!--  <img src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" />
-               -->
-              
-              
+
            		<!-- 표지가 있을 경우 -->
 				<c:if test="${post.originalfile != null }">
 				<a href="post/readOnePost?post_num=${post.post_num }">
@@ -477,20 +472,26 @@
                 ${post.post_title }</a></h1>
                 </div>
                 </c:if>   
-              
-              
-              
+
               <div class="post-container">
-                <!-- <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" /> -->
+              	
                 <img src="post/downloadPic?user_id=${post.user_id }" alt="post-image" class="profile-photo-md pull-left" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">
                 <div class="post-detail">
                   <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">${post.user_id }</a> <span class="following">following</span></h5>
+
+                    <c:if test="${post.user_id == sessionScope.loginId }">
+                    <h5><a href="post/postList" class="profile-link">${post.user_id }</a><span class="following">following</span></h5>
+                    </c:if>
+                    
+                    <c:if test="${post.user_id != sessionScope.loginId }">
+                    <h5><a href="user/friendPage?friend_id=${post.user_id }" class="profile-link">${post.user_id }</a><span class="following">following</span></h5>
+                    </c:if>
+
                     <p class="text-muted">${post.post_date }</p>
                   </div>
                   <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                    <a href="post/postLike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" class="btn text-green"><i class="icon ion-thumbsup"></i>${post.post_like }</a>
+                    <a href="post/postDislike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" class="btn text-red"><i class="fa fa-thumbs-down"></i>${post.post_dislike }</a>
                   </div>
                 </div>
               </div>
@@ -499,7 +500,7 @@
 			</c:forEach>
 			</c:if>
 			
-			<c:if test="${mypostList == null || mypostList.size() == 0}">
+			<c:if test="${postList == null || postList.size() == 0}">
 			
 			<div style="text-align: center;">
 			<p>There is no post at all!</p>
@@ -507,49 +508,6 @@
 			</div>
 			
 			</c:if>
-          </div>
-
-          <!-- Newsfeed Common Side Bar Right
-          ================================================= -->
-    			<div class="col-md-2 static">
-            <div class="suggestions" id="sticky-sidebar">
-              <h4 class="grey">Who to Follow</h4>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Diana Amber</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Cris Haris</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Brian Walton</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Olivia Steward</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Sophia Page</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-            </div>
           </div>
     		</div>
     	</div>
