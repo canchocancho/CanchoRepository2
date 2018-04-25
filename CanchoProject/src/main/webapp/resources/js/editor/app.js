@@ -128,25 +128,3 @@ function myHandler(){
 		document.getElementById('p-slider').value = mm_player.position;
 	}
 }
-
-/*$(document).ready(function () {
-	
-	var toolContents = '';
-
-	//삭제 등의 버튼 추가
-	var bottomContents = '';
-	bottomContents += '<span class="toolbox"><i id="undo" class="itool fa fa-undo" aria-hidden="true"> undo</i></span>';
-	bottomContents += '<span class="toolbox"><i id="split" class="itool fa fa-scissors" aria-hidden="true"> split</i></span>';
-	bottomContents += '<span class="toolbox"><i id="delete" class="itool fa fa-trash" aria-hidden="true"> delete</i></span>';
-	bottomContents += '<span class="toolbox"><i id="clear" class="itool fa fa-trash-o" aria-hidden="true"> clear</i></span>';
-	bottomContents += '<span style="padding-left: 330px"></span>';
-	bottomContents += '<span class="bottombox"><i id="addImgTrack" class="ibottom fa fa-plus" aria-hidden="true"> <span class="character">ADD IMAGE TRACK</span></i></span>';
-	bottomContents += '<span class="bottombox"><i id="addAudioTrack" class="ibottom fa fa-plus" aria-hidden="true"> <span class="character">ADD AUDIO TRACK</span></i></span>';
-	bottomContents += '<span style="padding-left: 15px"></span>';
-	bottomContents +=	 ' <i class="fa fa-search" aria-hidden="true"></i>';
-	bottomContents +=	 " <input type='range' id='track-zoom' step='0.01' value='1' min='1' max='5' oninput='javascript:zoom();' />";   
-	$('#bottom').html(bottomContents);
-	
-	
-	
-});*/

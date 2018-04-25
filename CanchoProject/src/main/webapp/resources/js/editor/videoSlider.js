@@ -152,6 +152,10 @@ function checkTrackType(data){
  */
 function video0TrackEventRegister(){
 	$('.video-obj').on('click', function(e) {
+		
+		var mash = mm_player.mash;
+		console.log(JSON.stringify(mash));
+		
 		var clicked = $(this).attr('clicked');	
 		var IdsOftrackObjs = $.makeArray($(".track-obj").map(function(){
 		    return $(this).attr("id");
@@ -471,7 +475,7 @@ function updateLocationObj(id, trackId){
 	
 	if(trackInfo[0] == 'image') {
 		var clips = mm_player.mash.video[trackInfo[1]*1].clips;
-
+		
 		var index = 0;
 		for(var i = 0; i < clips.length; i++){
 			if(clips[i].frame == frame){
@@ -480,7 +484,6 @@ function updateLocationObj(id, trackId){
 			}
 		}
 		mm_player.mash.video[trackInfo[1]*1].clips[index].frame = newFrame;
-	
 	}else if(trackInfo[0] == 'audio') {
 		var clips = mm_player.mash.audio[trackInfo[1]*1].clips;
 
@@ -628,6 +631,7 @@ function reorderingVideo0Clips(videoOrders){
 	}
 	
 	video0TrackRedraw();
+	
 }
 function reorderingAudio0(videoOrders, imgIdxs){
 	var rtn = [];
@@ -657,7 +661,7 @@ function reorderingAudio0(videoOrders, imgIdxs){
 function trackObjEventRegister(){
 	$('.other-obj').off('click');
 	$('.other-obj').on('click', function(e) {
-
+		
 		var clicked = $(this).attr('clicked');
 		
 		if(clicked == 'false') {
@@ -820,4 +824,32 @@ function otherObjMove(track){
 		$("#" + idOfObj[i]).parent().css({position: 'relative'});
 		$("#" + idOfObj[i]).css({left: left, width: width, position:'absolute'});
 	}
+}
+
+function audioTrackSplitEventHandler(){
+	$('#split').off('click');
+	$('#split').on('click', function(){
+		//alert("audio split");
+		addUndoArr(mm_player.mash);
+		var idInfo = clickedObj.split('-');
+		var trackId = $('#' + clickedObj).attr('trackId');
+		var trackInfo = trackId.split('-');
+		var frame = $("#" + clickedObj).attr('frame');
+		var clips = mm_player.mash.audio[trackInfo[1]*1].clips;
+
+		var index = 0;
+		for(var i = 0; i < clips.length; i++){
+			if(clips[i].frame == frame){
+				index = i;
+				break;
+			}
+		}
+		
+		var selectedClip = mm_player.mash.audio[trackInfo[1]*1].clips[index];
+		
+		mm_player.selectedClip = selectedClip;
+		mm_player.split();
+		reDrawTrack(clickedObj, trackInfo, index);
+		timeLineSplitEventHandlerRemove();
+	});
 }
