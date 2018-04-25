@@ -375,7 +375,7 @@
 
 		//표지 만들기
 		function makeCover(){
-			window.open('makeCoverForm', 'newWindow', 'top=0, left=0, height=1920px, width=1080px');
+			window.open('makeCoverForm', 'newWindow', 'width=1280px, height=650px, scrollbars=yes');
 		}
 		
 		//저장

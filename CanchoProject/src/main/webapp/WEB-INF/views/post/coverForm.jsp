@@ -34,16 +34,16 @@
 			}
 					
 			#div_menu{
-				width:20%;
-				height:600px;
+				width:238px;
+				height:500px;
 				float:left;
 				background-color:#99ffb3;
 			}
 					
 			#div_con{
-				width:80%;
-				height:600px;
-				float:left;
+				width:1013px;
+				height:500px;
+				float:right;
 			}
 			
 			.btn1 {
@@ -709,11 +709,11 @@
 		
 		<!-- 내용(표지 부분) 영역 -->
 		<div id="div_con" class="div_con">
-		
-			<!-- 캔버스 -->
-			<canvas id="c" width="1200" height="600"></canvas>
 
-		</div>
+			<!-- 캔버스 -->
+			<canvas id="c" width="1013" height="500"></canvas>
+
+ 		</div>
 
 	</body>
 </html>
