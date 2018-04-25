@@ -490,8 +490,8 @@
                     <p class="text-muted">${post.post_date }</p>
                   </div>
                   <div class="reaction">
-                    <a href="post/postLike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" class="btn text-green"><i class="icon ion-thumbsup"></i>${update.post_like }</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                    <a href="post/postLike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" class="btn text-green"><i class="icon ion-thumbsup"></i>${post.post_like }</a>
+                    <a href="post/postDislike?post_num=${post.post_num }+&user_id=${sessionScope.loginId}" class="btn text-red"><i class="fa fa-thumbs-down"></i>${post.post_dislike }</a>
                   </div>
                 </div>
               </div>

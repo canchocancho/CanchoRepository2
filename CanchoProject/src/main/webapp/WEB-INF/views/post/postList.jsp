@@ -211,8 +211,8 @@
                       <p class="text-muted">${post.post_date }</p>
                     </div>
                     <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i>13</a>
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i>0</a>
+                      <a class="btn text-green"><i class="icon ion-thumbsup"></i>${post.post_like }</a>
+                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i>${post.post_dislike }</a>
                     </div>
                   </div>
                 </div>

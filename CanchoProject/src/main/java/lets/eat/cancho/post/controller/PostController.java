@@ -275,6 +275,24 @@ public class PostController {
 		
 	}
 	
+	//좋아요
+	@RequestMapping(value="postDislike", method=RequestMethod.GET)
+	public String postDislike(Post post, Model model, HttpSession session){
+			
+		logger.info("포스트 좋아요");
+		System.out.println(post.getUser_id());
+		System.out.println(post.getPost_num());
+			
+		int result = dao.updateDislike(post);
+			
+		ArrayList<Post> postList = dao.postList(post.getUser_id());
+		session.setAttribute("postList", postList);
+		model.addAttribute("postList", postList);
+			
+		return "redirect:/";
+			
+	}
+	
 	//초대하기
 	@RequestMapping(value="invite", method=RequestMethod.POST)
 	public String invite(String user_id, String url, String friend_id, Model model) throws
