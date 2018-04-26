@@ -41,7 +41,7 @@
 		<style>
 			#div_root{
 				width: 100%;
-				height:100px;
+				height:70px;
 				float:left;
 				/* background-color:#D5D5D5; */
 				background-image: "url(../resources/images/cover_1.jpg)";
@@ -49,16 +49,20 @@
 					
 			#div_top{
 				width:100%;
-				height:100px;
+				height:120px;
 				float:left;
-				background-color:#ffe699;
+				border-color: #BDBDBD;
+			    border-style: solid;
+			    border-left-style: none;
+			    border-right-style: none;
 			}
 					
 			#div_menu{
-				width:238px;
+				width:350px;
 				height:500px;
 				float:left;
 				background-color:#F6F6F6;
+				margin-top: 10px;
 			}
 					
 			#div_con{
@@ -706,7 +710,7 @@
 			  	<br>
 			  	<div class="controls">
 						<button id="copy">복사</button>
-						<button id="paste">붙여넣기</button><br>
+						<button id="paste">붙여넣기</button>
 						<button id="clear-canvas">전체 삭제</button>
 						<button id="roll-back">뒤로가기</button>
 				</div>
