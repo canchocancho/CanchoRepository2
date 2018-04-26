@@ -43,7 +43,11 @@ public class CommentController {
 	@RequestMapping(value="deleteComment", method=RequestMethod.GET)
 	public String deleteComment(int comment_num, int post_num, HttpSession session){
 		
-		dao.deleteComment(comment_num);		
+		logger.info("댓글 삭제 시작");
+		
+		dao.deleteComment(comment_num);
+		
+		logger.info("댓글 삭제 종료");
 		
 		return "redirect:readOnePost?post_num="+post_num;
 	}

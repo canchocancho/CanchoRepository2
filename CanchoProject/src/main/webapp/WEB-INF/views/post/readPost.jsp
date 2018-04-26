@@ -48,6 +48,13 @@
 				box-sizing: none;
 				width: 100%;
 			}
+			
+			.delete {
+				color: #8dc63f;
+  			  	font-size: 12px;
+    			margin-left: 20px;
+    			text-align: right;
+			}
 		</style>
 	</head>
 	<body>
@@ -171,7 +178,11 @@
 						<c:if test="${post.post_num == comment.post_num }">
 							<div class="post-comment">
 	                     	 
-	                     	 <p><a href="timeline.html" class="profile-link">${comment.user_id }</a> ${comment.comment_text }</p>
+	                     	 <p><a href="../user/friendPage?friend_id=${comment.user_id }" class="profile-link">${comment.user_id }</a> ${comment.comment_text }
+								<c:if test="${loginId == comment.user_id }">
+									<a href="deleteComment?comment_num=${comment.comment_num }&post_num=${comment.post_num }" class="delete">delete</a>
+								</c:if>
+							</p>
 							</div>
 						</c:if>
                     </c:forEach>
