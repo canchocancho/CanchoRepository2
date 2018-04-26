@@ -41,6 +41,14 @@
 	 		user_id = #{user_id}
 	 </select>
 	 
+	  <!-- 친구 삭제 -->
+	  <delete id="deleteFriend" parameterType="string">
+	  	delete from blog_friend
+	  		where friend_id = #{friend_id}
+	  </delete>
+	 
+	 
+	 
 	<!-- 회원 정보 수정 -->
 	<!-- <update id="updateUser" parameterType="user">
 	 	update 

@@ -175,6 +175,23 @@ public class MyPageController {
 		
 		return "friend/friendProfile";
 	}
+	
+	//친구 삭제
+	@RequestMapping(value="deleteFriend", method=RequestMethod.GET)
+	public String deleteFriend(String friend_id, HttpSession session, Model model){
+		logger.info("친구 삭제");
+		
+		int result = dao1.deleteFriend(friend_id);
+		
+		if (result != 1) {
+			logger.info("친구 삭제 실패");
+			model.addAttribute("errorMsg1", "친구 삭제 실패");
+			return "redirect:friendList";
+		}
+		
+		return "redirect:friendList";
+	}
+	
 
 	
 }

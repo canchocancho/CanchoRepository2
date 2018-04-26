@@ -28,8 +28,22 @@
 		
 <script type="text/javascript">
 	<c:if test ="${errorMsg != null}">
-		alert("${errorMsg}")
+		alert("${errorMsg}");
 	</c:if> 
+		
+	<c:if test ="${errorMsg1 != null}">
+		alert("${errorMsg}");
+	</c:if> 
+	
+	function deleteFriend(friend_id){
+		if (confirm("해당 친구를 정말로 삭제하시겠습니까?")) {
+			alert("삭제되었습니다.");
+			location.href = "deleteFriend?friend_id="+friend_id;
+		} else {
+			alert("삭제가 취소되었습니다.");
+			return;
+		}
+	}
 	
 	function insertFriend(user_id){
 		if (confirm("해당 ID를 친구로 추가할까요?")) {
@@ -151,7 +165,7 @@
               					<img src="../post/downloadPic?user_id=${friend.friend_id }" alt="" class="img-responsive cover" onerror="javascript:src='http://www.tourniagara.com/wp-content/uploads/2014/10/default-img.gif'">	
 		                  		<div class="card-info">
 			                      	<div class="friend-info">
-			                        	<a href="#" class="pull-right text-green">My Friend</a>
+			                        	<a href="javascript:deleteFriend('${friend.friend_id }')" class="pull-right text-green">Delete</a>
 			                      		<h5><a href="friendPage?friend_id=${friend.friend_id }" class="profile-link">${friend.friend_id }</a></h5>
 			                      	</div>
 		                    	</div>

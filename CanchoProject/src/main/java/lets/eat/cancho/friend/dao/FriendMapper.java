@@ -15,4 +15,7 @@ public interface FriendMapper {
 	
 	//전체 친구 목록 불러오기
 	public ArrayList<Friend> selectFriendList(String user_id);
+	
+	//친구 삭제
+	public int deleteFriend(String friend_id);
 }

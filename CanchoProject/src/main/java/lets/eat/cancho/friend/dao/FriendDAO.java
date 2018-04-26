@@ -76,6 +76,24 @@ private static final Logger logger = LoggerFactory.getLogger(FriendDAO.class);
 		return list;
 	}
 	
+	//친구 삭제
+	public int deleteFriend(String friend_id){
+		logger.info("친구 삭제 시작 - 다오");
+			
+		int result = 0;
+		FriendMapper mapper = sqlSession.getMapper(FriendMapper.class);
+				
+		try{
+			result = mapper.deleteFriend(friend_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+		logger.info("친구 삭제 종료 - 다오");
+			
+		return result;
+	}
+	
 	
 	
 }
