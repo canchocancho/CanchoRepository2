@@ -430,7 +430,7 @@
               		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo">
               	</c:if>
 
-            	<h5><a href="timeline.html" class="text-white">${loginName }</a></h5>
+            	<h5><a href="post/postList" class="text-white">${loginName }</a></h5>
             	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">

@@ -46,22 +46,17 @@
 	    <!--Favicon-->
 	    <link rel="shortcut icon" type="image/png" href="../resources/images/fav.png"/>
 	    
-	    <style>
-   /*  html { height: 100%; }
-    body { margin: 0; height: 100%; } */
-    /* Height / width / positioning can be customized for your use case.
-       For demo purposes, we make the user list 175px and firepad fill the rest of the page. */
+	<style>
     #userlist {
-      position: absolute; left: 0; top: 58px; bottom: 0; height: 400px;
-      width: 175px;
+      position: absolute; left: 0; top: 58px; bottom: 0; height: 200px; width: 175px;
     }
     #firepad {
       position: absolute; left: 175px; top: 58px; bottom: 0; right: 0; height: auto;
     }
-    .firepad-userlist{
+    .firepad-userlist {
       height: 100%;
     }
-  </style>
+	</style>
   
   <script type="text/javascript">
 	<c:if test ="${errorMsg != null}">
@@ -314,14 +309,11 @@
 	<script>
 		//초대
 		function invite() {
-			alert(window.location.href); //공유해야 할 url 주소(이걸 쪽지로 보내야 함)
-			var url = window.location.href;
+			var url = window.location.href; //공유해야 할 url 주소
 			
 			invite_form.url.value = String(url); //공유할 url 주소를 invite_form 안에 넣기
 			
 			var user_id = $('#user_id').val();
-			
-			alert(user_id); //유저 아이디
 			
 			$.ajax({
 				url : "../user/searchFriendList",
@@ -331,7 +323,9 @@
 				},
 				success : function(obj){
 					
-					var str = "<br>";
+					var str = "";
+					
+					str += '<input type="button" class="btn btn-primary pull-right" id="invite" name="invite" onclick="invite();" value="Invite Friends" style="float: left;"/><br><br>';
 					
 					for(var i in obj){
 						/* str += '<a href="../user/invite?user_id='+obj[i].user_id+'&friend_id='+obj[i].friend_id+"\">"+obj[i].friend_id+"</a><br>"; */
@@ -477,7 +471,7 @@
   
     <!-- Header
     ================================================= -->
-		<header id="header">
+	  <header id="header">
       <nav class="navbar navbar-default navbar-fixed-top menu">
         <div class="container">
 
@@ -519,51 +513,59 @@
   
     <!-- 404 Error
     ================================================= -->
-    <div class="error-page">
+	<div class="error-page">
 
 
-           <div id="userlist">
-				<!-- 초대하기 -->
-				<input type="button" id="invite" name="invite" onclick="invite();" value="초대" style="float: left;"/>
-				
-				<!-- 표지 만들기 -->
-				<input type="button" id="makeCover" name="makeCover" onclick="makeCover();" value="표지 만들기" style="float: left;"/>
-					
-				<!-- 저장하기 -->
-				<input type="button" id="save" name="save" onclick="save();" value="저장" style="float: left;"/>
-  			</div>
+		<div id="userlist"></div>
   			
-  			<div id="inviteList" name="inviteList" style="background-color: red; width: 175px; height: 400px; margin-top: 420px; margin-right: 50px;">
-  			</div>
-  			
+		<div id="inviteList" name="inviteList" style="background-color: #a5dff9; width: 175px; height: 200px; margin-top: 220px; margin-right: 50px;">
+			<!-- 초대하기 -->
+			<input type="button" class="btn btn-primary pull-right" id="invite" name="invite" onclick="invite();" value="Invite Friends" style="float: left;"/>
+		</div>
+		
+			<!--채팅창 -->
+			<input type="hidden" value="${loginId}" id="chat_id">
+		    <div id="_chatbox" style="float:left;">
+		        <fieldset>
+		            <div id="messageWindow" style="overflow-y: scroll; height:250px;" ></div>
+		            <br /> <input id="inputMessage" type="text" onkeyup="enterkey()" />
+		            <input type="submit" value="전송" onclick="send()" />
+		        </fieldset>
+		    </div>
+		
   		<div id="firepad">
-  
+  		
+  			<div class="titleDiv" style="margin-top: 30px; ">
 	  		<!-- 히든폼 -->
 			<form action="write" method="post" name="hidden_form" enctype="multipart/form-data" style="position: relative;">
-				제목 <input type="text" id="post_title" name="post_title" autocomplete="off">
-				표지 첨부 <input type="file" name="upload">
+				<div style="width: 80%; text-align: center; float: center;">
+				<input type="text" id="post_title" name="post_title" autocomplete="off" style="width: 500px;" placeholder="Title">
+				</div>
+				<div style="width: 600px; text-align: left; float: left;">
+				표지 첨부 <input type="file" name="upload" style="width: 500px;">
+				</div>
 				<input type="hidden" id="hidden_data" name="hidden_data">
 				<input type="hidden" id="user_id" name="user_id" value="${loginId }">
 			</form>
+			
+			<div>
+				<!-- 표지 만들기 -->
+				<input type="button" class="btn btn-primary pull-right" id="makeCover" name="makeCover" onclick="makeCover();" value="Make Cover" style="float: left;"/>
+			
+				<!-- 저장하기 -->
+				<input type="button" class="btn btn-primary pull-right" id="save" name="save" onclick="save();" value="Save" style="float: left;"/>
+			</div>
+			</div>
 			
 			<!-- 히든폼2(초대) -->
 			<form action="invite" method="post" id="invite_form" name="invite_form" method="post">
 				<input type="hidden" id="user_id" name="user_id" value="${loginId }">
 				<input type="hidden" id="url" name="url">
 				<input type="hidden" id="friend_id" name="friend_id">
-			</form>
-	
-			<!--채팅창 -->
-			<input type="hidden" value="${loginId}" id="chat_id">
-		    <div id="_chatbox">
-		        <fieldset>
-		            <div id="messageWindow" style="overflow-y: scroll; height:150px;" ></div>
-		            <br /> <input id="inputMessage" type="text" onkeyup="enterkey()" />
-		            <input type="submit" value="send" onclick="send()" />
-		        </fieldset>
-		    </div>
+			</form>	
+			
   		</div>
-        </div>
+	</div>
 
 
     
