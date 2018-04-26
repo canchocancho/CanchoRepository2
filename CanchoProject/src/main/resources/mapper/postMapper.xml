@@ -110,6 +110,12 @@
 			and post_num = #{post_num}
 	</update>
 	
-	
+	<!-- 포스트 삭제 -->
+	<delete id="deletePost" parameterType="int">
+		delete from
+			blog_post
+		where
+			post_num = #{post_num}	
+	</delete>
 
 </mapper>

@@ -13,5 +13,6 @@ public interface PostMapper {
 	public Post bringPost(int post_num);
 	public int updateLike(Post post);
 	public int updateDislike(Post post);
+	public int deletePost(int post_num);
 	
 }

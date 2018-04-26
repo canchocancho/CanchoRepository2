@@ -143,5 +143,24 @@ public class PostDAO {
 			
 			return result;
 		}
+		
+	//포스트 삭제
+	public int deletePost(int post_num){
+			
+		logger.info("포스트 삭제 시작");
+			
+		PostMapper mapper = session.getMapper(PostMapper.class);
+			
+		int result = 0;
+			
+		try{
+				result = mapper.deletePost(post_num);
+				
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 
 }

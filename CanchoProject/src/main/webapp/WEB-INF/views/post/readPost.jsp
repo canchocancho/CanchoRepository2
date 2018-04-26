@@ -34,6 +34,14 @@
 			<c:if test="${errorMsg != null }">
 				alert('${errorMsg }');
 			</c:if>
+			
+/* 			function deleteCheck(){
+				var deleteChecked = confirm('포스트를 삭제하시겠습니까?');
+				
+				if(!deleteChecked){
+					return "";
+				}
+			} */
 		</script>
 
 		<style>
@@ -196,6 +204,15 @@
 							<input type="text" class="form-control" name="comment_text" id="comment_text" placeholder="Post a comment" autocomplete="off">
                     </div>
                     </form>
+                    
+                    <!-- 포스트 삭제 -->
+                    <c:if test="${loginId == post.user_id }">
+                    	<br>
+                    	<div style="text-align: right;">
+						<a href="deletePost?post_num=${post.post_num }" onclick="deleteCheck();">Delete Post</a>
+						</div>
+					</c:if>
+                    
                     </div>
 
             </div>

@@ -28,10 +28,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -142,7 +140,6 @@ public class PostController {
 		String user_id = (String) session.getAttribute("loginId");
 		
 		ArrayList<Post> mypostList = dao.postListId(user_id);
-		
 		
 		model.addAttribute("mypostList", mypostList); //포스트 리스트 담기
 		
@@ -265,7 +262,7 @@ public class PostController {
 		System.out.println(post.getUser_id());
 		System.out.println(post.getPost_num());
 		
-		int result = dao.updateLike(post);
+		dao.updateLike(post);
 		
 		ArrayList<Post> postList = dao.postList(post.getUser_id());
 		session.setAttribute("postList", postList);
@@ -283,7 +280,7 @@ public class PostController {
 		System.out.println(post.getUser_id());
 		System.out.println(post.getPost_num());
 			
-		int result = dao.updateDislike(post);
+		dao.updateDislike(post);
 			
 		ArrayList<Post> postList = dao.postList(post.getUser_id());
 		session.setAttribute("postList", postList);
@@ -302,14 +299,8 @@ public class PostController {
 		
 		String email = userDAO.searchUserOne(friend_id).getUser_email(); //초대받을 사람 이메일
 		
-		//관리자 계정
+				//관리자 계정
 				String admin = "canchoad@gmail.com";
-				
-				//Server Address
-				/*String serverAddress = "http://203.233.199.106:8888/cancho/";
-				
-				serverAddress + "user/verify?user_id="
-				+ user.getUser_id()*/
 
 				//인증을 위한 E-mail을 보내는 부분		
 				MimeMessage message = mailSender.createMimeMessage();
@@ -335,6 +326,21 @@ public class PostController {
 		model.addAttribute("errorMsg", "친구에게 초대 메일을 발송하였습니다.");
 					 
 		return "post/postForm";
+	}
+	
+	@RequestMapping(value="deletePost", method=RequestMethod.GET)
+	public String deletePost(int post_num, HttpSession session){
+		
+		logger.info("포스트 삭제 시작");
+		
+		dao.deletePost(post_num);
+		
+		ArrayList<Post> postList = dao.postList((String)session.getAttribute("loginId"));
+		session.setAttribute("postList", postList);
+		
+		logger.info("포스트 삭제 완료");
+		
+		return "redirect:../";
 	}
 	
 
