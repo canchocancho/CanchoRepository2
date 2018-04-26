@@ -65,16 +65,6 @@ public class editController {
 				int lastIndex = savedfile.lastIndexOf('.');
 				fileName = savedfile.substring(0, lastIndex);
 				String extName = savedfile.substring(lastIndex+1, fileLength);
-				
-				/*// 페이지에 넘겨줄 파일경로가 담긴 리스트
-				case "mp4": videoList.add(savedfile); break;
-				case "ogg": videoList.add(savedfile); break;
-				case "webm": videoList.add(savedfile); break;
-				case "mp3": audioList.add(savedfile); break;
-				case "jpg": imageList.add(savedfile); break;
-				case "jpeg": imageList.add(savedfile); break;
-				case "png": imageList.add(savedfile); break;
-				}*/
 				if(extName.equals("mp4") || extName.equals("ogg") || extName.equals("webm")) {
 					ImageFileManager.extractVideo(fileName);
 				}

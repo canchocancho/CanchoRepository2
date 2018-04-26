@@ -90,8 +90,11 @@ function add_media(trackId, id, url, fname, duration){
 	};
 	if(type == 'audio'){
 		add['duration']  = duration;
+		mm_player.add(add, trackInfos[0], subTracksDuration[trackId] , trackInfos[1]*1);
+	}else{
+		mm_player.add(add, trackInfos[0], 60 , trackInfos[1]*1);
 	}
-	mm_player.add(add, trackInfos[0], subTracksDuration[trackId] , trackInfos[1]*1);
+	
 	subTracksDuration[trackId] += duration;
 	return mm_player.selectedClip;
 }
