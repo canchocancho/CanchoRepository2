@@ -792,7 +792,7 @@ function selectedObjDelete(objId){
 		
     	clickedObj = '';
     	selectedClipNum = 0;
-		tracksDuration[trackId] = tracksDuration[trackId] - selectedClip.frames;
+    	subTracksDuration[trackId] = subTracksDuration[trackId] - selectedClip.frames;
 		reDrawTrackAfterRemove(trackId, objId);
 		$( ".other-obj" ).draggable({ axis: "x", containment: '#' + trackId, scroll: false });
 		trackObjEventRegister();
@@ -802,12 +802,27 @@ function selectedObjDelete(objId){
 	        }
 	     });
 	}
-	/*resizeTrackObj(0);*/
 	var trackArr= Object.keys(subTracksDuration);
 	for(var i = 0; i < trackArr.length; i++){
 		otherObjMove(trackArr[i]);
 	}
 }
+function reDrawTrackAfterRemove(trackId, objId){
+	var trackArr = $('#' + trackId);
+	var newHtml = '';
+	for (var i = 0; i < trackArr[0].children.length; i++) {
+		if(trackArr[0].children[i].outerHTML == $('#' + objId)[0].outerHTML){
+			continue;
+		}
+		
+		newHtml += trackArr[0].children[i].outerHTML;
+	}
+	
+	$('#' + trackId).html(newHtml);
+	
+	subTrackObjNum[trackId] = subTrackObjNum[trackId] - 1;
+}
+
 
 function otherObjMove(track){
 	var max = getTotalDur();
@@ -836,7 +851,6 @@ function audioTrackSplitEventHandler(){
 		var trackInfo = trackId.split('-');
 		var frame = $("#" + clickedObj).attr('frame');
 		var clips = mm_player.mash.audio[trackInfo[1]*1].clips;
-
 		var index = 0;
 		for(var i = 0; i < clips.length; i++){
 			if(clips[i].frame == frame){
