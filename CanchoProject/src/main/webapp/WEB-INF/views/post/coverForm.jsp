@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,9 +11,26 @@
 		<title>MAKE COVER</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="This is social network html5 template available in themeforest......" />
+		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
+		<meta name="robots" content="index, follow" />
+		
 		<script type="text/javascript" src="<c:url value="/resources/js/fabric.min.js" />"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/fabric.js" />"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js" />"></script>
+		<script src="../resources/js/sockjs-0.3.4.js"></script>
+		
+		<link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../resources/css/style.css" />
+		<link rel="stylesheet" href="../resources/css/ionicons.min.css" />
+	    <link rel="stylesheet" href="../resources/css/font-awesome.min.css" />
+	
+	    <!--Google Font-->
+	    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+	
+	    <!--Favicon-->
+	    <link rel="shortcut icon" type="image/png" href="../resources/images/fav.png"/>
 
 		<script type="text/javascript" src="<c:url value="/resources/js/html2canvas.min.js" />"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/html2canvas.js" />"></script>
@@ -21,9 +41,10 @@
 		<style>
 			#div_root{
 				width: 100%;
-				height:50px;
+				height:100px;
 				float:left;
-				background-color:#ff9999;
+				/* background-color:#D5D5D5; */
+				background-image: "url(../resources/images/cover_1.jpg)";
 			}
 					
 			#div_top{
@@ -37,7 +58,7 @@
 				width:238px;
 				height:500px;
 				float:left;
-				background-color:#99ffb3;
+				background-color:#F6F6F6;
 			}
 					
 			#div_con{
@@ -550,6 +571,32 @@
 	</head>
 	
 	<body>
+		<header id="header">
+      <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
+
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../"><img src="../resources/images/logo.png" alt="logo"></a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+      </nav>
+    </header>
+  
+    <!-- Main content
+    ================================================= -->
+    <div class="error-page">
 		<!-- 맨 위 메뉴 바 부분 -->
 		<div id="div_root" style="text-align: center;">
 			<h3>Let's make your own cover:)</h3>
@@ -558,36 +605,28 @@
 		<!-- 편집 메뉴 영역 -->
 		<div id="div_top">
 				Background
-				<!-- <button type="button" onClick="changeBackground('delete')">배경 삭제</button>
-			    <button type="button" onClick="changeBackground('cd')">CD</button>
-			    <button type="button" onClick="changeBackground('christmas')">Christmas</button>
-			    <button type="button" onClick="changeBackground('diary')">Diary</button>
-			    <button type="button" onClick="changeBackground('label')">Label</button>
-			    <button type="button" onClick="changeBackground('menu')">Menu</button>
-			    <button type="button" onClick="changeBackground('paper')">Paper</button>
-			    <button type="button" onClick="changeBackground('poster')">Poster</button> -->
-			    <button type="button" class="btn1" onClick="changeBackground('0')">배경 삭제</button>
-			    <button type="button" class="btn1" onClick="changeBackground('1')">Autumn</button>
-			    <button type="button" class="btn1" onClick="changeBackground('2')">Autumn2</button>
-			    <button type="button" class="btn1" onClick="changeBackground('3')">Blackboard</button>
-			    <button type="button" class="btn1" onClick="changeBackground('4')">Christmas</button>
-			    <button type="button" class="btn1" onClick="changeBackground('5')">Christmas2</button>
-			    <button type="button" class="btn1" onClick="changeBackground('6')">Christmas3</button>
-			    <button type="button" class="btn1" onClick="changeBackground('7')">Christmas4</button>
-			    <button type="button" class="btn1" onClick="changeBackground('8')">Christmas5</button>
-			    <button type="button" class="btn1" onClick="changeBackground('9')">Christmas6</button>
-			    <button type="button" class="btn1" onClick="changeBackground('10')">Flower</button>
-			    <button type="button" class="btn1" onClick="changeBackground('11')">Flower2</button>
-			    <button type="button" class="btn1" onClick="changeBackground('12')">Flower3</button>
-			    <button type="button" class="btn1" onClick="changeBackground('13')">Flower4</button>
-			    <button type="button" class="btn1" onClick="changeBackground('14')">Notebook</button>
-			    <button type="button" class="btn1" onClick="changeBackground('15')">Pattern</button>
-			    <button type="button" class="btn1" onClick="changeBackground('16')">Pattern2</button>
-			    <button type="button" class="btn1" onClick="changeBackground('17')">Poster</button>
-			    <button type="button" class="btn1" onClick="changeBackground('18')">Poster2</button>
-			    <button type="button" class="btn1" onClick="changeBackground('19')">Workplace</button>
-			    <button type="button" class="btn1" onClick="changeBackground('20')">Workplace2</button>
-			    <button type="button" class="btn1" onClick="changeBackground('21')">Workplace3</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('0')">배경 삭제</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('1')">Autumn</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('2')">Autumn2</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('3')">Blackboard</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('4')">Christmas</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('5')">Christmas2</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('6')">Christmas3</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('7')">Christmas4</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('8')">Christmas5</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('9')">Christmas6</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('10')">Flower</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('11')">Flower2</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('12')">Flower3</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('13')">Flower4</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('14')">Notebook</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('15')">Pattern</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('16')">Pattern2</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('17')">Poster</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('18')">Poster2</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('19')">Workplace</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('20')">Workplace2</button>
+			    <button type="button" class="btn btn-info" onClick="changeBackground('21')">Workplace3</button>
 			    <br>
 				
 <!-- 			<div class="buttons">
@@ -667,9 +706,9 @@
 			  	<br>
 			  	<div class="controls">
 						<button id="copy">복사</button>
-						<button id="paste">붙여넣기</button>
-						<button id="clear-canvas" class="btn btn-info">전체 삭제</button>
-						<button id="roll-back" class="btn btn-info">뒤로가기</button>
+						<button id="paste">붙여넣기</button><br>
+						<button id="clear-canvas">전체 삭제</button>
+						<button id="roll-back">뒤로가기</button>
 				</div>
 		 		<div id="drawing-mode-options" style="">
 		   			<label for="drawing-mode-selector">Mode:</label>
@@ -714,6 +753,37 @@
 			<canvas id="c" width="1013" height="500"></canvas>
 
  		</div>
+		
+
+           
+    </div>
+
+
+    
+    <!-- Footer
+    ================================================= -->
+    <footer id="footer">
+      
+      <div class="copyright">
+        <p>Tomo Log @2018. All rights reserved</p>
+      </div>
+	</footer>
+    
+    <!--preloader-->
+    <div id="spinner-wrapper">
+      <div class="spinner"></div>
+    </div>
+    
+    <!-- Scripts
+    ================================================= -->
+    <script src="../resources/js/jquery-3.1.1.min.js"></script>
+    <script src="../resources/js/bootstrap.min.js"></script>
+    <script src="../resources/js/script.js"></script>
+    
+	
+	
+	
+	
 
 	</body>
 </html>
