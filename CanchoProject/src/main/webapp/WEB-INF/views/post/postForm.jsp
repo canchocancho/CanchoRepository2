@@ -472,11 +472,8 @@
 		    elem.scrollTop = elem.scrollHeight;
 		}, 0);
 	</script>
-	    
-	    
-	    
-	    
 	</head>
+	
   <body onload="init()">
   
     <!-- Header
