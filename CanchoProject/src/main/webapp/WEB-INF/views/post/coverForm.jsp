@@ -108,7 +108,7 @@
 			  text-decoration: none;
 			}
 			
-			.btn1:hover {
+		.btn1:hover {
 			  background: #3cb0fd;
 			  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
 			  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
@@ -116,7 +116,7 @@
 			  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
 			  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
 			  text-decoration: none;
-			}
+		}
 		</style>
 		
 		<script type="text/javascript">
@@ -670,7 +670,7 @@
 				    <input type="color" value="#005E7A" id="drawing-color"><br>
 					
 				    <label for="drawing-line-width">Line width:</label>
-				    <span class="info">30</span><input type="range" value="30" min="0" max="150" id="drawing-line-width">
+				    <span class="info">10</span><input type="range" value="10" min="0" max="150" id="drawing-line-width">
 
 				    <label for="drawing-shadow-color">Shadow color:</label>
 				    <input type="color" value="#005E7A" id="drawing-shadow-color"><br>
