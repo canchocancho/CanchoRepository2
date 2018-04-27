@@ -38,17 +38,47 @@
 		<script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Cute+Font|Do+Hyeon|Gaegu|Gamja+Flower|Gugi|Indie+Flower|Lato|Lobster|Lora|Oswald|PT+Sans+Narrow|Roboto|Roboto+Condensed|Slabo+27px|Ubuntu" rel="stylesheet">
 		
-		<style>		
-			#div_top{
-				width:100%;
-				height:120px;
-				float:left;
-				border-color: #BDBDBD;
-			    border-style: solid;
-			    border-left-style: none;
-			    border-right-style: none;
-			}
-					
+		<style>
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+	background-color:#f9f9f9;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:12px;
+	padding:6px 12px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
+	background:-moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
+	background-color:#e9e9e9;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
 			#div_menu{
 				width:250px;
 				height:500px;
@@ -58,9 +88,10 @@
 			}
 					
 			#div_con{
+				margin-top:10px;
 				width:1013px;
 				height:500px;
-				float:right;
+				float:left;
 			}
 			
 			.btn1 {
@@ -92,75 +123,6 @@
 		</style>
 		
 		<script type="text/javascript">
-			function changeBackground(img){
-				if(img == '0'){
-					document.getElementById("c").style.background = "";
-				}
-				if(img == '1'){
-					document.getElementById("c").style.background = "url(../resources/img/autumn.jpg)";
-				}
-				if(img == '2'){
-					document.getElementById("c").style.background = "url(../resources/img/autumn2.jpg)";
-				}
-				if(img == '3'){
-					document.getElementById("c").style.background = "url(../resources/img/blackboard.jpg)";
-				}
-				if(img == '4'){
-					document.getElementById("c").style.background = "url(../resources/img/christmas.jpg)";
-				}
-				if(img == '5'){
-					document.getElementById("c").style.background = "url(../resources/img/christmas2.jpg)";
-				}
-				if(img == '6'){
-					document.getElementById("c").style.background = "url(../resources/img/christmas3.jpg)";
-				}
-				if(img == '7'){
-					document.getElementById("c").style.background = "url(../resources/img/christmas4.jpg)";
-				}
-				if(img == '8'){
-					document.getElementById("c").style.background = "url(../resources/img/christmas5.jpg)";
-				}
-				if(img == '9'){
-					document.getElementById("c").style.background = "url(../resources/img/christmas6.jpg)";
-				}
-				if(img == '10'){
-					document.getElementById("c").style.background = "url(../resources/img/flower.jpg)";
-				}
-				if(img == '11'){
-					document.getElementById("c").style.background = "url(../resources/img/flower2.jpg)";
-				}
-				if(img == '12'){
-					document.getElementById("c").style.background = "url(../resources/img/flower3.jpg)";
-				}
-				if(img == '13'){
-					document.getElementById("c").style.background = "url(../resources/img/flower4.jpg)";
-				}
-				if(img == '14'){
-					document.getElementById("c").style.background = "url(../resources/img/notebook.jpg)";
-				}
-				if(img == '15'){
-					document.getElementById("c").style.background = "url(../resources/img/pattern.jpg)";
-				}
-				if(img == '16'){
-					document.getElementById("c").style.background = "url(../resources/img/pattern2.jpg)";
-				}
-				if(img == '17'){
-					document.getElementById("c").style.background = "url(../resources/img/poster.jpg)";
-				}
-				if(img == '18'){
-					document.getElementById("c").style.background = "url(../resources/img/poster2.jpg)";
-				}
-				if(img == '19'){
-					document.getElementById("c").style.background = "url(../resources/img/workplace.jpg)";
-				}
-				if(img == '20'){
-					document.getElementById("c").style.background = "url(../resources/img/workplace2.jpg)";
-				}
-				if(img == '21'){
-					document.getElementById("c").style.background = "url(../resources/img/workplace3.jpg)";
-				}
-			}
-
 	    	  function download(){
     			var download = document.getElementById("download");
     			var image = document.getElementById("finalCover").toDataURL("image/png")
@@ -197,14 +159,14 @@
 		    	  drawingModeEl.onclick = function() {
 		    	    canvas.isDrawingMode = !canvas.isDrawingMode;
 		    	    if (canvas.isDrawingMode) {
-		    	      drawingModeEl.innerHTML = '드로잉 모드 OFF';
+		    	      drawingModeEl.innerHTML = 'Drawing OFF';
 		    	      drawingOptionsEl.style.display = '';
 		    	      text.style.display = 'none';
 		    	      tMenu.style.display = 'none';
 		    	      uploadImage.style.display = 'none';
 		    	    }
 		    	    else {
-		    	      drawingModeEl.innerHTML = '드로잉 모드 ON';
+		    	      drawingModeEl.innerHTML = 'Drawing ON';
 		    	      drawingOptionsEl.style.display = 'none';
 		    	      text.style.display = '';
 		  	  	    tMenu.style.display = '';
@@ -401,16 +363,12 @@
 		    	 
 		    	  //글씨체 변경
 		    	  $('font-family').onchange = function(){
-		    	  	 alert(this.value);
-		    	  	 
 		    	  	 canvas.getActiveObject().set("fontFamily", this.value);
 		    		 canvas.requestRenderAll();
 		    	  };
-		    	  
+		    	 
 		    	  //글자 색상 변경
 		    	  $('font-color').onchange = function(){
-			    	  	 alert(this.value);
-			    	  	 
 			    	  	if (this.value == 'Red') {
 			    	  		 canvas.getActiveObject().set("fill", 'rgb(255,0,0)');
 				    		 canvas.requestRenderAll();
@@ -465,8 +423,6 @@
 		    	  
 		    	  //폰트 배경 색상 변경
 		    	  $('font-background').onchange = function(){
-			    	  	alert(this.value);
-			    	  	 
 			    	  	if (this.value == 'Red') {
 			    	  		 canvas.getActiveObject().set("textBackgroundColor", 'rgb(255,0,0)');
 				    		 canvas.requestRenderAll();
@@ -533,6 +489,8 @@
 		    	  
 		    	  
 		    	  $('btnComplete').onclick = function(){
+		    		  
+		    		  alert('아래쪽에서 완성된 커버를 확인 후 저장하세요!');
 
 		    		    var finalCover = document.getElementById("finalCover");
 		    		    
@@ -585,54 +543,56 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             
-			<button class="btn btn-primary pull-right" id="btnComplete" onclick="btnComplete()">Preview</button>
-			<a id="download" download="post_cover.png"><button class="btn btn-primary pull-right" onClick="download()">Save</button></a>
+            <a id="download" download="post_cover.png"><button class="btn btn-primary pull-right" onClick="download()" style="margin-top: 10px;">Save</button></a>
+			<button class="btn btn-primary pull-right" id="btnComplete" onclick="btnComplete()" style="margin-top: 10px;">Preview</button>
+			
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
       </nav>
     </header>
-  
+
     <!-- Main content
     ================================================= -->
-    <div class="error-page">
-
-		<!-- 편집 메뉴 영역 -->
-		<div id="div_top">
-				Background
-			    <button type="button" class="btn btn-info" onClick="changeBackground('0')">배경 삭제</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('1')">Autumn</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('2')">Autumn2</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('3')">Blackboard</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('4')">Christmas</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('5')">Christmas2</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('6')">Christmas3</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('7')">Christmas4</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('8')">Christmas5</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('9')">Christmas6</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('10')">Flower</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('11')">Flower2</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('12')">Flower3</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('13')">Flower4</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('14')">Notebook</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('15')">Pattern</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('16')">Pattern2</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('17')">Poster</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('18')">Poster2</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('19')">Workplace</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('20')">Workplace2</button>
-			    <button type="button" class="btn btn-info" onClick="changeBackground('21')">Workplace3</button>
-			    <br>
-				
-		</div>
+    <div class="error-page" style="height: 500px;">
 		
 		<!-- 왼쪽 도구 영역 -->
 		<div id="div_menu" class="div_menu">
-
+			<!-- 배경 버튼들 -->
+			<div id="backgroundDiv">
+				<h4>Select your background</h4>
+				<select name="backgroundChoice" id="backgroundChoice">
+					<option value="Select" selected="selected">>Select Background</option>
+					<option value="1">Autumn Leaves</option>
+					<option value="2">Dry Leaves</option>
+					<option value="3">Blackboard</option>
+					<option value="4">White Christmas</option>
+					<option value="5">Christmasy Cone</option>
+					<option value="6">Autumn's Gift</option>
+					<option value="7">Cookie Desk</option>
+					<option value="8">Ginger Cookies</option>
+					<option value="9">Red Ribbon</option>
+					<option value="10">Flower Drawing</option>
+					<option value="11">Flower Drawing2</option>
+					<option value="12">Rose Leaves</option>
+					<option value="13">Simple Flower</option>
+					<option value="14">Coffee Flower</option>
+					<option value="15">Sparkling</option>
+					<option value="16">Pink Heart</option>
+					<option value="17">Poster on Wall</option>
+					<option value="18">Poster with Cat</option>
+					<option value="19">Pink Workspace</option>
+					<option value="20">Sticky Monster</option>
+					<option value="21">Pinky Desk</option>
+					<option value="0">>Delete Background</option>
+				</select>
+			</div>
+			
+			<hr>
+			
 			<!-- 캔버스 버튼들 -->
 			<div style="display: inline-block; margin-left: 10px">
-			  	<button id="drawing-mode" class="btn btn-info">드로잉 모드 OFF</button><br>
-			  	<input type="file" id="imageLoader" name="imageLoader" style="display: none;"><br>
-			  	<button id="insertText" class="btn btn-info" style="display: none;">글씨 쓰기</button>
+			  	<button id="drawing-mode" class="btn btn-info">Drawing OFF</button><br><br>
+			  	<button id="insertText" class="myButton" style="display: none;">Write Text</button>
 			  	<div id="textmenu" class="controls" style="display: none;">
 					<p>
 						Font-family: 
@@ -686,15 +646,15 @@
 							<option value="White">White</option>
 						</select>
 					</p>
+					<input type="file" id="imageLoader" name="imageLoader" style="display: none;"><br>
 				</div>
-			  	<br>
-			  	<div class="controls">
-						<button id="copy">복사</button>
-						<button id="paste">붙여넣기</button>
-						<button id="clear-canvas">전체 삭제</button>
-						<button id="roll-back">뒤로가기</button>
+			  	<div class="controls" style="margin-left: 0;">
+						<button id="copy" class="myButton">Copy</button>
+						<button id="paste" class="myButton">Paste</button>
+						<button id="roll-back" class="myButton">Delete</button>
+						<button id="clear-canvas" class="myButton">Reset</button>
 				</div>
-		 		<div id="drawing-mode-options" style="">
+		 		<div id="drawing-mode-options" style="margin-top: 20px;">
 		   			<label for="drawing-mode-selector">Mode:</label>
 		   			<select id="drawing-mode-selector">
 					     <option>Pencil</option>
@@ -706,22 +666,23 @@
 					     <option>square</option>
 					     <option>diamond</option>
 					     <option>texture</option>
-		    		</select><br>
-		
-				    <label for="drawing-line-width">Line width:</label>
-				    <span class="info">30</span><input type="range" value="30" min="0" max="150" id="drawing-line-width"><br>
-				
+		    		</select>
+					<br>
+					
 				    <label for="drawing-color">Line color:</label>
 				    <input type="color" value="#005E7A" id="drawing-color"><br>
-		
+					
+				    <label for="drawing-line-width">Line width:</label>
+				    <span class="info">30</span><input type="range" value="30" min="0" max="150" id="drawing-line-width">
+
 				    <label for="drawing-shadow-color">Shadow color:</label>
 				    <input type="color" value="#005E7A" id="drawing-shadow-color"><br>
 				
 				    <label for="drawing-shadow-width">Shadow width:</label>
-				    <span class="info">0</span><input type="range" value="0" min="0" max="50" id="drawing-shadow-width"><br>
+				    <span class="info">0</span><input type="range" value="0" min="0" max="50" id="drawing-shadow-width">
 				
 				    <label for="drawing-shadow-offset">Shadow offset:</label>
-				    <span class="info">0</span><input type="range" value="0" min="0" max="50" id="drawing-shadow-offset"><br>
+				    <span class="info">0</span><input type="range" value="0" min="0" max="50" id="drawing-shadow-offset">
 		 	 </div>
 			</div>
 		</div>
@@ -759,11 +720,76 @@
     <script src="../resources/js/jquery-3.1.1.min.js"></script>
     <script src="../resources/js/bootstrap.min.js"></script>
     <script src="../resources/js/script.js"></script>
-    
-	
-	
-	
-	
-
+    <script>
+	 //배경 변경
+	 $("#backgroundChoice").on("change", function(){
+ 	  	if (this.value == '1') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/autumn.jpg)";
+		}
+ 	  	if (this.value == '2') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/autumn2.jpg)";
+		}
+ 	  	if (this.value == '3') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/blackboard.jpg)";
+		}
+ 	  	if (this.value == '4') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/christmas.jpg)";
+		}
+ 	  	if (this.value == '5') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/christmas2.jpg)";
+		}
+ 	  	if (this.value == '6') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/christmas3.jpg)";
+		}
+ 	  	if (this.value == '7') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/christmas4.jpg)";
+		}
+ 	  	if (this.value == '8') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/christmas5.jpg)";
+		}
+ 	  	if (this.value == '9') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/christmas6.jpg)";
+		}
+ 	  	if (this.value == '10') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/flower.jpg)";
+		}
+ 	  	if (this.value == '11') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/flower2.jpg)";
+		}
+ 	  	if (this.value == '12') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/flower3.jpg)";
+		}
+ 	  	if (this.value == '13') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/flower4.jpg)";
+		}
+ 	  	if (this.value == '14') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/notebook.jpg)";
+		}
+ 	  	if (this.value == '15') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/pattern.jpg)";
+		}
+ 	  	if (this.value == '16') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/pattern2.jpg)";
+		}
+ 	  	if (this.value == '17') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/poster.jpg)";
+		}
+ 	  	if (this.value == '18') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/poster2.jpg)";
+		}
+ 	  	if (this.value == '19') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/workplace.jpg)";
+		}
+ 	  	if (this.value == '20') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/workplace2.jpg)";
+		}
+ 	  	if (this.value == '21') {
+ 	  		document.getElementById("c").style.background = "url(../resources/img/workplace3.jpg)";
+		}
+ 	  	if (this.value == '0') {
+ 	  		document.getElementById("c").style.background = "";
+		}
+	 });
+    </script>
 	</body>
 </html>

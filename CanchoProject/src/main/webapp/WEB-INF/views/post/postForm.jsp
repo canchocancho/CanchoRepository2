@@ -379,7 +379,7 @@
 
 		//표지 만들기
 		function makeCover(){
-			window.open('makeCoverForm', 'newWindow', 'width=1280px, height=650px, scrollbars=yes');
+			window.open('makeCoverForm', 'newWindow', 'width=1280px, height=602px, resizable=no, scrollbar=no');
 		}
 		
 		//저장
@@ -519,11 +519,10 @@
       </nav>
     </header>
     <!--Header End-->
-  
+
     <!-- 404 Error
     ================================================= -->
 	<div class="error-page">
-
 
 		<div id="userlist"></div>
   			
