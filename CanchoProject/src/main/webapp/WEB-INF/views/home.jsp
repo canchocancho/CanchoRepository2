@@ -148,7 +148,10 @@
 
     <!-- Top Banner
     ================================================= -->
-		<section id="banner">
+    	<video id="banner1" preload="auto" autoplay="autoplay" loop="loop">
+    		<source src="resources/videos/video1.mp4" type="video/mp4">
+    	</video>
+		<!-- <section id="banner"> -->
 			<div class="container">
 
         <!-- Sign Up Form
@@ -189,7 +192,7 @@
           <path class="a3" d="M0 40 L30 72 L60 40"></path>
         </svg>
 			</div>
-		</section>
+		<!-- </section> -->
 
     <!-- Features Section
     ================================================= -->
