@@ -56,6 +56,19 @@
     .firepad-userlist {
       height: 100%;
     }
+	#post_title {
+	    width: 100%;
+	    padding: 12px 20px;
+	    margin: 8px 0;
+	    box-sizing: border-box;
+	    border: 3px solid #ccc;
+	    -webkit-transition: 0.5s;
+	    transition: 0.5s;
+	    outline: none;
+	}
+	#post_title:focus {
+	    border: 3px solid #555;
+	}
 	</style>
   
   <script type="text/javascript">
@@ -325,11 +338,10 @@
 					
 					var str = "";
 					
-					str += '<input type="button" class="btn btn-primary pull-right" id="invite" name="invite" onclick="invite();" value="Invite Friends" style="float: left;"/><br><br>';
+					str += '<input type="button" class="btn btn-primary pull-right" id="invite" name="invite" onclick="invite();" value="Invite Friends" style="width: 100%;"/><br><br>';
 					
 					for(var i in obj){
-						/* str += '<a href="../user/invite?user_id='+obj[i].user_id+'&friend_id='+obj[i].friend_id+"\">"+obj[i].friend_id+"</a><br>"; */
-						str += '<a href="#" onclick="addInvite(\''+obj[i].friend_id+'\');">'+obj[i].friend_id+'</a><br>';
+						str += '<a href="#" style="color: white; font-size: 10pt;" onclick="addInvite(\''+obj[i].friend_id+'\');">'+obj[i].friend_id+'</a><br>';
 					}
 
 					document.getElementById('inviteList').innerHTML=str;
@@ -344,8 +356,6 @@
 			
 			invite_form.friend_id.value = String(friend_id);
 			
-			 /* $('#invite_form').submit(); */
-
 				var friend_id = $('#friend_id').val();
 				var url = $('#url').val();
 				var user_id = $('#user_id').val();
@@ -518,43 +528,54 @@
 
 		<div id="userlist"></div>
   			
-		<div id="inviteList" name="inviteList" style="background-color: #a5dff9; width: 175px; height: 200px; margin-top: 220px; margin-right: 50px;">
+		<div id="inviteList" name="inviteList" style="background-color: #a5dff9; width: 175px; height: 200px; margin-top: 200px; margin-left: 0;">
 			<!-- 초대하기 -->
-			<input type="button" class="btn btn-primary pull-right" id="invite" name="invite" onclick="invite();" value="Invite Friends" style="float: left;"/>
+			<input type="button" class="btn btn-primary pull-right" id="invite" name="invite" onclick="invite();" value="Invite Friends" style="width: 100%"/>
 		</div>
 		
 			<!--채팅창 -->
 			<input type="hidden" value="${loginId}" id="chat_id">
-		    <div id="_chatbox" style="float:left;">
+		    <div id="_chatbox" style="float:left; width: 175px;">
 		        <fieldset>
-		            <div id="messageWindow" style="overflow-y: scroll; height:250px;" ></div>
-		            <br /> <input id="inputMessage" type="text" onkeyup="enterkey()" />
-		            <input type="submit" value="전송" onclick="send()" />
+		            <div id="messageWindow" style="overflow-y: scroll; height:310px;" ></div>
+		            <input id="inputMessage" type="text" onkeyup="enterkey()" style="width: 100%;"/><br>
+		            <input type="submit" value="Send Message" onclick="send()" class="btn btn-primary pull-right"/>
 		        </fieldset>
 		    </div>
 		
-  		<div id="firepad">
-  		
-  			<div class="titleDiv" style="margin-top: 30px; ">
+  		<div id="firepad" style="width: 80%; margin: 0 auto;">
+
+  			<div class="titleDiv">
+	
 	  		<!-- 히든폼 -->
 			<form action="write" method="post" name="hidden_form" enctype="multipart/form-data" style="position: relative;">
-				<div style="width: 80%; text-align: center; float: center;">
-				<input type="text" id="post_title" name="post_title" autocomplete="off" style="width: 500px;" placeholder="Title">
-				</div>
-				<div style="width: 600px; text-align: left; float: left;">
-				표지 첨부 <input type="file" name="upload" style="width: 500px;">
+			
+				<input type="text" id="post_title" name="post_title" autocomplete="off" style="width: 100%; margin-top: 10px;" placeholder="Title">
+				
+				<div style="width: 500px; margin-right: 0 auto;">
+				<table style="margin: 0 auto; width: 100%;">
+					<tr>
+						<td>
+							<p style="size: 30px;">Upload Cover</p>
+						</td>
+						<td style="width: 80%;">
+							<input type="file" name="upload">
+						</td>
+					</tr>
+				</table>
 				</div>
 				<input type="hidden" id="hidden_data" name="hidden_data">
 				<input type="hidden" id="user_id" name="user_id" value="${loginId }">
 			</form>
-			
-			<div>
-				<!-- 표지 만들기 -->
-				<input type="button" class="btn btn-primary pull-right" id="makeCover" name="makeCover" onclick="makeCover();" value="Make Cover" style="float: left;"/>
-			
-				<!-- 저장하기 -->
-				<input type="button" class="btn btn-primary pull-right" id="save" name="save" onclick="save();" value="Save" style="float: left;"/>
+
 			</div>
+			
+			<div class="buttonDiv" style="height: 34px;">
+				<!-- 저장하기 -->
+				<input type="button" class="btn btn-primary pull-right" id="save" name="save" onclick="save();" value="Save"/>
+
+				<!-- 표지 만들기 -->
+				<input type="button" class="btn btn-primary pull-right" id="makeCover" name="makeCover" onclick="makeCover();" value="Make Cover"/>
 			</div>
 			
 			<!-- 히든폼2(초대) -->
@@ -571,63 +592,7 @@
     
     <!-- Footer
     ================================================= -->
-    <footer id="footer">
-      <div class="container">
-      	<div class="row">
-          <div class="footer-wrapper">
-            <div class="col-md-3 col-sm-3">
-              <a href=""><img src="../resources/images/logo-black.png" alt="" class="footer-logo" /></a>
-              <ul class="list-inline social-icons">
-              	<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h5>For individuals</h5>
-              <ul class="footer-links">
-                <li><a href="">Signup</a></li>
-                <li><a href="">login</a></li>
-                <li><a href="">Explore</a></li>
-                <li><a href="">Finder app</a></li>
-                <li><a href="">Features</a></li>
-                <li><a href="">Language settings</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h5>For businesses</h5>
-              <ul class="footer-links">
-                <li><a href="">Business signup</a></li>
-                <li><a href="">Business login</a></li>
-                <li><a href="">Benefits</a></li>
-                <li><a href="">Resources</a></li>
-                <li><a href="">Advertise</a></li>
-                <li><a href="">Setup</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h5>About</h5>
-              <ul class="footer-links">
-                <li><a href="">About us</a></li>
-                <li><a href="">Contact us</a></li>
-                <li><a href="">Privacy Policy</a></li>
-                <li><a href="">Terms</a></li>
-                <li><a href="">Help</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3 col-sm-3">
-              <h5>Contact Us</h5>
-              <ul class="contact">
-                <li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
-                <li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
-                <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
-              </ul>
-            </div>
-          </div>
-      	</div>
-      </div>
+    <footer id="footer" style="margin-bottom: 0;">
       <div class="copyright">
         <p>Thunder Team ɠ2016. All rights reserved</p>
       </div>
