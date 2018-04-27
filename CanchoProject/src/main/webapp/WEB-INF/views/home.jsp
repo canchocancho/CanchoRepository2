@@ -78,6 +78,8 @@
 			A:visited   { text-decoration: none; }
 			A:active   { text-decoration: none; }
 			A:hover   { text-decoration: none; }
+			
+			/* .mySlides {display:none;} */
 		</style>
 	</head>
 	<body>
@@ -134,7 +136,7 @@
 
         <!-- Sign Up Form
         ================================================= -->
-        <div class="sign-up-form" style="left: 1100px;">
+        <div class="sign-up-form">
 					<a href="" class="logo"><img src="resources/images/logo.png" alt="Friend Finder"/></a>
 					<h2 class="text-white">Find My Friends</h2>
 					<div class="line-divider"></div>
@@ -221,6 +223,29 @@
     		<source src="resources/videos/video1.mp4" type="video/mp4">
     	</video>
     	
+    	<!-- <div id="imageSlide">
+    		<img class="mySlides" src="resources/images/work1.jpg" width="80%">
+  			<img class="mySlides" src="resources/images/work2.jpg" width="80%">
+  			<img class="mySlides" src="resources/images/work3.jpg" width="80%">
+    	</div>
+    	
+    	<script>
+			var myIndex = 0;
+			carousel();
+			
+			function carousel() {
+			    var i;
+			    var x = document.getElementsByClassName("mySlides");
+			    for (i = 0; i < x.length; i++) {
+			       x[i].style.display = "none";  
+			    }
+			    myIndex++;
+			    if (myIndex > x.length) {myIndex = 1}    
+			    x[myIndex-1].style.display = "block";  
+			    setTimeout(carousel, 5000); // Change image every 2 seconds
+			}
+		</script> -->
+    	
     	
 		<!-- <section id="site-facts">
 			<div class="container wrapper">
@@ -250,7 +275,7 @@
     ================================================= -->
 		<section id="live-feed">
 			<div class="container wrapper">
-				<h1 class="section-title slideDown">live feed</h1>
+				<h1 class="section-title slideDown">Our team</h1>
 				<ul class="online-users list-inline slideUp">
 					<li><a href="#" title="Alexis Clark"><img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
           <li><a href="#" title="James Carter"><img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>

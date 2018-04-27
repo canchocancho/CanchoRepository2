@@ -515,6 +515,7 @@ textarea{
 	overflow: hidden;
 }
 
+
 /*==================================================
   Homepage Signup Form
   ==================================================*/
@@ -525,7 +526,7 @@ textarea{
   width: 340px;
   min-height: 600px;
   top: 0;
-  padding: 40px 30px;
+  padding: 30px 30px;
   text-align: center;
   color: #fff;
   z-index: 1000;
