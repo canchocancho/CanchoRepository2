@@ -689,18 +689,12 @@
 		
 		<!-- 내용(표지 부분) 영역 -->
 		<div id="div_con" class="div_con">
-
 			<!-- 캔버스 -->
 			<canvas id="c" width="1013" height="500"></canvas>
-
  		</div>
-		
-
-           
+ 		   
     </div>
 
-
-    
     <!-- Footer
     ================================================= -->
     <footer id="footer">
