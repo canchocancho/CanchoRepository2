@@ -103,6 +103,10 @@ $(function(){
 	         });
 	   });
 });
+/**
+ * 파일 리스트 자동갱신
+ */
+
 
 
 /**
@@ -228,7 +232,6 @@ function outputFileList(list){
 	   if(selectBox == 'audio') {
 	      $('#fileBox').html(contents_a);
 	   }
-	   
 	   
 	   $('#dragDropZone').on('dragenter dragover', function(e) {
 	      e.preventDefault();
