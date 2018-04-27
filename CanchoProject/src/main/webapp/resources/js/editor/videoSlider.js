@@ -1,7 +1,7 @@
 var selectedClipNum;
 var video0TrackobjNum = 0;
 var trackWidth =926;
-var trackHeight = 80;
+var trackHeight = 70;
 var subTracksDuration = {
 		"image-1" : 0,
 		"image-2" : 0,
@@ -283,6 +283,8 @@ function videoDragDropEventHandler(){
  * 서브트랙 drag&drop
  */
 function subTrackDragDropEventHandler(trackId, type){
+
+	
 	$('#' + trackId).on('dragenter dragover', function(e) {
 		e.preventDefault();
 		$('#' + trackId + '-cont').css('border', '2px solid #ff0080');
@@ -345,9 +347,9 @@ function addVideoTrackVideoObj(id){
  * 서브트랙 오브젝트 추가
  */
 function addSubTrackObj(trackId, id){
-	/*if(video0TrackobjNum == 0){
+	if(video0TrackobjNum == 0){
 		return;
-	}*/
+	}
 	var path = $('#' + id).attr('path');
 	var fname = getFileName(path);
 	var type = getFileType(path);
@@ -367,6 +369,7 @@ function addSubTrackObj(trackId, id){
 		},
 		dataType : 'json',
 		success : function(duration) {
+			alert(duration);
 			if(type == 'audio') {
 				html += '<div class="draggable ui-widget-content ' + trackClass + ' audio-obj other-obj track-obj"';
 			}
@@ -844,8 +847,6 @@ function otherObjMove(track){
 function audioTrackSplitEventHandler(){
 	$('#split').off('click');
 	$('#split').on('click', function(){
-		//alert("audio split");
-		addUndoArr(mm_player.mash);
 		var idInfo = clickedObj.split('-');
 		var trackId = $('#' + clickedObj).attr('trackId');
 		var trackInfo = trackId.split('-');

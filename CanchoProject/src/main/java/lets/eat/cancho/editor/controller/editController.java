@@ -65,16 +65,6 @@ public class editController {
 				int lastIndex = savedfile.lastIndexOf('.');
 				fileName = savedfile.substring(0, lastIndex);
 				String extName = savedfile.substring(lastIndex+1, fileLength);
-				
-				/*// 페이지에 넘겨줄 파일경로가 담긴 리스트
-				case "mp4": videoList.add(savedfile); break;
-				case "ogg": videoList.add(savedfile); break;
-				case "webm": videoList.add(savedfile); break;
-				case "mp3": audioList.add(savedfile); break;
-				case "jpg": imageList.add(savedfile); break;
-				case "jpeg": imageList.add(savedfile); break;
-				case "png": imageList.add(savedfile); break;
-				}*/
 				if(extName.equals("mp4") || extName.equals("ogg") || extName.equals("webm")) {
 					ImageFileManager.extractVideo(fileName);
 				}
@@ -125,7 +115,6 @@ public class editController {
 			audioPath += '\\';
 			audioPath += tmp[i];
 		}
-		System.out.println(audioPath);
 		double duration = 0;
 		try {
 		  AudioFile audioFile = AudioFileIO.read(new File(audioPath));
@@ -164,35 +153,29 @@ public class editController {
 		}
 	}
 	@ResponseBody
-	   @RequestMapping(value = "delIndiFile", method = RequestMethod.POST)
-	   public String deleteAllFiles(String fileName, String fileType, String fileExt) {
+	@RequestMapping(value = "delIndiFile", method = RequestMethod.POST)
+	public String deleteAllFiles(String fileName, String fileType, String fileExt) {      
+		delMap = new HashMap<String,String>(); 
+		String fullpath = uploadPath + fileName + fileExt;
+	    String fullpathEx = extractPath;
+	    delMap.put("fullpath", fullpath);
 	      
-	      delMap = new HashMap<String,String>();
-	      
-	      System.out.println("the delIndiFile : fileName is : " + fileName);
-	      System.out.println("the delIndiFile : fileType is : " + fileType);
-	      System.out.println("the delIndiFile : fileExt is : " + fileExt);
-	      
-	      String fullpath = uploadPath + fileName + fileExt;
-	      String fullpathEx = extractPath;
-	      
-	   
-	      delMap.put("fullpath", fullpath);
-	      
-	      if(fileType.equals("video")) {
-	         fullpathEx = fullpathEx + fileName;
-	         delMap.put("fullpathEx", fullpathEx);
-	      }
-	      else {
-	         delMap.put("fullpathEx", "notVideo");
-	      }
-	      
-	      delMap.put("fileName", fileName);
-	      
-	      boolean result = FileService.deleteFile(delMap);
-	      
-	      return "redirect:/getFileList";
-	      
-	   
-	   }
+	    if(fileType.equals("video")) {
+	       fullpathEx = fullpathEx + fileName;
+	       delMap.put("fullpathEx", fullpathEx);
+	     }
+	     else {
+	        delMap.put("fullpathEx", "notVideo");
+	     }
+	     delMap.put("fileName", fileName); 
+	     boolean result = FileService.deleteFile(delMap); 
+	     return "redirect:/getFileList"; 
+	 }
+	@ResponseBody
+	@RequestMapping(value="saveFile", method = RequestMethod.POST)
+	public String saveFile(){
+		
+		return "a";
+	}
 }
+	
