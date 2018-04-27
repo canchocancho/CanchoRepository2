@@ -42,6 +42,7 @@
 		}
 			
 			$(function(){
+				
 				//유효성 검사
 				$('#joinForm').on('submit',function(){
 					var id = $('#user_id').val();
@@ -133,7 +134,7 @@
 
         <!-- Sign Up Form
         ================================================= -->
-        <div class="sign-up-form">
+        <div class="sign-up-form" style="left: 1100px;">
 					<a href="" class="logo"><img src="resources/images/logo.png" alt="Friend Finder"/></a>
 					<h2 class="text-white">Find My Friends</h2>
 					<div class="line-divider"></div>
@@ -179,11 +180,11 @@
 				<div class="row slideUp">
 					<div class="feature-item col-md-2 col-sm-6 col-xs-6 col-md-offset-2">
 						<div class="feature-icon"><i class="icon ion-person-add"></i></div>
-						<h3>Make Friends</h3>
+						<h3>Search Friends</h3>
 					</div>
 					<div class="feature-item col-md-2 col-sm-6 col-xs-6">
 						<div class="feature-icon"><i class="icon ion-images"></i></div>
-						<h3>Publish Posts</h3>
+						<h3>Create Posts</h3>
 					</div>
 					<div class="feature-item col-md-2 col-sm-6 col-xs-6">
 						<div class="feature-icon"><i class="icon ion-chatbox-working"></i></div>
@@ -191,7 +192,7 @@
 					</div>
 					<div class="feature-item col-md-2 col-sm-6 col-xs-6">
 						<div class="feature-icon"><i class="icon ion-compose"></i></div>
-						<h3>Create Polls</h3>
+						<h3>Text&Video Editor</h3>
 					</div>
 				</div>
 				<h2 class="sub-title">find awesome people like you</h2>
@@ -206,23 +207,22 @@
     ================================================= -->
 		<section id="app-download">
 			<div class="container wrapper">
-				<h1 class="section-title slideDown">download</h1>
-				<ul class="app-btn list-inline slideUp">
-					<li><button class="btn-secondary"><img src="resources/images/app-store.png" alt="App Store" /></button></li>
-					<li><button class="btn-secondary"><img src="resources/images/google-play.png" alt="Google Play" /></button></li>
-				</ul>
 				<h2 class="sub-title">stay connected anytime, anywhere</h2>
-				<img src="resources/images/800190.jpg" alt="iPhone" class="img-responsive" />
 			</div>
 		</section>
 
     <!-- Image Divider
     ================================================= -->
-    <div class="img-divider hidden-sm hidden-xs"></div>
+    <!-- <div class="img-divider hidden-sm hidden-xs"></div> -->
 
     <!-- Facts Section
     ================================================= -->
-		<section id="site-facts">
+    	<video id="banner1" preload="auto" autoplay="autoplay" loop="loop">
+    		<source src="resources/videos/video1.mp4" type="video/mp4">
+    	</video>
+    	
+    	
+		<!-- <section id="site-facts">
 			<div class="container wrapper">
 				<div class="circle">
 					<ul class="facts-list">
@@ -244,7 +244,7 @@
 					</ul>
 				</div>
 			</div>
-		</section>
+		</section> -->
 
     <!-- Live Feed Section
     ================================================= -->
@@ -581,7 +581,6 @@
 		</c:choose>
 		
 		<div id="idCheckResult"></div>
-		
 		
 		
 		
