@@ -42,30 +42,6 @@
 		}
 			
 			$(function(){
-/* 				//ID중복체크
-				$('#btn1').on('click', function(){
-					alert("누름");
-					$.ajax({
-						url : "idCheck",
-						type : "get",
-						data : {
-							id : user_id
-						},
-						success : function(obj){
-							if(obj){
-								var str = '<p>'+id+": 사용할 수 있는 ID 입니다."+'</p>';
-								$('#idCheckResult').html(str);
-							}else{
-								var str = '<p>'+id+": 사용할 수 없는 ID 입니다.</p><p>다른 사용자가 사용 중이거나 가입했던 이력이 있는 아이디일 수 있습니다."+'</p>';
-								$('#idCheckResult').html(str);
-							}
-						},
-						error : function(err){
-							console.log(err);
-						}
-					});
-				});  */
-				
 				//유효성 검사
 				$('#joinForm').on('submit',function(){
 					var id = $('#user_id').val();
