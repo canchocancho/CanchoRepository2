@@ -38,15 +38,7 @@
 		<script src="http://hongru.github.io/proj/canvas2image/canvas2image.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Cute+Font|Do+Hyeon|Gaegu|Gamja+Flower|Gugi|Indie+Flower|Lato|Lobster|Lora|Oswald|PT+Sans+Narrow|Roboto|Roboto+Condensed|Slabo+27px|Ubuntu" rel="stylesheet">
 		
-		<style>
-			#div_root{
-				width: 100%;
-				height:70px;
-				float:left;
-				/* background-color:#D5D5D5; */
-				background-image: "url(../resources/images/cover_1.jpg)";
-			}
-					
+		<style>		
 			#div_top{
 				width:100%;
 				height:120px;
@@ -58,7 +50,7 @@
 			}
 					
 			#div_menu{
-				width:350px;
+				width:250px;
 				height:500px;
 				float:left;
 				background-color:#F6F6F6;
@@ -593,6 +585,8 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             
+			<button class="btn btn-primary pull-right" id="btnComplete" onclick="btnComplete()">Preview</button>
+			<a id="download" download="post_cover.png"><button class="btn btn-primary pull-right" onClick="download()">Save</button></a>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
       </nav>
@@ -601,11 +595,7 @@
     <!-- Main content
     ================================================= -->
     <div class="error-page">
-		<!-- 맨 위 메뉴 바 부분 -->
-		<div id="div_root" style="text-align: center;">
-			<h3>Let's make your own cover:)</h3>
-		</div>
-		
+
 		<!-- 편집 메뉴 영역 -->
 		<div id="div_top">
 				Background
@@ -632,16 +622,6 @@
 			    <button type="button" class="btn btn-info" onClick="changeBackground('20')">Workplace2</button>
 			    <button type="button" class="btn btn-info" onClick="changeBackground('21')">Workplace3</button>
 			    <br>
-				
-<!-- 			<div class="buttons">
-				    <input type="button" class="BOLD" value="B" onclick="document.execCommand('bold')" />
-				    <input type="button" class="ITALIC" value="Italic" onclick="document.execCommand('Italic')" />
-				    <input type="button" class="UNDERBAR" value="밑줄" onclick="document.execCommand('Underline')" />
-				    <input type="button" class="BAR" value="취소선" onclick="document.execCommand('StrikeThrough')" />
-				    <input type="button" class="aignLeft" value="왼쪽 정렬" onclick="document.execCommand('justifyleft')" />
-				    <input type="button" class="aignCenter" value="가운데 정렬" onclick="document.execCommand('justifycenter')" />
-				    <input type="button" class="aignRight" value="오른쪽 정렬" onclick="document.execCommand('justifyright')" />
-				</div> -->
 				
 		</div>
 		
@@ -744,10 +724,6 @@
 				    <span class="info">0</span><input type="range" value="0" min="0" max="50" id="drawing-shadow-offset"><br>
 		 	 </div>
 			</div>
-			
-			<hr>
-			<button id="btnComplete" onclick="btnComplete()">완성</button>
-			<a id="download" download="post_cover.png"><button type="button" onClick="download()">저장</button></a>
 		</div>
 		
 		<!-- 내용(표지 부분) 영역 -->
