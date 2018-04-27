@@ -149,6 +149,7 @@
     <!-- Top Banner
     ================================================= -->
     	<video id="banner1" preload="auto" autoplay="autoplay" loop="loop">
+    		<source src="resources/videos/video2.mp4" type="video/mp4">
     		<source src="resources/videos/video1.mp4" type="video/mp4">
     	</video>
 		<!-- <section id="banner"> -->
