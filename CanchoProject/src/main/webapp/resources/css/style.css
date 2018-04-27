@@ -498,9 +498,21 @@ textarea{
   	background-position: center;
 	background-size: cover;
 	width: 100%;
-	min-height: 550px;
+	min-height: 600px;
 	position: relative;
 	top: 0;
+}
+
+#banner1{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	min-width: 100%;
+	min-height: 500px;
+	width: auto;
+	height: auto;
+	z-index: -1000;
+	overflow: hidden;
 }
 
 /*==================================================
