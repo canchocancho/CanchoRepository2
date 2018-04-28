@@ -98,9 +98,6 @@
                   <li><a href="friendPage?friend_id=${fprofile.user_id }">My Page</a></li>
                   <li><a href="" class="active">Profile</a></li>
                 </ul>
-                <ul class="follow-me list-inline">
-                  <li><button class="btn-primary">Add Friend</button></li>
-                </ul>
               </div>
             </div>
           </div><!--Timeline Menu for Large Screens End-->
@@ -124,7 +121,6 @@
                   <li><a href="friendPage?friend_id=${fprofile.user_id }">My Page</a></li>
                   <li><a href="" class="active">Profile</a></li>
               </ul>
-              <button class="btn-primary">Add Friend</button>
             </div>
           </div><!--Timeline Menu for Small Screens End-->
 
