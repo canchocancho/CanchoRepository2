@@ -94,6 +94,22 @@ private static final Logger logger = LoggerFactory.getLogger(FriendDAO.class);
 		return result;
 	}
 	
-	
+	//팔로워 수 조회
+	public int myFollower(String user_id){
+		logger.info("팔로워 조회 시작");
+		
+		int result = 0;
+		FriendMapper mapper = sqlSession.getMapper(FriendMapper.class);
+		
+		try{
+			result = mapper.myFollower(user_id);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("팔로워 조회 종료");
+		
+		return result;
+	}
 	
 }

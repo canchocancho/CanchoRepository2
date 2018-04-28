@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lets.eat.cancho.common.util.FileService;
+import lets.eat.cancho.friend.dao.FriendDAO;
 import lets.eat.cancho.post.dao.PostDAO;
 import lets.eat.cancho.post.vo.Post;
 import lets.eat.cancho.user.dao.UserDAO;
@@ -42,6 +43,9 @@ public class UserController {
 	
 	@Autowired
 	PostDAO postDAO;
+	
+	@Autowired
+	FriendDAO friendDAO;
 	
 	final String uploadPath = "/profilePicture";
 	
@@ -100,6 +104,11 @@ public class UserController {
 						ArrayList<Post> postList = postDAO.postList(vo.getUser_id());
 						session.setAttribute("postList", postList);
 						model.addAttribute("postList", postList);
+						
+						//팔로워 수 불러오기
+						logger.info("팔로워 수 불러오기");
+						int follower = friendDAO.myFollower(vo.getUser_id());
+						session.setAttribute("myFollower", follower);
 						
 				    	return "redirect:/";
 				    	 
