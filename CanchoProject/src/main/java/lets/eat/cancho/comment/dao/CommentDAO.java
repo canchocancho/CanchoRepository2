@@ -106,5 +106,20 @@ public class CommentDAO {
 		return list;
 	}
 	
+	public void deleteAllComment(int post_num){
+		
+		logger.info("전체 댓글 삭제 시작");
+		
+		CommentMapper mapper = session.getMapper(CommentMapper.class);
+		
+		try{
+			mapper.deleteAllComment(post_num);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		logger.info("전체 댓글 삭제 완료");
+	}
 	
 }

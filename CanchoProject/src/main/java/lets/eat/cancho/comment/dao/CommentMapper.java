@@ -16,4 +16,6 @@ public interface CommentMapper {
 
 	public ArrayList<Comment> commentList();
 	
+	public void deleteAllComment(int post_num);
+	
 }

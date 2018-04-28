@@ -44,6 +44,13 @@
 			comment_num = #{comment_num}
 	</delete>
 	
+	<delete id="deleteAllComment" parameterType="int">
+		delete from
+			blog_comment
+		where
+			post_num = #{post_num}
+	</delete>
+	
 	<update id="updateComment" parameterType="Comment">
 		update
 			blog_comment

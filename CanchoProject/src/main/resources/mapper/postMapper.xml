@@ -111,7 +111,7 @@
 	</update>
 	
 	<!-- 포스트 삭제 -->
-	<delete id="deletePost" parameterType="int">
+	<delete id="deletePost">
 		delete from
 			blog_post
 		where

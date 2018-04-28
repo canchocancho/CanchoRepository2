@@ -35,13 +35,13 @@
 				alert('${errorMsg }');
 			</c:if>
 			
-/* 			function deleteCheck(){
-				var deleteChecked = confirm('포스트를 삭제하시겠습니까?');
-				
-				if(!deleteChecked){
-					return "";
-				}
-			} */
+			function deleteCheck(){
+			       return confirm("포스트를 삭제하시겠습니까?");
+			}
+			
+			function deleteComment(){
+			       return confirm("코멘트를 삭제하시겠습니까?");
+			}
 		</script>
 
 		<style>
@@ -188,7 +188,7 @@
 	                     	 
 	                     	 <p><a href="../user/friendPage?friend_id=${comment.user_id }" class="profile-link">${comment.user_id }</a> ${comment.comment_text }
 								<c:if test="${loginId == comment.user_id }">
-									<a href="deleteComment?comment_num=${comment.comment_num }&post_num=${comment.post_num }" class="delete">delete</a>
+									<a href="deleteComment?comment_num=${comment.comment_num }&post_num=${comment.post_num }" class="delete" onclick="return deleteComment();">delete</a>
 								</c:if>
 							</p>
 							</div>
@@ -209,7 +209,7 @@
                     <c:if test="${loginId == post.user_id }">
                     	<br>
                     	<div style="text-align: right;">
-						<a href="deletePost?post_num=${post.post_num }" onclick="deleteCheck();">Delete Post</a>
+						<a href="deletePost?post_num=${post.post_num }" onclick="return deleteCheck();">Delete Post</a>
 						</div>
 					</c:if>
                     

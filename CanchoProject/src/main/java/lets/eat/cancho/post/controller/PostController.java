@@ -333,6 +333,8 @@ public class PostController {
 		
 		logger.info("포스트 삭제 시작");
 		
+		//글을 삭제하기 전에 딸린 댓글들을 다 지워야 함
+		commentDAO.deleteAllComment(post_num);
 		dao.deletePost(post_num);
 		
 		ArrayList<Post> postList = dao.postList((String)session.getAttribute("loginId"));
