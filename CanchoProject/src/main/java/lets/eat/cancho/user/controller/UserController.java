@@ -382,7 +382,7 @@ public class UserController {
 	        	model.addAttribute("errorMsg", "필수정보는 모두 기입해주세요.");
 	        	logger.info("프로필 업데이트 실패");
 	        	
-	        	return "user/editProfile";
+	        	return "user/editProfile";//
 	        }
 	        
 	        logger.info("프로필 수정 종료");
