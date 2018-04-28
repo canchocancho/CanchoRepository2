@@ -15,7 +15,7 @@
 		<meta name="description" content="This is social network html5 template available in themeforest......" />
 		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
 		<meta name="robots" content="index, follow" />
-		<title>POST</title>
+		<title>Write Post</title>
 	
 	
     <!-- Stylesheets
