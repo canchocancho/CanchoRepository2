@@ -504,7 +504,7 @@ textarea{
 }
 
 #banner1{
-	position: absolute;
+	/* position: absolute; */
 	top: 0px;
 	left: 0px;
 	min-width: 100%;
@@ -2589,7 +2589,7 @@ ul.contact li i{
 	left: 0;
   right: 0;
 	margin: auto;
-	bottom: -90px;
+	bottom: 0px;
 }
 
 .arrows path {
