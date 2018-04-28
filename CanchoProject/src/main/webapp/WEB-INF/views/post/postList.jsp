@@ -119,7 +119,9 @@
                   <li><a href="">Album</a></li>
                   <li><a href="../user/friendList">Friends</a></li>
                 </ul>
- 
+                 <ul class="follow-me list-inline" style="padding-top: 5px;">
+                  <li><i class="ion ion-android-person-add"></i> ${myFollower } people following me</li>
+                </ul>
               </div>
             </div>
           </div><!--Timeline Menu for Large Screens End-->
@@ -147,11 +149,9 @@
                 <li><a href="">Album</a></li>
                 <li><a href="friendList">Friends</a></li>
               </ul>
-              
-              <c:if test="${profile.p_originalfile != null }">
-				<button class="btn-primary">Add Friend</button>
-              </c:if>
-              
+                 <ul class="follow-me list-inline" style="padding-top: 5px;">
+                  <li><i class="ion ion-android-person-add"></i> ${myFollower } people following me</li>
+                </ul>
             </div>
           </div><!--Timeline Menu for Small Screens End-->
 

@@ -90,12 +90,12 @@
             	<c:if test="${profile.p_originalfile == null }">
               		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="img-responsive profile-photo">
               	</c:if>
-                  <h3>${loginName }</h3>
+                  <h3>${floginName }</h3>
                 </div>
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="friendPage?friend_id=${profile.user_id }">My Page</a></li>
+                  <li><a href="friendPage?friend_id=${fprofile.user_id }">My Page</a></li>
                   <li><a href="" class="active">Profile</a></li>
                   <li><a href="">Album</a></li>
                 </ul>
@@ -110,11 +110,11 @@
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
               <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
-              <h4>${loginName }</h4>
+              <h4>${floginName }</h4>
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                  <li><a href="../post/postList">My Page</a></li>
+                  <li><a href="friendPage?friend_id=${fprofile.user_id }">My Page</a></li>
                   <li><a href="" class="active">Profile</a></li>
                   <li><a href="">Album</a></li>
               </ul>
@@ -136,13 +136,13 @@
             <div class="col-md-7">
 				
 				
-			<c:if test="${profile != null }">
+			<c:if test="${fprofile != null }">
               <!-- About
               ================================================= -->
               <div class="about-profile">
                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Who am I?</h4>
-                  <p>${profile.p_introduce }</p>
+                  <p>${fprofile.p_introduce }</p>
                 </div>
                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>My Profile</h4>
@@ -150,46 +150,46 @@
                     <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
                     <div class="work-info">
                       <h5>Sex</h5>
-                      <p>${profile.p_sex }</p>
+                      <p>${fprofile.p_sex }</p>
                     </div>
                   </div>
                   <div class="organization">
                     <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
                     <div class="work-info">
                       <h5>Birthday</h5>
-                      <p>${profile.p_birthDate }</p>
+                      <p>${fprofile.p_birthDate }</p>
                     </div>
                   </div>
                   <div class="organization">
                     <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
                     <div class="work-info">
                       <h5>Email</h5>
-                      <p>${profile.user_email }</p>
+                      <p>${fprofile.user_email }</p>
                     </div>
                   </div>
                   <div class="organization">
                     <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
                     <div class="work-info">
                       <h5>My Work</h5>
-                      <p>${profile.p_company }</p>
+                      <p>${fprofile.p_company }</p>
                     </div>
                   </div>
                   <div class="organization">
                     <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
                     <div class="work-info">
                       <h5>My School</h5>
-                      <p>${profile.p_school }</p>
+                      <p>${fprofile.p_school }</p>
                     </div>
                   </div>
                 </div>
                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Location</h4>
-                  <p>${profile.p_city }, ${profile.p_country }</p>
+                  <p>${fprofile.p_city }, ${fprofile.p_country }</p>
                 </div>
               </div>
               </c:if>
               
-              <c:if test="${profile == null }">
+              <c:if test="${fprofile == null }">
               <div class="about-profile">
                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Who am I?</h4>
