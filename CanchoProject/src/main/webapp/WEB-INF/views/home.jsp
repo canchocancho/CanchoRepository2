@@ -436,7 +436,7 @@
               	</c:if>
 
             	<h5><a href="post/postList" class="text-white">${loginName }</a></h5>
-            	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
+            	<p class="text-white"><i class="ion ion-android-person-add"></i> ${myFollower } followers</p>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
               <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>

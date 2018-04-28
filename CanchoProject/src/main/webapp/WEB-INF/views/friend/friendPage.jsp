@@ -40,7 +40,6 @@
 			alert("삭제되었습니다.");
 			location.href = "deleteFriend?friend_id="+friend_id;
 		} else {
-			alert("삭제가 취소되었습니다.");
 			return;
 		}
 	}
@@ -139,7 +138,7 @@
               		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo">
               	</c:if>
             	<h5><a href="../post/postList" class="text-white">${sessionScope.loginName }</a></h5>
-            	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
+            	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> ${myFollower } followers</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
               <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>

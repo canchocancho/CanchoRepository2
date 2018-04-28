@@ -48,20 +48,12 @@
 	  </delete>
 	 
 	 
-	 
-	<!-- 회원 정보 수정 -->
-	<!-- <update id="updateUser" parameterType="user">
-	 	update 
-	 		blog_user
-	 	set
-	 		user_id = #{user_id}
-	 		, user_name = #{user_name}
-	 		, user_email = #{user_email}
-	 		, user_password = #{user_password}
-	 	where 
-	 		user_id = #{user_id} 	
-	</update> -->
-	 
-	
+	 <!-- 팔로워 수 조회 -->
+	 <select id="myFollower" parameterType="String" resultType="Int">
+	 	select count(*) from
+	 		blog_friend
+	 	where
+	 		friend_id = #{user_id}
+	 </select>
 	 
 </mapper>

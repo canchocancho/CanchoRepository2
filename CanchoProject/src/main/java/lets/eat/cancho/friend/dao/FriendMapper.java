@@ -18,4 +18,7 @@ public interface FriendMapper {
 	
 	//친구 삭제
 	public int deleteFriend(String friend_id);
+	
+	//팔로워 수 조회
+	public int myFollower(String user_id);
 }
