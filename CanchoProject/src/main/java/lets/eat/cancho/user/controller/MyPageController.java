@@ -165,13 +165,13 @@ public class MyPageController {
 		logger.info("친구 프로필 페이지로 이동");
 		
 		ArrayList<Post> postList = dao2.postListId(friend_id);
-		model.addAttribute("postList", postList); //포스트 리스트 담기
+		model.addAttribute("fpostList", postList); //포스트 리스트 담기
 		
 		Blog_Profile profile = dao.readProfile(friend_id);
-		model.addAttribute("profile", profile);
+		model.addAttribute("fprofile", profile);
 		
 		Blog_User user = dao.searchUserOne(friend_id);
-		model.addAttribute("loginName", user.getUser_name());
+		model.addAttribute("floginName", user.getUser_name());
 		
 		return "friend/friendProfile";
 	}

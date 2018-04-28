@@ -116,10 +116,11 @@
                 <ul class="list-inline profile-menu">
                   <li><a href="" class="active">My Page</a></li>
                   <li><a href="../user/myPage">Profile</a></li>
-                  <li><a href="">Album</a></li>
                   <li><a href="../user/friendList">Friends</a></li>
                 </ul>
- 
+                 <ul class="follow-me list-inline" style="padding-top: 5px;">
+                  <li><i class="ion ion-android-person-add"></i> ${myFollower } people following me</li>
+                </ul>
               </div>
             </div>
           </div><!--Timeline Menu for Large Screens End-->
@@ -144,14 +145,11 @@
               <ul class="list-inline">
                 <li><a href="postList" class="active">My Page</a></li>
                 <li><a href="myPage">Profile</a></li>
-                <li><a href="">Album</a></li>
                 <li><a href="friendList">Friends</a></li>
               </ul>
-              
-              <c:if test="${profile.p_originalfile != null }">
-				<button class="btn-primary">Add Friend</button>
-              </c:if>
-              
+                 <ul class="follow-me list-inline" style="padding-top: 5px;">
+                  <li><i class="ion ion-android-person-add"></i> ${myFollower } people following me</li>
+                </ul>
             </div>
           </div><!--Timeline Menu for Small Screens End-->
 
