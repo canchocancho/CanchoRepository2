@@ -24,7 +24,6 @@
 		<link rel="stylesheet" href="resources/css/style.css" />
 		<link rel="stylesheet" href="resources/css/ionicons.min.css" />
     <link rel="stylesheet" href="resources/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
@@ -81,49 +80,6 @@
 			A:hover   { text-decoration: none; }
 			
 			.mySlides {display:none;}
-			
-			.mission{
-				position: relative;
-    			text-align: center;
-			}
-			
-			.centered {
-			    position: absolute;
-			    top: 50%;
-			    left: 50%;
-			    transform: translate(-50%, -50%);
-			    font-family: fantasy;
-			    font-size: 40px;
-			}
-			
-			/* Bottom left text */
-			.bottom-left {
-			    position: absolute;
-			    bottom: 8px;
-			    left: 16px;
-			}
-			
-			/* Top left text */
-			.top-left {
-			    position: absolute;
-			    top: 8px;
-			    left: 16px;
-			}
-			
-			/* Top right text */
-			.top-right {
-			    position: absolute;
-			    top: 8px;
-			    right: 16px;
-			}
-			
-			/* Bottom right text */
-			.bottom-right {
-			    position: absolute;
-			    bottom: 8px;
-			    right: 16px;
-			}
-			
 		</style>
 	</head>
 	<body>
@@ -266,37 +222,13 @@
     		<source src="resources/videos/video1.mp4" type="video/mp4">
     	</video>
     	
-    	
-		<!-- <section id="site-facts">
-			<div class="container wrapper">
-				<div class="circle">
-					<ul class="facts-list">
-						<li>
-							<div class="fact-icon"><i class="icon ion-ios-people-outline"></i></div>
-							<h3 class="text-white">1,01,242</h3>
-							<p>People registered</p>
-						</li>
-						<li>
-							<div class="fact-icon"><i class="icon ion-images"></i></div>
-							<h3 class="text-white">21,01,242</h3>
-							<p>Posts published</p>
-						</li>
-						<li>
-							<div class="fact-icon"><i class="icon ion-checkmark-round"></i></div>
-							<h3 class="text-white">41,242</h3>
-							<p>People online</p>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</section> -->
 
     <!-- Live Feed Section
     ================================================= -->
 		<section id="live-feed">
 			<div class="container wrapper">
-				<h1 class="section-title slideDown" style="margin-bottom: 0;">Our Features</h1>
-					<div class="mission">
+				<h1 class="section-title slideDown">Our Features</h1><br><br>
+				<div class="mission">
 						<img class="mySlides w3-animate-right" src="resources/images/chat.jpg" width="100%">
 						<img class="mySlides w3-animate-right" src="resources/images/chat1.jpg" width="100%">
 			  			<img class="mySlides w3-animate-right" src="resources/images/edit2.jpg" width="100%">
@@ -304,27 +236,26 @@
 			  			<img class="mySlides w3-animate-right" src="resources/images/text.jpg" width="100%">
 			  			<!-- <div class="centered">Centered</div> -->
 			  			
-					</div>
+				</div>
 			</div>
 		</section>
 		</c:if>
-		
 		<script>
-							var myIndex = 0;
-							carousel();
+			var myIndex = 0;
+			carousel();
 							
-							function carousel() {
-							    var i;
-							    var x = document.getElementsByClassName("mySlides");
-							    for (i = 0; i < x.length; i++) {
-							      x[i].style.display = "none";  
-							    }
-							    myIndex++;
-							    if (myIndex > x.length) {myIndex = 1}    
-							    x[myIndex-1].style.display = "block";  
-							    setTimeout(carousel, 3000);    
-							}
-						</script>
+			function carousel() {
+				var i;
+				var x = document.getElementsByClassName("mySlides");
+				for (i = 0; i < x.length; i++) {
+					x[i].style.display = "none";  
+				}
+				myIndex++;
+				if (myIndex > x.length) {myIndex = 1}    
+					x[myIndex-1].style.display = "block";  
+				setTimeout(carousel, 3000);    
+				}
+		</script>
 		
 		
 		
@@ -397,7 +328,7 @@
               	</c:if>
 
             	<h5><a href="post/postList" class="text-white">${loginName }</a></h5>
-            	<p class="text-white"><i class="ion ion-android-person-add"></i> ${myFollower } followers</p>
+            	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
               <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>
@@ -409,7 +340,7 @@
             </ul><!--news-feed links ends-->
           </div>
           
-    	<div class="col-md-7" style="width: 70%;">
+    	<div class="col-md-7">
 
             <!-- Post Create Box
             ================================================= -->
@@ -541,8 +472,7 @@
       	</div>
       </div>
       <div class="copyright">
-        <p>Tomo Log @2018. All rights reserved</p>
-        
+         <p>Tomo Log @2018. All rights reserved</p>
       </div>
 		</footer>
 		
