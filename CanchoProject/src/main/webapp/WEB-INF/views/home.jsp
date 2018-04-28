@@ -24,6 +24,7 @@
 		<link rel="stylesheet" href="resources/css/style.css" />
 		<link rel="stylesheet" href="resources/css/ionicons.min.css" />
     <link rel="stylesheet" href="resources/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
@@ -79,7 +80,50 @@
 			A:active   { text-decoration: none; }
 			A:hover   { text-decoration: none; }
 			
-			/* .mySlides {display:none;}  */
+			.mySlides {display:none;}
+			
+			.mission{
+				position: relative;
+    			text-align: center;
+			}
+			
+			.centered {
+			    position: absolute;
+			    top: 50%;
+			    left: 50%;
+			    transform: translate(-50%, -50%);
+			    font-family: fantasy;
+			    font-size: 40px;
+			}
+			
+			/* Bottom left text */
+			.bottom-left {
+			    position: absolute;
+			    bottom: 8px;
+			    left: 16px;
+			}
+			
+			/* Top left text */
+			.top-left {
+			    position: absolute;
+			    top: 8px;
+			    left: 16px;
+			}
+			
+			/* Top right text */
+			.top-right {
+			    position: absolute;
+			    top: 8px;
+			    right: 16px;
+			}
+			
+			/* Bottom right text */
+			.bottom-right {
+			    position: absolute;
+			    bottom: 8px;
+			    right: 16px;
+			}
+			
 		</style>
 	</head>
 	<body>
@@ -222,29 +266,6 @@
     		<source src="resources/videos/video1.mp4" type="video/mp4">
     	</video>
     	
-    	<!-- <div id="imageSlide">
-    		<img class="mySlides" src="resources/images/work1.jpg" width="80%">
-  			<img class="mySlides" src="resources/images/work2.jpg" width="80%">
-  			<img class="mySlides" src="resources/images/work3.jpg" width="80%">
-    	</div>
-    	
-    	<script>
-			var myIndex = 0;
-			carousel();
-			
-			function carousel() {
-			    var i;
-			    var x = document.getElementsByClassName("mySlides");
-			    for (i = 0; i < x.length; i++) {
-			       x[i].style.display = "none";  
-			    }
-			    myIndex++;
-			    if (myIndex > x.length) {myIndex = 1}    
-			    x[myIndex-1].style.display = "block";  
-			    setTimeout(carousel, 5000); // Change image every 2 seconds
-			}
-		</script> -->
-    	
     	
 		<!-- <section id="site-facts">
 			<div class="container wrapper">
@@ -274,95 +295,35 @@
     ================================================= -->
 		<section id="live-feed">
 			<div class="container wrapper">
-				<h1 class="section-title slideDown">Our team</h1>
-				<ul class="online-users list-inline slideUp">
-					<li><a href="#" title="Alexis Clark"><img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-          <li><a href="#" title="James Carter"><img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-          <li><a href="#" title="Robert Cook"><img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-          <li><a href="#" title="Richard Bell"><img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-          <li><a href="#" title="Anna Young"><img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-          <li><a href="#" title="Julia Cox"><img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-				</ul>
-				<h2 class="sub-title">see what’s happening now</h2>
-				<div class="row">
-					<div class="col-md-4 col-sm-6 col-md-offset-2">
-						<div class="feed-item">
-							<img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo-sm" />
-							<div class="live-activity">
-								<p><a href="#" class="profile-link">Sarah</a> just posted a photo from Moscow</p>
-								<p class="text-muted">20 Secs ago</p>
-							</div>
-						</div>
-						<div class="feed-item">
-							<img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo-sm" />
-							<div class="live-activity">
-								<p><a href="#" class="profile-link">John</a> Published a post from Sydney</p>
-								<p class="text-muted">1 min ago</p>
-							</div>
-						</div>
-						<div class="feed-item">
-							<img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo-sm" />
-							<div class="live-activity">
-								<p><a href="#" class="profile-link">Julia</a> Updated her status from London</p>
-								<p class="text-muted">5 mins ago</p>
-							</div>
-						</div>
-						<div class="feed-item">
-							<img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo-sm" />
-							<div class="live-activity">
-								<p><a href="#" class="profile-link">Sophia</a> Share a photo from Virginia</p>
-								<p class="text-muted">10 mins ago</p>
-							</div>
-						</div>
-						<div class="feed-item">
-							<img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo-sm" />
-							<div class="live-activity">
-								<p><a href="#" class="profile-link">Linda</a> just posted a photo from Toronto</p>
-								<p class="text-muted">20 mins ago</p>
-							</div>
-						</div>
+				<h1 class="section-title slideDown" style="margin-bottom: 0;">Our Features</h1>
+					<div class="mission">
+						<img class="mySlides w3-animate-right" src="resources/images/chat.jpg" width="100%">
+						<img class="mySlides w3-animate-right" src="resources/images/chat1.jpg" width="100%">
+			  			<img class="mySlides w3-animate-right" src="resources/images/edit2.jpg" width="100%">
+			  			<img class="mySlides w3-animate-right" src="resources/images/people.jpg" width="100%">
+			  			<img class="mySlides w3-animate-right" src="resources/images/text.jpg" width="100%">
+			  			<!-- <div class="centered">Centered</div> -->
 					</div>
-					<div class="col-md-4 col-sm-6">
-						<div class="feed-item">
-							<img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo-sm" />
-							<div class="live-activity">
-								<p><a href="#" class="profile-link">Nora</a> Shared an article from Ohio</p>
-								<p class="text-muted">22 mins ago</p>
-							</div>
-						</div>
-						<div class="feed-item">
-							<img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo-sm" />
-							<div class="live-activity">
-								<p><a href="#" class="profile-link">Addison</a> Created a poll from Barcelona</p>
-								<p class="text-muted">23 mins ago</p>
-							</div>
-						</div>
-						<div class="feed-item">
-							<img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo-sm" />
-							<div class="live-activity">
-								<p><a href="#" class="profile-link">Diana</a> Posted a video from Captown</p>
-								<p class="text-muted">27 mins ago</p>
-							</div>
-						</div>
-						<div class="feed-item">
-							<img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo-sm" />
-							<div class="live-activity">
-								<p><a href="#" class="profile-link">Sarah</a> Shared friend's post from Moscow</p>
-								<p class="text-muted">30 mins ago</p>
-							</div>
-						</div>
-						<div class="feed-item">
-							<img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo-sm" />
-							<div class="live-activity">
-								<p><a href="#" class="profile-link">Emma</a> Started a new job at Torronto</p>
-								<p class="text-muted">33 mins ago</p>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</section>
 		</c:if>
+		
+		<script>
+							var myIndex = 0;
+							carousel();
+							
+							function carousel() {
+							    var i;
+							    var x = document.getElementsByClassName("mySlides");
+							    for (i = 0; i < x.length; i++) {
+							      x[i].style.display = "none";  
+							    }
+							    myIndex++;
+							    if (myIndex > x.length) {myIndex = 1}    
+							    x[myIndex-1].style.display = "block";  
+							    setTimeout(carousel, 3000);    
+							}
+						</script>
 		
 		
 		

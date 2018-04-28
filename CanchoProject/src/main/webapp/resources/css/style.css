@@ -103,7 +103,7 @@ section h1.section-title{
 	font-family: 'Agency FB', sans-serif;
 	font-size: 215px;
 	color: #E6E7E8;
-	margin-bottom: -55px;
+	/* margin-bottom: 0px; */
 }
 
 section h2.sub-title{
@@ -623,7 +623,7 @@ textarea{
   margin: auto;
   border: 6px solid #fff;
   box-shadow: 0 12px 12px rgba(39, 170, 225, 0.3);
-  cursor: pointer;
+  /* cursor: pointer; */
   font-size: 35px;
   color: #fff;
   line-height: 100px;
