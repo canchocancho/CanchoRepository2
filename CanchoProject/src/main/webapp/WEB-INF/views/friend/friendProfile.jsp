@@ -95,7 +95,7 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="friendPage?friend_id=${fprofile.user_id }">My Page</a></li>
+                  <li><a href="friendPage?friend_id=${friendId }">My Page</a></li>
                   <li><a href="" class="active">Profile</a></li>
                 </ul>
               </div>
@@ -118,7 +118,7 @@
                 </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                  <li><a href="friendPage?friend_id=${fprofile.user_id }">My Page</a></li>
+                  <li><a href="friendPage?friend_id=${friendId }">My Page</a></li>
                   <li><a href="" class="active">Profile</a></li>
               </ul>
             </div>
