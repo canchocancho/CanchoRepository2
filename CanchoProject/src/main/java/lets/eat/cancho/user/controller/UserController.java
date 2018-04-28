@@ -361,7 +361,7 @@ public class UserController {
 			logger.info("프로필 저장 종료");
 			session.setAttribute("profile", profile);
 
-			return "redirect:myPage";
+			return "redirect:/user/myPage";
 		}
 		
 		//수정일 경우
@@ -369,12 +369,19 @@ public class UserController {
 			logger.info("updateProfile");
 			
 	        if(!upload.isEmpty()){
-				//첨부파일이 있는 경우
+				//새 첨부파일이 있는 경우
 				//Post 객체에 originalFileName과 savedfileName을 저장
 				String savedfile = FileService.saveFile(upload, uploadPath); //저장된 파일명
 				profile.setP_savedfile(savedfile);
 				profile.setP_originalfile(upload.getOriginalFilename());
 			}
+	        
+	        //첨부파일이 없는 경우(프사 그대로)
+	        else{
+	        	Blog_Profile fProfile = dao.readProfile(profile.getUser_id());
+	        	profile.setP_savedfile(fProfile.getP_savedfile());
+	        	profile.setP_originalfile(fProfile.getP_originalfile());
+	        }
 	        
 	        int result = dao.updateProfile(profile);
 	        
@@ -382,13 +389,13 @@ public class UserController {
 	        	model.addAttribute("errorMsg", "필수정보는 모두 기입해주세요.");
 	        	logger.info("프로필 업데이트 실패");
 	        	
-	        	return "user/editProfile";//
+	        	return "user/editProfile";
 	        }
 	        
 	        logger.info("프로필 수정 종료");
 	        session.setAttribute("profile", profile);
 	        
-	        return "redirect:/myPage";
+	        return "redirect:/user/myPage";
 		}
 	}
 	
