@@ -415,7 +415,7 @@
     </header>
     <!--Header End-->
 
-    <div id="page-contents">
+    <div id="page-contents" style="background-image: url('images/background.jpg'); background-repeat: repeat;">
     	<div class="container">
     		<div class="row">
 
