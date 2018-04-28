@@ -272,7 +272,7 @@ public class PostController {
 		
 	}
 	
-	//좋아요
+	//싫어요
 	@RequestMapping(value="postDislike", method=RequestMethod.GET)
 	public String postDislike(Post post, Model model, HttpSession session){
 			

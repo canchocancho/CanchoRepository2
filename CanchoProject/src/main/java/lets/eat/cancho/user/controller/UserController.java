@@ -388,7 +388,7 @@ public class UserController {
 	        logger.info("프로필 수정 종료");
 	        session.setAttribute("profile", profile);
 	        
-	        return "user/myPage";
+	        return "redirect:/myPage";
 		}
 	}
 	

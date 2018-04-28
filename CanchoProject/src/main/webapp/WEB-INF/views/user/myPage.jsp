@@ -181,6 +181,8 @@
                       <p>${sessionScope.profile.user_email }</p>
                     </div>
                   </div>
+                  <!-- 프로필에 직장 정보가 있을 경우 -->
+                  <c:if test="${sessionScope.profile.p_company != null }">
                   <div class="organization">
                     <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
                     <div class="work-info">
@@ -188,6 +190,9 @@
                       <p>${sessionScope.profile.p_company }</p>
                     </div>
                   </div>
+                  </c:if>
+                  <!-- 프로필에 학교 정보가 있을 경우 -->
+                  <c:if test="${sessionScope.profile.p_school != null }">
                   <div class="organization">
                     <img src="../resources/images/envato.png" alt="" class="pull-left img-org" />
                     <div class="work-info">
@@ -195,6 +200,7 @@
                       <p>${sessionScope.profile.p_school }</p>
                     </div>
                   </div>
+                  </c:if>
                 </div>
                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Location</h4>

@@ -502,7 +502,7 @@
                 <a href="/cancho">Timeline</a>
               </li>
               <li class="dropdown">
-                <a href="">My Page</a>
+                <a href="postList">My Page</a>
               </li>
               <li class="dropdown">
                 <a href="../user/friendList">Friends</a>
