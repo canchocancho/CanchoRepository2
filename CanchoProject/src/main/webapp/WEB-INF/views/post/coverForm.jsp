@@ -481,7 +481,9 @@
 		    		  fontSize: 20,
 		    		});
 		    		canvas.add(textbox).setActiveObject(textbox);
-		    		fonts.unshift('Times New Roman');//
+		    		
+		    		canvas.getActiveObject().set("fontFamily", 'Lobster');
+		    		canvas.requestRenderAll();
 		    	  }
 		    	  
 		    	  
