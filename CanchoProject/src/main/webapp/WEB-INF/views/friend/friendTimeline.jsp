@@ -101,24 +101,23 @@
               <div class="col-md-3">
                 <div class="profile-info">
                   <!-- 프로필 사진이 있을 때 -->
-            	<c:if test="${profile.p_originalfile != null }">
-              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="img-responsive profile-photo">
+            	<c:if test="${fprofile.p_originalfile != null }">
+              		<img src="../post/downloadPic?user_id=${fprofile.user_id }" alt="post-image" class="img-responsive profile-photo">
               	</c:if>
               	
             	<!-- 프로필 사진이 없을 때 -->
-            	<c:if test="${profile.p_originalfile == null }">
+            	<c:if test="${fprofile.p_originalfile == null }">
               		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="img-responsive profile-photo">
               	</c:if>
-                  <h3>${loginName}</h3>
+                  <h3>${floginName}</h3>
                 </div>
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li><a href="" class="active">My Page</a></li>
-                  <li><a href="friendProfile?friend_id=${profile.user_id }">Profile</a></li>
+                  <li><a href="friendProfile?friend_id=${friendId }">Profile</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
-                  <li><button class="btn-primary">Add Friend</button></li>
                 </ul>
               </div>
             </div>
@@ -129,25 +128,24 @@
             <div class="profile-info">
             
             <!-- 프로필 사진이 있을 때 -->
-            	<c:if test="${profile.p_originalfile != null }">
-              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="img-responsive profile-photo">
+            	<c:if test="${fprofile.p_originalfile != null }">
+              		<img src="../post/downloadPic?user_id=${fprofile.user_id }" alt="post-image" class="img-responsive profile-photo">
               	</c:if>
               	
             <!-- 프로필 사진이 없을 때 -->
-            	<c:if test="${profile.p_originalfile == null }">
+            	<c:if test="${fprofile.p_originalfile == null }">
               		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="img-responsive profile-photo">
               	</c:if>
               	
-              <h4>${loginName}</h4>
+              <h4>${floginName}</h4>
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
                   <li><a href="" class="active">My Page</a></li>
-                  <li><a href="friendProfile?friend_id=${profile.user_id }">Profile</a></li>
+                  <li><a href="friendProfile?friend_id=${friendId }">Profile</a></li>
               </ul>
               
-              <c:if test="${profile.p_originalfile != null }">
-				<button class="btn-primary">Add Friend</button>
+              <c:if test="${fprofile.p_originalfile != null }">
               </c:if>
               
             </div>
@@ -171,9 +169,9 @@
             <!-- Post Content
             ================================================= -->
             <!-- 게시글이 하나라도 존재하는 경우 -->
-			<c:if test="${postList != null && postList.size() != 0}">
+			<c:if test="${fpostList != null && fpostList.size() != 0}">
 			
-			<c:forEach items="${postList }" var="post">
+			<c:forEach items="${fpostList }" var="post">
 				  <div class="post-content">
 
 				<!-- 표지가 있을 경우 -->
@@ -194,12 +192,12 @@
                 
                 <div class="post-container">
                 <!-- 프로필 사진이 있을 때 -->
-            	<c:if test="${profile.p_originalfile != null }">
-              		<img src="../post/downloadPic?user_id=${profile.user_id }" alt="post-image" class="profile-photo-md pull-left">
+            	<c:if test="${fprofile.p_originalfile != null }">
+              		<img src="../post/downloadPic?user_id=${fprofile.user_id }" alt="post-image" class="profile-photo-md pull-left">
               	</c:if>
               	
             	<!-- 프로필 사진이 없을 때 -->
-            	<c:if test="${profile.p_originalfile == null }">
+            	<c:if test="${fprofile.p_originalfile == null }">
               		<img src="https://media.istockphoto.com/vectors/social-media-blue-bird-vector-id608578604?k=6&m=608578604&s=612x612&w=0&h=qvNEv9J5UlZqYsRTZvi548twflGRJUkcBZCQ_Q2Gt1c=" alt="" class="profile-photo-md pull-left">
               	</c:if>
                   
@@ -220,7 +218,7 @@
 			</c:forEach>
 			</c:if>
 			
-			<c:if test="${postList == null || postList.size() == 0}">
+			<c:if test="${fpostList == null || fpostList.size() == 0}">
 			
 			<div style="text-align: center;">
 			<br>
