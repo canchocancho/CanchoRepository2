@@ -18,6 +18,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-3.2.1.js"></script>
 
+
     <!-- Stylesheets
     ================================================= -->
 		<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
