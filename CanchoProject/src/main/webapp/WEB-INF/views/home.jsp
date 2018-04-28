@@ -79,7 +79,7 @@
 			A:active   { text-decoration: none; }
 			A:hover   { text-decoration: none; }
 			
-			/* .mySlides {display:none;} */
+			/* .mySlides {display:none;}  */
 		</style>
 	</head>
 	<body>
@@ -129,7 +129,6 @@
     ================================================= -->
     	<video id="banner1" preload="auto" autoplay="autoplay" loop="loop">
     		<source src="resources/videos/video2.mp4" type="video/mp4">
-    		<source src="resources/videos/video1.mp4" type="video/mp4">
     	</video>
 		<!-- <section id="banner"> -->
 			<div class="container">
@@ -436,7 +435,7 @@
               	</c:if>
 
             	<h5><a href="post/postList" class="text-white">${loginName }</a></h5>
-            	<p class="text-white"><i class="ion ion-android-person-add"></i> ${myFollower } followers</p>
+            	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
               <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>

@@ -119,6 +119,7 @@
                   <li><a href="">Album</a></li>
                   <li><a href="../user/friendList">Friends</a></li>
                 </ul>
+ 
               </div>
             </div>
           </div><!--Timeline Menu for Large Screens End-->
