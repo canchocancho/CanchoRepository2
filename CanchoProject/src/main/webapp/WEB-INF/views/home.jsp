@@ -447,7 +447,7 @@
             </ul><!--news-feed links ends-->
           </div>
           
-    	<div class="col-md-7">
+    	<div class="col-md-7" style="width: 70%;">
 
             <!-- Post Create Box
             ================================================= -->
