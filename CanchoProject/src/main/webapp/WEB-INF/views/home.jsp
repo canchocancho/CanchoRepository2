@@ -580,6 +580,7 @@
       </div>
       <div class="copyright">
         <p>Tomo Log @2018. All rights reserved</p>
+        
       </div>
 		</footer>
 		
