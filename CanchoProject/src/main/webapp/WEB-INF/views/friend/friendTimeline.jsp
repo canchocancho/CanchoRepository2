@@ -328,7 +328,7 @@
       	</div>
       </div>
       <div class="copyright">
-        <p>Thunder Team © 2016. All rights reserved</p>
+        <p>Tomo Log @2018. All rights reserved</p>
       </div>
 		</footer>
     
