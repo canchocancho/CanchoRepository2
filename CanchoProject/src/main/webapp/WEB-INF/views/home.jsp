@@ -24,6 +24,7 @@
 		<link rel="stylesheet" href="resources/css/style.css" />
 		<link rel="stylesheet" href="resources/css/ionicons.min.css" />
     <link rel="stylesheet" href="resources/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
