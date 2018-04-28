@@ -378,9 +378,9 @@ public class UserController {
 	        
 	        //첨부파일이 없는 경우(프사 그대로)
 	        else{
-	        	Blog_Profile fProfile = dao.readProfile(profile.getUser_id());
-	        	profile.setP_savedfile(fProfile.getP_savedfile());
-	        	profile.setP_originalfile(fProfile.getP_originalfile());
+	        	Blog_Profile fProfile = dao.readProfile(profile.getUser_id()); //원래 프로필 불러오기
+	        	profile.setP_savedfile(fProfile.getP_savedfile()); //원래 프로필에서 원래 프사 정보 불러와서 받아온 form에 넣어주기
+	        	profile.setP_originalfile(fProfile.getP_originalfile()); //같은 사진을 update와 같음
 	        }
 	        
 	        int result = dao.updateProfile(profile);
@@ -392,8 +392,10 @@ public class UserController {
 	        	return "user/editProfile";
 	        }
 	        
+	        Blog_Profile newProfile = dao.readProfile(profile.getUser_id());
+	        
 	        logger.info("프로필 수정 종료");
-	        session.setAttribute("profile", profile);
+	        session.setAttribute("profile", newProfile);
 	        
 	        return "redirect:/user/myPage";
 		}
