@@ -303,6 +303,7 @@
 			  			<img class="mySlides w3-animate-right" src="resources/images/people.jpg" width="100%">
 			  			<img class="mySlides w3-animate-right" src="resources/images/text.jpg" width="100%">
 			  			<!-- <div class="centered">Centered</div> -->
+			  			
 					</div>
 			</div>
 		</section>
