@@ -97,7 +97,6 @@
                 <ul class="list-inline profile-menu">
                   <li><a href="../post/postList">My Page</a></li>
                   <li><a href="" class="active">Profile</a></li>
-                  <li><a href="">Album</a></li>
                   <li><a href="friendList">Friends</a></li>
                 </ul>
                  <ul class="follow-me list-inline" style="padding-top: 5px;">
@@ -125,7 +124,6 @@
               <ul class="list-inline">
                   <li><a href="../post/postList">My Page</a></li>
                   <li><a href="" class="active">Profile</a></li>
-                  <li><a href="">Album</a></li>
                   <li><a href="friendList">Friends</a></li>
               </ul>
                  <ul class="follow-me list-inline" style="padding-top: 5px;">

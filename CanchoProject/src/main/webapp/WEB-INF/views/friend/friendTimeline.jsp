@@ -116,7 +116,6 @@
                 <ul class="list-inline profile-menu">
                   <li><a href="" class="active">My Page</a></li>
                   <li><a href="friendProfile?friend_id=${profile.user_id }">Profile</a></li>
-                  <li><a href="">Album</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
                   <li><button class="btn-primary">Add Friend</button></li>
@@ -145,7 +144,6 @@
               <ul class="list-inline">
                   <li><a href="" class="active">My Page</a></li>
                   <li><a href="friendProfile?friend_id=${profile.user_id }">Profile</a></li>
-                  <li><a href="">Album</a></li>
               </ul>
               
               <c:if test="${profile.p_originalfile != null }">
