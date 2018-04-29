@@ -56,10 +56,8 @@
 			<mvc:mapping path="/post/postForm"/>
 			<mvc:mapping path="/post/postList"/>
 			<mvc:mapping path="/post/readPost"/>
-			<mvc:mapping path="/user/deleteComplete"/>
 			<mvc:mapping path="/user/deleteForm"/>
 			<mvc:mapping path="/user/editProfile"/>
-			<mvc:mapping path="/user/joinComplete"/>
 			<mvc:mapping path="/user/myPage"/>
 			<mvc:mapping path="/user/updateInfo"/>
 			<mvc:mapping path="/videoEditor/editor"/>

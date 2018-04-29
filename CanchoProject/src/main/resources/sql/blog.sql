@@ -21,7 +21,7 @@ CREATE TABLE blog_post
 	savedfile			VARCHAR2(100),
     post_date           DATE             default SYSDATE,
     post_like			INT 			 default 0,
-    post_dislike		INT   			 default 0
+    post_dislike		INT   			 default 0,
     CONSTRAINT BLOG_POST_PK PRIMARY KEY (post_num)
 );
 
@@ -74,28 +74,3 @@ CREATE TABLE blog_profile
 	constraint user_id_fk foreign key(user_id) references blog_user(user_id),
 	constraint user_email_fk foreign key(user_email) references blog_user(user_email)
 );
-
-
--- ---------------------------------------------------아래는 아직 안 만든 테이블들
-
-
-
--- tag table
-CREATE TABLE blog_tag
-(
-    post_num    INT             NOT NULL, 
-    tag_name    VARCHAR(100)    NULL  
-    ,CONSTRAINT FK_blog_tag_post_num_blog_post FOREIGN KEY (post_num)
-    REFERENCES blog_post (post_num)
-);
-
--- blog_block table
-CREATE TABLE blog_block
-(
-    user_id       VARCHAR2(45)    NOT NULL, 
-    blocked_id    VARCHAR2(45)    NOT NULL, 
-    CONSTRAINT BLOG_BLOCK_PK PRIMARY KEY (user_id)
-    ,CONSTRAINT FK_blog_block_user_id_blog_use FOREIGN KEY (user_id)
-    REFERENCES blog_user (user_id)
-);
-
