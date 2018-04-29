@@ -147,10 +147,10 @@
 								<input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter id" autocomplete="off">
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="password" class="form-control" id="user_password" name="user_password" placeholder="Enter a password">
+								<input type="password" class="form-control" id="user_password" name="user_password" placeholder="Enter password">
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="password" class="form-control" id="user_password2" placeholder="Enter a password again">
+								<input type="password" class="form-control" id="user_password2" placeholder="Enter password again">
 							</fieldset>
 							<fieldset class="form-group">
 								<input type="text" class="form-control" id="user_name" name="user_name" placeholder="Enter name" autocomplete="off">
