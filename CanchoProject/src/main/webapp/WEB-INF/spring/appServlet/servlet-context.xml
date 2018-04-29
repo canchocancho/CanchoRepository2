@@ -40,4 +40,32 @@
 	
 	<context:component-scan base-package="lets.eat.cancho" />
 	
+	<!-- 로그인 인터셉터를 빈에 등록 (빈에 가지고 있는 파일의 경로설정을 해서 스프링이 사용할 수 있도록 처리) -->
+	<beans:bean id="loginInterceptor" class="lets.eat.cancho.common.interceptor.LoginInterceptor"></beans:bean>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 특정 네임스페이스 하위의 모든경로에 대하여 다음과 같이 와일드카드 지정이 가능하다. -->
+			<!-- <mvc:mapping path="/board/**"/> -->
+			<!-- 별이 * 한개이면, 해당 위치에서 한단계 아래를 의미하고 **이면 해당 위치 아래의 모든 것을 포함 -->
+		
+			<mvc:mapping path="/friend/friendPage"/>
+			<mvc:mapping path="/friend/friendProfile"/>
+			<mvc:mapping path="/friend/friendTimeline"/>
+			<mvc:mapping path="/post/coverForm"/>
+			<mvc:mapping path="/post/postForm"/>
+			<mvc:mapping path="/post/postList"/>
+			<mvc:mapping path="/post/readPost"/>
+			<mvc:mapping path="/user/deleteComplete"/>
+			<mvc:mapping path="/user/deleteForm"/>
+			<mvc:mapping path="/user/editProfile"/>
+			<mvc:mapping path="/user/joinComplete"/>
+			<mvc:mapping path="/user/myPage"/>
+			<mvc:mapping path="/user/updateInfo"/>
+			<mvc:mapping path="/videoEditor/editor"/>
+			
+			<beans:ref bean="loginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>	
+	
 </beans:beans>
