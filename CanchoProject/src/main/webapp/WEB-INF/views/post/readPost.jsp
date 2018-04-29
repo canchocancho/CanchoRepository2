@@ -129,12 +129,16 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="../post/postList" class="active">Timeline</a></li>
-                  <li><a href="../user/myPage">About</a></li>
-                  <li><a href="timeline-album.html">Album</a></li>
+                <li><a href="../" class="active">Timeline</a></li>
+                  <li><a href="../user/friendPage?friend_id=${post.user_id }">My Page</a></li>
+                  <li><a href="../user/friendProfile?friend_id=${post.user_id }">Profile</a></li>
                   <li><a href="../user/friendList">Friends</a></li>
                 </ul>
+                 <ul class="follow-me list-inline" style="padding-top: 5px;">
+                  <li><i class="ion ion-android-person-add"></i> ${myFollower } people following me</li>
+                </ul>
               </div>
+              
             </div>
           </div><!--Timeline Menu for Large Screens End-->
 
