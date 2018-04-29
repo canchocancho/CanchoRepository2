@@ -128,13 +128,11 @@
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li><a href="../post/postList">My Page</a></li>
-                  <li><a href="myPage" class="active">Profile</a></li>
-                  <li><a href="">Album</a></li>
+                  <li><a href="" class="active">Profile</a></li>
                   <li><a href="friendList">Friends</a></li>
                 </ul>
-                <ul class="follow-me list-inline">
-                  <li>1,299 people following her</li>
-                  <li><button class="btn-primary">Add Friend</button></li>
+                 <ul class="follow-me list-inline" style="padding-top: 5px;">
+                  <li><i class="ion ion-android-person-add"></i> ${myFollower } people following me</li>
                 </ul>
               </div>
             </div>
@@ -334,7 +332,7 @@
       	<div class="row">
           <div class="footer-wrapper">
             <div class="col-md-3 col-sm-3">
-              <a href=""><img src="resources/images/logo-black.png" alt="" class="footer-logo" /></a>
+              <a href=""><img src="../resources/images/logo-black.png" alt="" class="footer-logo" /></a>
               <ul class="list-inline social-icons">
               	<li><i class="icon ion-social-facebook"></i></li>
               	<li><i class="icon ion-social-twitter"></i></li>
