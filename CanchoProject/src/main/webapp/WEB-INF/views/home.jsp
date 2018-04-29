@@ -476,35 +476,7 @@
       <div class="copyright">
          <p>Tomo Log @2018. All rights reserved</p>
       </div>
-		</footer>
-		
-		
-		
-		
-		<!-- 원래 home.jsp -->
-		<c:choose>
-			<c:when test="${sessionScope.loginId == null }">
-				<li><a href="user/joinForm">회원가입</a></li>
-				<li><a href="user/loginPage">로그인</a></li>
-				<li><a href="editor">브이로그 만들기</a></li>
-				<li><a href="post/postList">포스트 목록</a></li>
-				<li><a href="user/activateForm">휴면계정 복구</a></li>
-			</c:when>
-			<c:otherwise>
-				<h3>${sessionScope.loginName }님 환영합니다. </h3>
-				<li><a href="post/writePost">포스트 쓰기</a></li>
-				<li><a href="post/postList">포스트 목록</a></li>		
-				<li><a href="user/logout">로그아웃</a></li>
-				<li><a href="user/myPage">마이페이지</a></li>
-			</c:otherwise>
-		</c:choose>
-		
-		<div id="idCheckResult"></div>
-		
-		
-		
-		
-		
+		</footer>	
 
     <!-- Scripts
     ================================================= -->
