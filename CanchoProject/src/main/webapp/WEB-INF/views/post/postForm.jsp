@@ -341,7 +341,7 @@
 					str += '<input type="button" class="btn btn-primary pull-right" id="invite" name="invite" onclick="invite();" value="Invite Friends" style="width: 100%;"/><br><br>';
 					
 					for(var i in obj){
-						str += '<a href="#" style="color: white; font-size: 10pt;" onclick="addInvite(\''+obj[i].friend_id+'\');">'+obj[i].friend_id+'</a><br>';
+						str += '<a href="#" style="color: #00004d; font-size: 10pt;" onclick="addInvite(\''+obj[i].friend_id+'\');">'+obj[i].friend_id+'</a><br>';
 					}
 
 					document.getElementById('inviteList').innerHTML=str;
@@ -449,7 +449,7 @@
 		    $("#messageWindow").html("<p class='chat_content'>채팅에 참여하였습니다.</p>");
 		}
 		function onError(event) {
-		    alert("오류가 발생했습니다.");
+		    /* alert("오류가 발생했습니다."); */
 		}
 		function send() {
 		    if ($("#inputMessage").val() == "") {
