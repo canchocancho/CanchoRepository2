@@ -39,6 +39,8 @@
 	 		blog_friend
 	 	where
 	 		user_id = #{user_id}
+	 	order by
+	 		friend_id
 	 </select>
 	 
 	  <!-- 친구 삭제 -->
