@@ -137,6 +137,11 @@ public class MyPageController {
 			model.addAttribute("errorMsg", "친구 추가 실패");
 			return "friend/friendPage";
 		}
+		
+		ArrayList<Post> postList = dao2.postList(myId);
+		session.setAttribute("postList", postList);
+		model.addAttribute("postList", postList);
+		
 		logger.info("친구 추가 종료");
 		
 		return "redirect:friendList";
