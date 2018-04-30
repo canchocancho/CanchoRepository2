@@ -398,6 +398,15 @@
 				<c:if test="${post.originalfile != null }">
 				<a href="post/readOnePost?post_num=${post.post_num }">
 				<img src="post/download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
+
+<%-- 				<video controls>
+                        <source src="post/download?post_num=${post.post_num }" type="video/mp4">
+                </video> 
+                
+                <input type="file" name="upload" accept="file_extension|audio/*|video/*|image/*|media_type">
+                
+                --%>
+
 				</a>
 				</c:if>
                 

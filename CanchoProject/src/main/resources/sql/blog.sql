@@ -25,6 +25,19 @@ CREATE TABLE blog_post
     CONSTRAINT blog_p_fk FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
 );
 
+-- blog_vpost table
+CREATE TABLE blog_vpost
+(
+	vpost_num		NUMBER				PRIMARY KEY,
+    originalfile	VARCHAR2(2000)		NOT NULL,
+	savedfile		VARCHAR2(2000)		NOT NULL,
+	user_id			varchar2(45)		NOT NULL,
+	vpost_date		DATE				default SYSDATE,
+	vpost_like		NUMBER				default 0,
+	vpost_dislike	NUMBER				default 0,
+	CONSTRAINT blog_vp_fk FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
+);
+
 -- blog_post sequence
 CREATE SEQUENCE blog_post_seq
 START WITH 1
