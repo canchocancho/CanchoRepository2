@@ -12,7 +12,7 @@ CREATE TABLE blog_user
 -- blog_post table
 CREATE TABLE blog_post
 (
-    post_num            INT              PRIMARY KEY, 
+    post_num            NUMBER              PRIMARY KEY, 
     post_title          VARCHAR2(144)    NOT NULL, 
     post_title_clean    VARCHAR2(10)     NULL, 
     post_file           VARCHAR2(300)    NOT NULL, 
@@ -20,9 +20,9 @@ CREATE TABLE blog_post
     originalfile		VARCHAR2(200),
 	savedfile			VARCHAR2(100),
     post_date           DATE             default SYSDATE,
-    post_like			INT 			 default 0,
-    post_dislike		INT   			 default 0,
-    CONSTRAINT FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
+    post_like			NUMBER 			 default 0,
+    post_dislike		NUMBER   			 default 0,
+    CONSTRAINT blog_p_fk FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
 );
 
 -- blog_post sequence
@@ -35,20 +35,20 @@ CREATE TABLE blog_friend
 (
     user_id      VARCHAR2(45)    NOT NULL, 
     friend_id    VARCHAR2(45)    NOT NULL,
-    CONSTRAINT FOREIGN KEY (user_id) REFERENCES blog_user (user_id),
-	CONSTRAINT FOREIGN KEY (friend_id) REFERENCES blog_user (user_id)
+    CONSTRAINT blog_f_fk FOREIGN KEY (user_id) REFERENCES blog_user (user_id),
+	CONSTRAINT blog_f_fk2 FOREIGN KEY (friend_id) REFERENCES blog_user (user_id)
 );
 
 -- blog_comment table
 CREATE TABLE blog_comment
 (
-    comment_num     INT              PRIMARY KEY, 
-    post_num        INT              NOT NULL, 
+    comment_num     NUMBER              PRIMARY KEY, 
+    post_num        NUMBER              NOT NULL, 
     comment_text    VARCHAR2(300)    NOT NULL, 
     user_id         VARCHAR2(45)     NOT NULL, 
     comment_date    DATE             NOT NULL, 
-	CONSTRAINT FOREIGN KEY (post_num) REFERENCES blog_post (post_num),
-    CONSTRAINT FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
+	CONSTRAINT blog_c_fk FOREIGN KEY (post_num) REFERENCES blog_post (post_num),
+    CONSTRAINT blog_c_fk2 FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
 );
 
 -- blog_comment sequence
@@ -70,6 +70,6 @@ CREATE TABLE blog_profile
     p_introduce    		VARCHAR2(1000),
     p_originalfile		VARCHAR2(200),
 	p_savedfile			VARCHAR2(100),
-	CONSTRAINT FOREIGN KEY (user_id) REFERENCES blog_user (user_id),
-	CONSTRAINT FOREIGN KEY (user_email) REFERENCES blog_user (user_email)
+	CONSTRAINT blog_p_fk FOREIGN KEY (user_id) REFERENCES blog_user (user_id),
+	CONSTRAINT blog_p_fk2 FOREIGN KEY (user_email) REFERENCES blog_user (user_email)
 );
