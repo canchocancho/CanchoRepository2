@@ -48,6 +48,12 @@
 				Login_form.submit();
 			}
 		</script>
+		<style>
+			A:link   { text-decoration: none; } /* a 태그에 마우스 올렸을 때 밑줄 같은 거 없애기 */
+			A:visited   { text-decoration: none; }
+			A:active   { text-decoration: none; }
+			A:hover   { text-decoration: none; }
+		</style>
 	</head>
   <body>
   
@@ -106,7 +112,7 @@
                       </div>
                     </div>
                   </form><!--Login Form Ends-->
-                  <p><a href="activateForm">Activate Account</a></p>
+                  <p style="margin-left: 37%;"><a href="activateForm">Activate Account</a></p>
                   <br>
                   <button class="btn btn-primary" onClick="formCheck();">Login Now</button>
         </div>

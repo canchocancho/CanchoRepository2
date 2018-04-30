@@ -42,6 +42,43 @@
 			A:visited   { text-decoration: none; }
 			A:active   { text-decoration: none; }
 			A:hover   { text-decoration: none; }
+			
+			.othercss{
+			  background:#27aae1;
+			  color:#fff;
+			  border:none;
+			  position:relative;
+			  height:60px;
+			  font-size:1.6em;
+			  padding:0 2em;
+			  cursor:pointer;
+			  transition:800ms ease all;
+			  outline:none;
+			}
+			.othercss:hover{
+			  background:#fff;
+			  color:#27aae1;
+			}
+			.othercss:before,.othercss:after{
+			  content:'';
+			  position:absolute;
+			  top:0;
+			  right:0;
+			  height:2px;
+			  width:0;
+			  background: #27aae1;
+			  transition:400ms ease all;
+			}
+			.othercss:after{
+			  right:inherit;
+			  top:inherit;
+			  left:0;
+			  bottom:0;
+			}
+			.othercss:hover:before,.othercss:hover:after{
+			  width:100%;
+			  transition:800ms ease all;
+			}
 		</style>
 	</head>
 	<body>
@@ -163,7 +200,8 @@
               ================================================= -->
               <div class="create-post">
                 <div class="row">
-                      <button class="btn btn-primary pull-right" onclick="createPost();">Publish</button>
+		            <button class="othercss" onclick="createPost();" style="width: 48%;">Write Diary</button>
+					<button class="othercss" onclick="createVideo();" style="width: 48%;">Make Vlog</button>
                 </div>
               </div><!-- Post Create Box End-->
 
