@@ -4,10 +4,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -15,10 +21,16 @@ import javax.servlet.http.HttpSession;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.junit.internal.matchers.SubstringMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +38,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lets.eat.cancho.editor.util.FileService;
 import lets.eat.cancho.editor.util.ImageFileManager;
+import lets.eat.cancho.editor.util.saveFileManager;
 import lets.eat.cancho.editor.util.test;
+import lets.eat.cancho.editor.vo.FrameVO;
+import lets.eat.cancho.editor.vo.editorVO;
 
 
 /**
@@ -35,13 +50,16 @@ import lets.eat.cancho.editor.util.test;
 
 @Controller
 public class editController {
-	int Cnt = 0;
+	
 	HashMap<String, String> delMap = new HashMap<String, String>();
 	
 	/*사용자에 토모로그 폴더 생기게*/
 	
 	final String uploadPath = "C:\\tomolog\\temp\\";	//파일 업로드 경로
 	final String extractPath = "C:\\tomolog\\extract\\";	// 추출된 이미지 경로
+	ArrayList<FrameVO> vList = new ArrayList<FrameVO>();
+	
+	
 	
 	@RequestMapping(value = "/editor", method = RequestMethod.GET)
 	public String home() {
@@ -94,8 +112,10 @@ public class editController {
 		String videoPath = "C:\\tomolog\\extract\\" + ffid;
 		String vExtractPath = "tomolog\\extract\\" + ffid + "\\";
 		int count = test.findFileNum(videoPath) - 1;
+		int length = test.findFilelength(videoPath);
 		rtn.put("count", count);
 		rtn.put("extractPath", vExtractPath);
+		rtn.put("length", length);
 		boolean isAudio = false;
 		File audio = new File(videoPath + "\\audio.mp3");
 		if(audio.exists()) isAudio=true;
@@ -172,10 +192,90 @@ public class editController {
 	     return "redirect:/getFileList"; 
 	 }
 	@ResponseBody
-	@RequestMapping(value="saveFile", method = RequestMethod.POST)
-	public String saveFile(){
+	@RequestMapping(value="saveVideoFile", method = RequestMethod.POST)
+	public void saveVideoFile(@RequestBody editorVO editorVO){
+
+		int  folderNum = Integer.parseInt(editorVO.getCount());
 		
-		return "a";
+		int lastIndex = editorVO.getvFname().lastIndexOf('.');
+	      String fileName = editorVO.getvFname().substring(0, lastIndex);
+	      
+	      String trim = String.format("%.0f", (Double.parseDouble(editorVO.getTrim())));
+	      String frame = String.format("%.0f", (Double.parseDouble(editorVO.getFrame())));
+	      String frames = String.format("%.0f", (Double.parseDouble(editorVO.getFrames())));
+	      
+	      int trimN = Integer.parseInt(trim);
+	      int framesN = Integer.parseInt(frames);
+	      int frameN = Integer.parseInt(frame);
+	      
+	      int startF = 0;
+	      int endF = 0;
+	      
+	      if(trimN == 0) {
+	         startF = 0;
+	         endF = framesN * 30;
+	      }
+	      
+	      if(trimN != 0) {
+	         startF = (trimN * 30) + 1;
+	         endF = ((startF-1) + framesN * 30);
+	      }
+	      
+	      String startFrame = String.valueOf(startF);
+	      String endFrame = String.valueOf(endF);
+	      
+	      
+	      FrameVO fr = new FrameVO();
+	      fr.setStartFrame(startFrame);
+	      fr.setEndFrame(endFrame);
+	      fr.setFolderNum(folderNum);
+	      fr.setFileName(fileName);
+	      fr.setFrame(frameN);
+	      vList.add(fr);
+	      
+	      Collections.sort(vList);
+	      if(vList.size() == Integer.parseInt(editorVO.getLength())) {
+	    	  for(int i = 0; i < vList.size(); i++) {
+	    		saveFileManager.numbering(vList.get(i).getStartFrame(), vList.get(i).getEndFrame(), vList.get(i).getFileName());
+	    	  }
+	    	  for(int j = 0; j < vList.size(); j++) {
+	    		  saveFileManager.calAudio(Integer.parseInt(vList.get(j).getStartFrame()), 
+	    				  Integer.parseInt(vList.get(j).getEndFrame()), vList.get(j).getFileName(), editorVO.getUrls());  
+	    	  }
+	    	  vList = null;
+	    	  vList = new ArrayList<FrameVO>();
+	      }
+	      
+	      saveFileManager.makeVideo();
+
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="saveAudioFile", method = RequestMethod.POST)
+	public void saveAudioFile(@RequestBody editorVO editorVO){
+	/*	System.out.println("frames : " + editorVO.getFrames());
+		System.out.println("trim : " + editorVO.getTrim());
+		System.out.println("type : " + editorVO.getType());
+		System.out.println("fname : " + editorVO.getvFname());
+		System.out.println("vid : " + editorVO.getVid());
+		System.out.println("frame : " + editorVO.getFrame());
+		System.out.println("--------------------");*/
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="saveImageFile", method = RequestMethod.POST)
+	public void saveImageFile(@RequestBody editorVO editorVO){
+		/*System.out.println("frames : " + editorVO.getFrames());
+		System.out.println("trim : " + editorVO.getTrim());
+		System.out.println("type : " + editorVO.getType());
+		System.out.println("fname : " + editorVO.getvFname());
+		System.out.println("vid : " + editorVO.getVid());
+		System.out.println("frame : " + editorVO.getFrame());
+		System.out.println("--------------------");*/
+	}
+
 }
+
+
+ 
 	

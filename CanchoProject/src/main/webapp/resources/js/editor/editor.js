@@ -2,7 +2,6 @@ var vorder = 3;
 var aorder = 3;
 var clickedObj;
 var cnt = 0;
-
 /**
  * 개별 파일 삭제
  */
@@ -104,9 +103,133 @@ $(function(){
 	   });
 });
 /**
- * 파일 리스트 자동갱신
+ * 파일 다운로드
  */
-
+$(function(){
+	$("#save").on("click", function(){
+		var media = mm_player.mash.media;
+		var video = mm_player.mash.video;
+		var audio = mm_player.mash.audio;
+		var mfname;
+		var mid;
+		var vid;
+		var type;
+		var frames;
+		var trim;
+		var vFname
+		var frame;
+		var count = 0;
+		var turnOn = true;
+		var length;
+		var url;
+		for (var i = 0; i < media.length; i++) {
+			if (media[i].type == "video") {
+				mfname = media[i].label;
+				type = media[i].type;
+				urls = media[i].url;
+				for (var vb = 0; vb < video[0].clips.length; vb++) {
+					if (media[i].id == video[0].clips[vb].id) {
+						vid = video[0].clips[vb].id;
+						frames = video[0].clips[vb].frames;
+						trim = video[0].clips[vb].trim;
+						frame = video[0].clips[vb].frame;
+						vFname = mfname;
+						length = video[0].clips.length;
+						count++
+						alert(count);
+						$.ajax({
+							type : "POST"
+							,url : "saveVideoFile"
+							,async : false
+							,contentType : "application/json; charset=utf-8"
+							,data :JSON.stringify({
+								"frames" : frames,
+								"vid" : vid,
+								"trim" : trim,
+								"vFname" : vFname,
+								"type" : type,
+								"frame" : frame,
+								"count" : count,
+								"length" : length,
+								"urls" : urls
+							})
+							,success : function(){
+							}
+							,error : function(e){
+								
+							}
+						});
+					}
+				}
+			}else if(media[i].type == "audio"){
+				mfname = media[i].label;
+				type = media[i].type;
+				for (var aa = 0; aa < audio.length; aa++) {
+					for (var ab = 0; ab < audio[aa].clips.length; ab++) {
+						if (media[i].id == audio[aa].clips[ab].id && aa == audio[aa].index) {
+							vid = audio[aa].clips[ab].id;
+							frames = audio[aa].clips[ab].frames;
+							trim = audio[aa].clips[ab].trim;
+							frame = audio[aa].clips[ab].frame
+							vFname = mfname;
+							$.ajax({
+								type : "POST"
+								,url : "saveAudioFile"
+								,contentType : "application/json; charset=utf-8"
+								,data :JSON.stringify({
+									"frames" : frames,
+									"vid" : vid,
+									"trim" : trim,
+									"frame" : frame,
+									"vFname" : vFname,
+									"type" : type
+								})
+								,success : function(){
+									
+								}
+								,error : function(e){
+									alert("실패");
+								}
+							});
+						}
+					}
+				}
+			}else if(media[i].type == "image"){
+				mfname = media[i].label;
+				type = media[i].type;
+				for (var va = 0; va < video.length; va++) {
+					for (var vb = 0; vb < video[va].clips.length; vb++) {
+						if (media[i].id == video[va].clips[vb].id && va == video[va].index) {
+							vid = video[va].clips[vb].id;
+							frames = video[va].clips[vb].frames;
+							trim = video[va].clips[vb].trim;
+							frame = video[va].clips[vb].frame
+							vFname = mfname;
+							$.ajax({
+								type : "POST"
+									,url : "saveImageFile"
+										,contentType : "application/json; charset=utf-8"
+											,data :JSON.stringify({
+												"frames" : frames,
+												"vid" : vid,
+												"trim" : trim,
+												"vFname" : vFname,
+												"frame" : frame,
+												"type" : type
+											})
+											,success : function(){
+											}
+								,error : function(e){
+									alert("실패");
+								}
+							});
+						}
+					}
+				}
+			}
+		}	
+	});
+});
 
 
 /**
@@ -136,6 +259,7 @@ function outputFileList(list){
 	   
 	   if(list == null) {
 	      cnt = 1;
+	      
 	   }
 	   else {
 	      cnt = 2;

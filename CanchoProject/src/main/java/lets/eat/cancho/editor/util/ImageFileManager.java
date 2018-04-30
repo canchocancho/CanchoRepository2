@@ -105,12 +105,12 @@ public class ImageFileManager {
 		}
 	}
 	
-	public static void videoThumbGender(String originPath, String thumbPath){
+	public static void videoblend(String originPath, String savePath){
 		Runtime run = Runtime.getRuntime();
 		
 		String command = "C:\\ffmpeg\\bin\\ffmpeg.exe -i \""
 				+originPath+"\" -ss 5 -vcodec png \""
-				+thumbPath+"\"";
+				+savePath+"\"";
 		
 		//System.out.println(command);
 		try{
