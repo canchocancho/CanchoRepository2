@@ -22,7 +22,9 @@ CREATE TABLE blog_post
     post_date           DATE             default SYSDATE,
     post_like			INT 			 default 0,
     post_dislike		INT   			 default 0,
-    CONSTRAINT BLOG_POST_PK PRIMARY KEY (post_num)
+    CONSTRAINT BLOG_POST_PK PRIMARY KEY (post_num),
+    CONSTRAINT FK_blog_post_user_id_blog_u FOREIGN KEY (user_id)
+    REFERENCES blog_user (user_id)
 );
 
 -- blog_post sequence
@@ -35,7 +37,8 @@ CREATE TABLE blog_friend
 (
     user_id      VARCHAR2(45)    NOT NULL, 
     friend_id    VARCHAR2(45)    NOT NULL,
-    CONSTRAINT FK_blog_friend_user_id FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
+    CONSTRAINT FK_blog_friend_user_id FOREIGN KEY (user_id) REFERENCES blog_user (user_id),
+	CONSTRAINT FK_blog_friend_friend_ FOREIGN KEY (friend_id) REFERENCES blog_user (user_id)
 );
 
 -- blog_comment table
