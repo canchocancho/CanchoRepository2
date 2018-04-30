@@ -38,7 +38,7 @@ CREATE TABLE blog_friend
     CONSTRAINT FK_blog_friend_user_id FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
 );
 
--- comment table
+-- blog_comment table
 CREATE TABLE blog_comment
 (
     comment_num     INT              NOT NULL, 
@@ -53,11 +53,12 @@ CREATE TABLE blog_comment
     REFERENCES blog_user (user_id)
 );
 
+-- blog_comment sequence
 CREATE SEQUENCE blog_comment_SEQ
 START WITH 1
 INCREMENT BY 1;
 
--- profile table
+-- blog_profile table
 CREATE TABLE blog_profile
 (
     user_id		varchar2(45),
