@@ -86,6 +86,43 @@
 			A:hover   { text-decoration: none; }
 			
 			.mySlides {display:none;}
+			
+			.othercss{
+			  background:#27aae1;
+			  color:#fff;
+			  border:none;
+			  position:relative;
+			  height:60px;
+			  font-size:1.6em;
+			  padding:0 2em;
+			  cursor:pointer;
+			  transition:800ms ease all;
+			  outline:none;
+			}
+			.othercss:hover{
+			  background:#fff;
+			  color:#27aae1;
+			}
+			.othercss:before,.othercss:after{
+			  content:'';
+			  position:absolute;
+			  top:0;
+			  right:0;
+			  height:2px;
+			  width:0;
+			  background: #27aae1;
+			  transition:400ms ease all;
+			}
+			.othercss:after{
+			  right:inherit;
+			  top:inherit;
+			  left:0;
+			  bottom:0;
+			}
+			.othercss:hover:before,.othercss:hover:after{
+			  width:100%;
+			  transition:800ms ease all;
+			}
 		</style>
 	</head>
 	<body>
@@ -263,14 +300,8 @@
 				setTimeout(carousel, 2000);    
 				}
 		</script>
-		
-		
-		
-		
-		
-		
-		
-		
+
+	
 	<!-- 로그인이 되어 있을 경우 -->	
 	<c:if test="${sessionScope.loginId != null }">
     <!-- Header
@@ -351,9 +382,9 @@
 
             <!-- Post Create Box
             ================================================= -->
-            <div class="create-post">
-            <button class="btn btn-primary pull-right" onclick="createPost();">Write Diary</button>
-			<button class="btn btn-primary pull-right" onclick="createVideo();">Make Vlog</button>
+            <div class="create-post" style="text-align: center;">
+            <button class="othercss" onclick="createPost();" style="width: 48%;">Write Diary</button>
+			<button class="othercss" onclick="createVideo();" style="width: 48%;">Make Vlog</button>
             </div><!-- Post Create Box End-->
 
             <!-- Post Content
