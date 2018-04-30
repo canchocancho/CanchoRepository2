@@ -142,14 +142,14 @@
 		    	      drawingShadowColorEl = $('drawing-shadow-color'),
 		    	      drawingLineWidthEl = $('drawing-line-width'),
 		    	      drawingShadowWidth = $('drawing-shadow-width'),
-		    	      drawingShadowOffset = $('drawing-shadow-offset'),
-		    	      clearEl = $('clear-canvas');
+		    	      drawingShadowOffset = $('drawing-shadow-offset');
+		    	      /* clearEl = $('clear-canvas'); */
 		    	  
 		    	  var text = $('insertText');
 		    	  var uploadImage = $('imageLoader');
 		    	  var tMenu = $('textmenu');
 		    	  
-		    	  clearEl.onclick = function() { canvas.clear() };
+		    	  /* clearEl.onclick = function() { canvas.clear() }; */
 		    	  
 		    	  var n;
 
@@ -319,13 +319,16 @@
 		    	    });
 		    	  }
 		    	  
+		    	  //선택 삭제
+		    	 $('delete').onclick = function() {
+		    		 canvas.remove(canvas.getActiveObject())
+				  }
+		    	  
 		    	  //뒤로가기
 		    	 $('roll-back').onclick = function() {
-		    		 /* n = canvas.getObjects().length;
+		    		 n = canvas.getObjects().length;
 		    		 canvas.remove(canvas.item(n-1));
-		    		 n--; */
-		    		 canvas.remove(canvas.getActiveObject())
-		    		 
+		    		 n--;
 				  }
 		    	  
 		    	  //복사
@@ -652,8 +655,8 @@
 			  	<div class="controls" style="margin-left: 0;">
 						<button id="copy" class="myButton">Copy</button>
 						<button id="paste" class="myButton">Paste</button>
-						<button id="roll-back" class="myButton">Delete</button>
-						<button id="clear-canvas" class="myButton">Reset</button>
+						<button id="delete" class="myButton">Delete</button>
+						<button id="roll-back" class="myButton">Back</button>
 				</div>
 		 		<div id="drawing-mode-options" style="margin-top: 20px;">
 		   			<label for="drawing-mode-selector">Mode:</label>
