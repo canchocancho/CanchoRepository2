@@ -334,7 +334,6 @@
 				  			_clipboard = cloned;
 				  		});
 				  	}
-
 		    	  
 		    	 //붙여넣기
 				 $('paste').onclick = function(){
