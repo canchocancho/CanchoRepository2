@@ -31,7 +31,7 @@ CREATE TABLE blog_vpost
 	vpost_num		NUMBER				PRIMARY KEY,
     voriginalfile	VARCHAR2(2000)		NOT NULL,
 	vsavedfile		VARCHAR2(2000)		NOT NULL,
-	user_id			varchar2(45)		NOT NULL,
+	user_id			VARCHAR2(45)		NOT NULL,
 	vpost_date		DATE				default SYSDATE,
 	vpost_like		NUMBER				default 0,
 	vpost_dislike	NUMBER				default 0,
