@@ -399,7 +399,7 @@
 				<a href="post/readOnePost?post_num=${post.post_num }">
 				<img src="post/download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
 
-<%-- 				<video controls>
+<%-- 			<video controls>
                         <source src="post/download?post_num=${post.post_num }" type="video/mp4">
                 </video> 
                 
