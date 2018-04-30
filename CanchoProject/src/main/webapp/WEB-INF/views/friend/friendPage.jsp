@@ -26,49 +26,55 @@
     <link rel="shortcut icon" type="image/png" href="../resources/images/fav.png">
 
 		
-<script type="text/javascript">
-	<c:if test ="${errorMsg != null}">
-		alert("${errorMsg}");
-	</c:if> 
-		
-	<c:if test ="${errorMsg1 != null}">
-		alert("${errorMsg}");
-	</c:if> 
-	
-	function deleteFriend(friend_id){
-		if (confirm("해당 친구를 정말로 삭제하시겠습니까?")) {
-			alert("삭제되었습니다.");
-			location.href = "deleteFriend?friend_id="+friend_id;
-		} else {
-			return;
-		}
-	}
-	
-	function insertFriend(user_id){
-		if (confirm("해당 ID를 친구로 추가할까요?")) {
-			location.href = 'insertFriend?user_id='+ user_id;
-		} else {
-			return false;
-		}
-	}
-	
-	function formSubmit(){
-		var form = document.getElementById('s1');
-		form.submit();
-	}
-	
-	//유효성 검사
-	$(function(){
-		$('#s1').on('submit', function(){
-			var id = $('user_id').val();
+		<script type="text/javascript">
+			<c:if test ="${errorMsg != null}">
+				alert("${errorMsg}");
+			</c:if> 
+				
+			<c:if test ="${errorMsg1 != null}">
+				alert("${errorMsg}");
+			</c:if> 
 			
-			if (id.length == 0) {
-				alert("검색할 ID를 입력하세요");
-				return;
+			function deleteFriend(friend_id){
+				if (confirm("해당 친구를 정말로 삭제하시겠습니까?")) {
+					alert("삭제되었습니다.");
+					location.href = "deleteFriend?friend_id="+friend_id;
+				} else {
+					return;
+				}
 			}
-		});
-	});
-</script>
+			
+			function insertFriend(user_id){
+				if (confirm("해당 ID를 친구로 추가할까요?")) {
+					location.href = 'insertFriend?user_id='+ user_id;
+				} else {
+					return false;
+				}
+			}
+			
+			function formSubmit(){
+				var form = document.getElementById('s1');
+				form.submit();
+			}
+			
+			//유효성 검사
+			$(function(){
+				$('#s1').on('submit', function(){
+					var id = $('user_id').val();
+					
+					if (id.length == 0) {
+						alert("검색할 ID를 입력하세요");
+						return;
+					}
+				});
+			});
+		</script>
+		<style>
+			A:link   { text-decoration: none; } /* a 태그에 마우스 올렸을 때 밑줄 같은 거 없애기 */
+			A:visited   { text-decoration: none; }
+			A:active   { text-decoration: none; }
+			A:hover   { text-decoration: none; }
+		</style>
 </head>
 <body>
 
