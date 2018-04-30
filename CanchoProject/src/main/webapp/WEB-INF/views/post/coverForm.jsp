@@ -335,7 +335,7 @@
 				  		});
 				  	}
 		    	  
-		    	 //붙여넣기
+		    	 //붙여넣기--
 				 $('paste').onclick = function(){
 				  		_clipboard.clone(function(clonedObj) {
 				  			canvas.discardActiveObject();
