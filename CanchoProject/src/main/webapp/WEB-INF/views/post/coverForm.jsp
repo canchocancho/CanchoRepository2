@@ -321,9 +321,11 @@
 		    	  
 		    	  //뒤로가기
 		    	 $('roll-back').onclick = function() {
-		    		 n = canvas.getObjects().length;
+		    		 /* n = canvas.getObjects().length;
 		    		 canvas.remove(canvas.item(n-1));
-		    		 n--;
+		    		 n--; */
+		    		 canvas.remove(canvas.getActiveObject())
+		    		 
 				  }
 		    	  
 		    	  //복사
