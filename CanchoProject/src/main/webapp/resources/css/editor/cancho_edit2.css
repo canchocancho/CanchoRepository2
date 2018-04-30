@@ -147,7 +147,7 @@ input {
 	width: 926px; 
 	height: 58px; 
 	/* background-color: #0477A8; */	
-	background-color: white;
+	background-color: #00BFFF;
 	position: relative;
 }
 
@@ -280,7 +280,7 @@ audio {
 .odd-track-container{
 	/* background-color: #7DDFFF; */
 	border: 1px solid #7DDFFF;
-	background-color: white;
+	background-color: #00BFFF;
 }
 
 /* 세번째, 다섯번쨰 트랙 back  */

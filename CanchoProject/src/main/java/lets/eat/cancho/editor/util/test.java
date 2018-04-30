@@ -17,5 +17,12 @@ public class test {
 		File[] files = file.listFiles();
 		return files.length;
 	}
+	
+	public static int findFilelength(String path) {
+		File file = new File(path);
+		File[] files = file.listFiles();
+		int fileLength = files[0].toString().length();
+		return fileLength;
+	}
 
 }

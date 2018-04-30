@@ -149,6 +149,13 @@
     		<artifactId>jackson-databind</artifactId>
   			  <version>2.9.0</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+    		<groupId>org.json</groupId>
+    		<artifactId>json</artifactId>
+    		<version>20090211</version>
+		</dependency>
 		<!-- 파일 업/다운을 위한 dependency 추가 -->
 		<!--image 썸네일 -->
 		<dependency>

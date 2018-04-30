@@ -109,7 +109,7 @@
             <tr class="con_tr">
                <td class="con_td"><img src="resources/images/deleteCon.png" id="delete" class="bottom_cons"></td>
                <td class="con_td"><img src="resources/images/clearCon.png" id="clear" class="bottom_cons"></td>
-               <td class="con_td"><button>저장</button></td>
+               <td class="con_td"><button id = "save">저장</button></td>
             </tr>
             <tr class="text_tr">
                <td class="text_td">delete</td>

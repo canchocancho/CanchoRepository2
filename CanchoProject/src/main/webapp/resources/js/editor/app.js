@@ -46,15 +46,16 @@ function mm_load() {
  * MovieMasher masher
  * mm_player에 이미지를 넣어 동영상처럼 만든다
  */
-function add_mash(id,url,count,isAudio){
+function add_mash(id,fname,url,count,length,isAudio){
 	var zeroPlus = '';
 	var duration = count/30;
 	var zeroCount = String(count.toString()).length;
+	alert(zeroCount);
 	for(var i = 0; i <= zeroCount; i++){
 		zeroPlus += '0';
 	}
 	var media = {
-    			'label': id,
+    			'label': fname,
 	    		'id': id,
 	    		'type': 'video', 
 	    		'url': url,
@@ -65,9 +66,9 @@ function add_mash(id,url,count,isAudio){
 	mm_player.add(media, 'video', videoTotalDuration , 0);
 	if(isAudio ==true){
 		   media = {
-				      'label': id,
+				      'label': fname,
 				      'type': 'audio',
-				      'id': 'audio'+ id,
+				      'id': "audio"+id,
 				      'url': url + 'audio.mp3',
 				      'duration': duration,
 		  };
@@ -75,6 +76,7 @@ function add_mash(id,url,count,isAudio){
 		  mm_player.add(media, 'audio', videoTotalDuration , 0);
 	   }
 	  videoTotalDuration += duration;
+	  mainTrackObjCnt++;
  }
 /**
  * 추가 미디어 mash추가

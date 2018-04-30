@@ -14,6 +14,8 @@ var subTrackObjNum = {
 		"audio-1" : 0,
 		"audio-2" : 0
 };
+var mainTrackObjCnt = 0;
+
 /**
  * 현재 mash된 미디어의 라벨
  */
@@ -152,10 +154,19 @@ function checkTrackType(data){
  */
 function video0TrackEventRegister(){
 	$('.video-obj').on('click', function(e) {
+		for (var i = 0; i < mm_player.mash.audio.length; i++) {
+			var test = mm_player.mash.audio[i];
+			console.log(JSON.stringify(test));
+		}
+		for (var i = 0; i < mm_player.mash.video.length; i++) {
+			var test2 = mm_player.mash.video[i];
+			console.log(JSON.stringify(test2));
+		}
 		
-		var mash = mm_player.mash;
-		console.log(JSON.stringify(mash));
-		
+		for (var i = 0; i < mm_player.mash.media.length; i++) {
+			var test2 = mm_player.mash.media[i];
+			console.log(JSON.stringify(test2));
+		}
 		var clicked = $(this).attr('clicked');	
 		var IdsOftrackObjs = $.makeArray($(".track-obj").map(function(){
 		    return $(this).attr("id");
@@ -229,6 +240,7 @@ function videoSlider(){
         },
         update: function(event, ui) {
         	var idsInOrder = $("#video-track").sortable("toArray");
+        	//alert(idsInOrder);
         	reorderingVideo0Clips(idsInOrder);
         }
     });
@@ -333,7 +345,7 @@ function addVideoTrackVideoObj(id){
 			html +=  fname;
 			html += '</div>';
 			$('#video-track').html(html);
-			add_mash(newid, videoInfo.extractPath.replace(/\\/gi, '/') ,videoInfo.count, videoInfo.isAudio);
+			add_mash(newid,fname,videoInfo.extractPath.replace(/\\/gi, '/') ,videoInfo.count,videoInfo.length,videoInfo.isAudio);
 			resizeTrackObj(0);
 			video0TrackEventRemover();
 			video0TrackEventRegister();
@@ -369,7 +381,6 @@ function addSubTrackObj(trackId, id){
 		},
 		dataType : 'json',
 		success : function(duration) {
-			alert(duration);
 			if(type == 'audio') {
 				html += '<div class="draggable ui-widget-content ' + trackClass + ' audio-obj other-obj track-obj"';
 			}
@@ -403,6 +414,9 @@ function addSubTrackObj(trackId, id){
 	});	
 }
 
+/**
+ * 메인 오브젝트 추가시 비율 재조정
+ */
 function resizeTrackObj(maxValue){
 	var videoTotalLength = 0;
 	var videoTrackObjsCnt = $.makeArray($(".video-obj").map(function(){
@@ -435,7 +449,9 @@ function resizeTrackObj(maxValue){
 		});	
 	}
 }
-
+/**
+ * 서브 오브젝트 추가시 비율 재조정
+ */
 function resizeSubTrackObj(id, trackId){	
 	var videoTrackObjsCnt = $.makeArray($(".video-obj").map(function(){
 	    return $(this).attr("frames");
@@ -462,6 +478,9 @@ function resizeSubTrackObj(id, trackId){
 	}
 }
 
+/**
+ * 서브 오브젝트 프레임 위치 이동
+ */
 function updateLocationObj(id, trackId){
 	var position = $("#" + id).position();
 	var maxDuration = getTotalDur();
@@ -502,8 +521,9 @@ function updateLocationObj(id, trackId){
 	$("#" + id).attr('frame', newFrame);
 	mm_player.change(frame);
 }
-
-
+/**
+ * 동영상 프레임 스플릿
+ */
 function videoClipSplit(){
 	var audio0Clips = mm_player.mash.audio[0].clips;
 	var selectedClip;
@@ -523,14 +543,15 @@ function videoClipSplit(){
 	mm_player.selectedClip = selectedClip;
 	mm_player.split();
 }
-
+/**
+ * movieMasher 스플릿 핸들러
+ */
 function videoTrackSplitEventHandler(){
 	$('#split').off('click');
 	$('#split').on('click', function(){
 		if(getType(mm_player.mash.video[0].clips[selectedClipNum].id) == 'image') return;
 		videoClipSplit();
 		video0TrackRedraw();
-		timeLineSplitEventHandlerRemove();
 	});
 }
 
@@ -581,7 +602,6 @@ function video0TrackRedraw(){
 	video0TrackEventRegister();
 }
 
-///으아아아아아아  이건 진짜 모르겠다 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 function reorderingVideo0Clips(videoOrders){
 	var video0Clips = mm_player.mash.video[0].clips;
 	var newVideo0Clips = [];
@@ -632,7 +652,6 @@ function reorderingVideo0Clips(videoOrders){
 		mm_player.selectedClip = mm_player.mash.audio[0].clips[i];
 		mm_player.change('frames');
 	}
-	
 	video0TrackRedraw();
 	
 }
@@ -693,7 +712,6 @@ function trackObjEventRegister(){
 $(function(){
 	$('#mute').on('click',function(e){
 		var volume = mm_player.mash.audio[0].clips;
-		alert(volume[selectedClipNum].gain);
 		if (volume[selectedClipNum].gain == 1) {
 			mm_player.mash.audio[0].clips[selectedClipNum].gain = 0;
 		}else{
@@ -733,8 +751,7 @@ function selectedObjDelete(objId){
 		var selectedAudioClip;
 		for(var i = 0; i < mm_player.mash.video[0].clips.length; i++){
 			
-			if( getType(mm_player.mash.video[0].clips[i].id) == 'image' ||
-					getType(mm_player.mash.video[0].clips[i].id) == 'transition'	) continue;
+			if( getType(mm_player.mash.video[0].clips[i].id) == 'image') continue;
 			if(i==selectedClipNum) {
 				selectedAudioClip = audio0Clips[index];
 				break;
@@ -777,9 +794,7 @@ function selectedObjDelete(objId){
 		
 		var selectedClip = clips[index];
 		if(track == 'image') track = 'video';
-		//alert(track);
 		mm_player.remove(selectedClip, track, trackInfo[1]*1);
-		//alert(JSON.stringify(mm_player.mash.audio[trackInfo[1]*1].clips));
 		if(track == 'audio') {
 			for(var i = 0; i < mm_player.mash.audio[trackInfo[1]*1].clips.length; i++){
 				mm_player.selectedClip = mm_player.mash.audio[trackInfo[1]*1].clips[i];
