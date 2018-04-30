@@ -41,7 +41,12 @@
 		function createPost(){
 			location.href = "post/writePost";
 		}
-			
+/* 		
+		//동영상 편집기로 이동
+		function createVideo(){
+			location.href = "editor/어쩌구";
+		}
+			 */
 			$(function(){
 				
 				//유효성 검사
@@ -347,7 +352,8 @@
             <!-- Post Create Box
             ================================================= -->
             <div class="create-post">
-            <button class="btn btn-primary pull-right" onclick="createPost();">Publish</button>
+            <button class="btn btn-primary pull-right" onclick="createPost();">Write Diary</button>
+			<button class="btn btn-primary pull-right" onclick="createVideo();">Make Vlog</button>
             </div><!-- Post Create Box End-->
 
             <!-- Post Content
