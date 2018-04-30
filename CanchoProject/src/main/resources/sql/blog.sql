@@ -29,8 +29,8 @@ CREATE TABLE blog_post
 CREATE TABLE blog_vpost
 (
 	vpost_num		NUMBER				PRIMARY KEY,
-    originalfile	VARCHAR2(2000)		NOT NULL,
-	savedfile		VARCHAR2(2000)		NOT NULL,
+    voriginalfile	VARCHAR2(2000)		NOT NULL,
+	vsavedfile		VARCHAR2(2000)		NOT NULL,
 	user_id			varchar2(45)		NOT NULL,
 	vpost_date		DATE				default SYSDATE,
 	vpost_like		NUMBER				default 0,

@@ -117,5 +117,18 @@
 		where
 			post_num = #{post_num}	
 	</delete>
+	
+	
+	<!-- 포스트 브이로그 조인
+	
+select blog_post.*, blog_vpost.*
+from blog_post, blog_vpost
+where blog_post.user_id = 'bbb';
+	
+	
+	 -->
+	
+	
+	
 
 </mapper>
