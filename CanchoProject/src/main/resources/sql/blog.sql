@@ -28,14 +28,17 @@ CREATE TABLE blog_post
 -- blog_vpost table
 CREATE TABLE blog_vpost
 (
-	vpost_num		NUMBER				PRIMARY KEY,
-    voriginalfile	VARCHAR2(2000)		NOT NULL,
-	vsavedfile		VARCHAR2(2000)		NOT NULL,
-	user_id			VARCHAR2(45)		NOT NULL,
-	vpost_date		DATE				default SYSDATE,
-	vpost_like		NUMBER				default 0,
-	vpost_dislike	NUMBER				default 0,
-	CONSTRAINT blog_vp_fk FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
+    post_num            NUMBER           	PRIMARY KEY, 
+    post_title          VARCHAR2(144)		NULL, 
+    post_title_clean    VARCHAR2(10)     	NULL, 
+    post_file           VARCHAR2(300)    	NULL, 
+    user_id             VARCHAR2(45)     	NOT NULL, 
+    originalfile		VARCHAR2(200),
+	savedfile			VARCHAR2(100),
+    post_date           DATE            	default SYSDATE,
+    post_like			NUMBER 				default 0,
+    post_dislike		NUMBER   		 	default 0,
+    CONSTRAINT blog_vp_fk FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
 );
 
 -- blog_post sequence

@@ -169,7 +169,7 @@ public class UserController {
 		String admin = "canchoad@gmail.com";
 		
 		//Server Address
-		String serverAddress = "http://203.233.199.106:8888/cancho/";
+		String serverAddress = "http://10.10.8.36:8888/cancho/";
 		
 		logger.info(user.toString());
 		int result = dao.joinUser(user);
