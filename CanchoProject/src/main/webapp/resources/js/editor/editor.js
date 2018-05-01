@@ -129,7 +129,7 @@ $(function(){
 				type = media[i].type;
 				urls = media[i].url;
 				for (var vb = 0; vb < video[0].clips.length; vb++) {
-					if (media[i].type == "video" || media[i].id == video[0].clips[vb].id) {
+					if (media[i].id == video[0].clips[vb].id && video[0].index == 0) {
 						vid = video[0].clips[vb].id;
 						frames = video[0].clips[vb].frames;
 						trim = video[0].clips[vb].trim;
@@ -150,9 +150,7 @@ $(function(){
 								"frame" : frame,
 								"count" : count,
 								"length" : length,
-								"urls" : urls,
-								"imgPath" : imgPath,
-								"imgFrame" : imgFrame
+								"urls" : urls
 							})
 							,success : function(){
 							}
@@ -162,39 +160,19 @@ $(function(){
 						});
 					}
 				}
-			}else if(media[i].type == "audio"){
-				mfname = media[i].label;
-				type = media[i].type;
-				for (var aa = 0; aa < audio.length; aa++) {
-					for (var ab = 0; ab < audio[aa].clips.length; ab++) {
-						if (media[i].id == audio[aa].clips[ab].id && audio[aa].index != 0) {
-							urls = media[i].url;
-							vid = audio[aa].clips[ab].id;
-							frames = audio[aa].clips[ab].frames;
-							trim = audio[aa].clips[ab].trim;
-							frame = audio[aa].clips[ab].frame
-							vFname = mfname;
-							$.ajax({
-								type : "POST"
-								,url : "saveAudioFile"
-								,async : false
-								,contentType : "application/json; charset=utf-8"
-								,data :JSON.stringify({
-									"frames" : frames,
-									"frame" : frame,
-									"urls" : urls
-								})
-								,success : function(){
-									
-								}
-								,error : function(e){
-									alert("실패");
-								}
-							});
-						}
-					}
-				}
-			}else if(media[i].type == "image"){
+			}
+		}
+		$.ajax({
+			type : "POST"
+			,url : "makeVideo"	
+			,async : false
+			,success : function(){
+			}
+			,error : function(e){
+			}
+		});	
+		for (var i = 0; i < media.length; i++) {
+			if(media[i].type == "image"){
 				mfname = media[i].label;
 				type = media[i].type;
 				for (var va = 0; va < video.length; va++) {
@@ -225,12 +203,47 @@ $(function(){
 				}
 			}
 		}
+		for (var i = 0; i < media.length; i++) {
+			if(media[i].type == "audio"){
+				mfname = media[i].label;
+				type = media[i].type;
+				for (var aa = 0; aa < audio.length; aa++) {
+					for (var ab = 0; ab < audio[aa].clips.length; ab++) {
+						if (media[i].id == audio[aa].clips[ab].id && audio[aa].index != 0) {
+							urls = media[i].url;
+							vid = audio[aa].clips[ab].id;
+							frames = audio[aa].clips[ab].frames;
+							trim = audio[aa].clips[ab].trim;
+							frame = audio[aa].clips[ab].frame
+							vFname = mfname;
+							$.ajax({
+								type : "POST"
+								,url : "saveAudioFile"
+								,async : false
+								,contentType : "application/json; charset=utf-8"
+								,data :JSON.stringify({
+									"frames" : frames,
+									"frame" : frame,
+									"urls" : urls
+								})
+								,success : function(){
+									
+								}
+								,error : function(e){
+								}
+							});
+						}
+					}
+				}
+			}
+		}
 		$.ajax({
 			type : "POST"
 			,url : "done"
 			,contentType : "application/json; charset=utf-8"	
 			,async : false
 			,success : function(){
+				alert("인코딩이 완료 되었습니다.")
 			}
 			,error : function(e){
 			}

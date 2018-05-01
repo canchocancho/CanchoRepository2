@@ -225,7 +225,6 @@ private static String executeCommand(String command) throws IOException, Interru
 	    exitCode = process.waitFor();
 	    
 	    if (exitCode == 0) {
-	    	FileService.deleteSaved();
 		}  
 	    return getStringFromInputStream(process.getInputStream());
 	}
@@ -430,7 +429,7 @@ private static String executeCommandZ(String command) throws IOException, Interr
 		  
 		  int fNum = ppListn;
 		  
-	      int endFrame = (int)(Double.parseDouble(imgFrame) + 1);
+	      int endFrame = (int)(Double.parseDouble(imgFrame) + 4);
 	      
 	      if(fNum == 2) {
 	    	  command= "ffmpeg -i A.mp4 -i c:\\" + imgPath + " -filter_complex \"[0:v][1:v] overlay=0:0:enable='between(t,"+imgFrame+","+ endFrame +")'\" -pix_fmt yuv420p -c:a copy c:/tomolog/maked/"+ ppListn +".mp4";
@@ -464,7 +463,6 @@ private static String executeCommandZ(String command) throws IOException, Interr
 			}
 	   }
 	 public static void fisaving() {
-		 System.out.println("오니");
 		  String ori = "";
 		  File pp = new File(savedPath);
 		  String[] ppList = pp.list();

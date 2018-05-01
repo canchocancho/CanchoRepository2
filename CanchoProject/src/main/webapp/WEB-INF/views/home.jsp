@@ -46,7 +46,6 @@
 		function createVideo(){
 			location.href = "editor";
 		}
-
 			$(function(){
 				
 				//유효성 검사

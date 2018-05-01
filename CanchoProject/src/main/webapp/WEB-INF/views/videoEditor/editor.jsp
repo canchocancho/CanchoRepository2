@@ -4,7 +4,7 @@
 <!doctype html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Example :: Movie Masher</title>
+    <title>TOMOLog</title>
     
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
    <link rel="stylesheet" href="resources/vendor/jquery/jquery-ui-1.12.1/jquery-ui.css">
@@ -48,16 +48,16 @@
    
   </head> 
   <body onload='mm_load()'>
+  <header>
   <nav class="navbar navbar-default navbar-fixed-top menu">
         <div class="container">
-
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <img id="logologo" src="resources/images/logo.png" alt="logo" /></a>
           </div>
         </div><!-- /.container -->
       </nav>
-    </header>
+   </header>
    <div id="upperContainer">  
       <div id ="playerContainer">
           <div id="playerBox">
@@ -98,22 +98,26 @@
          <table id="iconTable">
             <tr class="con_tr">
                <td class="con_td"><img src="resources/images/splitCon.png" id="split" class="bottom_cons"></td>
-               <td class="con_td"><img src="resources/images/muteCon.png" id="mute" clicked="false" class="bottom_cons"></td>
+               <td class="con_td"><img src="resources/images/saveCon.png" id="save" clicked="false" class="bottom_cons"></td>
             </tr>
             <tr class="text_tr">
                <td class="text_td">split</td>
-               <td class="text_td">mute</td>
+               <td class="text_td">save</td>
             </tr>
             <tr class="con_tr">
                <td class="con_td"><img src="resources/images/deleteCon.png" id="delete" class="bottom_cons"></td>
                <td class="con_td"><img src="resources/images/clearCon.png" id="clear" class="bottom_cons"></td>
-               <td class="con_td"><button id = "save">저장</button></td>
             </tr>
             <tr class="text_tr">
                <td class="text_td">delete</td>
                <td class="text_td">clear</td>
             </tr>
+            <tr>
          </table>
+         <form action="post/write2" method="post" enctype="multipart/form-data">
+			<input type="file" name="upload" accept="file_extension|audio/*|video/*|image/*|media_type">
+			<input type="submit" value="저장"> 	
+   		</form>
       </div>
    </div>
       <div id="middle"></div> 
@@ -166,35 +170,5 @@
       </div>
       <div id = "volume"></div>
    </div>
-   
-   
-   
-   
-   
-   
-   
-   
-   <div>
-   	<form action="post/write2" method="post" enctype="multipart/form-data">
-   	
-   		<input type="file" name="upload" accept="file_extension|audio/*|video/*|image/*|media_type">
-   		<input type="submit" value="저장">
-   	   	
-   	</form>
-   </div>
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
   </body>
 </html>

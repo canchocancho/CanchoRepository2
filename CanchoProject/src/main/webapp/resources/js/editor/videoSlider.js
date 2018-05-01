@@ -167,7 +167,7 @@ function MainTrackEventRegister(){
 			for(var i = 0; i < IdsOftrackObjs.length; i++){
 				var thisId = IdsOftrackObjs[i];
 				if(clickedObj == thisId) continue;
-				$('#' + thisId).css({'border-color': '#2e2e2e'});
+			/*	$('#' + thisId).css({'border-color': '#2e2e2e'});*/
 				$('#' + thisId).attr('clicked', 'false');
 			}
 		}
@@ -194,7 +194,7 @@ function UnSeletedObj(){
 	for(var i = 0; i < IdsOftrackObjs.length; i++){
 		var thisId = IdsOftrackObjs[i];
 		if(clickedObj == thisId) continue;
-		$('#' + thisId).css({'border-color': '#2e2e2e'});
+		/*$('#' + thisId).css({'border-color': '#2e2e2e'});*/
 		$('#' + thisId).attr('clicked', 'false');
 	}	
 }
@@ -259,7 +259,7 @@ function videoDragDropEventHandler(){
 	
 	$('#video-track').on('dragenter dragover', function(e) {
 		e.preventDefault();
-		$(this).css('border', '2px solid #ff0080');
+		/*$(this).css('border', '2px solid #ff0080');*/
 	});
 	$('#video-track').on('drop', function(e) {
 		e.preventDefault();
@@ -285,7 +285,7 @@ function subTrackDragDropEventHandler(trackId, type){
 	
 	$('#' + trackId).on('dragenter dragover', function(e) {
 		e.preventDefault();
-		$('#' + trackId + '-cont').css('border', '2px solid #ff0080');
+	/*	$('#' + trackId + '-cont').css('border', '2px solid #ff0080');*/
 	});	
 	$('#' + trackId).on('drop', function(e) {
 		e.preventDefault();
@@ -691,7 +691,7 @@ function trackObjEventRegister(){
 			
 		}
 		else {
-			$(this).css({'border-color': '#2e2e2e'});
+		/*	$(this).css({'border-color': '#2e2e2e'});*/
 			$(this).attr('clicked', 'false');
 			timeLineSplitEventHandlerRemove();
 			clickedObj = '';

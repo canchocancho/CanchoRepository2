@@ -62,7 +62,9 @@ public class editController {
 	
 	
 	@RequestMapping(value = "/editor", method = RequestMethod.GET)
-	public String home() {
+	public String home(HttpSession session) {
+		String user = (String)session.getAttribute("loginId");
+		System.out.println(user);
 		return "videoEditor/editor";
 	}
 	
@@ -194,7 +196,8 @@ public class editController {
 	@ResponseBody
 	@RequestMapping(value="saveVideoFile", method = RequestMethod.POST)
 	public void saveVideoFile(@RequestBody editorVO editorVO){
-		
+			
+			System.out.println(editorVO.getUrls());
 			int  folderNum = Integer.parseInt(editorVO.getCount());
 			int lastIndex = editorVO.getvFname().lastIndexOf('.');
 		    String fileName = editorVO.getvFname().substring(0, lastIndex); 
@@ -244,18 +247,26 @@ public class editController {
 		    	  vList = new ArrayList<FrameVO>();
 		      }
 		      
-		      saveFileManager.makeVideo();
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="makeVideo", method = RequestMethod.POST)
+	public void makeVideo(){
+		saveFileManager.makeVideo();
+	}
+
+	@ResponseBody
 	@RequestMapping(value="saveImageFile", method = RequestMethod.POST)
-	public void saveImageFile(@RequestBody editorVO editorVO){	
+	public void saveImageFile(@RequestBody editorVO editorVO){
+		System.out.println(editorVO.getImgPath());
 		saveFileManager.makeImage(editorVO.getImgPath(), editorVO.getImgFrame());
+		
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="saveAudioFile", method = RequestMethod.POST)
-	public void saveAudioeFile(@RequestBody editorVO editorVO){	
+	public void saveAudioeFile(@RequestBody editorVO editorVO){
+		System.out.println(editorVO.getUrls());
 		saveFileManager.calMsTime(editorVO.getUrls(),editorVO.getFrame());
 	}
 	
@@ -263,6 +274,8 @@ public class editController {
 	@RequestMapping(value="done", method = RequestMethod.POST)
 	public void done(){	
 		saveFileManager.fisaving();
+		FileService.deleteSaved();
+		FileService.deleteMaked();
 	}
 }
 

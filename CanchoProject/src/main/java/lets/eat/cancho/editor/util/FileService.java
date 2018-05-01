@@ -279,4 +279,29 @@ public class FileService {
         return result;
      }
 	
+	public static void deleteMaked() {
+	      boolean result = false;
+	      
+	      String makedPath = "c:\\tomolog\\maked\\";
+	      
+	      File makedFile = new File(makedPath);
+	      
+	      String[] mnameList = makedFile.list();
+	       int fCnt = mnameList.length;
+	       String childPath = "";
+	       
+	       for(int i = 0; i < fCnt; i++) {
+	          System.out.println(mnameList[i]);
+	         childPath = makedFile + "/" +mnameList[i];
+	         File f = new File(childPath);
+	         if( ! f.isDirectory()) {
+	           f.delete();
+	         }
+	       }
+	      
+	       File mf = new File(makedPath);
+	        mf.delete();   
+	   }
+	
+	
 }

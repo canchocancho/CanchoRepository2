@@ -167,7 +167,7 @@ input {
 }
 
 #firstTrack {
-	width: 1298px;
+	width: 1305px;
 	border: 1px solid #0477A8;
 	background-color: white;
 }
@@ -207,8 +207,8 @@ audio {
 	overflow:hidden;
 	display: inline-block;
 	background-color:#57C9FC;
-	border: 2px solid;
-	border-color: #0477A8;
+	/* border: 2px solid;
+	border-color: #0477A8; */
 	cursor: pointer;
 	height:56px;
 	color: #fff;
@@ -218,8 +218,8 @@ audio {
 	overflow:hidden;
 	display: inline-block;
 	background-color:#f2ff02;
-	border: 2px solid;
-	border-color: #2e2e2e;
+	/* border: 2px solid;
+	border-color: #2e2e2e; */
 	cursor: pointer;
 	height:56px;
 	color: #fff;	
@@ -256,8 +256,8 @@ audio {
 	overflow:hidden;
 	display: inline-block;
 	background-color:#6547b1;
-	border: 2px solid;
-	border-color: #262626;
+	/* border: 2px solid;
+	border-color: #262626; */
 	cursor: pointer;
 	height:56px;
 	color: #fff;
@@ -268,8 +268,8 @@ audio {
 	overflow:hidden;
 	display: inline-block;
 	background-color:#0080c0;
-	border: 2px solid;
-	border-color: #2e2e2e;
+	/* border: 2px solid;
+	border-color: #2e2e2e; */
 	cursor: pointer;
 	height:56px;
 	color: #fff;

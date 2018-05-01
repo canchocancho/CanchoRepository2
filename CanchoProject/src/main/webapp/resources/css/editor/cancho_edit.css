@@ -4,11 +4,13 @@ body {
 
 	width: 100%;
 	margin: 0px;
+	height: 100%;
 	/* background: white; */
 	/* background-color: #0093b7;  */
 	/* background-image: url(../../images/editorBg2.jpg);
 	background-size: cover;  */
 	/* background-color: white; */
+	overflow: hidden;
 	
 }
 
@@ -149,8 +151,8 @@ body {
 					}
 			
 						.bottom_cons {
-							width: 60px;
-							height: 60px
+							width: 55px;
+							height: 55px
 						}
 					
 				.text_tr {
@@ -169,8 +171,7 @@ body {
 	#downContainer {
 		width: 100%;
 		height: 58%; 
-		overflow: auto;
+		/* overflow: auto; */
 		background-color: #B2EBF4;
 	}
-	
 	
