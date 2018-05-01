@@ -60,7 +60,7 @@
 			<mvc:mapping path="/user/editProfile"/>
 			<mvc:mapping path="/user/myPage"/>
 			<mvc:mapping path="/user/updateInfo"/>
-			<mvc:mapping path="/videoEditor/editor"/>
+			<mvc:mapping path="/editor"/>
 			
 			<beans:ref bean="loginInterceptor"/>
 		</mvc:interceptor>
