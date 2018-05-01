@@ -50,7 +50,6 @@ function add_mash(id,fname,url,count,length,isAudio){
 	var zeroPlus = '';
 	var duration = count/30;
 	var zeroCount = String(count.toString()).length;
-	alert(zeroCount);
 	for(var i = 0; i <= zeroCount; i++){
 		zeroPlus += '0';
 	}

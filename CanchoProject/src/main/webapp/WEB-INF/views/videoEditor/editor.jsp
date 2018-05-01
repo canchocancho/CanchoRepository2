@@ -55,8 +55,6 @@
           <div class="navbar-header">
             <img id="logologo" src="resources/images/logo.png" alt="logo" /></a>
           </div>
-
-          
         </div><!-- /.container -->
       </nav>
     </header>

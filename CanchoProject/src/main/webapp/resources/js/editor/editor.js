@@ -119,24 +119,23 @@ $(function(){
 		var vFname
 		var frame;
 		var count = 0;
-		var turnOn = true;
 		var length;
-		var url;
+		var urls;
+		var imgPath;
+		var imgFrame;
 		for (var i = 0; i < media.length; i++) {
 			if (media[i].type == "video") {
 				mfname = media[i].label;
 				type = media[i].type;
 				urls = media[i].url;
 				for (var vb = 0; vb < video[0].clips.length; vb++) {
-					if (media[i].id == video[0].clips[vb].id) {
+					if (media[i].type == "video" || media[i].id == video[0].clips[vb].id) {
 						vid = video[0].clips[vb].id;
 						frames = video[0].clips[vb].frames;
 						trim = video[0].clips[vb].trim;
 						frame = video[0].clips[vb].frame;
 						vFname = mfname;
 						length = video[0].clips.length;
-						count++
-						alert(count);
 						$.ajax({
 							type : "POST"
 							,url : "saveVideoFile"
@@ -151,7 +150,9 @@ $(function(){
 								"frame" : frame,
 								"count" : count,
 								"length" : length,
-								"urls" : urls
+								"urls" : urls,
+								"imgPath" : imgPath,
+								"imgFrame" : imgFrame
 							})
 							,success : function(){
 							}
@@ -166,7 +167,8 @@ $(function(){
 				type = media[i].type;
 				for (var aa = 0; aa < audio.length; aa++) {
 					for (var ab = 0; ab < audio[aa].clips.length; ab++) {
-						if (media[i].id == audio[aa].clips[ab].id && aa == audio[aa].index) {
+						if (media[i].id == audio[aa].clips[ab].id && audio[aa].index != 0) {
+							urls = media[i].url;
 							vid = audio[aa].clips[ab].id;
 							frames = audio[aa].clips[ab].frames;
 							trim = audio[aa].clips[ab].trim;
@@ -175,14 +177,12 @@ $(function(){
 							$.ajax({
 								type : "POST"
 								,url : "saveAudioFile"
+								,async : false
 								,contentType : "application/json; charset=utf-8"
 								,data :JSON.stringify({
 									"frames" : frames,
-									"vid" : vid,
-									"trim" : trim,
 									"frame" : frame,
-									"vFname" : vFname,
-									"type" : type
+									"urls" : urls
 								})
 								,success : function(){
 									
@@ -203,31 +203,38 @@ $(function(){
 							vid = video[va].clips[vb].id;
 							frames = video[va].clips[vb].frames;
 							trim = video[va].clips[vb].trim;
-							frame = video[va].clips[vb].frame
 							vFname = mfname;
+							imgPath = media[i].url
+							imgFrame = video[va].clips[vb].frame;
 							$.ajax({
 								type : "POST"
 									,url : "saveImageFile"
 										,contentType : "application/json; charset=utf-8"
-											,data :JSON.stringify({
-												"frames" : frames,
-												"vid" : vid,
-												"trim" : trim,
-												"vFname" : vFname,
-												"frame" : frame,
-												"type" : type
+										,async : false
+										,data :JSON.stringify({
+												"imgPath" : imgPath,
+												"imgFrame" : imgFrame
 											})
 											,success : function(){
 											}
 								,error : function(e){
-									alert("실패");
 								}
 							});
 						}
 					}
 				}
 			}
-		}	
+		}
+		$.ajax({
+			type : "POST"
+			,url : "done"
+			,contentType : "application/json; charset=utf-8"	
+			,async : false
+			,success : function(){
+			}
+			,error : function(e){
+			}
+		});	
 	});
 });
 

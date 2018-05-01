@@ -10,8 +10,22 @@ public class editorVO {
 	private String count;
 	private String length;
 	private String urls;
+	private String imgPath;
+	private String imgFrame;
 	
 	
+	public String getImgPath() {
+		return imgPath;
+	}
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+	public String getImgFrame() {
+		return imgFrame;
+	}
+	public void setImgFrame(String imgFrame) {
+		this.imgFrame = imgFrame;
+	}
 	public String getUrls() {
 		return urls;
 	}
@@ -69,9 +83,9 @@ public class editorVO {
 	
 	public editorVO(){
 	}
-
+	
 	public editorVO(String vid, String frames, String trim, String vFname, String type, String frame, String count,
-			String length, String urls) {
+			String length, String urls, String imgPath, String imgFrame) {
 		super();
 		this.vid = vid;
 		this.frames = frames;
@@ -82,8 +96,9 @@ public class editorVO {
 		this.count = count;
 		this.length = length;
 		this.urls = urls;
+		this.imgPath = imgPath;
+		this.imgFrame = imgFrame;
 	}
-	
 	@Override
 	public String toString() {
 		return "editorVO [vid=" + vid + ", frames=" + frames + ", trim=" + trim + ", vFname=" + vFname + ", type="

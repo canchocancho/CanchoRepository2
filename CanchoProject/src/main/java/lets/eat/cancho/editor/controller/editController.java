@@ -50,8 +50,8 @@ import lets.eat.cancho.editor.vo.editorVO;
 
 @Controller
 public class editController {
-	
 	HashMap<String, String> delMap = new HashMap<String, String>();
+	
 	
 	/*사용자에 토모로그 폴더 생기게*/
 	
@@ -194,86 +194,76 @@ public class editController {
 	@ResponseBody
 	@RequestMapping(value="saveVideoFile", method = RequestMethod.POST)
 	public void saveVideoFile(@RequestBody editorVO editorVO){
-
-		int  folderNum = Integer.parseInt(editorVO.getCount());
 		
-		int lastIndex = editorVO.getvFname().lastIndexOf('.');
-	      String fileName = editorVO.getvFname().substring(0, lastIndex);
-	      
-	      String trim = String.format("%.0f", (Double.parseDouble(editorVO.getTrim())));
-	      String frame = String.format("%.0f", (Double.parseDouble(editorVO.getFrame())));
-	      String frames = String.format("%.0f", (Double.parseDouble(editorVO.getFrames())));
-	      
-	      int trimN = Integer.parseInt(trim);
-	      int framesN = Integer.parseInt(frames);
-	      int frameN = Integer.parseInt(frame);
-	      
-	      int startF = 0;
-	      int endF = 0;
-	      
-	      if(trimN == 0) {
-	         startF = 0;
-	         endF = framesN * 30;
-	      }
-	      
-	      if(trimN != 0) {
-	         startF = (trimN * 30) + 1;
-	         endF = ((startF-1) + framesN * 30);
-	      }
-	      
-	      String startFrame = String.valueOf(startF);
-	      String endFrame = String.valueOf(endF);
-	      
-	      
-	      FrameVO fr = new FrameVO();
-	      fr.setStartFrame(startFrame);
-	      fr.setEndFrame(endFrame);
-	      fr.setFolderNum(folderNum);
-	      fr.setFileName(fileName);
-	      fr.setFrame(frameN);
-	      vList.add(fr);
-	      
-	      Collections.sort(vList);
-	      if(vList.size() == Integer.parseInt(editorVO.getLength())) {
-	    	  for(int i = 0; i < vList.size(); i++) {
-	    		saveFileManager.numbering(vList.get(i).getStartFrame(), vList.get(i).getEndFrame(), vList.get(i).getFileName());
-	    	  }
-	    	  for(int j = 0; j < vList.size(); j++) {
-	    		  saveFileManager.calAudio(Integer.parseInt(vList.get(j).getStartFrame()), 
-	    				  Integer.parseInt(vList.get(j).getEndFrame()), vList.get(j).getFileName(), editorVO.getUrls());  
-	    	  }
-	    	  vList = null;
-	    	  vList = new ArrayList<FrameVO>();
-	      }
-	      
-	      saveFileManager.makeVideo();
-
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="saveAudioFile", method = RequestMethod.POST)
-	public void saveAudioFile(@RequestBody editorVO editorVO){
-	/*	System.out.println("frames : " + editorVO.getFrames());
-		System.out.println("trim : " + editorVO.getTrim());
-		System.out.println("type : " + editorVO.getType());
-		System.out.println("fname : " + editorVO.getvFname());
-		System.out.println("vid : " + editorVO.getVid());
-		System.out.println("frame : " + editorVO.getFrame());
-		System.out.println("--------------------");*/
+			int  folderNum = Integer.parseInt(editorVO.getCount());
+			int lastIndex = editorVO.getvFname().lastIndexOf('.');
+		    String fileName = editorVO.getvFname().substring(0, lastIndex); 
+		    String trim = String.format("%.0f", (Double.parseDouble(editorVO.getTrim())));
+		    String frame = String.format("%.0f", (Double.parseDouble(editorVO.getFrame())));
+		    String frames = String.format("%.0f", (Double.parseDouble(editorVO.getFrames())));
+		      
+		      int trimN = Integer.parseInt(trim);
+		      int framesN = Integer.parseInt(frames);
+		      int frameN = Integer.parseInt(frame);
+		      
+		      int startF = 0;
+		      int endF = 0;
+		      
+		      if(trimN == 0) {
+		         startF = 0;
+		         endF = framesN * 30;
+		      }
+		      
+		      if(trimN != 0) {
+		         startF = (trimN * 30) + 1;
+		         endF = ((startF-1) + framesN * 30);
+		      }
+		      
+		      String startFrame = String.valueOf(startF);
+		      String endFrame = String.valueOf(endF);
+		      
+		      
+		      FrameVO fr = new FrameVO();
+		      fr.setStartFrame(startFrame);
+		      fr.setEndFrame(endFrame);
+		      fr.setFolderNum(folderNum);
+		      fr.setFileName(fileName);
+		      fr.setFrame(frameN);
+		      vList.add(fr);
+		      
+		      Collections.sort(vList);
+		      if(vList.size() == Integer.parseInt(editorVO.getLength())) {
+		    	  for(int i = 0; i < vList.size(); i++) {
+		    		saveFileManager.numbering(vList.get(i).getStartFrame(), vList.get(i).getEndFrame(), vList.get(i).getFileName());
+		    	  }
+		    	  for(int j = 0; j < vList.size(); j++) {
+		    		  saveFileManager.calAudio(Integer.parseInt(vList.get(j).getStartFrame()), 
+		    				  Integer.parseInt(vList.get(j).getEndFrame()), vList.get(j).getFileName(), editorVO.getUrls());  
+		    	  }
+		    	  vList = null;
+		    	  vList = new ArrayList<FrameVO>();
+		      }
+		      
+		      saveFileManager.makeVideo();
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="saveImageFile", method = RequestMethod.POST)
-	public void saveImageFile(@RequestBody editorVO editorVO){
-		/*System.out.println("frames : " + editorVO.getFrames());
-		System.out.println("trim : " + editorVO.getTrim());
-		System.out.println("type : " + editorVO.getType());
-		System.out.println("fname : " + editorVO.getvFname());
-		System.out.println("vid : " + editorVO.getVid());
-		System.out.println("frame : " + editorVO.getFrame());
-		System.out.println("--------------------");*/
+	public void saveImageFile(@RequestBody editorVO editorVO){	
+		saveFileManager.makeImage(editorVO.getImgPath(), editorVO.getImgFrame());
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value="saveAudioFile", method = RequestMethod.POST)
+	public void saveAudioeFile(@RequestBody editorVO editorVO){	
+		saveFileManager.calMsTime(editorVO.getUrls(),editorVO.getFrame());
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="done", method = RequestMethod.POST)
+	public void done(){	
+		saveFileManager.fisaving();
+	}
 }
 
 

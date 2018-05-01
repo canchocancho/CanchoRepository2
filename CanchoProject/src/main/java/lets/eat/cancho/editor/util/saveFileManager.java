@@ -11,7 +11,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+
+import lets.eat.cancho.editor.vo.editorVO;
 
 public class saveFileManager {
 	//	[video] path선언
@@ -160,9 +163,6 @@ public class saveFileManager {
 		
 	    int exitCode = 0;
 	    String result = "";
-	    
-	  
-		/*System.out.println(command);*/
 		
 	    Process process;
 	    ProcessBuilder builder = new ProcessBuilder(command.replaceAll("[ ]+", " ").split(" "));
@@ -173,15 +173,37 @@ public class saveFileManager {
 	    exitCode = process.waitFor();
 	    
 	    if (exitCode == 0) {
-			System.out.println("끝났습니다.");
-			videoAndAudio();
+	    	makeAudio();
 		}else{
 		}
 	    
 	    return getStringFromInputStream(process.getInputStream());
 	}
 	
-private static String executeCommandA(String command) throws IOException, InterruptedException {
+private static String executeCommand(String command) throws IOException, InterruptedException {
+		
+		File goPath = new File(savedPath);
+		if (!goPath.isDirectory()) {
+			goPath.mkdirs();
+		}
+		
+	    int exitCode = 0;
+	    String result = "";
+		
+	    Process process;
+	    ProcessBuilder builder = new ProcessBuilder(command.replaceAll("[ ]+", " ").split(" "));
+	    
+	    builder.inheritIO();
+	    builder.directory(goPath);
+	    process = builder.start();
+	    exitCode = process.waitFor();
+
+	    
+	    return getStringFromInputStream(process.getInputStream());
+	}
+	
+	
+	private static String executeCommandA(String command) throws IOException, InterruptedException {
 		
 		File goPath = new File(savedPath);
 		if (!goPath.isDirectory()) {
@@ -201,6 +223,59 @@ private static String executeCommandA(String command) throws IOException, Interr
 	    builder.directory(goPath);
 	    process = builder.start();
 	    exitCode = process.waitFor();
+	    
+	    if (exitCode == 0) {
+	    	FileService.deleteSaved();
+		}  
+	    return getStringFromInputStream(process.getInputStream());
+	}
+	
+	private static String executeCommandI(String command) throws IOException, InterruptedException {
+		
+		File goPath = new File(savedPath);
+		if (!goPath.isDirectory()) {
+			goPath.mkdirs();
+		}
+		
+	    int exitCode = 0;
+	    String result = "";
+	    
+		
+	    Process process;
+	    ProcessBuilder builder = new ProcessBuilder(command.replaceAll("[ ]+", " ").split(" "));
+	    
+	    builder.inheritIO();
+	    builder.directory(goPath);
+	    process = builder.start();
+	    exitCode = process.waitFor();
+	    if (exitCode == 0) {
+			System.out.println("이미지 삽입 완료");
+		}
+	    
+	    return getStringFromInputStream(process.getInputStream());
+	}
+	
+private static String executeCommandZ(String command) throws IOException, InterruptedException {
+		
+		File goPath = new File(savedPath);
+		if (!goPath.isDirectory()) {
+			goPath.mkdirs();
+		}
+		
+	    int exitCode = 0;
+	    String result = "";
+	    
+		
+	    Process process;
+	    ProcessBuilder builder = new ProcessBuilder(command.replaceAll("[ ]+", " ").split(" "));
+	    
+	    builder.inheritIO();
+	    builder.directory(goPath);
+	    process = builder.start();
+	    exitCode = process.waitFor();
+	    if (exitCode == 0) {
+			
+		}
 	    
 	    return getStringFromInputStream(process.getInputStream());
 	}
@@ -247,7 +322,7 @@ private static String executeCommandA(String command) throws IOException, Interr
 	      numberingA += 1;
 	      
 	      double startTime = startNum / 30;
-	      double endTime = endNum / 30;
+	      double endTime = (endNum / 30)-startTime;
 	      
 	      //   start
 	      String startAu = "";
@@ -327,7 +402,7 @@ private static String executeCommandA(String command) throws IOException, Interr
 	      System.out.println("start Time: " + startAu + "    end Time:  " + endAu);
 	      
 	      try {
-	      executeCommandA(command);
+	      executeCommand(command);
 	      } catch (IOException e) {
 	      // TODO Auto-generated catch block
 	      e.printStackTrace();
@@ -336,19 +411,98 @@ private static String executeCommandA(String command) throws IOException, Interr
 	      e.printStackTrace();
 	      }
 	 }
-	 public static void videoAndAudio() {
-	      
-	      //ffmpeg -y -i video.mp4 -itsoffset 00:00:30 -i music.ogg -map 0:0 -map 1:0 -c:v copy -shortest out.mp4
-	      /*String command = "ffmpeg -y -i " + newPath + "saveVideo.mp4 -itsoffset " + startAu;
-	      command += " -i audio" + numberingA + ".mp3 -map 0:0 -map 1:0 -c:v copy -shortest outV" + numberingA + ".mp4"; */
-		 //"ffmpeg -r 24 비디오파일 -f concat -safe 0 -i 오디오파일.txt -c:a aac -pix_fmt yuv420p -crf 23 -r 24 -shortest -y 만들어낸비디오이름.mp4
-	      //String command = "ffmpeg -r 24 " +  savedPath + "saveVideo.mp4 -f concat -safe 0 -i auido.txt -c:a aac -pix_fmt yuv420p -crf 23 -r 24 -shortest -y comV.mp4";
-	      String command = "ffmpeg -r 30 -i " + savedPath + "saveVideo.mp4 -f concat -safe 0 -i c:\\tomolog\\saved\\audio.txt -c:a aac -pix_fmt yuv420p -crf 23 -r 30 -shortest -y video-from-framess.mp4";
+	 public static void makeAudio() {
+	      String command = "ffmpeg -r 30 -i " + savedPath + "saveVideo.mp4 -f concat -safe 0 -i c:\\tomolog\\saved\\audio.txt -c:a aac -pix_fmt yuv420p -crf 23 -r 30 -shortest -y A.mp4";
 	      try {
 				executeCommandA(command);
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
 	   }
+	 
+	 public static void makeImage(String imgPath, String imgFrame) {
+		 
+		 //int i = ;
+		 String command ="";
+		  File pp = new File(savedPath);
+		  String[] ppList = pp.list();
+		  int ppListn = ppList.length;
+		  
+		  int fNum = ppListn;
+		  
+	      int endFrame = (int)(Double.parseDouble(imgFrame) + 1);
+	      
+	      if(fNum == 2) {
+	    	  command= "ffmpeg -i A.mp4 -i c:\\" + imgPath + " -filter_complex \"[0:v][1:v] overlay=0:0:enable='between(t,"+imgFrame+","+ endFrame +")'\" -pix_fmt yuv420p -c:a copy c:/tomolog/maked/"+ ppListn +".mp4";
+	      }
+	      else {
+	    	  command = "ffmpeg -i "+ (ppListn - 1) + ".mp4 -i c:\\" + imgPath;
+	    	  command += " -filter_complex \"[0:v][1:v] overlay=0:0:enable='between(t,"+imgFrame+","+ endFrame +")'\" -pix_fmt yuv420p -c:a copy c:/tomolog/maked/"+ ppListn +".mp4";
+	      }
+	      try {
+				executeCommandI(command);
+			} catch (IOException | InterruptedException e) {
+				e.printStackTrace();
+			}
+	   }
+	 public static void calMsTime(String url , String start) {
+		  File ap = new File(savedPath);
+		  String[] apList = ap.list();
+		  int apListn = apList.length;  
+	      double sF = (Double.parseDouble(start)) * 1000;
+	      String command = "";
+	      String nam = "\"";
+	      if (apListn <= 2) {
+	    	  command = "ffmpeg -i " + savedPath +"A.mp4 -i c:\\" + url + " -filter_complex " + nam + "[1]adelay=" + sF + "|" + sF + "[aud];[0][aud]amix" + nam + " -c:v copy c:\\tomolog\\maked\\" + (apListn + 1) + ".mp4";
+	      }else{
+	      command = "ffmpeg -i " + savedPath + (apListn-1) + ".mp4 -i c:\\" + url + " -filter_complex " + nam + "[1]adelay=" + sF + "|" + sF + "[aud];[0][aud]amix" + nam + " -c:v copy c:\\tomolog\\maked\\" + apListn + ".mp4";
+	      }
+	      try {
+	    	  executeCommandZ(command);
+			} catch (IOException | InterruptedException e) {
+				e.printStackTrace();
+			}
+	   }
+	 public static void fisaving() {
+		 System.out.println("오니");
+		  String ori = "";
+		  File pp = new File(savedPath);
+		  String[] ppList = pp.list();
+		  int ppListn = ppList.length;
+		  long time = new Date().getTime();
+	      String sysName = System.getProperty("user.name");
+	      String downPath = "c:\\users\\" + sysName + "\\downloads\\tomolog"+ time +".mp4";
+	      
+	    if (ppListn == 2) {
+	    	ori = "c:\\tomolog\\maked\\A.mp4";
+		}else{
+			ori = "c:\\tomolog\\maked\\"+ (ppListn -1)+".mp4";
+		}
+	        
+	       File source = new File(ori);
+	       File dest = new File(downPath);
+
+	       long start = System.nanoTime();
+	       fisavingFile(source, dest);
+	        
+	     }
+	      
+	   public static void fisavingFile(File source, File dest){
+		   
+		  
+	      
+	        FileChannel sourceChannel = null;
+	        FileChannel destChannel = null;
+	        
+	        try {
+	            sourceChannel = new FileInputStream(source).getChannel();
+	            destChannel = new FileOutputStream(dest).getChannel();
+	            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+	            sourceChannel.close();
+	            destChannel.close();
+	        }catch(Exception e){       
+	        }
+	        
+	   }    
 }
 

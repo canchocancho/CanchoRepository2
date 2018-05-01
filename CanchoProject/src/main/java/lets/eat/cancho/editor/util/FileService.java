@@ -231,4 +231,52 @@ public class FileService {
 	
 	    
 	}
+	public static boolean deleteSaved() {
+        boolean result = false;
+        
+        
+        String savedPath = "c:\\tomolog\\saved\\";
+        String audioPath = savedPath + "audio\\";
+        // temp폴더 밑의 파일들을 삭제(오직 파일만 존재)
+        
+        File audiFile = new File(audioPath);
+        File tempFile = new File(savedPath);
+        
+        String[] anameList = audiFile.list();
+        int aCnt = anameList.length;
+        String ccPath = "";
+        
+        String[] fnameList = tempFile.list();
+         int fCnt = fnameList.length;
+         String childPath = "";
+         
+         for(int j = 0; j < aCnt; j++) {
+            ccPath = audiFile + "/" + anameList[j];
+            File a = new File(ccPath);
+            if(! a.isDirectory()) {
+               a.delete();
+            }
+         }
+         
+         audiFile.delete();
+         
+         for(int i = 0; i < fCnt; i++) {
+           childPath = tempFile + "/" +fnameList[i];
+           
+           File f = new File(childPath);
+           if( ! f.isDirectory()) {
+             f.delete();   //파일이면 바로 삭제
+           }
+           else {
+              
+           }
+           
+           }
+
+         File f = new File(savedPath);
+         f.delete();   //폴더는 맨 나중에 삭제
+        
+        return result;
+     }
+	
 }
