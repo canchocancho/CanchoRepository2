@@ -394,7 +394,7 @@
             
             <div class="post-content">
 
-           		<!-- 표지가 있을 경우 -->
+           		<!-- 표지가 있을 경우(표지+글인 경우) -->
 				<c:if test="${post.originalfile != null }">
 				<a href="post/readOnePost?post_num=${post.post_num }">
 				<img src="post/download?post_num=${post.post_num }" alt="post-image" class="img-responsive post-image">
@@ -410,7 +410,7 @@
 				</a>
 				</c:if>
                 
-                <!-- 표지가 없을 경우 -->
+                <!-- 표지가 없을 경우(글만 있거나 비디오가 있을 경우) -->
                 <c:if test="${post.originalfile == null }">
                 <div class="user-info">
                 <h1 style="text-align: center;"><a href="post/readOnePost?post_num=${post.post_num }">
