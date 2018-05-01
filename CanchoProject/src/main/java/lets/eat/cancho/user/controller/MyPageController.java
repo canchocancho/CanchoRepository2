@@ -190,6 +190,8 @@ public class MyPageController {
 	public String deleteFriend(String friend_id, HttpSession session, Model model){
 		logger.info("친구 삭제");
 		
+		String myId = (String) session.getAttribute("loginId");
+		
 		int result = dao1.deleteFriend(friend_id);
 		
 		if (result != 1) {
@@ -197,6 +199,10 @@ public class MyPageController {
 			model.addAttribute("errorMsg1", "친구 삭제 실패");
 			return "redirect:friendList";
 		}
+		
+		ArrayList<Post> postList = dao2.postList(myId);
+		session.setAttribute("postList", postList);
+		model.addAttribute("postList", postList);
 		
 		return "redirect:friendList";
 	}
