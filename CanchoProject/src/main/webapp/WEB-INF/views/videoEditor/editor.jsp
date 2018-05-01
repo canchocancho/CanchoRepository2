@@ -53,7 +53,7 @@
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <img id="logologo" src="resources/images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="/cancho"><img id="logologo" src="resources/images/logo.png" alt="logo" /></a>
           </div>
         </div><!-- /.container -->
       </nav>
