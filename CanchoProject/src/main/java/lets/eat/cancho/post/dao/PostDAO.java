@@ -37,6 +37,25 @@ public class PostDAO {
 		return result;
 	}
 	
+	//브이로그 작성
+	public int writePost2(Post post){
+		
+		logger.info("브이로그 작성 시작");
+		
+		PostMapper mapper = session.getMapper(PostMapper.class);
+		
+		int result = 0;
+		
+		try{
+			result = mapper.writePost2(post);
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
 	//포스트 목록
 	public ArrayList<Post> postList(String user_id){
 		

@@ -34,6 +34,31 @@
 			) 
 	</insert>
 	
+	<!-- 브이로그 저장 -->
+	<insert id="writePost2" parameterType="Post">
+		insert into
+			blog_post
+			(
+			post_num
+			,user_id
+
+			<if test="originalfile != null and savedfile != null">
+			,originalfile
+			,savedfile
+			</if>
+			)
+		values
+			(
+			blog_post_seq.nextval
+			,#{user_id}
+			
+			<if test="originalfile != null and savedfile != null">
+			,#{originalfile}
+			,#{savedfile}
+			</if>
+			) 
+	</insert>
+	
 	<!-- 포스트 목록 -->
 	<select id="postList" parameterType="String" resultType="Post">
 		select

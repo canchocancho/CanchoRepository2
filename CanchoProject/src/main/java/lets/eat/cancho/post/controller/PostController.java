@@ -345,5 +345,39 @@ public class PostController {
 		return "redirect:../";
 	}
 	
+	
+	@RequestMapping(value="write2", method=RequestMethod.POST)
+	public String write2(HttpSession session, Model model, MultipartFile upload){
+		
+		logger.info("WRITE VIDEO");
+
+		String loginId = (String)session.getAttribute("loginId");	
+        
+        Post post = new Post();
+        post.setUser_id(loginId);
+			//첨부파일이 있는 경우
+			//Post 객체에 originalFileName과 savedfileName을 저장
+			String savedfile = FileService.saveFile(upload, uploadPath); //저장된 파일명
+			post.setSavedfile(savedfile);
+			post.setOriginalfile(upload.getOriginalFilename());
+        
+		int result = dao.writePost2(post);
+		
+		if(result != 1){
+			//등록실패
+			model.addAttribute("errorMsg", "오류가 발생했습니다.");
+			logger.info("포스팅 실패");
+			
+			return "editor";
+		}
+		
+		logger.info("포스팅 종료");
+		
+		ArrayList<Post> postList = dao.postList(loginId);
+		session.setAttribute("postList", postList);
+
+		return "redirect:/";
+	}
+	
 
 }

@@ -13,9 +13,9 @@ CREATE TABLE blog_user
 CREATE TABLE blog_post
 (
     post_num            NUMBER           	PRIMARY KEY, 
-    post_title          VARCHAR2(144)		NOT NULL, 
-    post_title_clean    VARCHAR2(10)     	NULL, 
-    post_file           VARCHAR2(300)    	NOT NULL, 
+    post_title          VARCHAR2(144), 
+    post_title_clean    VARCHAR2(10), 
+    post_file           VARCHAR2(300), 
     user_id             VARCHAR2(45)     	NOT NULL, 
     originalfile		VARCHAR2(200),
 	savedfile			VARCHAR2(100),
@@ -23,22 +23,6 @@ CREATE TABLE blog_post
     post_like			NUMBER 				default 0,
     post_dislike		NUMBER   		 	default 0,
     CONSTRAINT blog_p_fk FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
-);
-
--- blog_vpost table
-CREATE TABLE blog_vpost
-(
-    post_num            NUMBER           	PRIMARY KEY, 
-    post_title          VARCHAR2(144)		NULL, 
-    post_title_clean    VARCHAR2(10)     	NULL, 
-    post_file           VARCHAR2(300)    	NULL, 
-    user_id             VARCHAR2(45)     	NOT NULL, 
-    originalfile		VARCHAR2(200),
-	savedfile			VARCHAR2(100),
-    post_date           DATE            	default SYSDATE,
-    post_like			NUMBER 				default 0,
-    post_dislike		NUMBER   		 	default 0,
-    CONSTRAINT blog_vp_fk FOREIGN KEY (user_id) REFERENCES blog_user (user_id)
 );
 
 -- blog_post sequence

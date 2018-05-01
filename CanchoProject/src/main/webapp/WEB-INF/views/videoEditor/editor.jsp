@@ -166,5 +166,35 @@
       </div>
       <div id = "volume"></div>
    </div>
+   
+   
+   
+   
+   
+   
+   
+   
+   <div>
+   	<form action="post/write2" method="post" enctype="multipart/form-data">
+   	
+   		<input type="file" name="upload" accept="file_extension|audio/*|video/*|image/*|media_type">
+   		<input type="submit" value="저장">
+   	   	
+   	</form>
+   </div>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
   </body>
 </html>
