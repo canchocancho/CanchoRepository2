@@ -157,7 +157,6 @@
               	</c:if>
               	
               <h4>${post.user_id}</h4>
-              <p class="text-muted">Creative Director</p>
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
@@ -176,12 +175,9 @@
             <div class="col-md-3"></div>
             <div class="col-md-7">
 
-
             <!-- Post Content
             ================================================= -->
-                    <!-- <div class="post-text"> -->
                       <p>${postText }</p>
-                    <!-- </div> -->
                     <br>
                     
                     <div class="line-divider"></div>
