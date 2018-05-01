@@ -41,12 +41,12 @@
 		function createPost(){
 			location.href = "post/writePost";
 		}
-/* 		
+ 		
 		//동영상 편집기로 이동
 		function createVideo(){
-			location.href = "editor/어쩌구";
+			location.href = "editor";
 		}
-			 */
+
 			$(function(){
 				
 				//유효성 검사

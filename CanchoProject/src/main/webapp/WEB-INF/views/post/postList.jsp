@@ -35,6 +35,11 @@
 			function createPost(){
 				location.href = "writePost";
 			}
+			
+			//동영상 편집기로 이동
+			function createVideo(){
+				location.href = "../editor";
+			}
 		</script>
 
 		<style>
