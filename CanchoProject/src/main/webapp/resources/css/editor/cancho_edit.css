@@ -84,7 +84,7 @@ body {
 		height: 95%;
 		float: left;
 		/* border-right: 2px solid #00BFFF; */
-		margin-left: 35px;
+		/* margin-left: 10px; */
 		margin-top: 20px;
 	}
 	
@@ -132,17 +132,17 @@ body {
 			width: 15%;
 			height: 95%;
 			float: left;
-			margin-left: 50px;
+			/* margin-left: 20px; */
 		}
 			#iconTable {
 				margin: 0px auto;
-				width: 200px;
-				height: 200px;
-				margin-top: 35px;
+				width: 350px;
+				height: 300px;
+				/* margin-top: 5px; */
 			}
 			
 				.con_tr {
-					height: 80px;
+					height: 70px;
 					text-align: center;
 				}
 				
@@ -151,8 +151,8 @@ body {
 					}
 			
 						.bottom_cons {
-							width: 55px;
-							height: 55px
+							width: 60px;
+							height: 60px;
 						}
 					
 				.text_tr {
@@ -163,6 +163,10 @@ body {
 					.text_td {
 						text-align: center;
 					}
+				#text_tt {
+					height: 20px;
+					width: 100px;
+				}
 		
 	#middle {
 		height: 20px;

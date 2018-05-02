@@ -274,6 +274,7 @@ public class editController {
 	@RequestMapping(value="done", method = RequestMethod.POST)
 	public void done(){	
 		saveFileManager.fisaving();
+		System.out.println("what");
 		FileService.deleteSaved();
 		FileService.deleteMaked();
 	}

@@ -112,12 +112,15 @@
                <td class="text_td">delete</td>
                <td class="text_td">clear</td>
             </tr>
-            <tr>
+            <tr id="text_tt">
+            	<td colspan="2">
+	            	<form action="post/write2" method="post" enctype="multipart/form-data">
+						<input type="file" name="upload" accept="file_extension|audio/*|video/*|image/*|media_type">
+						<input type="submit" value="POST"> 	
+	   				</form>
+   				</td>
+            </tr>
          </table>
-         <form action="post/write2" method="post" enctype="multipart/form-data">
-			<input type="file" name="upload" accept="file_extension|audio/*|video/*|image/*|media_type">
-			<input type="submit" value="저장"> 	
-   		</form>
       </div>
    </div>
       <div id="middle"></div> 

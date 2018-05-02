@@ -227,7 +227,7 @@ function videoSlider(){
         },
         update: function(event, ui) {
         	var idsInOrder = $("#video-track").sortable("toArray");
-        	reorderingVideo0Clips(idsInOrder);
+        	reorderingMainClips(idsInOrder);
         }
     });
 }
@@ -240,11 +240,11 @@ function drag(e) {
 }
 
 /**
- * 비디오 drag&drop 핸들러
+ * 전체 drag&drop 핸들러
  */
 function trackDragAndDropEventHander(){
 	var trackArr= Object.keys(subTrackObjNum);
-	videoDragDropEventHandler();
+	MainTrackDragDropEventHandler();
 	for(var i = 0; i < trackArr.length; i++){
 		var splited = trackArr[i].split('-');
 		var type = splited[0];
@@ -255,18 +255,17 @@ function trackDragAndDropEventHander(){
 /**
  * 메인 drag&drop
  */
-function videoDragDropEventHandler(){
+function MainTrackDragDropEventHandler(){
 	
 	$('#video-track').on('dragenter dragover', function(e) {
 		e.preventDefault();
-		/*$(this).css('border', '2px solid #ff0080');*/
 	});
 	$('#video-track').on('drop', function(e) {
 		e.preventDefault();
 		$(this).css('border', '0px');
 		var data = e.originalEvent.dataTransfer.getData("text");
 		if(checkFileType(data) == 'video') {
-			addVideoTrackVideoObj(data);
+			addMainTrackVideoObj(data);
 		}else{
 			return;
 		}
@@ -306,7 +305,7 @@ function subTrackDragDropEventHandler(trackId, type){
 /**
  * 메인트랙 오브젝트 추가
  */
-function addVideoTrackVideoObj(id){
+function addMainTrackVideoObj(id){
 	var ffid = $('#' + id).attr('ffid');
 	var path = $('#' + id).attr('path');
 	var fname = getFileName(path);	
@@ -332,7 +331,7 @@ function addVideoTrackVideoObj(id){
 			html += '</div>';
 			$('#video-track').html(html);
 			add_mash(newid,fname,videoInfo.extractPath.replace(/\\/gi, '/') ,videoInfo.count,videoInfo.length,videoInfo.isAudio);
-			resizeTrackObj(0);
+			resizeMainTrackObj(0);
 			MainTrackEventRemover();
 			MainTrackEventRegister();
 		},
@@ -403,7 +402,7 @@ function addSubTrackObj(trackId, id){
 /**
  * 메인 오브젝트 추가시 비율 재조정
  */
-function resizeTrackObj(maxValue){
+function resizeMainTrackObj(maxValue){
 	var videoTotalLength = 0;
 	var videoTrackObjsCnt = $.makeArray($(".video-obj").map(function(){
 	    return $(this).attr("frames");
@@ -456,7 +455,7 @@ function resizeSubTrackObj(id, trackId){
 		}
 	}
 	if( biggest > totalVideoTrack){
-		resizeTrackObj(biggest);
+		resizeMainTrackObj(biggest);
 	} else {
 		$('#'+id).css({
 			'heigth': height, 'width': newWidth
@@ -507,8 +506,21 @@ function updateLocationObj(id, trackId){
 	$("#" + id).attr('frame', newFrame);
 	mm_player.change(frame);
 }
+
 /**
- * 동영상 프레임 스플릿
+ * movieMasher 스플릿 핸들러
+ */
+function videoTrackSplitEventHandler(){
+	$('#split').off('click');
+	$('#split').on('click', function(){
+		if(getType(mm_player.mash.video[0].clips[selectedClipNum].id) == 'image') return;
+		videoClipSplit();
+		video0TrackRedraw();
+	});
+}
+
+/**
+ * 동영상 프레임 나누기
  */
 function videoClipSplit(){
 	var audio0Clips = mm_player.mash.audio[0].clips;
@@ -528,17 +540,6 @@ function videoClipSplit(){
 	selectedClip = video0Clips[selectedClipNum];
 	mm_player.selectedClip = selectedClip;
 	mm_player.split();
-}
-/**
- * movieMasher 스플릿 핸들러
- */
-function videoTrackSplitEventHandler(){
-	$('#split').off('click');
-	$('#split').on('click', function(){
-		if(getType(mm_player.mash.video[0].clips[selectedClipNum].id) == 'image') return;
-		videoClipSplit();
-		video0TrackRedraw();
-	});
 }
 
 function timeLineSplitEventHandlerRemove(){
@@ -585,7 +586,7 @@ function video0TrackRedraw(){
 		html += '</div>';
 	}
 	$('#video-track').html(html);
-	resizeTrackObj(0);
+	resizeMainTrackObj(0);
 	timeLineSplitEventHandlerRemove();
 	MainTrackEventRemover();
 	MainTrackEventRegister();
@@ -593,7 +594,7 @@ function video0TrackRedraw(){
 /**
  * 메인트랙 클립순서 변경
  */
-function reorderingVideo0Clips(videoOrders){
+function reorderingMainClips(videoOrders){
 	var video0Clips = mm_player.mash.video[0].clips;
 	var newVideo0Clips = [];
 	var imgIdxs = [];
@@ -684,9 +685,6 @@ function trackObjEventRegister(){
 			clickedObj = $(this).attr('id');
 			var trackId = $(this).attr('trackId');
 			var idInfo = clickedObj.split('-');
-			if(idInfo[0] == 'audio'){
-				audioTrackSplitEventHandler();
-			} 
 			UnSeletedObj();
 			
 		}
@@ -759,7 +757,7 @@ function selectedObjDelete(objId){
     	var newIdsInOrder =  reAssignUiId(idsInOrder, selectedClipNum);
     	clickedObj = '';
     	selectedClipNum = 0;
-    	reorderingVideo0Clips(newIdsInOrder);	
+    	reorderingMainClips(newIdsInOrder);	
 		timeLineSplitEventHandlerRemove();
 		videoTotalDuration -= selectedClip.frames;
 	}
@@ -848,29 +846,4 @@ function otherObjMove(track){
 		$("#" + idOfObj[i]).parent().css({position: 'relative'});
 		$("#" + idOfObj[i]).css({left: left, width: width, position:'absolute'});
 	}
-}
-
-function audioTrackSplitEventHandler(){
-	$('#split').off('click');
-	$('#split').on('click', function(){
-		var idInfo = clickedObj.split('-');
-		var trackId = $('#' + clickedObj).attr('trackId');
-		var trackInfo = trackId.split('-');
-		var frame = $("#" + clickedObj).attr('frame');
-		var clips = mm_player.mash.audio[trackInfo[1]*1].clips;
-		var index = 0;
-		for(var i = 0; i < clips.length; i++){
-			if(clips[i].frame == frame){
-				index = i;
-				break;
-			}
-		}
-		
-		var selectedClip = mm_player.mash.audio[trackInfo[1]*1].clips[index];
-		
-		mm_player.selectedClip = selectedClip;
-		mm_player.split();
-		reDrawTrack(clickedObj, trackInfo, index);
-		timeLineSplitEventHandlerRemove();
-	});
 }

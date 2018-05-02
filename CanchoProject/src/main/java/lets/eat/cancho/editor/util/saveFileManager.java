@@ -452,7 +452,7 @@ private static String executeCommandZ(String command) throws IOException, Interr
 	      String command = "";
 	      String nam = "\"";
 	      if (apListn <= 2) {
-	    	  command = "ffmpeg -i " + savedPath +"A.mp4 -i c:\\" + url + " -filter_complex " + nam + "[1]adelay=" + sF + "|" + sF + "[aud];[0][aud]amix" + nam + " -c:v copy c:\\tomolog\\maked\\" + (apListn + 1) + ".mp4";
+	    	  command = "ffmpeg -i " + savedPath +"A.mp4 -i c:\\" + url + " -filter_complex " + nam + "[1]adelay=" + sF + "|" + sF + "[aud];[0][aud]amix" + nam + " -c:v copy c:\\tomolog\\maked\\" + (apListn) + ".mp4";
 	      }else{
 	      command = "ffmpeg -i " + savedPath + (apListn-1) + ".mp4 -i c:\\" + url + " -filter_complex " + nam + "[1]adelay=" + sF + "|" + sF + "[aud];[0][aud]amix" + nam + " -c:v copy c:\\tomolog\\maked\\" + apListn + ".mp4";
 	      }
