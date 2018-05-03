@@ -64,19 +64,19 @@ public class UserController {
 		
 	    if(vo == null) {
 		    //아이디가 없는 경우
-	    	model.addAttribute("errorMsg", "존재하지 않는 아이디입니다.");
+	    	model.addAttribute("errorMsg", "加入されていないIDです。");
 	    	logger.info("로그인 실패");
 	    	return "user/loginPage";  
 		 }
 	    else if (!vo.getUser_password().equals(user.getUser_password())) {
 			 //비밀번호가 틀린 경우
-			 model.addAttribute("errorMsg", "비밀번호가 잘못되었습니다.");
+			 model.addAttribute("errorMsg", "パスワードが違います。");
 			 logger.info("로그인 실패");
 			 return "user/loginPage";
 		}
 	    else if (vo.getUser_deleted().equals("Y")){
 	    	//탈퇴한 회원일 경우
-	    	model.addAttribute("errorMsg", "휴면 계정입니다. 메인 페이지에서 계정을 복구해주세요.");
+	    	model.addAttribute("errorMsg", "休眠アカウントです。アカウントを復旧してください。");
 	    	logger.info("탈퇴한 회원");
 	    	return "user/loginPage";  
 	    }
@@ -114,7 +114,7 @@ public class UserController {
 				    	 
 				      } else {
 				    	//E-mail 인증이 되지 않은 로그인
-					    model.addAttribute("errorMsg", "이메일 인증을 완료해주세요.");
+					    model.addAttribute("errorMsg", "加入メールを確認してください。");
 					    logger.info("이메일 인증 미완료");
 					    return "user/loginPage";
 				      }
@@ -182,13 +182,13 @@ public class UserController {
 		 
 		    messageHelper.setFrom(admin);  					//보내는 사람 (생략 시 정상작동 안 함)
 		    messageHelper.setTo(user.getUser_email());     	//받는 사람 이메일
-		    messageHelper.setSubject("[이메일 인증]"); 			//메일 제목(생략 가능)
+		    messageHelper.setSubject("[トモログ加入]"); 			//메일 제목(생략 가능)
 		    messageHelper.setText(							//메일 내용
-		    		  new StringBuffer().append("메일인증 \n")
-						.append("Cancho에 가입해주셔서 감사합니다. \n"
+		    		  new StringBuffer().append("加入メール \n")
+						.append("トモログへようこそ！ \n"
 								+ serverAddress + "user/verify?user_id="
 								+ user.getUser_id())
-						.append("\n이메일 인증 확인").toString());	
+						.append("\nこちらのURLに接続してください。").toString());	
 			 try {
 				 //메일 보내기
 			      mailSender.send(message);
@@ -201,7 +201,7 @@ public class UserController {
 		} 
 		else {
 			logger.info("User Join Fail");
-			model.addAttribute("errorMsg", "알 수 없는 에러가 발생하였습니다.");
+			model.addAttribute("errorMsg", "エラーが発生しました。.");
 			return "redirect:/";
 		}
 		
@@ -251,7 +251,7 @@ public class UserController {
 
 		//입력한 비밀번호가 틀렸을 경우
 		if(!password.equals(user.getUser_password())){
-			model.addAttribute("errorMsg", "비밀번호를 잘못 입력하셨습니다.");
+			model.addAttribute("errorMsg", "パスワードが違います。");
 			return "user/deleteForm";
 		}
 		
@@ -259,7 +259,7 @@ public class UserController {
 		
 		//비밀번호는 제대로 입력했는데 오류가 일어나 탈퇴 실패
 		if(result != 1){
-			model.addAttribute("errorMsg", "알 수 없는 오류가 발생하였습니다.");
+			model.addAttribute("errorMsg", "エラーが発生しました。");
 			return "user/deleteForm";
 		}
 		
@@ -288,19 +288,19 @@ public class UserController {
 		
 		//아예 가입된 회원이 아닐 경우
 		if(deleted_user == null){
-			model.addAttribute("errorMsg", "해당 아이디로 가입된 이력이 없습니다.");
+			model.addAttribute("errorMsg", "加入されたIDではありません。");
 			return "user/activateForm";
 		}
 		
 		//가입은 되어 있는데 휴면계정이 아닐 경우
 		else if(!deleted_user.getUser_deleted().equals("Y")){
-			model.addAttribute("errorMsg", "휴면 계정이 아닙니다.");
+			model.addAttribute("errorMsg", "休眠アカウントではありません。");
 			return "user/activateForm";
 		}
 		
 		//휴면계정인데 비밀번호가 틀렸을 경우
 		else if(!user.getUser_password().equals(deleted_user.getUser_password())){
-			model.addAttribute("errorMsg", "비밀번호가 틀렸습니다.");
+			model.addAttribute("errorMsg", "パスワードが違います。");
 			return "user/activateForm";
 		}
 		
@@ -312,7 +312,7 @@ public class UserController {
 				logger.info("계정 활성화 성공");
 			}
 			else {
-				model.addAttribute("errorMsg", "알 수 없는 오류가 발생하였습니다.");
+				model.addAttribute("errorMsg", "エラーが発生しました。");
 				return "user/activateForm";
 			}
 			
@@ -352,7 +352,7 @@ public class UserController {
 			
 			if(result != 1){
 				//등록실패
-				model.addAttribute("errorMsg", "필수정보는 모두 기입해주세요.");
+				model.addAttribute("errorMsg", "必須情報は全部う記入してください。");
 				logger.info("프로필 저장 실패");
 				
 				return "user/editProfile";
@@ -386,7 +386,7 @@ public class UserController {
 	        int result = dao.updateProfile(profile);
 	        
 	        if(result != 1){
-	        	model.addAttribute("errorMsg", "필수정보는 모두 기입해주세요.");
+	        	model.addAttribute("errorMsg", "必須情報は全部う記入してください。");
 	        	logger.info("프로필 업데이트 실패");
 	        	
 	        	return "user/editProfile";

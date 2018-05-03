@@ -66,7 +66,7 @@ public class MyPageController {
 		int result = dao.updateUser(user);
 		
 		if (result != 1) {
-			model.addAttribute("errorMsg", "이미 가입된 이메일입니다.");
+			model.addAttribute("errorMsg", "すでに加入されたメールです.");
 			logger.info("회원정보 수정 실패");
 			return "user/updateInfo";
 		}
@@ -134,7 +134,7 @@ public class MyPageController {
 		
 		if (result != 1) {
 			logger.info("친구 추가 실패");
-			model.addAttribute("errorMsg", "친구 추가 실패");
+			model.addAttribute("errorMsg", "エラーが発生しました。");
 			return "friend/friendPage";
 		}
 		
@@ -196,7 +196,7 @@ public class MyPageController {
 		
 		if (result != 1) {
 			logger.info("친구 삭제 실패");
-			model.addAttribute("errorMsg1", "친구 삭제 실패");
+			model.addAttribute("errorMsg1", "エラーが発生しました。");
 			return "redirect:friendList";
 		}
 		

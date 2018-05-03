@@ -309,12 +309,12 @@ public class PostController {
 				 
 				    messageHelper.setFrom(admin);  					//보내는 사람 (생략 시 정상작동 안 함)
 				    messageHelper.setTo(email);     	//받는 사람 이메일
-				    messageHelper.setSubject("[포스팅 초대]"); 			//메일 제목(생략 가능)
+				    messageHelper.setSubject("[ポスティングの招待]"); 			//메일 제목(생략 가능)
 				    messageHelper.setText(							//메일 내용
-				    		  new StringBuffer().append("포스팅 초대가 도착했어요! \n")
-								.append(user_id+"님으로부터 포스팅 초대를 받았습니다. \n"
+				    		  new StringBuffer().append("ポスティングの招待が到着いたしました！ \n")
+								.append(user_id+"様からポスティングの招待を受けました。 \n"
 										+ url)
-								.append("\n지금 당장 해당 주소로 들어오세요.").toString());	
+								.append("\n今すぐこちらのURLに接続してください。").toString());	
 					 try {
 						 //메일 보내기
 					      mailSender.send(message);
@@ -323,7 +323,7 @@ public class PostController {
 					      e.printStackTrace();
 					 }
 
-		model.addAttribute("errorMsg", "친구에게 초대 메일을 발송하였습니다.");
+		model.addAttribute("errorMsg", "トモダチに招待のメールを送りいたしました。");
 					 
 		return "post/postForm";
 	}
@@ -365,7 +365,7 @@ public class PostController {
 		
 		if(result != 1){
 			//등록실패
-			model.addAttribute("errorMsg", "오류가 발생했습니다.");
+			model.addAttribute("errorMsg", "エラーが発生しました。");
 			logger.info("포스팅 실패");
 			
 			return "editor";
