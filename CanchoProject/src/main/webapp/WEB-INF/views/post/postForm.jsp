@@ -638,7 +638,7 @@
       //// Initialize contents.
       firepad.on('ready', function() {
         if (firepad.isHistoryEmpty()) {
-          firepad.setText('당신의 하루를 기록해보세요.');
+          firepad.setText('あなたの今日を表現してみましょう。');
         }
       });
     }
