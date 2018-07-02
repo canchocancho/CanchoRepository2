@@ -369,10 +369,10 @@
 						user_id : user_id
 					},
 					success : function(){
-						alert("초대 메일을 발송하였습니다.");
+						alert("招待のメールを送りました。");
 					},
 					error : function(e){
-						alert("알 수 없는 오류가 발생하였습니다. 다시 시도해주세요.");
+						alert("エラーが発生しました。");
 					}
 				}); 
 		}
@@ -405,7 +405,7 @@
 			$('.highlight').fadeIn(1700);
 		});
 		var textarea = document.getElementById("messageWindow");
-		var webSocket = new WebSocket('ws://10.10.15.149:8888/cancho/broadcasting');
+		var webSocket = new WebSocket('ws://203.233.199.106:8888/cancho/broadcasting');
 		var inputMessage = document.getElementById('inputMessage');
 		webSocket.onerror = function(event) {
 		    onError(event)
@@ -446,7 +446,7 @@
 		    }
 		}
 		function onOpen(event) {
-		    $("#messageWindow").html("<p class='chat_content'>채팅에 참여하였습니다.</p>");
+		    $("#messageWindow").html("<p class='chat_content'>チャットルームに入りました。</p>");
 		}
 		function onError(event) {
 		    /* alert("오류가 발생했습니다."); */

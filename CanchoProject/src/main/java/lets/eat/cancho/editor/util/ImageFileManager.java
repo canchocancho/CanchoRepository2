@@ -9,9 +9,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.springframework.stereotype.Repository;
-
-
 /**
  * 
  * @author minsu

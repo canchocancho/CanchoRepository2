@@ -36,11 +36,11 @@
 			</c:if>
 			
 			function deleteCheck(){
-			       return confirm("포스트를 삭제하시겠습니까?");
+			       return confirm("ポスティングを削除します。");
 			}
 			
 			function deleteComment(){
-			       return confirm("코멘트를 삭제하시겠습니까?");
+			       return confirm("コメントを削除します。");
 			}
 		</script>
 

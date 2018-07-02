@@ -494,7 +494,7 @@
 		    	  
 		    	  $('btnComplete').onclick = function(){
 		    		  
-		    		  alert('아래쪽에서 완성된 커버를 확인 후 저장하세요!');
+		    		  alert('完成されたカバーを確認してセーブしてくっださい。');
 
 		    		    var finalCover = document.getElementById("finalCover");
 		    		    

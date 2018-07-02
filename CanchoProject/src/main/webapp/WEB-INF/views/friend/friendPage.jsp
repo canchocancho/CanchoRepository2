@@ -36,7 +36,7 @@
 			</c:if> 
 			
 			function deleteFriend(friend_id){
-				if (confirm("해당 친구를 정말로 삭제하시겠습니까?")) {
+				if (confirm("このトモダチを削除します。")) {
 					alert("삭제되었습니다.");
 					location.href = "deleteFriend?friend_id="+friend_id;
 				} else {
@@ -45,7 +45,7 @@
 			}
 			
 			function insertFriend(user_id){
-				if (confirm("해당 ID를 친구로 추가할까요?")) {
+				if (confirm("このIDをトモダチに追加します。")) {
 					location.href = 'insertFriend?user_id='+ user_id;
 				} else {
 					return false;
@@ -63,7 +63,7 @@
 					var id = $('user_id').val();
 					
 					if (id.length == 0) {
-						alert("검색할 ID를 입력하세요");
+						alert("IDを入力してください。");
 						return;
 					}
 				});

@@ -1,6 +1,5 @@
 package lets.eat.cancho.editor.util;
 
-import java.awt.List;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
